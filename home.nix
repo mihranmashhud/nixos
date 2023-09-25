@@ -54,7 +54,6 @@
     rustup
     gcc
     nodePackages.pnpm
-    gh
     
     # system tools
     monitor

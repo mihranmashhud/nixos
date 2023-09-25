@@ -8,4 +8,5 @@
     ./zsh.nix
     ./starship.nix
   ];
+  programs.git-credential-oauth.enable = true;
 }
