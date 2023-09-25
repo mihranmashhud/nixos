@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+CHOICE=/tmp/background-choice
+
+cd $HOME/Pictures/Backgrounds
+
+kitty -- ranger --choosefile=$CHOICE || exit 1
+
+pic=$(cat $CHOICE)
+
+if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
+  swww img $pic --transition-type center
+else
+  feh --no-fehbg --bg-fill $pic
+fi

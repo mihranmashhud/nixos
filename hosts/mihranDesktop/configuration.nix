@@ -10,15 +10,21 @@
       ../shared.nix
       ./hardware-configuration.nix
     ];
-  networking.hostName = "mihranLaptop"; # Define your hostname.
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  networking.hostName = "mihranDesktop"; # Define your hostname.
 
   hardware.opengl.extraPackages = with pkgs; [
-    intel-media-driver
+    amdvlk
+    rocm-opencl-icd
+    rocm-opencl-runtime
+  ];
+  hardware.opengl.extraPackages32 = with pkgs; [
+    driversi686Linux.amdvlk
   ];
   environment.systemPackages = with pkgs; [
     brightnessctl
+  ];
+
+  boot.initrd.kernelModules = [
+    "amdgpu"
   ];
 }

@@ -2,11 +2,16 @@
   imports = [
     ./programs
     ./theming
+    ./scripts
   ];
 
   home = {
     username = "mihranmashhud";
     homeDirectory = "/home/mihranmashhud";
+    sessionPath = [
+      "$HOME/.local/bin"
+      "$HOME/scripts"
+    ];
   };
 
   xresources.properties = {
@@ -18,7 +23,17 @@
   };
 
   home.packages = with pkgs; [
-
+    # apps
+    discord
+    telegram-desktop
+    gnome.nautilus
+    warp
+    pavucontrol
+    lutris
+    steam
+    obsidian
+    mpv
+    
     # archives
     zip
     xz
@@ -30,12 +45,18 @@
     jq
     yq-go
     eza
+    rmtrash
+    pamixer
+    nix-prefetch-git
+    killall
 
     # dev tools
     rustup
     gcc
+    nodePackages.pnpm
     
     # system tools
+    monitor
     sysstat
     lm_sensors # sensors
     ethtool

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+echo "Performing a dry-run of the pull operation:"
+
+mapfile -t excludes_arr < $HOME/scripts/.cs-server-ignore
+
+declare -a excludes
+
+for e in "${excludes_arr[@]}"
+do
+  excludes+=( --exclude="$e" )
+done
+
+rsync -anvzP "${excludes[@]}" mmashhud@linux.student.cs.uwaterloo.ca:./ /mnt/cs-server --delete
+
+read -p "Safe To procede? [y/N]: " PROCEDE
+
+case $PROCEDE in
+  y | Y)
+    echo "Proceding with pull operation..."
+    rsync -azP "${excludes[@]}" mmashhud@linux.student.cs.uwaterloo.ca:./ /mnt/cs-server --delete
+    ;;
+  *)
+    echo "Cancelling pull operation."
+    exit 1
+    ;;
+esac

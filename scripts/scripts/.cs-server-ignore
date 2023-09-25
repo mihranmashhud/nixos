@@ -1,0 +1,7 @@
+.Xauthority
+.*
+.ccls-cache/
+.git/
+cs350-os161/os161-1.99/kern/compile/
+cs350-os161/root/kernel*
+cs350-os161/root/*bin/

@@ -18,16 +18,20 @@
 
     # home-manager for user configuration
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.05";
+      url = "github:nix-community/home-manager/master";
       # The `follows` keyword in inputs is used for inheritance.
       # Here, `inputs.nixpkgs` of home-manager is kept consistent with
       # the `inputs.nixpkgs` of the current flake,
       # to avoid problems caused by different versions of nixpkgs.
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprland.url = "github:hyprwm/Hyprland";
+
+    nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: 
+  outputs = { self, nixpkgs, home-manager, hyprland, nix-colors, ... }@inputs: 
   let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
@@ -37,21 +41,43 @@
         allowUnfree = true;
       };
     };
+    args = {
+      inherit inputs;
+      inherit nix-colors;
+    };
   in
   {
     nixosConfigurations = {
       "mihranLaptop" = nixpkgs.lib.nixosSystem {
         inherit system;
 
-        specialArgs = inputs;
+        specialArgs = args;
         modules = [ 
           ./hosts/mihranLaptop/configuration.nix 
 
           home-manager.nixosModules.home-manager {
             home-manager = {
+              extraSpecialArgs = args;
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.mihranmashhud = import ./home.nix;
+              users.mihranmashhud = import ./hosts/mihranLaptop/home.nix;
+            };
+          }
+        ];
+      };
+      "mihranDesktop" = nixpkgs.lib.nixosSystem {
+        inherit system;
+
+        specialArgs = args;
+        modules = [ 
+          ./hosts/mihranDesktop/configuration.nix 
+
+          home-manager.nixosModules.home-manager {
+            home-manager = {
+              extraSpecialArgs = args;
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.mihranmashhud = import ./hosts/mihranDesktop/home.nix;
             };
           }
         ];

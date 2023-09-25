@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+CHOICE=/tmp/background-choice
+
+cd $HOME/Pictures/Backgrounds
+
+pic=`ls | grep -v "$(cat $CHOICE)" | shuf -n1`
+
+if [ -z "$pic" ]; then
+  pic=`ls | shuf -n1`
+fi
+
+echo $pic > $CHOICE
+
+if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
+  swww img $pic --transition-type center
+else
+  feh --no-fehbg --bg-fill $pic
+fi
