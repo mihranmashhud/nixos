@@ -49,7 +49,7 @@
     };
   };
 
-  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
 
   services.xserver = {
     enable = true;
@@ -57,11 +57,17 @@
       sddm.enable = true;
       sddm.theme = "${import ../theming/sddm-chili.nix { inherit pkgs; }}";
     };
-    desktopManager.gnome.enable = true;
   };
   # Set default apps here
   xdg.mime.defaultApplications = {
     "application/pdf" = "firefox.desktop";
+  };
+
+  xdg.portal = {
+    enable = true;
+    # extraPortals = with pkgs; [
+    #   xdg-desktop-portal-gtk
+    # ];
   };
 
   services.automatic-timezoned.enable = true;
@@ -98,6 +104,7 @@
   hardware = {
     opengl.enable = true;
     opengl.driSupport = true;
+    opengl.driSupport32Bit = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -121,6 +128,10 @@
     curl
     libsForQt5.qt5.qtquickcontrols2   
     libsForQt5.qt5.qtgraphicaleffects     
+    lutris
+    wineWowPackages.stable
+    wineWowPackages.waylandFull
+    winetricks
   ];
 
   environment.variables = {
@@ -168,6 +179,8 @@
   programs = {
     zsh.enable = true;
     hyprland.enable = true;
+    steam.enable = true;
+    gamemode.enable = true;
   };
 
   # List services that you want to enable:
