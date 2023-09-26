@@ -16,7 +16,7 @@
       }
       {
         "label" = "logout";
-        "action" = "loginctl terminate-session self";
+        "action" = "hyprctl dispatch exit";
         "text" = "Logout";
         "keybind" = "e";
       }
