@@ -14,26 +14,40 @@
     ];
   };
 
-  xresources.properties = {
-    "Xcursor.size" = 16;
+  xdg.userDirs = {
+    enable = true;
+    extraConfig = {
+      XDG_SCREENSHOTS_DIR = "${config.home.homeDirectory}/Pictures/Screenshots";
+    };
   };
 
   programs = {
     home-manager.enable = true;
   };
 
-  home.packages = with pkgs; [
+  home.packages = let
+    drvs = (import ./derivations {inherit pkgs;});
+  in with (pkgs // drvs); [
     # apps
-    discord
-    telegram-desktop
     gnome.nautilus
     warp
     pavucontrol
-    lutris
-    steam
     obsidian
     mpv
+    zoom
+    xwaylandvideobridge
+    grimblast
+    github-desktop
+
+    discord
+    telegram-desktop
+    teams
     
+    libreoffice
+    hunspell
+    hunspellDicts.en_US
+    hunspellDicts.en_CA
+
     # archives
     zip
     xz
@@ -49,9 +63,11 @@
     pamixer
     nix-prefetch-git
     killall
+    nix-index
 
     # dev tools
-    rustup
+    rustc
+    cargo
     gcc
     nodePackages.pnpm
     
