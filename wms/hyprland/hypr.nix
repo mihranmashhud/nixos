@@ -51,9 +51,27 @@
         mouse_move_enables_dpms = true;
       };
 
+      # Startup
+      exec-once = [
+        # Set the cursor
+        "hyprctl setcursor ${config.gtk.cursorTheme.name} ${toString config.xresources.properties."Xcursor.size"}"
+        # Clipboard
+        "wl-paste --type text --watch cliphist store"
+        "wl-paste --type image --watch cliphist store"
+        # Sync files
+        "syncthing &"
+        # Perform on idle start
+        "swayidle -w before-sleep '~/scripts/wayland-lockscreen -f; playerctl pause' &"
+        # Wallpaper
+        "swww init; ~/scripts/random-wallpaper"
+        # Removable media mounting
+        "udiskie &"
+        # KDE Connect Indicator
+        "kdeconnect-indicator &"
+      ];
+
       source = [
         "./rules.conf"
-        "./startup.conf"
         "./binds.conf"
       ];
     };
