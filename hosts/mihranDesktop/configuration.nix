@@ -5,24 +5,22 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [
+  imports = [
       ../shared.nix
       ./hardware-configuration.nix
     ];
   networking.hostName = "mihranDesktop"; # Define your hostname.
 
+  boot.kernelPackages = pkgs.linuxPackages_zen;
   hardware.opengl.extraPackages = with pkgs; [
-    amdvlk
-    rocm-opencl-icd
-    rocm-opencl-runtime
+    # amdvlk
   ];
   hardware.opengl.extraPackages32 = with pkgs; [
-    driversi686Linux.amdvlk
+    # driversi686Linux.amdvlk
+    driversi686Linux.mesa
   ];
-  environment.systemPackages = with pkgs; [
-    brightnessctl
-  ];
+  # environment.systemPackages = with pkgs; [
+  # ];
 
   boot.initrd.kernelModules = [
     "amdgpu"
