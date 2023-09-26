@@ -9,6 +9,7 @@
         settings = {
           # Enable userChrome.css
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+          "privacy.webrtc.hideGlobalIndicator" = true;
         };
         userChrome = ''
           #TabsToolbar {
