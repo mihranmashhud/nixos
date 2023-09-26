@@ -5,6 +5,7 @@
   programs = {
     firefox = {
       enable = true;
+      package = pkgs.firefox-bin;
       profiles.mihranmashhud = {
         settings = {
           # Enable userChrome.css
