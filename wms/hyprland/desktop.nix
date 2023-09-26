@@ -30,6 +30,7 @@
         "[workspace 6 silent] discord &"
         "obs --startreplaybuffer --minimize-to-tray &"
         "[workspace 10 silent] pavucontrol &"
+        "xwaylandvideobridge &"
       ];
     };
   };
