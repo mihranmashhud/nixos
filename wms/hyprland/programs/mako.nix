@@ -3,6 +3,7 @@
 in {
   services.mako = with config.colorScheme.colors; {
     enable = true;
+    defaultTimeout = 2000;
     backgroundColor = "#${base00}";
     borderColor = "#${base0D}";
     borderRadius = 5;
