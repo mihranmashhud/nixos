@@ -4,9 +4,9 @@ CHOICE=/tmp/background-choice
 
 cd $HOME/Pictures/Backgrounds
 
-kitty -- ranger --choosefile=$CHOICE || exit 1
+pic=`imv .`
 
-pic=$(cat $CHOICE)
+echo $pic > $CHOICE
 
 if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
   swww img $pic --transition-type center
