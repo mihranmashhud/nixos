@@ -6,23 +6,21 @@
 
 {
   imports = [
-      ../shared.nix
-      ./hardware-configuration.nix
-    ];
+    ../shared.nix
+    ./hardware-configuration.nix
+  ];
+
   networking.hostName = "mihranDesktop"; # Define your hostname.
 
+  # Kernel
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  hardware.opengl.extraPackages = with pkgs; [
-    # amdvlk
-  ];
-  hardware.opengl.extraPackages32 = with pkgs; [
-    # driversi686Linux.amdvlk
-    driversi686Linux.mesa
-  ];
-  # environment.systemPackages = with pkgs; [
-  # ];
 
-  boot.initrd.kernelModules = [
-    "amdgpu"
+  # Monitors listing
+  services.xserver.xrandrHeads = [
+    "DP-1"
+    "HDMI-A-1"
   ];
+
+  # Enable AMDVLK
+  hardware.amdgpu.amdvlk = true;
 }
