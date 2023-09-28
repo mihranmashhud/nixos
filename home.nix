@@ -64,6 +64,7 @@
     nix-prefetch-git
     killall
     nix-index
+    imagemagick
 
     # dev tools
     rustc
