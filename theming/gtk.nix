@@ -6,8 +6,13 @@
       name = "Bibata-Modern-Classic";
     };
     theme = {
-      package = pkgs.flat-remix-gtk;
-      name = "Flat-Remix-GTK-Blue-Dark";
+      package = (pkgs.colloid-gtk-theme.override {
+        tweaks = [
+          "black"
+          "rimless"
+        ];
+      });
+      name = "Colloid-Dark";
     };
     iconTheme = {
       package = pkgs.papirus-icon-theme;
