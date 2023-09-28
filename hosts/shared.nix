@@ -166,6 +166,10 @@
     opengl.enable = true;
     opengl.driSupport = true;
     opengl.driSupport32Bit = true;
+    opengl.extraPackages = with pkgs; [
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
