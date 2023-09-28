@@ -34,7 +34,7 @@
     pavucontrol
     obsidian
     mpv
-    zoom
+    zoom-us
     xwaylandvideobridge
     grimblast
     github-desktop
