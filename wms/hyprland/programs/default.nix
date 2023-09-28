@@ -13,6 +13,7 @@
     udiskie
     networkmanager_dmenu
     libnotify
+    hyprkeys
   ];
 
   xdg.configFile."waybar".source = ./waybar;
