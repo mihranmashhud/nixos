@@ -13,6 +13,15 @@
         "DP-1, highrr, auto, 1"
         "HDMI-A-1, 1920x1080, auto, 1"
       ];
+      animations = {
+        enabled = "yes";
+        bezier = [
+          "linear,0,0,1,1"
+        ];
+        animation = [
+          "borderangle, 1, 50, linear, loop"
+        ];
+      };
       workspace = [
         "1, monitor:DP-1, default:true"
         "2, monitor:DP-1"
