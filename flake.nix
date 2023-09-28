@@ -16,6 +16,8 @@
   inputs  = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    nixos-hardware.url = "github:nixos/nixos-hardware/master";
+
     # home-manager for user configuration
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -31,7 +33,7 @@
     nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland, nix-colors, ... }@inputs: 
+  outputs = { self, nixpkgs, nixos-hardware, home-manager, hyprland, nix-colors, ... }@inputs: 
   let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
@@ -42,6 +44,7 @@
       };
     };
     args = {
+      inherit pkgs;
       inherit inputs;
       inherit nix-colors;
     };
@@ -54,6 +57,8 @@
         specialArgs = args;
         modules = [ 
           ./hosts/mihranLaptop/configuration.nix 
+
+          nixos-hardware.nixosModules.lenovo-thinkpad-t480
 
           home-manager.nixosModules.home-manager {
             home-manager = {
@@ -70,7 +75,12 @@
 
         specialArgs = args;
         modules = [ 
-          ./hosts/mihranDesktop/configuration.nix 
+          ./hosts/mihranDesktop/configuration.nix
+
+          nixos-hardware.nixosModules.common-cpu-amd
+          nixos-hardware.nixosModules.common-cpu-amd-pstate
+          nixos-hardware.nixosModules.common-gpu-amd
+          nixos-hardware.nixosModules.common-pc-ssd
 
           home-manager.nixosModules.home-manager {
             home-manager = {
