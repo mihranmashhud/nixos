@@ -8,9 +8,9 @@
       package = pkgs.firefox-bin;
       profiles.mihranmashhud = {
         settings = {
-          # Enable userChrome.css
-          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+          "toolkit.legacyUserProfileCustomizations.stylesheets" = true; # Enable userChrome.css
           "privacy.webrtc.hideGlobalIndicator" = true;
+          "media.ffmpeg.vaapi.enabled" = true;
         };
         userChrome = ''
           #TabsToolbar {
