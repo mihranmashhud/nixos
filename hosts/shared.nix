@@ -188,11 +188,15 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     home-manager
+
     git
     wget
     curl
+
     libsForQt5.qt5.qtquickcontrols2   
     libsForQt5.qt5.qtgraphicaleffects     
+
+    # Lutris
     lutris
     wineWowPackages.stable
     wineWowPackages.waylandFull
