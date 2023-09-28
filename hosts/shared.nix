@@ -1,9 +1,70 @@
 { config, pkgs, ... }: {
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 10;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # Console
+  console = {
+    font = "ter-132n";
+    packages = with pkgs; [
+      terminus_font
+    ];
+  };
+
+  #TTY
+  services.kmscon = {
+    enable = true;
+    hwRender = true;
+    extraConfig = ''
+      font-name=CaskaydiaCove Nerd Font
+      font-size=12
+    '';
+  };
+
+  # Boot
+  boot = {
+    loader.systemd-boot = {
+      enable = true;
+      configurationLimit = 5;
+    };
+    loader.efi.canTouchEfiVariables = true;
+    loader.timeout = 10;
+    # Plymouth with silent boot
+    consoleLogLevel = 0;
+    initrd.verbose = false;
+    plymouth = let
+      theme = "circle_hud";
+      # logo_script = ''
+      #   logo_image = Image("white.png");
+      #   logo_sprite = Sprite();
+      #   logo_sprite.SetImage(logo_image);
+      #   logo_sprite.SetX(Window.GetX() + (Window.GetWidth() / 2 - logo_image.GetWidth() / 2));
+      #   logo_sprite.SetY(Window.GetHeight() - logo_image.GetHeight() - 50);
+      # '';
+    in {
+      enable = true;
+      themePackages = with pkgs; [
+        (adi1090x-plymouth-themes.override {
+          selected_themes = [
+            theme
+          ];
+          # TODO: create overlay for this
+          # postFixup = ''
+          #   cd $out/share/plymouth/themes/${theme}
+          #   curl -O 'https://github.com/NixOS/nixos-artwork/blob/master/logo/white.png?raw=true'
+          #   echo "${logo_script}" >> ${theme}.script
+          # '';
+        })
+      ];
+      inherit theme;
+    };
+    kernelParams = [
+      # Silent Boot Params
+      "quiet"
+      "splash" # See splash screen
+      "rd.systemd.show_status=false"
+      "rd.udev.log_level=3"
+      "udev.log_priority=3"
+      "boot.shell_on_fail"
+    ];
+  };
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
