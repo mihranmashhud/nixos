@@ -12,13 +12,12 @@
     ];
   networking.hostName = "mihranLaptop"; # Define your hostname.
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
-
-  hardware.opengl.extraPackages = with pkgs; [
-    intel-media-driver
-  ];
+  # Packages
   environment.systemPackages = with pkgs; [
     brightnessctl
   ];
+
+  # Services
+  services.xserver.libinput.enable = true; # Enable touchpad support
+  services.tlp.enable = true;
 }
