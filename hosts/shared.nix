@@ -145,8 +145,16 @@
     xkbVariant = "";
   };
 
-  # Enable CUPS to print documents.
+  # Printing
   services.printing.enable = true;
+  services.avahi.enable = true;
+  services.avahi.nssmdns = true;
+  # for WiFi printer
+  services.avahi.openFirewall = true;
+  # Load epson driver
+  services.printing.drivers = with pkgs; [
+    epson-escpr
+  ];
 
   # Enable sound with pipewire.
   sound.enable = true;
