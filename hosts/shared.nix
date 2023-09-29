@@ -132,9 +132,9 @@
 
   xdg.portal = {
     enable = true;
-    # extraPortals = with pkgs; [
-    #   xdg-desktop-portal-gtk
-    # ];
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
   };
 
   services.automatic-timezoned.enable = true;
