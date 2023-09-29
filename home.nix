@@ -25,67 +25,69 @@
     home-manager.enable = true;
   };
 
-  home.packages = let
-    drvs = (import ./derivations {inherit pkgs;});
-  in with (pkgs // drvs); [
-    # apps
-    gnome.nautilus
-    warp
-    pavucontrol
-    obsidian
-    mpv
-    zoom-us
-    xwaylandvideobridge
-    grimblast
-    github-desktop
+  home.packages =
+    let
+      drvs = (import ./derivations { inherit pkgs; });
+    in
+    with (pkgs // drvs); [
+      # apps
+      gnome.nautilus
+      warp
+      pavucontrol
+      obsidian
+      mpv
+      zoom-us
+      xwaylandvideobridge
+      grimblast
+      github-desktop
 
-    discord
-    telegram-desktop
-    teams
-    
-    libreoffice
-    hunspell
-    hunspellDicts.en_US
-    hunspellDicts.en_CA
+      discord
+      telegram-desktop
+      teams
 
-    # archives
-    zip
-    xz
-    unzip
-    gnutar
+      libreoffice
+      hunspell
+      hunspellDicts.en_US
+      hunspellDicts.en_CA
 
-    # utils
-    ripgrep
-    jq
-    yq-go
-    eza
-    rmtrash
-    pamixer
-    killall
-    imagemagick
-    fd
+      # archives
+      zip
+      xz
+      unzip
+      gnutar
 
-    # dev tools
-    rustup
-    gcc
-    nodePackages.pnpm
-    
-    # nix
-    nix-index
-    nix-prefetch-git
-    nixpkgs-fmt
-    nixd
+      # utils
+      ripgrep
+      jq
+      yq-go
+      eza
+      rmtrash
+      pamixer
+      killall
+      imagemagick
+      fd
 
-    # system tools
-    ytop
-    procs
-    monitor
-    sysstat
-    lm_sensors # sensors
-    ethtool
-    pciutils # lspci
-    usbutils # lsusb
-  ];
+      # dev tools
+      rustup
+      gcc
+      nodePackages.pnpm
+
+      # nix
+      nix-index
+      nix-prefetch-git
+      nixpkgs-fmt
+      nixd
+
+      # system tools
+      ytop
+      procs
+      monitor
+      sysstat
+      lm_sensors # sensors
+      ethtool
+      pciutils # lspci
+      usbutils # lsusb
+    ];
 
   home.stateVersion = "23.05";
 }

@@ -1,17 +1,16 @@
-{
-  fetchFromGitLab,
-  fetchpatch,
-  cmake,
-  extra-cmake-modules,
-  pkg-config,
-  stdenv,
-  qtbase,
-  kdelibs4support,
-  kpipewire,
-  qtquickcontrols2,
-  qtx11extras,
-  wrapQtAppsHook
-}: 
+{ fetchFromGitLab
+, fetchpatch
+, cmake
+, extra-cmake-modules
+, pkg-config
+, stdenv
+, qtbase
+, kdelibs4support
+, kpipewire
+, qtquickcontrols2
+, qtx11extras
+, wrapQtAppsHook
+}:
 let
   name = "xwaylandvideobridge";
 in

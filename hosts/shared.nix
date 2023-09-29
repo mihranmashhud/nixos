@@ -29,32 +29,34 @@
     # Plymouth with silent boot
     consoleLogLevel = 0;
     initrd.verbose = false;
-    plymouth = let
-      theme = "circle_hud";
-      # logo_script = ''
-      #   logo_image = Image("white.png");
-      #   logo_sprite = Sprite();
-      #   logo_sprite.SetImage(logo_image);
-      #   logo_sprite.SetX(Window.GetX() + (Window.GetWidth() / 2 - logo_image.GetWidth() / 2));
-      #   logo_sprite.SetY(Window.GetHeight() - logo_image.GetHeight() - 50);
-      # '';
-    in {
-      enable = true;
-      themePackages = with pkgs; [
-        (adi1090x-plymouth-themes.override {
-          selected_themes = [
-            theme
-          ];
-          # TODO: create overlay for this
-          # postFixup = ''
-          #   cd $out/share/plymouth/themes/${theme}
-          #   curl -O 'https://github.com/NixOS/nixos-artwork/blob/master/logo/white.png?raw=true'
-          #   echo "${logo_script}" >> ${theme}.script
-          # '';
-        })
-      ];
-      inherit theme;
-    };
+    plymouth =
+      let
+        theme = "circle_hud";
+        # logo_script = ''
+        #   logo_image = Image("white.png");
+        #   logo_sprite = Sprite();
+        #   logo_sprite.SetImage(logo_image);
+        #   logo_sprite.SetX(Window.GetX() + (Window.GetWidth() / 2 - logo_image.GetWidth() / 2));
+        #   logo_sprite.SetY(Window.GetHeight() - logo_image.GetHeight() - 50);
+        # '';
+      in
+      {
+        enable = true;
+        themePackages = with pkgs; [
+          (adi1090x-plymouth-themes.override {
+            selected_themes = [
+              theme
+            ];
+            # TODO: create overlay for this
+            # postFixup = ''
+            #   cd $out/share/plymouth/themes/${theme}
+            #   curl -O 'https://github.com/NixOS/nixos-artwork/blob/master/logo/white.png?raw=true'
+            #   echo "${logo_script}" >> ${theme}.script
+            # '';
+          })
+        ];
+        inherit theme;
+      };
     kernelParams = [
       # Silent Boot Params
       "quiet"
@@ -101,12 +103,12 @@
       wants = [ "graphical-session.target" ];
       after = [ "graphical-session.target" ];
       serviceConfig = {
-          Type = "simple";
-          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-          Restart = "on-failure";
-          RestartSec = 1;
-          TimeoutStopSec = 10;
-        };
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
     };
   };
 
@@ -174,7 +176,7 @@
   };
 
   # For swaylock
-  security.pam.services.swaylock = {};
+  security.pam.services.swaylock = { };
 
   hardware = {
     opengl.enable = true;
@@ -210,8 +212,8 @@
     wget
     curl
 
-    libsForQt5.qt5.qtquickcontrols2   
-    libsForQt5.qt5.qtgraphicaleffects     
+    libsForQt5.qt5.qtquickcontrols2
+    libsForQt5.qt5.qtgraphicaleffects
 
     # Lutris
     lutris
@@ -250,9 +252,9 @@
     ];
     fontconfig = {
       defaultFonts = {
-        sansSerif = ["Inter"];
-        serif = ["Roboto Slab"];
-        monospace = ["CaskaydiaCove Nerd Font"];
+        sansSerif = [ "Inter" ];
+        serif = [ "Roboto Slab" ];
+        monospace = [ "CaskaydiaCove Nerd Font" ];
       };
     };
   };
@@ -281,14 +283,14 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-  networking.firewall = { 
+  networking.firewall = {
     enable = true;
     allowedTCPPortRanges = [
-    { from = 1714; to = 1764; } # KDE Connect
-    ];  
-    allowedUDPPortRanges = [ 
-    { from = 1714; to = 1764; } # KDE Connect
-    ];  
+      { from = 1714; to = 1764; } # KDE Connect
+    ];
+    allowedUDPPortRanges = [
+      { from = 1714; to = 1764; } # KDE Connect
+    ];
   };
 
   # This value determines the NixOS release from which the default

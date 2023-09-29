@@ -1,18 +1,18 @@
-{
-  lib,
-  stdenv,
-  fetchFromGitHub,
-  scdoc,
-  hyprland,
-  grim,
-  slurp,
-  hyprpicker,
-  jq,
-  libnotify,
-  wl-clipboard,
-  makeWrapper,
-  coreutils,
-}: 
+{ lib
+, stdenv
+, fetchFromGitHub
+, scdoc
+, hyprland
+, grim
+, slurp
+, hyprpicker
+, jq
+, libnotify
+, wl-clipboard
+, makeWrapper
+, coreutils
+,
+}:
 let
   name = "grimblast";
 in

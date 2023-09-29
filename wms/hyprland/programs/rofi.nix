@@ -28,7 +28,8 @@
       #   bar = mkLiteral "abc"; => bar: abc;
       # };
       inherit (config.lib.formats.rasi) mkLiteral;
-    in {
+    in
+    {
       "*" = {
         bg = mkLiteral "#${base00}";
         al = mkLiteral "#${base04}";

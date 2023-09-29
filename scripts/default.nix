@@ -1,7 +1,7 @@
 { config, pkgs, ... }: {
   home.file."scripts".source = ./scripts;
   home.sessionPath = [
-      "$HOME/scripts"
+    "$HOME/scripts"
   ];
   home.packages = with pkgs; [
     ranger

@@ -13,7 +13,7 @@
     ];
   };
 
-  inputs  = {
+  inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
@@ -33,65 +33,67 @@
     nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, home-manager, hyprland, nix-colors, ... }@inputs: 
-  let
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-
-      config = {
-        allowUnfree = true;
-      };
-    };
-    args = {
-      inherit pkgs;
-      inherit inputs;
-      inherit nix-colors;
-    };
-  in
-  {
-    nixosConfigurations = {
-      "mihranLaptop" = nixpkgs.lib.nixosSystem {
+  outputs = { self, nixpkgs, nixos-hardware, home-manager, hyprland, nix-colors, ... }@inputs:
+    let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
         inherit system;
 
-        specialArgs = args;
-        modules = [ 
-          ./hosts/mihranLaptop/configuration.nix 
-
-          nixos-hardware.nixosModules.lenovo-thinkpad-t480
-
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              extraSpecialArgs = args;
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.mihranmashhud = import ./hosts/mihranLaptop/home.nix;
-            };
-          }
-        ];
+        config = {
+          allowUnfree = true;
+        };
       };
-      "mihranDesktop" = nixpkgs.lib.nixosSystem {
-        inherit system;
+      args = {
+        inherit pkgs;
+        inherit inputs;
+        inherit nix-colors;
+      };
+    in
+    {
+      nixosConfigurations = {
+        "mihranLaptop" = nixpkgs.lib.nixosSystem {
+          inherit system;
 
-        specialArgs = args;
-        modules = [ 
-          ./hosts/mihranDesktop/configuration.nix
+          specialArgs = args;
+          modules = [
+            ./hosts/mihranLaptop/configuration.nix
 
-          nixos-hardware.nixosModules.common-cpu-amd
-          nixos-hardware.nixosModules.common-cpu-amd-pstate
-          nixos-hardware.nixosModules.common-gpu-amd
-          nixos-hardware.nixosModules.common-pc-ssd
+            nixos-hardware.nixosModules.lenovo-thinkpad-t480
 
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              extraSpecialArgs = args;
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.mihranmashhud = import ./hosts/mihranDesktop/home.nix;
-            };
-          }
-        ];
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                extraSpecialArgs = args;
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.mihranmashhud = import ./hosts/mihranLaptop/home.nix;
+              };
+            }
+          ];
+        };
+        "mihranDesktop" = nixpkgs.lib.nixosSystem {
+          inherit system;
+
+          specialArgs = args;
+          modules = [
+            ./hosts/mihranDesktop/configuration.nix
+
+            nixos-hardware.nixosModules.common-cpu-amd
+            nixos-hardware.nixosModules.common-cpu-amd-pstate
+            nixos-hardware.nixosModules.common-gpu-amd
+            nixos-hardware.nixosModules.common-pc-ssd
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                extraSpecialArgs = args;
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.mihranmashhud = import ./hosts/mihranDesktop/home.nix;
+              };
+            }
+          ];
+        };
       };
     };
-  };
 }
