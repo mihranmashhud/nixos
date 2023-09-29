@@ -63,6 +63,7 @@
     pamixer
     killall
     imagemagick
+    fd
 
     # dev tools
     rustup
@@ -76,6 +77,8 @@
     nixd
 
     # system tools
+    ytop
+    procs
     monitor
     sysstat
     lm_sensors # sensors
