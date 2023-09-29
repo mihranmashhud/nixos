@@ -1,4 +1,7 @@
 { config, pkgs, ... }: {
+  # home.sessionVariables = {
+  #   NIX_BUILD_SHELL = "zsh";
+  # };
   programs.zsh = {
     enable = true;
 
@@ -19,10 +22,7 @@
     antidote = {
       enable = true;
       plugins = [
-        # Completion
         "ohmyzsh/ohmyzsh path:lib/completion.zsh"
-
-        # Plugins
         "ohmyzsh/ohmyzsh path:plugins/gitfast"
         "ohmyzsh/ohmyzsh path:plugins/wd"
         "ohmyzsh/ohmyzsh path:plugins/command-not-found"
@@ -33,6 +33,7 @@
         "zsh-users/zsh-autosuggestions"
         "zsh-users/zsh-syntax-highlighting"
         "ael-code/zsh-colored-man-pages"
+        "chisui/zsh-nix-shell path:nix-shell.plugin.zsh"
       ];
     };
   };
