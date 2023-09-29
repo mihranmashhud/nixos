@@ -236,6 +236,7 @@
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
+      roboto-slab
       inter
       (nerdfonts.override {
         fonts = [
@@ -249,7 +250,8 @@
     ];
     fontconfig = {
       defaultFonts = {
-        serif = ["Inter"];
+        sansSerif = ["Inter"];
+        serif = ["Roboto Slab"];
         monospace = ["CaskaydiaCove Nerd Font"];
       };
     };
