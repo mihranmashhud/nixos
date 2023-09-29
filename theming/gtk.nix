@@ -15,8 +15,8 @@
       name = "Colloid-Dark";
     };
     iconTheme = {
-      package = pkgs.papirus-icon-theme;
-      name = "Papirus";
+      package = pkgs.fluent-icon-theme;
+      name = "Fluent";
     };
   };
 }
