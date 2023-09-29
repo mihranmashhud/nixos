@@ -11,4 +11,5 @@
   ];
   programs.git-credential-oauth.enable = true;
   programs.command-not-found.enable = true;
+  services.xembed-sni-proxy.enable = true;
 }
