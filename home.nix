@@ -65,8 +65,7 @@
     imagemagick
 
     # dev tools
-    rustc
-    cargo
+    rustup
     gcc
     nodePackages.pnpm
     
