@@ -61,9 +61,7 @@
     eza
     rmtrash
     pamixer
-    nix-prefetch-git
     killall
-    nix-index
     imagemagick
 
     # dev tools
@@ -72,6 +70,12 @@
     gcc
     nodePackages.pnpm
     
+    # nix
+    nix-index
+    nix-prefetch-git
+    nixpkgs-fmt
+    nixd
+
     # system tools
     monitor
     sysstat
