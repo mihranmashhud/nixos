@@ -117,6 +117,12 @@
     displayManager = {
       sddm.enable = true;
       sddm.theme = "${import ../theming/sddm-chili.nix { inherit pkgs; }}";
+      sddm.settings = {
+        Theme = {
+          EnableAvatars = true;
+          DisableAvatarsThreshold = 7;
+        };
+      };
     };
   };
   # Set default apps here
