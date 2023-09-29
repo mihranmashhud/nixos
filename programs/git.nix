@@ -4,5 +4,11 @@
 
     userName = "mihranmashhud";
     userEmail = "mihranmashhud@gmail.com";
+
+    extraConfig = {
+      color.ui = "auto";
+    };
+
+    delta.enable = true;
   };
 }
