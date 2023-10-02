@@ -284,6 +284,7 @@
     hyprland.enable = true;
     steam.enable = true;
     gamemode.enable = true;
+    nm-applet.enable = true;
   };
 
   # List services that you want to enable:

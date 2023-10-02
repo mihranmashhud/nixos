@@ -11,7 +11,6 @@
     swaylock
     swww
     udiskie
-    networkmanager_dmenu
     libnotify
     hyprkeys
   ];
