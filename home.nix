@@ -41,6 +41,7 @@
       grimblast
       github-desktop
       chromium
+      slack
 
       discord
       telegram-desktop
