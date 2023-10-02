@@ -40,6 +40,7 @@
       xwaylandvideobridge
       grimblast
       github-desktop
+      chromium
 
       discord
       telegram-desktop
