@@ -112,6 +112,8 @@
     };
   };
 
+  services.gnome.gnome-keyring.enable = true;
+
   # services.xserver.desktopManager.gnome.enable = true;
 
   services.xserver = {
@@ -221,10 +223,12 @@
   environment.systemPackages = with pkgs; [
     home-manager
 
+    # Pull files
     git
     wget
     curl
 
+    # Qt
     libsForQt5.qt5.qtquickcontrols2
     libsForQt5.qt5.qtgraphicaleffects
 
