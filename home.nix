@@ -79,7 +79,7 @@
       nixd
 
       # system tools
-      ytop
+      bottom
       procs
       monitor
       sysstat
