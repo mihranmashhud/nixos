@@ -76,7 +76,6 @@
       nix-index
       nix-prefetch-git
       nixpkgs-fmt
-      nixd
 
       # system tools
       bottom
