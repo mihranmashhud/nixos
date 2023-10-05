@@ -1,4 +1,5 @@
-{ fetchFromGitLab
+{ inputs
+, fetchFromGitLab
 , fetchpatch
 , cmake
 , extra-cmake-modules
@@ -18,14 +19,7 @@ stdenv.mkDerivation {
   pname = name;
   inherit name;
 
-  src = fetchFromGitLab {
-    domain = "invent.kde.org";
-    owner = "system";
-    repo = "xwaylandvideobridge";
-    rev = "1b5c5d3dc7e3110592469ceda459ff8ef6610e22";
-    hash = "sha256-r3rUcVQhyN/13gRPpmhaKtrnchd3aHTnX3SMJG5+8iI=";
-  };
-
+  src = inputs.xwaylandvideobridge;
   patches = [
     ./patches/cursor-mode.patch
   ];

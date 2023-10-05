@@ -26,10 +26,7 @@
   };
 
   home.packages =
-    let
-      drvs = (import ./derivations { inherit pkgs; });
-    in
-    with (pkgs // drvs); [
+    with (pkgs); [
       # apps
       gnome.nautilus
       warp

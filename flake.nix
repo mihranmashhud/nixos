@@ -31,14 +31,18 @@
     hyprland.url = "github:hyprwm/Hyprland";
 
     nix-colors.url = "github:misterio77/nix-colors";
+
+    my-derivations.url = "path:./derivations";
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, home-manager, hyprland, nix-colors, ... }@inputs:
+  outputs = { self, nixpkgs, nixos-hardware, home-manager, hyprland, nix-colors, my-derivations, ... }@inputs:
     let
       system = "x86_64-linux";
+      drvs = my-derivations.packages.${system};
       pkgs = import nixpkgs {
         inherit system;
 
+        overlays = [(final: prev: prev // drvs)];
         config = {
           allowUnfree = true;
         };

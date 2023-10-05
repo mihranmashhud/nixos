@@ -1,4 +1,5 @@
-{ lib
+{ inputs
+, lib
 , stdenv
 , fetchFromGitHub
 , scdoc
@@ -20,15 +21,7 @@ stdenv.mkDerivation {
   pname = name;
   inherit name;
 
-  src = fetchFromGitHub {
-    owner = "hyprwm";
-    repo = "contrib";
-    sparseCheckout = [
-      "grimblast"
-    ];
-    rev = "33663f663e07b4ca52c9165f74e3d793f08b15e7";
-    hash = "sha256-kqOX4AD8bLUVweL06L/cuaOnF2u8QbTZJo3QBsSOBK8=";
-  };
+  src = inputs.grimblast;
   nativeBuildInputs = [
     scdoc
     makeWrapper
