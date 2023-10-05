@@ -42,7 +42,7 @@
 
       discord
       telegram-desktop
-      teams
+      teams-for-linux
 
       libreoffice
       hunspell
