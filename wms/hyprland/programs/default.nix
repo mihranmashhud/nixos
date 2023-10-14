@@ -17,8 +17,5 @@
 
   xdg.configFile."waybar".source = ./waybar;
   programs.waybar.enable = true;
-  services.kdeconnect = {
-    enable = true;
-    indicator = true;
-  };
+  services.kdeconnect.indicator = true;
 }
