@@ -1,7 +1,4 @@
 { config, pkgs, ... }: {
-  # home.sessionVariables = {
-  #   NIX_BUILD_SHELL = "zsh";
-  # };
   programs.zsh = {
     enable = true;
 
