@@ -42,7 +42,7 @@
       pkgs = import nixpkgs {
         inherit system;
 
-        overlays = [(final: prev: prev // drvs)];
+        overlays = [ (final: prev: prev // drvs) ];
         config = {
           allowUnfree = true;
         };
