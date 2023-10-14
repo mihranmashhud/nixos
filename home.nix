@@ -52,6 +52,7 @@
       github-desktop
       chromium
       slack
+      pulseaudio
 
       discord
       telegram-desktop
