@@ -36,6 +36,17 @@
             updateInterval = 24 * 60 * 60 * 1000; # every day
             definedAliases = [ "nw" ];
           };
+          "Nix Options" = {
+            urls = [{
+              template = "https://search.nixos.org/packages";
+              params = [
+                { name = "channel"; value = "unstable"; }
+                { name = "query"; value = "{searchTerms}"; }
+              ];
+            }];
+            icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            definedAliases = [ "nop" ];
+          };
           "Bing".metaData.hidden = "true";
         };
         search.force = true;
