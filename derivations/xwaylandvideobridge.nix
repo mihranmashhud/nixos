@@ -12,12 +12,9 @@
 , qtx11extras
 , wrapQtAppsHook
 }:
-let
+stdenv.mkDerivation rec {
   name = "xwaylandvideobridge";
-in
-stdenv.mkDerivation {
   pname = name;
-  inherit name;
 
   src = inputs.xwaylandvideobridge;
   patches = [
