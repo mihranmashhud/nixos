@@ -13,6 +13,7 @@
       sudo = "sudo ";
       ls = "eza";
       cat = "bat";
+      npm = "pnpm";
     };
 
     # Load completion before loading plugins with antidote.
