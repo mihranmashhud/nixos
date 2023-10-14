@@ -11,6 +11,9 @@
   ];
 
   networking.hostName = "mihranDesktop"; # Define your hostname.
+  networking.interfaces.enp4s0.wakeOnLan = {
+    enable = true;
+  };
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_zen;
