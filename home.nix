@@ -54,6 +54,7 @@
       slack
       protonup-qt
       pulseaudio
+      bruno
 
       discord
       telegram-desktop
