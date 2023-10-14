@@ -20,9 +20,10 @@
         };
       in
       {
-        packages = with pkgs; builtins.mapAttrs (name: value: value { inherit inputs; }) {
-          xwaylandvideobridge = libsForQt5.callPackage ./xwaylandvideobridge.nix;
-          grimblast = callPackage ./grimblast.nix;
+        packages = with pkgs; {
+          xwaylandvideobridge = libsForQt5.callPackage ./xwaylandvideobridge.nix { inherit inputs; };
+          grimblast = callPackage ./grimblast.nix { inherit inputs; };
+          alvr = callPackage ./alvr-appimage.nix {};
         };
       });
 }
