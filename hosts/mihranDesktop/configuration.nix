@@ -31,4 +31,23 @@
     enable = true;
     motherboard = "amd";
   };
+
+  programs.corectrl = {
+    enable = true;
+    gpuOverclock.enable = true;
+  };
+
+  networking.firewall = {
+    allowedTCPPortRanges = [
+      { from = 9943; to = 9944; } # ALVR
+    ];
+    allowedUDPPortRanges = [
+      { from = 9943; to = 9944; } # ALVR
+    ];
+  };
+
+  environment.systemPackages = with pkgs; [
+    alvr
+    sidequest
+  ];
 }
