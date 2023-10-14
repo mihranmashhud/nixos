@@ -52,6 +52,7 @@
       github-desktop
       chromium
       slack
+      protonup-qt
       pulseaudio
 
       discord
