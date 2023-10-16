@@ -67,8 +67,6 @@
         "swayidle -w before-sleep '~/scripts/wayland-lockscreen -f; playerctl pause' &"
         # Wallpaper
         "swww init; ~/scripts/random-wallpaper"
-        # Removable media mounting
-        "udiskie &"
       ];
 
       source = [
