@@ -18,31 +18,13 @@
         "type": "github"
       }
     },
-    "grimblast": {
-      "flake": false,
-      "locked": {
-        "dir": "grimblast",
-        "lastModified": 1696339530,
-        "narHash": "sha256-rb954Rc+IyUiiXoIuQOJRp0//zH/WeMYZ3yJ5CccODA=",
-        "owner": "hyprwm",
-        "repo": "contrib",
-        "rev": "2e3f8ac2a3f1334fd2e211b07ed76b4215bb0542",
-        "type": "github"
-      },
-      "original": {
-        "dir": "grimblast",
-        "owner": "hyprwm",
-        "repo": "contrib",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1696193975,
-        "narHash": "sha256-mnQjUcYgp9Guu3RNVAB2Srr1TqKcPpRXmJf4LJk6KRY=",
+        "lastModified": 1697059129,
+        "narHash": "sha256-9NJcFF9CEYPvHJ5ckE8kvINvI84SZZ87PvqMbH6pro0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "fdd898f8f79e8d2f99ed2ab6b3751811ef683242",
+        "rev": "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593",
         "type": "github"
       },
       "original": {
@@ -55,7 +37,6 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "grimblast": "grimblast",
         "nixpkgs": "nixpkgs",
         "xwaylandvideobridge": "xwaylandvideobridge"
       }
@@ -78,11 +59,11 @@
     "xwaylandvideobridge": {
       "flake": false,
       "locked": {
-        "lastModified": 1696296488,
-        "narHash": "sha256-Xk68sR/frsYWgw/cW51+TJCUUvYW6E5NCpNie9czXcg=",
+        "lastModified": 1697119617,
+        "narHash": "sha256-79Z4BH7C85ZF+1Zivs3bTey7IdUnaDKhvZxzL6sDqUs=",
         "ref": "refs/heads/master",
-        "rev": "c2d534d52b5243906b969276b9b4e6c69aa06d7a",
-        "revCount": 152,
+        "rev": "ddb5e48d0984ff922c05543d7c0045ef6eaa1ab8",
+        "revCount": 158,
         "type": "git",
         "url": "https://invent.kde.org/system/xwaylandvideobridge.git"
       },
