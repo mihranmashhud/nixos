@@ -3,10 +3,14 @@
     ./hypr.nix
   ];
   home.packages = with pkgs; [
-    obs-studio
-    obs-studio-plugins.obs-websocket
     obs-cli
   ];
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      obs-websocket
+    ];
+  };
   wayland.windowManager.hyprland = {
     settings = {
       monitor = [
