@@ -55,6 +55,7 @@
       protonup-qt
       pulseaudio
       bruno
+      beekeeper-studio
 
       discord
       telegram-desktop
