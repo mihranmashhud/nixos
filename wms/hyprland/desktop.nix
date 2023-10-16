@@ -41,6 +41,10 @@
         "[workspace 10 silent] pavucontrol &"
         "xwaylandvideobridge &"
       ];
+
+      bind = [
+        ",F10,exec,obs-cli --password $(cat ~/.config/obs-studio/password) replaybuffer save"
+      ];
     };
   };
 }
