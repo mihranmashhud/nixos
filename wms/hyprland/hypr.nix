@@ -63,8 +63,6 @@
         # Clipboard
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
-        # Sync files
-        "syncthing &"
         # Perform on idle start
         "swayidle -w before-sleep '~/scripts/wayland-lockscreen -f; playerctl pause' &"
         # Wallpaper
