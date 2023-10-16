@@ -42,7 +42,7 @@
     with (pkgs); [
       # apps
       gnome.nautilus
-      warp
+      cinnamon.warpinator
       pavucontrol
       obsidian
       mpv
