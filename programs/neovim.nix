@@ -8,7 +8,7 @@
     defaultEditor = true;
     # Packages to make available to Neovim
     extraPackages = with pkgs; [
-      nodePackages.npm
+      nodejs
     ];
   };
 }
