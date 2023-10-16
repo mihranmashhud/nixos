@@ -17,9 +17,6 @@ stdenv.mkDerivation rec {
   pname = name;
 
   src = inputs.xwaylandvideobridge;
-  patches = [
-    ./patches/cursor-mode.patch
-  ];
 
   nativeBuildInputs = [
     cmake
