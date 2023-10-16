@@ -34,24 +34,6 @@
         "type": "github"
       }
     },
-    "grimblast": {
-      "flake": false,
-      "locked": {
-        "dir": "grimblast",
-        "lastModified": 1696339530,
-        "narHash": "sha256-rb954Rc+IyUiiXoIuQOJRp0//zH/WeMYZ3yJ5CccODA=",
-        "owner": "hyprwm",
-        "repo": "contrib",
-        "rev": "2e3f8ac2a3f1334fd2e211b07ed76b4215bb0542",
-        "type": "github"
-      },
-      "original": {
-        "dir": "grimblast",
-        "owner": "hyprwm",
-        "repo": "contrib",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -59,11 +41,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1696940889,
-        "narHash": "sha256-p2Wic74A1tZpFcld1wSEbFQQbrZ/tPDuLieCnspamQo=",
+        "lastModified": 1697371398,
+        "narHash": "sha256-Tn5feZ5SoYHQM9BTjw5e06DuNu8wc21gC9+bq/kXA8Y=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "6bba64781e4b7c1f91a733583defbd3e46b49408",
+        "rev": "3b67ae3f665379c06999641f99d94dba75b53876",
         "type": "github"
       },
       "original": {
@@ -82,11 +64,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1697151905,
-        "narHash": "sha256-sfuiRn7D5D2NzDkXXN/DUUcs2d1ddlf3VmzDBzDO2Tk=",
+        "lastModified": 1697405756,
+        "narHash": "sha256-rHcHtCWhqqRtafYLfxN6H130enk1t9iyEVMWut9XiBs=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "3a61350286de842c7f1566c38e2b42821080ddf4",
+        "rev": "8af3e7beebb96eceb8a094a20286d57e3b135938",
         "type": "github"
       },
       "original": {
@@ -123,13 +105,12 @@
     "my-derivations": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "grimblast": "grimblast",
         "nixpkgs": "nixpkgs_2",
         "xwaylandvideobridge": "xwaylandvideobridge"
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-oPlC83CitULJFyuQ3DoLWN4/4vbwhi6tP8h/QR8SRlY=",
+        "narHash": "sha256-pYcHJBt5o55ueBAWCOWVBVn2Cc35945K2A5FSk77Bzg=",
         "path": "./derivations",
         "type": "path"
       },
@@ -206,11 +187,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1696193975,
-        "narHash": "sha256-mnQjUcYgp9Guu3RNVAB2Srr1TqKcPpRXmJf4LJk6KRY=",
+        "lastModified": 1697059129,
+        "narHash": "sha256-9NJcFF9CEYPvHJ5ckE8kvINvI84SZZ87PvqMbH6pro0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "fdd898f8f79e8d2f99ed2ab6b3751811ef683242",
+        "rev": "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593",
         "type": "github"
       },
       "original": {
@@ -327,11 +308,11 @@
     "xwaylandvideobridge": {
       "flake": false,
       "locked": {
-        "lastModified": 1696296488,
-        "narHash": "sha256-Xk68sR/frsYWgw/cW51+TJCUUvYW6E5NCpNie9czXcg=",
+        "lastModified": 1697119617,
+        "narHash": "sha256-79Z4BH7C85ZF+1Zivs3bTey7IdUnaDKhvZxzL6sDqUs=",
         "ref": "refs/heads/master",
-        "rev": "c2d534d52b5243906b969276b9b4e6c69aa06d7a",
-        "revCount": 152,
+        "rev": "ddb5e48d0984ff922c05543d7c0045ef6eaa1ab8",
+        "revCount": 158,
         "type": "git",
         "url": "https://invent.kde.org/system/xwaylandvideobridge.git"
       },
