@@ -69,8 +69,6 @@
         "swww init; ~/scripts/random-wallpaper"
         # Removable media mounting
         "udiskie &"
-        # KDE Connect Indicator
-        "kdeconnect-indicator &"
       ];
 
       source = [
