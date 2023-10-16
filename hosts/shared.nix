@@ -114,6 +114,8 @@
 
   services.gnome.gnome-keyring.enable = true;
 
+  services.gvfs.enable = true;
+
   # services.xserver.desktopManager.gnome.enable = true;
 
   services.xserver = {
