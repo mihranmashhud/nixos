@@ -49,6 +49,11 @@
         disable_hyprland_logo = true;
         mouse_move_focuses_monitor = false;
         mouse_move_enables_dpms = true;
+        # new_window_takes_over_fullscreen = 1; # wait for hyprland package update
+      };
+
+      binds = {
+        allow_workspace_cycles = true;
       };
 
       # Startup
