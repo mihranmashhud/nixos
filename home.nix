@@ -45,6 +45,7 @@
       bruno
       beekeeper-studio
       simple-scan
+      xournalpp
 
       discord
       telegram-desktop
