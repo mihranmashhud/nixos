@@ -310,6 +310,7 @@
     gamemode.enable = true;
     nm-applet.enable = true;
     kdeconnect.enable = true;
+    java.enable = true;
   };
 
   # List services that you want to enable:
