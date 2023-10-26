@@ -7,6 +7,7 @@
 
     extraConfig = {
       color.ui = "auto";
+      diff.tool = "nvim -d";
     };
 
     delta.enable = true;
