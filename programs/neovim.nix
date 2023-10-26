@@ -9,6 +9,9 @@
     # Packages to make available to Neovim
     extraPackages = with pkgs; [
       nodejs
+      lua-language-server
+      luajitPackages.luarocks
+      stylua
     ];
   };
 }
