@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }: rec {
   gtk = {
     enable = true;
     cursorTheme = {
@@ -18,5 +18,11 @@
       package = pkgs.fluent-icon-theme;
       name = "Fluent";
     };
+  };
+  home.pointerCursor = {
+    gtk.enable = true;
+    package = gtk.cursorTheme.package;
+    name = gtk.cursorTheme.name;
+    size = 24;
   };
 }

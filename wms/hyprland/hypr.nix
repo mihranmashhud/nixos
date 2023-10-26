@@ -58,8 +58,6 @@
 
       # Startup
       exec-once = [
-        # Set the cursor
-        "hyprctl setcursor ${config.gtk.cursorTheme.name} ${toString config.xresources.properties."Xcursor.size"}"
         # Clipboard
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
