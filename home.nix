@@ -44,6 +44,7 @@
       pulseaudio
       bruno
       beekeeper-studio
+      simple-scan
 
       discord
       telegram-desktop

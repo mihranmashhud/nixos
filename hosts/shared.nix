@@ -162,6 +162,12 @@
     epson-escpr
   ];
 
+  # Scanning
+  hardware.sane = {
+    enable = true;
+    extraBackends = [ pkgs.sane-airscan ];
+  };
+
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -213,7 +219,12 @@
   users.users.mihranmashhud = {
     isNormalUser = true;
     description = "Mihran Mashhud";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ 
+      "networkmanager"
+      "wheel"
+      "scanner"
+      "lp"
+    ];
     shell = pkgs.zsh;
   };
 
