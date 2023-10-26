@@ -302,7 +302,11 @@
   programs = {
     zsh.enable = true;
     hyprland.enable = true;
-    steam.enable = true;
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      gamescopeSession.enable = true;
+    };
     gamemode.enable = true;
     nm-applet.enable = true;
     kdeconnect.enable = true;
