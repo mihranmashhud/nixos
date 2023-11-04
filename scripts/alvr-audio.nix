@@ -1,12 +1,16 @@
-#!/usr/bin/env bash
-
+{pkgs, ...}: with pkgs;
+let
+  package = writeShellApplication {
+    name = "alvr-audio";
+    runtimeInputs = [pulseaudio];
+    text = /* bash */ ''
 function get_alvr_playback_source_id() {
-  local last_node_name=''
-  local last_node_id=''
-  pactl list $1 | while read -r line; do
+  local last_node_name=""
+  local last_node_id=""
+  pactl list "$1" | while read -r line; do
     node_id=$(echo "$line" | grep -oP "$2 #\K.+" | sed -e 's/^[ \t]*//')
     node_name=$(echo "$line" | grep -oP 'node.name = "\K[^"]+' | sed -e 's/^[ \t]*//')
-    if [[ "$node_id" != '' ]] && [[ "$last_node_id" != "$node_id" ]]; then
+    if [[ "$node_id" != "" ]] && [[ "$last_node_id" != "$node_id" ]]; then
       last_node_id="$node_id"
     fi
     if [[ -n "$node_name" ]] && [[ "$last_node_name" != "$node_name" ]]; then
@@ -79,3 +83,11 @@ disconnect)
   unload_sink
   ;;
 esac
+   '';
+   };
+in
+{
+  home.packages = [
+    package
+  ];
+}

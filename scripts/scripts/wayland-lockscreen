@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-CHOICE=/tmp/background-choice
-pic=`cat $CHOICE`
-swaylock $@ -i "$pic" -s fill

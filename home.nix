@@ -41,7 +41,6 @@
       chromium
       slack
       protonup-qt
-      pulseaudio
       bruno
       beekeeper-studio
       simple-scan

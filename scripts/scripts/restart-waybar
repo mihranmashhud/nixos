@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-killall waybar
-nohup waybar -c ~/.config/waybar/laptop-config.json > /dev/null

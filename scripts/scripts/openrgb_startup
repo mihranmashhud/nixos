@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-killall openrgb
-while read line
-do
- echo $line | grep "Profile loaded" && wraith-master --resetport && break;
-done < <(openrgb --server -p sunrise.orp &)
