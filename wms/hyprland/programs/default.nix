@@ -10,7 +10,6 @@
     swayidle
     swaylock
     swww
-    udiskie
     libnotify
     hyprkeys
   ];
@@ -18,4 +17,5 @@
   xdg.configFile."waybar".source = ./waybar;
   programs.waybar.enable = true;
   services.kdeconnect.indicator = true;
+  services.udiskie.enable = true;
 }
