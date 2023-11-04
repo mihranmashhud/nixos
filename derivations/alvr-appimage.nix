@@ -16,8 +16,8 @@ appimageTools.wrapType2 {
   name = "alvr_dashboard";
 
   src = fetchurl {
-    url = "https://github.com/alvr-org/ALVR/releases/download/v20.4.3/ALVR-x86_64.AppImage";
-    hash = "sha256-q6f8HbP/gCpFi9Ai7WqN/MBJl1HUOIhKWZfLOYsDANk=";
+    url = "https://github.com/alvr-org/ALVR-nightly/releases/download/v21.0.0-dev00%2Bnightly.2023.10.30/ALVR-x86_64.AppImage";
+    hash = "sha256-tFwd2PlnWUMKkUoYA6qdSp/QKMW+teJYoeSv9BdQbl8=";
   };
 
   extraPkgs = pkgs: with pkgs; [
@@ -31,7 +31,7 @@ appimageTools.wrapType2 {
     iconv
     chromium
   ];
-  extraInstallCommands = ''
+  extraInstallCommands = /* bash */ ''
     install -Dm644 ${desktopFile} -t "$out/share/applications"
 
     for res in 16x16 32x32 48x48 64x64 128x128 256x256; do
