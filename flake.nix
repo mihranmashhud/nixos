@@ -16,6 +16,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    nur.url = "github:nix-community/NUR";
+
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
     nix-gaming.url = "github:fufexan/nix-gaming";
@@ -33,28 +35,29 @@
     hyprland.url = "github:hyprwm/Hyprland";
 
     nix-colors.url = "github:misterio77/nix-colors";
-
-    my-derivations.url = "path:./derivations";
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, nix-gaming, home-manager, hyprland, nix-colors, my-derivations, ... }@inputs:
+  outputs = { self, nixpkgs, nur, nixos-hardware, nix-gaming, home-manager, hyprland, nix-colors, ... }@inputs:
     let
       system = "x86_64-linux";
-      drvs = my-derivations.packages.${system};
       pkgs = import nixpkgs {
         inherit system;
 
         overlays = [
-          (final: prev: prev // drvs)
+          nur.overlay
         ];
         config = {
           allowUnfree = true;
         };
       };
+      nur-no-pkgs = import nur {
+        nurpkgs = import nixpkgs { inherit system; };
+      };
       args = {
         inherit pkgs;
         inherit inputs;
         inherit nix-colors;
+        inherit nur-no-pkgs;
       };
     in
     {
@@ -83,6 +86,8 @@
 
           specialArgs = args;
           modules = [
+            { nixpkgs.overlays = [nur.overlay]; }
+
             ./hosts/mihranDesktop/configuration.nix
 
             nixos-hardware.nixosModules.common-cpu-amd

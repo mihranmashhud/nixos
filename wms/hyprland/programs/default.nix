@@ -12,6 +12,9 @@
     swww
     libnotify
     hyprkeys
+    (nur.repos.mikilio.xwaylandvideobridge.overrideAttrs {
+      isHyprland = true;
+    })
   ];
 
   xdg.configFile."waybar".source = ./waybar;

@@ -35,7 +35,6 @@
       obsidian
       mpv
       zoom-us
-      xwaylandvideobridge
       grimblast
       github-desktop
       chromium
