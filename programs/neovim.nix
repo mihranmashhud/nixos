@@ -8,6 +8,7 @@
     defaultEditor = true;
     # Packages to make available to Neovim
     extraPackages = with pkgs; [
+      nixd
       nodejs
       lua-language-server
       luajitPackages.luarocks
