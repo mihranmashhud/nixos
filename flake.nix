@@ -46,7 +46,6 @@
 
         overlays = [
           (final: prev: prev // drvs)
-          (final: prev: prev // hyprland.packages.${system})
         ];
         config = {
           allowUnfree = true;
