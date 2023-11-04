@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, inputs, ... }: {
 
   # Console
   console = {
@@ -308,7 +308,9 @@
     steam = {
       enable = true;
       remotePlay.openFirewall = true;
-      gamescopeSession.enable = true;
+      extraCompatPackages = [
+        inputs.nix-gaming.packages.${pkgs.system}.proton-ge
+      ];
     };
     gamemode.enable = true;
     nm-applet.enable = true;

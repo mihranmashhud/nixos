@@ -2,9 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
-
-{
+{ config, pkgs, ... }: {
   imports = [
     ../shared.nix
     ./hardware-configuration.nix
@@ -16,7 +14,7 @@
   };
 
   # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_stable;
 
   # Monitors listing
   services.xserver.xrandrHeads = [
@@ -45,6 +43,9 @@
       { from = 9943; to = 9944; } # ALVR
     ];
   };
+
+  services.pipewire.lowLatency.enable = true;
+  security.rtkit.enable = true;
 
   environment.systemPackages = with pkgs; [
     alvr

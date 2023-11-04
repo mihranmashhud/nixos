@@ -18,6 +18,8 @@
 
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
+    nix-gaming.url = "github:fufexan/nix-gaming";
+
     # home-manager for user configuration
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -35,7 +37,7 @@
     my-derivations.url = "path:./derivations";
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, home-manager, hyprland, nix-colors, my-derivations, ... }@inputs:
+  outputs = { self, nixpkgs, nixos-hardware, nix-gaming, home-manager, hyprland, nix-colors, my-derivations, ... }@inputs:
     let
       system = "x86_64-linux";
       drvs = my-derivations.packages.${system};
@@ -67,8 +69,7 @@
 
             nixos-hardware.nixosModules.lenovo-thinkpad-t480
 
-            home-manager.nixosModules.home-manager
-            {
+            home-manager.nixosModules.home-manager {
               home-manager = {
                 extraSpecialArgs = args;
                 useGlobalPkgs = true;
@@ -90,8 +91,10 @@
             nixos-hardware.nixosModules.common-gpu-amd
             nixos-hardware.nixosModules.common-pc-ssd
 
-            home-manager.nixosModules.home-manager
-            {
+            nix-gaming.nixosModules.pipewireLowLatency
+            nix-gaming.nixosModules.steamCompat
+
+            home-manager.nixosModules.home-manager {
               home-manager = {
                 extraSpecialArgs = args;
                 useGlobalPkgs = true;
