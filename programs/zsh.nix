@@ -14,7 +14,7 @@
     };
 
     # Load completion before loading plugins with antidote.
-    initExtraFirst = "autoload -U compinit && compinit";
+    initExtraFirst = /* bash */ "autoload -U compinit && compinit";
     enableCompletion = false;
 
     antidote = {
