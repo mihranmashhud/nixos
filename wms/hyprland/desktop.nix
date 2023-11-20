@@ -47,6 +47,7 @@
         "obs --startreplaybuffer --minimize-to-tray &"
         "[workspace 10 silent] pavucontrol &"
         "xwaylandvideobridge &"
+        "openrgb -p 'cool ice'"
       ];
 
       bind = [
