@@ -10,7 +10,6 @@
     homeDirectory = "/home/mihranmashhud";
     sessionPath = [
       "$HOME/.local/bin"
-      "$HOME/scripts"
     ];
   };
 

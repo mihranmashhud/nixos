@@ -48,12 +48,14 @@
           allowUnfree = true;
         };
       };
+      scripts = import ./scripts/scripts.nix { inherit pkgs; };
       nur-no-pkgs = import nur {
         nurpkgs = import nixpkgs { inherit system; };
       };
       args = {
         inherit pkgs;
         inherit inputs;
+        inherit scripts;
         inherit nix-colors;
         inherit nur-no-pkgs;
       };
