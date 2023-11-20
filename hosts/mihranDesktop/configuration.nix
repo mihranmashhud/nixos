@@ -49,6 +49,7 @@
 
   environment.systemPackages = with pkgs; [
     nur.repos.materus.alvr
+    wlxoverlay
     sidequest
   ];
 }
