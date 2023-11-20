@@ -42,6 +42,7 @@
 
         overlays = [
           (final: prev: drvs.packages.${system})
+          (final: prev: hyprland.packages.${system})
           nur.overlay
         ];
         config = {
