@@ -50,6 +50,7 @@
   environment.systemPackages = with pkgs; [
     nur.repos.materus.alvr
     wlxoverlay
+    pulseaudio # for alvr audio script
     sidequest
   ];
 }
