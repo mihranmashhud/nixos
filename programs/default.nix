@@ -14,5 +14,4 @@
   services.xembed-sni-proxy.enable = true;
   services.ssh-agent.enable = true;
   services.syncthing.enable = true;
-  services.syncthing.tray.enable = true;
 }
