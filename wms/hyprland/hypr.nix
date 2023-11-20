@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, scripts, ... }: {
   imports = [
     ./programs
   ];
@@ -57,12 +57,14 @@
       };
 
       # Startup
-      exec-once = [
-        # Clipboard
-        "wl-paste --type text --watch cliphist store"
-        "wl-paste --type image --watch cliphist store"
-        # Perform on idle start
-        "swayidle -w before-sleep '~/scripts/wayland-lockscreen -f; playerctl pause' &"
+      exec-once = let
+        before-sleep = builtins.concatStringsSep "; " [
+          "${scripts.wayland-lockscreen}/bin/wayland-lockscreen -f"
+          "${pkgs.playerctl}/bin/playerctl pause"
+        ];
+      in [
+        # Idle start
+        "${pkgs.swayidle}/bin/swayidle -w before-sleep '${before-sleep}' &"
         # Wallpaper
         "swww init; ~/scripts/random-wallpaper"
       ];
