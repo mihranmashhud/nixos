@@ -311,7 +311,6 @@
         inputs.nix-gaming.packages.${pkgs.system}.proton-ge
       ];
     };
-    gamemode.enable = true;
     nm-applet.enable = true;
     kdeconnect.enable = true;
     java.enable = true;
