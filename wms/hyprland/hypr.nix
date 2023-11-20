@@ -66,7 +66,7 @@
         # Idle start
         "${pkgs.swayidle}/bin/swayidle -w before-sleep '${before-sleep}' &"
         # Wallpaper
-        "swww init; ~/scripts/random-wallpaper"
+        "swww init"
       ];
 
       source = [
