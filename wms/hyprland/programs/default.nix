@@ -18,4 +18,5 @@
   programs.waybar.enable = true;
   services.kdeconnect.indicator = true;
   services.udiskie.enable = true;
+  services.cliphist.enable = true;
 }
