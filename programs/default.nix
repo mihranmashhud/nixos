@@ -8,6 +8,7 @@
     ./zsh.nix
     ./starship.nix
     ./imv.nix
+    ./direnv.nix
   ];
   programs.git-credential-oauth.enable = true;
   programs.command-not-found.enable = true;
