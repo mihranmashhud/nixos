@@ -253,6 +253,8 @@
     wineWowPackages.stable
     wineWowPackages.waylandFull
     winetricks
+
+    protontricks
   ];
 
   environment.variables = {
