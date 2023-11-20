@@ -43,10 +43,16 @@
         overlays = [
           (final: prev: drvs.packages.${system})
           (final: prev: hyprland.packages.${system})
+          (final: prev: {
+            obsidian = prev.obsidian.override {electron = final.electron_24;};
+          })
           nur.overlay
         ];
         config = {
           allowUnfree = true;
+          permittedInsecurePackages = [
+            "electron-24.8.6"
+          ];
         };
       };
       scripts = import ./scripts/scripts.nix { inherit pkgs; };
