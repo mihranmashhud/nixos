@@ -1,4 +1,5 @@
-{ pkgs }: pkgs.stdenv.mkDerivation {
+{pkgs}:
+pkgs.stdenv.mkDerivation {
   name = "sddm-chili";
   src = pkgs.fetchFromGitHub {
     owner = "MarianArlt";

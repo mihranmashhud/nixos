@@ -1,4 +1,8 @@
-{ config, pkgs, ... }: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   programs.zsh = {
     enable = true;
 
@@ -14,7 +18,11 @@
     };
 
     # Load completion before loading plugins with antidote.
-    initExtraFirst = /* bash */ "autoload -U compinit && compinit";
+    initExtraFirst =
+      /*
+      bash
+      */
+      "autoload -U compinit && compinit";
     enableCompletion = false;
 
     antidote = {

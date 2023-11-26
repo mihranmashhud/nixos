@@ -1,8 +1,10 @@
-{ config, pkgs, ... }:
-let
-  system-sounds = "${pkgs.deepin.deepin-sound-theme}/share/sounds/deepin/stereo";
-in
 {
+  config,
+  pkgs,
+  ...
+}: let
+  system-sounds = "${pkgs.deepin.deepin-sound-theme}/share/sounds/deepin/stereo";
+in {
   services.mako = with config.colorScheme.colors; {
     enable = true;
     defaultTimeout = 2000;

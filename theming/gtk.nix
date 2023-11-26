@@ -1,4 +1,8 @@
-{ config, pkgs, ... }: rec {
+{
+  config,
+  pkgs,
+  ...
+}: rec {
   gtk = {
     enable = true;
     cursorTheme = {
@@ -6,12 +10,12 @@
       name = "Bibata-Modern-Classic";
     };
     theme = {
-      package = (pkgs.colloid-gtk-theme.override {
+      package = pkgs.colloid-gtk-theme.override {
         tweaks = [
           "black"
           "rimless"
         ];
-      });
+      };
       name = "Colloid-Dark";
     };
     iconTheme = {

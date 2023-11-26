@@ -1,4 +1,3 @@
-{ scripts, ... }:
-{
+{scripts, ...}: {
   home.packages = builtins.attrValues scripts;
 }

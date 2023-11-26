@@ -1,4 +1,8 @@
-{ config, pkgs, ... }: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./mako.nix
     ./rofi.nix
@@ -13,6 +17,7 @@
     hyprkeys
     xwaylandvideobridge
     wdisplays
+    eww-wayland
   ];
 
   xdg.configFile."waybar".source = ./waybar;

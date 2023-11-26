@@ -1,5 +1,9 @@
-{ config, pkgs, inputs, ... }: {
-
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   # Console
   console = {
     font = "ter-132n";
@@ -29,34 +33,32 @@
     # Plymouth with silent boot
     consoleLogLevel = 0;
     initrd.verbose = false;
-    plymouth =
-      let
-        theme = "circle_hud";
-        # logo_script = ''
-        #   logo_image = Image("white.png");
-        #   logo_sprite = Sprite();
-        #   logo_sprite.SetImage(logo_image);
-        #   logo_sprite.SetX(Window.GetX() + (Window.GetWidth() / 2 - logo_image.GetWidth() / 2));
-        #   logo_sprite.SetY(Window.GetHeight() - logo_image.GetHeight() - 50);
-        # '';
-      in
-      {
-        enable = true;
-        themePackages = with pkgs; [
-          (adi1090x-plymouth-themes.override {
-            selected_themes = [
-              theme
-            ];
-            # TODO: create overlay for this
-            # postFixup = ''
-            #   cd $out/share/plymouth/themes/${theme}
-            #   curl -O 'https://github.com/NixOS/nixos-artwork/blob/master/logo/white.png?raw=true'
-            #   echo "${logo_script}" >> ${theme}.script
-            # '';
-          })
-        ];
-        inherit theme;
-      };
+    plymouth = let
+      theme = "circle_hud";
+      # logo_script = ''
+      #   logo_image = Image("white.png");
+      #   logo_sprite = Sprite();
+      #   logo_sprite.SetImage(logo_image);
+      #   logo_sprite.SetX(Window.GetX() + (Window.GetWidth() / 2 - logo_image.GetWidth() / 2));
+      #   logo_sprite.SetY(Window.GetHeight() - logo_image.GetHeight() - 50);
+      # '';
+    in {
+      enable = true;
+      themePackages = with pkgs; [
+        (adi1090x-plymouth-themes.override {
+          selected_themes = [
+            theme
+          ];
+          # TODO: create overlay for this
+          # postFixup = ''
+          #   cd $out/share/plymouth/themes/${theme}
+          #   curl -O 'https://github.com/NixOS/nixos-artwork/blob/master/logo/white.png?raw=true'
+          #   echo "${logo_script}" >> ${theme}.script
+          # '';
+        })
+      ];
+      inherit theme;
+    };
     kernelParams = [
       # Silent Boot Params
       "quiet"
@@ -99,9 +101,9 @@
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
+      wantedBy = ["graphical-session.target"];
+      wants = ["graphical-session.target"];
+      after = ["graphical-session.target"];
       serviceConfig = {
         Type = "simple";
         ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
@@ -122,7 +124,7 @@
     enable = true;
     displayManager = {
       sddm.enable = true;
-      sddm.theme = "${import ../theming/sddm-chili.nix { inherit pkgs; }}";
+      sddm.theme = "${import ../theming/sddm-chili.nix {inherit pkgs;}}";
       sddm.settings = {
         Theme = {
           EnableAvatars = true;
@@ -165,7 +167,7 @@
   # Scanning
   hardware.sane = {
     enable = true;
-    extraBackends = [ pkgs.sane-airscan ];
+    extraBackends = [pkgs.sane-airscan];
   };
 
   # Enable sound with pipewire.
@@ -186,7 +188,7 @@
   };
 
   # For swaylock
-  security.pam.services.swaylock = { };
+  security.pam.services.swaylock = {};
 
   hardware = {
     opengl.enable = true;
@@ -222,7 +224,7 @@
   users.users.mihranmashhud = {
     isNormalUser = true;
     description = "Mihran Mashhud";
-    extraGroups = [ 
+    extraGroups = [
       "networkmanager"
       "wheel"
       "scanner"
@@ -287,9 +289,9 @@
     ];
     fontconfig = {
       defaultFonts = {
-        sansSerif = [ "Inter" ];
-        serif = [ "Roboto Slab" ];
-        monospace = [ "CaskaydiaCove Nerd Font" ];
+        sansSerif = ["Inter"];
+        serif = ["Roboto Slab"];
+        monospace = ["CaskaydiaCove Nerd Font"];
       };
     };
   };
@@ -338,7 +340,7 @@
   system.stateVersion = "23.05"; # Did you read the comment?
 
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = ["nix-command" "flakes"];
     auto-optimise-store = true;
     substituters = [
       "https://nix-community.cachix.org"

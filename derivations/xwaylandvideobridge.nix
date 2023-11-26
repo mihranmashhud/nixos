@@ -1,14 +1,15 @@
-{ inputs
-, cmake
-, extra-cmake-modules
-, pkg-config
-, stdenv
-, qtbase
-, kdelibs4support
-, kpipewire
-, qtquickcontrols2
-, qtx11extras
-, wrapQtAppsHook
+{
+  inputs,
+  cmake,
+  extra-cmake-modules,
+  pkg-config,
+  stdenv,
+  qtbase,
+  kdelibs4support,
+  kpipewire,
+  qtquickcontrols2,
+  qtx11extras,
+  wrapQtAppsHook,
 }:
 stdenv.mkDerivation rec {
   name = "xwaylandvideobridge";
