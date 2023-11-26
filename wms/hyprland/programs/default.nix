@@ -12,6 +12,7 @@
     libnotify
     hyprkeys
     xwaylandvideobridge
+    wdisplays
   ];
 
   xdg.configFile."waybar".source = ./waybar;
