@@ -17,6 +17,7 @@
       lua-language-server
       luajitPackages.luarocks
       stylua
+      alejandra
     ];
   };
 }
