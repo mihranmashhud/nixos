@@ -52,5 +52,6 @@
     wlxoverlay
     pulseaudio # for alvr audio script
     sidequest
+    r2modman
   ];
 }
