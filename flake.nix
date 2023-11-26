@@ -28,6 +28,10 @@
 
     nix-colors.url = "github:misterio77/nix-colors";
 
+    eww = {
+      url = "github:hylophile/eww/dynamic-icons";
+    };
+
     drvs = {
       url = "path:./derivations";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -43,6 +47,7 @@
     home-manager,
     hyprland,
     nix-colors,
+    eww,
     drvs,
     ...
   } @ inputs: let
@@ -53,6 +58,7 @@
       overlays = [
         (final: prev: drvs.packages.${system})
         (final: prev: hyprland.packages.${system})
+        (final: prev: eww.packages.${system})
         (final: prev: {
           obsidian = prev.obsidian.override {electron = final.electron_24;};
         })
