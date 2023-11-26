@@ -62,5 +62,6 @@
     pulseaudio # for alvr audio script
     sidequest
     r2modman
+    gkraken
   ];
 }
