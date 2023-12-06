@@ -102,7 +102,7 @@ in {
       */
       ''
         killall waybar
-        nohup waybar -c ~/.config/waybar/laptop-config.json > /dev/null
+        nohup waybar -c ~/.config/waybar/desktop-config.json > /dev/null
       '';
   };
 }

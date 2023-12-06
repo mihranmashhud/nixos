@@ -1,13 +1,12 @@
 {
   config,
   pkgs,
-  lib,
+  scripts,
   ...
 }: {
   imports = [
     ./programs
     ./theming
-    ./scripts
   ];
 
   home = {
@@ -92,7 +91,7 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
-  ];
+  ] ++ builtins.attrValues scripts;
 
   home.stateVersion = "23.05";
 }

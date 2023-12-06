@@ -71,7 +71,7 @@
         ];
       };
     };
-    scripts = import ./scripts/scripts.nix {inherit pkgs;};
+    scripts = import ./modules/scripts.nix {inherit pkgs;};
     nur-no-pkgs = import nur {
       nurpkgs = import nixpkgs {inherit system;};
     };
