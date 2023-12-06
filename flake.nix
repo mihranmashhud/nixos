@@ -28,6 +28,11 @@
 
     nix-colors.url = "github:misterio77/nix-colors";
 
+    flake-compat = {
+      url = "github:inclyc/flake-compat";
+      flake = false;
+    };
+
     eww = {
       url = "github:hylophile/eww/dynamic-icons";
     };
