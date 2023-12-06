@@ -46,6 +46,7 @@
     simple-scan
     xournalpp
     vial
+    transmission_4-gtk
 
     discord
     telegram-desktop
