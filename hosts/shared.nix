@@ -204,6 +204,11 @@
   hardware.bluetooth = {
     enable = true;
     package = pkgs.bluez5-experimental;
+    input = {
+      General = {
+        UserspaceHID = true;
+      };
+    };
   };
   services.blueman.enable = true;
   environment.etc = {
