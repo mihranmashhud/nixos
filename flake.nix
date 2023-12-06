@@ -57,12 +57,12 @@
 
       overlays = [
         (final: prev: drvs.packages.${system})
-        (final: prev: hyprland.packages.${system})
         (final: prev: eww.packages.${system})
         (final: prev: {
           obsidian = prev.obsidian.override {electron = final.electron_24;};
         })
         nur.overlay
+        hyprland.overlays.default
       ];
       config = {
         allowUnfree = true;
