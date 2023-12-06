@@ -324,6 +324,11 @@
   # services.openssh.enable = true;
   services.udisks2.enable = true;
 
+  services.udev.packages = with pkgs; [
+    qmk-udev-rules
+    vial-udev-rules
+  ];
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

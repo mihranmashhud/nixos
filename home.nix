@@ -45,6 +45,7 @@
     beekeeper-studio
     simple-scan
     xournalpp
+    vial
 
     discord
     telegram-desktop
