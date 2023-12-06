@@ -3,7 +3,10 @@
   pkgs,
   scripts,
   ...
-}: {
+}: 
+let
+  inherit ((import ../../modules/fns.nix {inherit pkgs;}).hypr) windowrules;
+in {
   imports = [
     ./programs
   ];
@@ -43,6 +46,8 @@
 
       input = {
         follow_mouse = 2;
+        kb_layout = "us,ara";
+        kb_options = "grp:ctrls_toggle";
       };
 
       gestures = {
@@ -74,8 +79,39 @@
         "swww init"
       ];
 
+      windowrulev2 = windowrules [
+        {
+          window = "class:^(discord)$";
+          rules = ["workspace 6"];
+        }
+        {
+          window = "class:^(pavucontrol)$";
+          rules = ["workspace 10"];
+        }
+        {
+          window = "class:^(leagueclientux.exe)$";
+          rules = [
+            "workspace 4"
+            "float"
+            "center"
+            "size 1600 900"
+            "fullscreen"
+            "forceinput"
+            "nomaxsize"
+          ];
+        }
+        {
+          window = "class:^(xwaylandvideobridge)$";
+          rules = [
+            "opacity 0.0 override 0.0 override"
+            "noanim"
+            "nofocus"
+            "noinitialfocus"
+          ];
+        }
+      ];
+
       source = [
-        "./rules.conf"
         "./binds.conf"
       ];
     };
