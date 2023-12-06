@@ -15,6 +15,7 @@
       ls = "eza";
       cat = "bat";
       npm = "pnpm";
+      npx = "pnpm dlx";
     };
 
     # Load completion before loading plugins with antidote.
