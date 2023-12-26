@@ -115,6 +115,13 @@ in {
             "noinitialfocus"
           ];
         }
+        {
+          window = "title:^()$,class:^(steam)$";
+          rules = [
+            "stayfocused"
+            "minsize 1 1"
+          ];
+        }
       ];
 
       source = [
