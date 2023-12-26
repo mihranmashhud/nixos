@@ -95,8 +95,6 @@ in {
             "float"
             "center"
             "size 1600 900"
-            "fullscreen"
-            "forceinput"
             "nomaxsize"
           ];
         }
