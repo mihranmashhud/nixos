@@ -21,7 +21,7 @@
     in {
       packages = with pkgs; {
         wlxoverlay = callPackage ./wlxoverlay.nix {};
-        xwaylandvideobridge = libsForQt5.callPackage ./xwaylandvideobridge.nix {inherit inputs;};
+        # xwaylandvideobridge = libsForQt5.callPackage ./xwaylandvideobridge.nix {inherit inputs;};
         vial-udev-rules = callPackage ./vial-udev-rules.nix {};
       };
     });
