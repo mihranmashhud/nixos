@@ -1,6 +1,8 @@
-{pkgs}: with pkgs; let
+{pkgs}:
+with pkgs; let
   bgChoiceFile = "/tmp/background-choice";
   bgsLocation = "$HOME/Pictures/Backgrounds";
+  system-sounds = "${pkgs.deepin.deepin-sound-theme}/share/sounds/deepin/stereo";
 in {
   wayland-lockscreen = writeShellApplication {
     name = "wayland-lockscreen";
@@ -103,6 +105,18 @@ in {
       ''
         killall waybar
         nohup waybar -c ~/.config/waybar/desktop-config.json > /dev/null
+      '';
+  };
+
+  play-bell = writeShellApplication {
+    name = "play-bell";
+    runtimeInputs = [mpv];
+    text =
+      /*
+      bash
+      */
+      ''
+        mpv ${system-sounds}/message.wav
       '';
   };
 }
