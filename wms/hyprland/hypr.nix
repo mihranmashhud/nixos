@@ -101,6 +101,12 @@ in {
           ];
         }
         {
+          window = "class:^(league of legends.exe)$";
+          rules = [
+            "fullscreen"
+          ];
+        }
+        {
           window = "class:^(xwaylandvideobridge)$";
           rules = [
             "opacity 0.0 override 0.0 override"
