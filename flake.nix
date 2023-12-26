@@ -59,7 +59,9 @@
         (final: prev: drvs.packages.${system})
         (final: prev: eww.packages.${system})
         (final: prev: {
-          obsidian = prev.obsidian.override {electron = final.electron_24;};
+          obsidian = prev.obsidian.override {
+            electron = final.electron_24;
+          };
         })
         nur.overlay
         hyprland.overlays.default
@@ -68,6 +70,7 @@
         allowUnfree = true;
         permittedInsecurePackages = [
           "electron-24.8.6"
+          "electron-25.9.0"
         ];
       };
     };
