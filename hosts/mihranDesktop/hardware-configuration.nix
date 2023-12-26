@@ -13,7 +13,7 @@
   ];
 
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
-  boot.initrd.kernelModules = ["amdgpu"];
+  boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
 
@@ -34,6 +34,11 @@
 
   fileSystems."/home/mihranmashhud/Data" = {
     device = "/dev/disk/by-uuid/ff386612-8c1b-444a-b8fe-a43e428ad61d";
+    fsType = "ext4";
+  };
+
+  fileSystems."/var/lib/libvirt/images" = {
+    device = "/dev/disk/by-uuid/5758bc2e-f6ba-4346-a691-15cff3c1d27f";
     fsType = "ext4";
   };
 

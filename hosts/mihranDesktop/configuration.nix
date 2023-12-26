@@ -9,6 +9,7 @@
   imports = [
     ../shared.nix
     ./hardware-configuration.nix
+    ../../modules/gpu-passthrough.nix
   ];
 
   networking.hostName = "mihranDesktop"; # Define your hostname.
