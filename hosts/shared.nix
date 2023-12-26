@@ -202,8 +202,29 @@
 
   # Bluetooth
   hardware.bluetooth = {
+    # package = pkgs.bluez.overrideAttrs (oldAttrs: {
+    #   patches =
+    #     oldAttrs.patches
+    #     ++ [
+    #       (pkgs.fetchpatch {
+    #         url = "https://github.com/BluezTestBot/bluez/commit/1608878095ba93f9e2385dde2cfdb1488ae6ebea.patch";
+    #         sha256 = "sha256-UUmYMHnxYrw663nEEC2mv3zj5e0omkLNejmmPUtgS3c=";
+    #       })
+    #     ];
+    # });
+    package = pkgs.bluez;
     enable = true;
-    package = pkgs.bluez5-experimental;
+    settings = {
+      General = {
+        JustWorksRepairing = "always";
+        FastConnectable = true;
+        Class = "0x000100";
+      };
+      GATT = {
+        ReconnectIntervals="1,1,2,3,5,8,13,21,34,55";
+        AutoEnable=true;
+      };
+    };
     input = {
       General = {
         UserspaceHID = true;
