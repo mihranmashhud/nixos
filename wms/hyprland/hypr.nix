@@ -81,15 +81,19 @@ in {
 
       windowrulev2 = windowrules [
         {
-          window = "class:^(discord)$";
+          windows = [
+            "class:^(discord)$"
+            "class:^(Slack)$"
+            "class:^(org.telegram.desktop)$"
+          ];
           rules = ["workspace 6"];
         }
         {
-          window = "class:^(pavucontrol)$";
+          windows = ["class:^(pavucontrol)$"];
           rules = ["workspace 10"];
         }
         {
-          window = "class:^(leagueclientux.exe)$";
+          windows = ["class:^(leagueclientux.exe)$"];
           rules = [
             "workspace 4"
             "float"
@@ -99,13 +103,13 @@ in {
           ];
         }
         {
-          window = "class:^(league of legends.exe)$";
+          windows = ["class:^(league of legends.exe)$"];
           rules = [
             "fullscreen"
           ];
         }
         {
-          window = "class:^(xwaylandvideobridge)$";
+          windows = ["class:^(xwaylandvideobridge)$"];
           rules = [
             "opacity 0.0 override 0.0 override"
             "noanim"

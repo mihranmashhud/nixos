@@ -33,7 +33,7 @@
     };
 
     drvs = {
-      url = "path:./derivations";
+      url = "path:derivations";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -95,6 +95,8 @@
           ./hosts/mihranLaptop/configuration.nix
 
           nixos-hardware.nixosModules.lenovo-thinkpad-t480
+
+          nix-gaming.nixosModules.steamCompat
 
           home-manager.nixosModules.home-manager
           {

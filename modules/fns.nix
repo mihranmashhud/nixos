@@ -1,13 +1,13 @@
 {pkgs, ...}: let
-  inherit (builtins) concatMap concatString;
+  inherit (builtins) concatMap concatStringsSep hasAttr;
+  hasAttrs = attrs: set: builtins.all (attr: hasAttr attr set) attrs;
 in {
   hypr = {
     windowrules = list:
-      concatMap ({
-        window,
-        rules,
-      }:
-        map (rule: "${rule},${window}") rules)
+      concatMap (
+        set:
+          concatMap (rule: map (window: concatStringsSep "," [rule window]) set.windows) set.rules
+      )
       list;
     binds = list:
       map ({
@@ -16,7 +16,7 @@ in {
         dispatcher,
         params,
       }:
-        concatString "," [mods key dispatcher params])
+        concatStringsSep "," [mods key dispatcher params])
       list;
   };
 }
