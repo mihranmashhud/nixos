@@ -35,13 +35,6 @@
     initrd.verbose = false;
     plymouth = let
       theme = "circle_hud";
-      # logo_script = ''
-      #   logo_image = Image("white.png");
-      #   logo_sprite = Sprite();
-      #   logo_sprite.SetImage(logo_image);
-      #   logo_sprite.SetX(Window.GetX() + (Window.GetWidth() / 2 - logo_image.GetWidth() / 2));
-      #   logo_sprite.SetY(Window.GetHeight() - logo_image.GetHeight() - 50);
-      # '';
     in {
       enable = true;
       themePackages = with pkgs; [
@@ -49,12 +42,6 @@
           selected_themes = [
             theme
           ];
-          # TODO: create overlay for this
-          # postFixup = ''
-          #   cd $out/share/plymouth/themes/${theme}
-          #   curl -O 'https://github.com/NixOS/nixos-artwork/blob/master/logo/white.png?raw=true'
-          #   echo "${logo_script}" >> ${theme}.script
-          # '';
         })
       ];
       inherit theme;
@@ -221,8 +208,8 @@
         Class = "0x000100";
       };
       GATT = {
-        ReconnectIntervals="1,1,2,3,5,8,13,21,34,55";
-        AutoEnable=true;
+        ReconnectIntervals = "1,1,2,3,5,8,13,21,34,55";
+        AutoEnable = true;
       };
     };
     input = {
@@ -358,6 +345,21 @@
     qmk-udev-rules
     vial-udev-rules
   ];
+
+  services.postgresql = {
+    enable = true;
+    ensureDatabases = [
+      "mydatabase"
+      "i3-institute-local"
+    ];
+    authentication = pkgs.lib.mkOverride 10 ''
+      #type database  DBuser  auth-method
+      local all       all     trust
+      #type database DBuser origin-address auth-method
+      # ipv4
+      host  all      all     127.0.0.1/32   trust
+    '';
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

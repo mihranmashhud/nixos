@@ -3,8 +3,7 @@
   pkgs,
   scripts,
   ...
-}: 
-let
+}: let
   inherit ((import ../../modules/fns.nix {inherit pkgs;}).hypr) windowrules;
 in {
   imports = [
@@ -118,7 +117,7 @@ in {
           ];
         }
         {
-          window = "title:^()$,class:^(steam)$";
+          windows = ["title:^()$,class:^(steam)$"];
           rules = [
             "stayfocused"
             "minsize 1 1"

@@ -16,6 +16,7 @@
   boot.initrd.kernelModules = ["i915"];
   boot.kernelModules = [];
   boot.extraModulePackages = [];
+  boot.resumeDevice = "/dev/disk/by-uuid/1e11cfc1-dbed-4740-abad-b7ce9479d094";
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/1e11cfc1-dbed-4740-abad-b7ce9479d094";

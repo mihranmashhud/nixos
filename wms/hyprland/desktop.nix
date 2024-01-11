@@ -21,8 +21,8 @@
   wayland.windowManager.hyprland = {
     settings = {
       monitor = [
-        "DP-1, highrr, auto, 1"
-        "HDMI-A-1, 1920x1080, auto, 1"
+        "DP-1, highrr, 1920x0, 1"
+        "HDMI-A-1, 1920x1080, 0x0, 1"
       ];
       animations = {
         enabled = "yes";
@@ -57,6 +57,8 @@
       bind = [
         ",F10,exec,obs-cli --password $(cat ~/.config/obs-studio/password) replaybuffer save"
       ];
+
+      env = "WLR_DRM_DEVICES,/dev/dri/card0:/dev/dri/card1";
     };
   };
 }
