@@ -47,6 +47,7 @@
     xournalpp
     vial
     transmission_4-gtk
+    gparted
 
     discord
     telegram-desktop
