@@ -59,7 +59,7 @@
           };
         })
         nur.overlay
-        hyprland.overlays.default
+        # hyprland.overlays.default
       ];
       config = {
         allowUnfree = true;
