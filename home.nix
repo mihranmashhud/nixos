@@ -28,75 +28,81 @@
     home-manager.enable = true;
   };
 
-  home.packages = with pkgs; [
-    # apps
-    gnome.nautilus
-    cinnamon.warpinator
-    pavucontrol
-    obsidian
-    mpv
-    zoom-us
-    grimblast
-    github-desktop
-    chromium
-    slack
-    protonup-qt
-    bruno
-    beekeeper-studio
-    simple-scan
-    xournalpp
-    vial
-    transmission_4-gtk
-    gparted
+  home.packages = with pkgs;
+    [
+      # apps
+      gnome.nautilus
+      cinnamon.warpinator
+      pavucontrol
+      obsidian
+      mpv
+      zoom-us
+      grimblast
+      github-desktop
+      chromium
+      slack
+      protonup-qt
+      bruno
+      beekeeper-studio
+      simple-scan
+      xournalpp
+      vial
+      transmission_4-gtk
+      gparted
+      inkscape
+      gnome.gnome-calculator
 
-    discord
-    telegram-desktop
-    teams-for-linux
+      discord
+      telegram-desktop
+      teams-for-linux
 
-    libreoffice
-    hunspell
-    hunspellDicts.en_US
-    hunspellDicts.en_CA
+      libreoffice
+      hunspell
+      hunspellDicts.en_US
+      hunspellDicts.en_CA
 
-    # archives
-    zip
-    xz
-    unzip
-    gnutar
+      # archives
+      zip
+      xz
+      unzip
+      gnutar
 
-    # utils
-    ripgrep
-    jq
-    yq-go
-    eza
-    rmtrash
-    pamixer
-    killall
-    imagemagick
-    fd
+      # utils
+      ripgrep
+      jq
+      yq-go
+      eza
+      rmtrash
+      pamixer
+      killall
+      imagemagick
+      fd
+      entr
+      btop
 
-    # dev tools
-    rustup
-    gcc
-    nodePackages.pnpm
+      # dev tools
+      rustup
+      gcc
+      nodePackages.pnpm
       androidStudioPackages.beta
       alejandra
 
-    # nix
-    nix-index
-    nix-prefetch-git
-    nixpkgs-fmt
+      # nix
+      nix-index
+      nix-prefetch-git
+      nixpkgs-fmt
 
-    # system tools
-    bottom
-    procs
-    monitor
-    sysstat
-    lm_sensors # sensors
-    ethtool
-    pciutils # lspci
-    usbutils # lsusb
-  ] ++ builtins.attrValues scripts;
+      # system tools
+      bottom
+      procs
+      monitor
+      sysstat
+      lm_sensors # sensors
+      ethtool
+      pciutils # lspci
+      usbutils # lsusb
+    ]
+    ++ builtins.attrValues scripts;
 
   home.stateVersion = "23.05";
 }
