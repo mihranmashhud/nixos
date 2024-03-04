@@ -327,6 +327,12 @@
     kdeconnect.enable = true;
     java.enable = true;
     adb.enable = true;
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        # Place shared libraries here.
+      ];
+    };
   };
 
   # List services that you want to enable:
@@ -386,5 +392,11 @@
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 1w";
+  };
+  nix.registry = {
+    nixpkgs.to = {
+      type = "path";
+      path = pkgs.path;
+    };
   };
 }
