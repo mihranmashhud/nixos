@@ -5,6 +5,7 @@
 }: {
   home.sessionVariables = {
     BROWSER = "firefox";
+    DEFAULT_BROWSER = "${config.programs.firefox.package}/bin/firefox";
   };
   programs = {
     firefox = {
