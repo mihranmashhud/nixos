@@ -79,6 +79,7 @@
     rustup
     gcc
     nodePackages.pnpm
+      androidStudioPackages.beta
 
     # nix
     nix-index

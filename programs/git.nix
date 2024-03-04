@@ -14,6 +14,11 @@
       diff.tool = "nvim -d";
     };
 
-    delta.enable = true;
+    delta = {
+      enable = true;
+      options = {
+        side-by-side = true;
+      };
+    };
   };
 }
