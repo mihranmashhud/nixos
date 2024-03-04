@@ -82,6 +82,12 @@
       inherit nur-no-pkgs;
     };
   in {
+    templates = {
+      devshell = {
+        description = "Simple flake dev shell.";
+        path = ./templates/devshell;
+      };
+    };
     nixosConfigurations = {
       "mihranLaptop" = nixpkgs.lib.nixosSystem {
         inherit system;
