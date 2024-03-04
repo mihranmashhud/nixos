@@ -245,6 +245,7 @@
       "wheel"
       "scanner"
       "lp"
+      "adbusers"
     ];
     shell = pkgs.zsh;
   };
@@ -325,6 +326,7 @@
     nm-applet.enable = true;
     kdeconnect.enable = true;
     java.enable = true;
+    adb.enable = true;
   };
 
   # List services that you want to enable:
