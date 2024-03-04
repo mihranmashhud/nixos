@@ -13,6 +13,7 @@
     ./starship.nix
     ./imv.nix
     ./direnv.nix
+    ./zoxide.nix
   ];
   programs.git-credential-oauth.enable = true;
   programs.command-not-found.enable = true;
