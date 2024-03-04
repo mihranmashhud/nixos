@@ -74,6 +74,7 @@
       nurpkgs = import nixpkgs {inherit system;};
     };
     args = {
+      inherit self;
       inherit pkgs;
       inherit inputs;
       inherit scripts;
