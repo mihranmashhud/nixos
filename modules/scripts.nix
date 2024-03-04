@@ -1,9 +1,41 @@
 {pkgs}:
 with pkgs; let
-  bgChoiceFile = "/tmp/background-choice";
-  bgsLocation = "$HOME/Pictures/Backgrounds";
+  bg-choice-file = "$HOME/.cache/background-choice";
+  bgs-dir = "$HOME/Pictures/Backgrounds";
   system-sounds = "${pkgs.deepin.deepin-sound-theme}/share/sounds/deepin/stereo";
-in {
+  nix-rebuild-log = "nixos-rebuild.log";
+  nix-config-dir = "$HOME/nixos"; # Change to the location of your nixos config.
+in rec {
+  rebuild-nixos = writeShellApplication {
+    name = "rebuild-nixos";
+    runtimeInputs = [libnotify play-bell alejandra play-bell-error];
+    text =
+      /*
+      bash
+      */
+      ''
+        set -e
+
+        pushd "${nix-config-dir}"
+
+        # Format files
+        alejandra .
+
+        # Show changes
+        git diff -U0 **/*.nix
+
+        echo "NixOS Rebuilding..."
+
+        # Rebuild, output simplified errors, log tracebacks
+        sudo nixos-rebuild switch --flake . &> "${nix-rebuild-log}" || (cat "${nix-rebuild-log}" | grep --color error && (notify-send -e "NixOS rebuild failed" && play-sound dialog-error) && false)
+
+        notify-send -e "NixOS rebuild completed!"
+        play-bell
+
+        popd > /dev/null
+      '';
+    checkPhase = "";
+  };
   wayland-lockscreen = writeShellApplication {
     name = "wayland-lockscreen";
     runtimeInputs = [swaylock];
@@ -12,8 +44,8 @@ in {
       bash
       */
       ''
-        CHOICE="${bgChoiceFile}"
-        pic=$(cat $CHOICE)
+        CHOICE="${bg-choice-file}"
+        pic=$(cat "$CHOICE")
         swaylock "$@" -i "$pic" -s fill
       '';
   };
@@ -26,13 +58,13 @@ in {
       bash
       */
       ''
-        CHOICE="${bgChoiceFile}"
+        CHOICE="${bg-choice-file}"
 
-        cd "${bgsLocation}"
+        cd "${bgs-dir}"
 
         pic=$(imv .)
 
-        echo "$pic" > $CHOICE
+        echo "$pic" > "$CHOICE"
 
         if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
           swww img "$pic" --transition-type center
@@ -50,17 +82,17 @@ in {
       bash
       */
       ''
-        CHOICE="${bgChoiceFile}"
+        CHOICE="${bg-choice-file}"
 
-        cd "${bgsLocation}"
+        cd "${bgs-dir}"
 
-        pic=$(find "$PWD" -type f | grep -v "$(cat $CHOICE)" | shuf -n1)
+        pic=$(find "$PWD" -type f | grep -v "$(cat "$CHOICE")" | shuf -n1)
 
         if [ -z "$pic" ]; then
           pic=$(find "$PWD" | shuf -n1)
         fi
 
-        echo "$pic" > $CHOICE
+        echo "$pic" > "$CHOICE"
 
         if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
           swww img "$pic" --transition-type center
@@ -90,7 +122,7 @@ in {
       bash
       */
       ''
-        killall waybar
+        killall waybar || true
         nohup waybar -c ~/.config/waybar/laptop-config.json > /dev/null
       '';
   };
@@ -103,7 +135,7 @@ in {
       bash
       */
       ''
-        killall waybar
+        killall waybar || true
         nohup waybar -c ~/.config/waybar/desktop-config.json > /dev/null
       '';
   };
@@ -116,7 +148,18 @@ in {
       bash
       */
       ''
-        mpv ${system-sounds}/message.wav
+        mpv ${system-sounds}/message.wav > /dev/null
+      '';
+  };
+  play-bell-error = writeShellApplication {
+    name = "play-sound";
+    runtimeInputs = [mpv];
+    text =
+      /*
+      bash
+      */
+      ''
+        mpv "${system-sounds}/$1.wav" > /dev/null
       '';
   };
 }
