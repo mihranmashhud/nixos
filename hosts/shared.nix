@@ -24,12 +24,20 @@
 
   # Boot
   boot = {
-    loader.systemd-boot = {
-      enable = true;
-      configurationLimit = 5;
+    loader = {
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/efi";
+      };
+      grub = {
+        enable = true;
+        device = "nodev";
+        efiSupport = true;
+        configurationLimit = 5;
+        useOSProber = true;
+      };
+      timeout = 10;
     };
-    loader.efi.canTouchEfiVariables = true;
-    loader.timeout = 10;
     # Plymouth with silent boot
     consoleLogLevel = 0;
     initrd.verbose = false;
