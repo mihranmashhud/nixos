@@ -1,4 +1,5 @@
 {
+  self,
   config,
   pkgs,
   inputs,
@@ -393,7 +394,12 @@
     dates = "weekly";
     options = "--delete-older-than 1w";
   };
+
   nix.registry = {
+    self.to = {
+      type = "path";
+      path = self;
+    };
     nixpkgs.to = {
       type = "path";
       path = pkgs.path;
