@@ -5,11 +5,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1694529238,
-        "narHash": "sha256-zsNZZGTGnMOf9YpHKJqMSsa0dXbfmxeoJ7xHlrt+xmY=",
+        "lastModified": 1705309234,
+        "narHash": "sha256-uNRRNRKmJyCRC/8y1RqBkqWBLM034y4qN7EprSdmgyA=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "ff7b65b44d01cf9ba6a71320833626af21126384",
+        "rev": "1ef2e671c3b0c19053962c07dbda38332dcebf26",
         "type": "github"
       },
       "original": {
@@ -18,13 +18,26 @@
         "type": "github"
       }
     },
+    "gitbutler": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1708873436,
+        "narHash": "sha256-zkYZx1XUw06PKI21/pSSQAPnbj5x7JkE1NJ2dsFPw7k=",
+        "type": "tarball",
+        "url": "https://app.gitbutler.com/downloads/release/linux/x86_64/gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://app.gitbutler.com/downloads/release/linux/x86_64/gz"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1699099776,
-        "narHash": "sha256-X09iKJ27mGsGambGfkKzqvw5esP1L/Rf8H3u3fCqIiU=",
+        "lastModified": 1708475490,
+        "narHash": "sha256-g1v0TsWBQPX97ziznfJdWhgMyMGtoBFs102xSYO4syU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "85f1ba3e51676fa8cc604a3d863d729026a6b8eb",
+        "rev": "0e74ca98a74bc7270d28838369593635a5db3260",
         "type": "github"
       },
       "original": {
@@ -37,6 +50,7 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
+        "gitbutler": "gitbutler",
         "nixpkgs": "nixpkgs",
         "xwaylandvideobridge": "xwaylandvideobridge"
       }
@@ -59,11 +73,11 @@
     "xwaylandvideobridge": {
       "flake": false,
       "locked": {
-        "lastModified": 1699606353,
-        "narHash": "sha256-2RxzY/V6pT0f4SYzCyFXyNBqKulTzQQ46TY5+lu+iLU=",
+        "lastModified": 1707188198,
+        "narHash": "sha256-Fm9aCV8xwhyQoXIhQ5DbYQGFxPdMdFDxxF/lXayjTI0=",
         "ref": "refs/heads/master",
-        "rev": "0ca63bfbd8b30dfdb5807f6e4e35ca272d7cdc01",
-        "revCount": 183,
+        "rev": "619f7c9c990c52db53eb4943afdac115f603d810",
+        "revCount": 206,
         "type": "git",
         "url": "https://invent.kde.org/system/xwaylandvideobridge.git"
       },

@@ -7,6 +7,10 @@
       url = "git+https://invent.kde.org/system/xwaylandvideobridge.git";
       flake = false;
     };
+    gitbutler = {
+      url = "tarball+https://app.gitbutler.com/downloads/release/linux/x86_64/gz";
+      flake = false;
+    };
   };
   outputs = {
     self,
@@ -23,6 +27,7 @@
         wlxoverlay = callPackage ./wlxoverlay.nix {};
         # xwaylandvideobridge = libsForQt5.callPackage ./xwaylandvideobridge.nix {inherit inputs;};
         vial-udev-rules = callPackage ./vial-udev-rules.nix {};
+        gitbutler = callPackage ./gitbutler.nix {inherit inputs;};
       };
     });
 }
