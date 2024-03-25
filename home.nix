@@ -86,6 +86,7 @@
       nodePackages.pnpm
       androidStudioPackages.beta
       alejandra
+      go
 
       # nix
       nix-index
