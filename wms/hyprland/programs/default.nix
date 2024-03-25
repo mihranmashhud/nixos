@@ -1,9 +1,12 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
+    inputs.ags.homeManagerModules.default
+    # ./ags.nix
     ./mako.nix
     ./rofi.nix
     ./wlogout.nix
