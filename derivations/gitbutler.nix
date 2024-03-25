@@ -1,4 +1,7 @@
-{appimageTools, inputs}:
+{
+  appimageTools,
+  inputs,
+}:
 appimageTools.wrapType2 {
   name = "gitbutler";
   src = inputs.gitbutler;
