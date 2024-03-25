@@ -43,7 +43,7 @@
         "keybind" = "r";
       }
     ];
-    style = with config.colorScheme.colors; ''
+    style = with config.colorScheme.palette; ''
       * {
         background-image: none;
       }

@@ -5,7 +5,7 @@
 }: let
   system-sounds = "${pkgs.deepin.deepin-sound-theme}/share/sounds/deepin/stereo";
 in {
-  services.mako = with config.colorScheme.colors; {
+  services.mako = with config.colorScheme.palette; {
     enable = true;
     defaultTimeout = 2000;
     backgroundColor = "#${base00}";

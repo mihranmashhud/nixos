@@ -7,7 +7,7 @@
     font_size = "12.0";
   in {
     enable = true;
-    settings = with config.colorScheme.colors; {
+    settings = with config.colorScheme.palette; {
       inherit font_size;
 
       # Bell

@@ -24,7 +24,7 @@
       display-filebrowser = "  ";
       kb-cancel = "Escape,Control+g,Control+bracketleft,Super+w";
     };
-    theme = with config.colorScheme.colors; let
+    theme = with config.colorScheme.palette; let
       # Use `mkLiteral` for string-like values that should show without
       # quotes, e.g.:
       # {

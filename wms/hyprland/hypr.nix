@@ -15,7 +15,7 @@ in {
     recursive = true;
   };
 
-  wayland.windowManager.hyprland = with config.colorScheme.colors; {
+  wayland.windowManager.hyprland = with config.colorScheme.palette; {
     enable = true;
     settings = {
       "$inactive_color" = "rgb(${base02})";
