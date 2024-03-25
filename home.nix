@@ -71,7 +71,6 @@
       ripgrep
       jq
       yq-go
-      eza
       rmtrash
       pamixer
       killall
@@ -79,6 +78,7 @@
       fd
       entr
       btop
+      comma
 
       # dev tools
       rustup

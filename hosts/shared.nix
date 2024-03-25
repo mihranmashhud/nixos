@@ -32,6 +32,7 @@
       };
       grub = {
         enable = true;
+        copyKernels = true;
         device = "nodev";
         efiSupport = true;
         configurationLimit = 5;

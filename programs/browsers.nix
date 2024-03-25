@@ -17,11 +17,15 @@
           "privacy.webrtc.hideGlobalIndicator" = true;
           "media.ffmpeg.vaapi.enabled" = true;
         };
-        userChrome = ''
-          #TabsToolbar {
-            visibility: collapse !important;
-          }
-        '';
+        userChrome =
+          /*
+          css
+          */
+          ''
+            #TabsToolbar {
+              visibility: collapse !important;
+            }
+          '';
         search.engines = {
           "Nix Packages" = {
             urls = [

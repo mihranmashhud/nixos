@@ -22,8 +22,8 @@
 
   # Monitors listing
   services.xserver.xrandrHeads = [
+    "DP-2"
     "DP-1"
-    "HDMI-A-1"
   ];
 
   # Enable AMDVLK
