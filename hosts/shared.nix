@@ -255,7 +255,6 @@
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     home-manager
 
@@ -320,8 +319,8 @@
     steam = {
       enable = true;
       remotePlay.openFirewall = true;
-      extraCompatPackages = [
-        inputs.nix-gaming.packages.${pkgs.system}.proton-ge
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
       ];
     };
     nm-applet.enable = true;
