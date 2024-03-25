@@ -28,6 +28,7 @@
 
     nix-colors.url = "github:misterio77/nix-colors";
 
+    ags.url = "github:Aylur/ags";
 
     drvs = {
       url = "path:derivations";
@@ -98,8 +99,6 @@
 
           nixos-hardware.nixosModules.lenovo-thinkpad-t480
 
-          nix-gaming.nixosModules.steamCompat
-
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -126,7 +125,6 @@
           nixos-hardware.nixosModules.common-pc-ssd
 
           nix-gaming.nixosModules.pipewireLowLatency
-          nix-gaming.nixosModules.steamCompat
 
           home-manager.nixosModules.home-manager
           {
