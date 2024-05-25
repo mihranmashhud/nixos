@@ -54,7 +54,11 @@
     ];
   };
 
-  services.pipewire.lowLatency.enable = true;
+  services.pipewire.lowLatency = {
+    enable = true;
+    quantum = 32;
+    rate = 48000;
+  };
   security.rtkit.enable = true;
 
   environment.systemPackages = with pkgs; [
