@@ -1,6 +1,6 @@
 {pkgs}:
 with pkgs; let
-  bg-choice-file = "$HOME/.cache/background-choice";
+  bg-choice-file = "$HOME/.cache/background-img";
   bgs-dir = "$HOME/Pictures/Backgrounds";
   system-sounds = "${pkgs.deepin.deepin-sound-theme}/share/sounds/deepin/stereo";
   nix-rebuild-log = "nixos-rebuild.log";
@@ -36,19 +36,6 @@ in rec {
       '';
     checkPhase = "";
   };
-  wayland-lockscreen = writeShellApplication {
-    name = "wayland-lockscreen";
-    runtimeInputs = [swaylock];
-    text =
-      /*
-      bash
-      */
-      ''
-        CHOICE="${bg-choice-file}"
-        pic=$(cat "$CHOICE")
-        swaylock "$@" -i "$pic" -s fill
-      '';
-  };
 
   choose-wallpaper = writeShellApplication {
     name = "choose-wallpaper";
@@ -64,7 +51,7 @@ in rec {
 
         pic=$(imv .)
 
-        echo "$pic" > "$CHOICE"
+        ln -sf "$pic" "$CHOICE"
 
         if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
           swww img "$pic" --transition-type center
@@ -86,13 +73,13 @@ in rec {
 
         cd "${bgs-dir}"
 
-        pic=$(find "$PWD" -type f | grep -v "$(cat "$CHOICE")" | shuf -n1)
+        pic=$(find "$PWD" -type f | grep -v "$(readlink "$CHOICE")" | shuf -n1)
 
         if [ -z "$pic" ]; then
           pic=$(find "$PWD" | shuf -n1)
         fi
 
-        echo "$pic" > "$CHOICE"
+        ln -sf "$pic" "$CHOICE"
 
         if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
           swww img "$pic" --transition-type center
