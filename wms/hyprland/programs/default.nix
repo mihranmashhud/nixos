@@ -22,7 +22,10 @@
   ];
 
   xdg.configFile."waybar".source = ./waybar;
-  programs.waybar.enable = true;
+  programs.waybar = {
+    enable = true;
+    package = inputs.waybar.packages.${pkgs.system}.waybar;
+  };
   services.kdeconnect.indicator = true;
   services.udiskie.enable = true;
   services.cliphist.enable = true;
