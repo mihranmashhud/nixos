@@ -355,6 +355,9 @@
 
     # PS5 DualSense controller over bluetooth hidraw
     KERNEL=="hidraw*", KERNELS=="*054C:0CE6*", MODE="0660", TAG+="uaccess"
+
+    # Logitech G920 Racing Wheel
+    ATTR{idVendor}=="046d", ATTR{idProduct}=="c261", RUN+="${pkgs.usb-modeswitch}/bin/usb_modeswitch -v 046d -p c261 -M 0f00010142 -C 0x03 -m 01 -r 01"
   '';
 
   services.postgresql = {
