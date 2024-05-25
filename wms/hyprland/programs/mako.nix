@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  system-sounds = "${pkgs.deepin.deepin-sound-theme}/share/sounds/deepin/stereo";
+  system-sounds = "${pkgs.kdePackages.ocean-sound-theme}/share/sounds/ocean/stereo";
 in {
   services.mako = with config.colorScheme.palette; {
     enable = true;
@@ -16,7 +16,7 @@ in {
     layer = "overlay";
     extraConfig = ''
       on-button-left=exec makoctl menu -n "$id" rofi -dmenu -p 'Select action: '
-      on-notify=exec mpv ${system-sounds}/message.wav
+      on-notify=exec mpv ${system-sounds}/message-attention.oga
     '';
   };
 }
