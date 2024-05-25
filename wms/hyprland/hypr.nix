@@ -2,12 +2,14 @@
   config,
   pkgs,
   scripts,
+  inputs,
   ...
 }: let
   inherit ((import ../../modules/fns.nix {inherit pkgs;}).hypr) windowrules;
 in {
   imports = [
     ./programs
+    inputs.hyprlock.homeManagerModules.default
   ];
 
   xdg.configFile."hypr" = {
@@ -66,14 +68,7 @@ in {
       };
 
       # Startup
-      exec-once = let
-        before-sleep = builtins.concatStringsSep "; " [
-          "${scripts.wayland-lockscreen}/bin/wayland-lockscreen -f"
-          "${pkgs.playerctl}/bin/playerctl pause"
-        ];
-      in [
-        # Idle start
-        "${pkgs.swayidle}/bin/swayidle -w before-sleep '${before-sleep}' &"
+      exec-once = [
         # Wallpaper
         "swww init"
       ];
