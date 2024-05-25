@@ -45,7 +45,7 @@
     ags.url = "github:Aylur/ags";
 
     drvs = {
-      url = "path:./derivations";
+      url = "path:derivations";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
