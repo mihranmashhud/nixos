@@ -394,10 +394,11 @@
     ];
   };
 
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 1w";
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 1w --keep 5";
+    flake = "/home/mihranmashhud/nixos";
   };
 
   nix.registry = {
