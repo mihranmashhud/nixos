@@ -68,13 +68,8 @@
 
       overlays = [
         (final: prev: drvs.packages.${system})
-        (final: prev: {
-          obsidian = prev.obsidian.override {
-            electron = final.electron_24;
-          };
-        })
+        (final: prev: hyprland.packages.${system})
         nur.overlay
-        # hyprland.overlays.default
       ];
       config = {
         allowUnfree = true;
