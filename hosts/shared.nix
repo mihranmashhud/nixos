@@ -320,10 +320,12 @@
     hyprland.enable = true;
     steam = {
       enable = true;
+      gamescopeSession.enable = true;
       remotePlay.openFirewall = true;
       extraCompatPackages = with pkgs; [
         proton-ge-bin
       ];
+      localNetworkGameTransfers.openFirewall = true;
     };
     nm-applet.enable = true;
     kdeconnect.enable = true;
