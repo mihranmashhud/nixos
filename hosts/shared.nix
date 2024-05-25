@@ -117,19 +117,20 @@
 
   # services.xserver.desktopManager.gnome.enable = true;
 
-  services.xserver = {
-    enable = true;
-    displayManager = {
-      sddm.enable = true;
-      sddm.theme = "${import ../theming/sddm-chili.nix {inherit pkgs;}}";
-      sddm.settings = {
-        Theme = {
-          EnableAvatars = true;
-          DisableAvatarsThreshold = 7;
-        };
+  services.xserver.enable = true;
+
+  services.displayManager = {
+    sddm.wayland.enable = true;
+    sddm.enable = true;
+    sddm.theme = "${import ../theming/sddm-chili.nix {inherit pkgs;}}";
+    sddm.settings = {
+      Theme = {
+        EnableAvatars = true;
+        DisableAvatarsThreshold = 7;
       };
     };
   };
+
   # Set default apps here
   xdg.mime.defaultApplications = {
     "application/pdf" = "firefox.desktop";
