@@ -21,9 +21,10 @@
   wayland.windowManager.hyprland = {
     settings = {
       monitor = [
-        "DP-2, highrr, 0x0, 1"
-        "DP-1, highrr, 1920x0, 1"
+        "DP-2, highrr, 0x0, 1, vrr, 1"
+        "DP-1, highrr, 1920x0, 1, vrr, 0"
       ];
+      misc.vrr = 1;
       animations = {
         enabled = "yes";
         bezier = [
