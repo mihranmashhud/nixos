@@ -365,6 +365,8 @@
 
   services.upower.enable = true;
 
+  services.chrony.enable = true;
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
