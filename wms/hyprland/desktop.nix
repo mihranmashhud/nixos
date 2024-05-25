@@ -59,7 +59,7 @@
         ",F10,exec,obs-cli --password $(cat ~/.config/obs-studio/password) replaybuffer save"
       ];
 
-      env = "WLR_DRM_DEVICES,/dev/dri/card0:/dev/dri/card1";
+      env = "WLR_DRM_DEVICES,$HOME/.config/hypr/rx6700xtcard";
     };
   };
 }
