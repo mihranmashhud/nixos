@@ -69,4 +69,7 @@
     r2modman
     gkraken
   ];
+
+  virtualisation.docker.enable = true;
+  users.users.mihranmashhud.extraGroups = ["docker"];
 }
