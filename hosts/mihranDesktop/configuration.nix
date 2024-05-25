@@ -17,7 +17,7 @@
   };
 
   # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   # Monitors listing
   services.xserver.xrandrHeads = [
