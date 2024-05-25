@@ -130,4 +130,38 @@ in {
       ];
     };
   };
+
+  programs.hyprlock = {
+    enable = true;
+    backgrounds = [
+      {
+        monitor = "DP-2";
+        path = "$HOME/.cache/background-img";
+      }
+      {
+        monitor = "DP-1";
+        path = "$HOME/.cache/background-img";
+      }
+    ];
+    images = [
+      {
+        monitor = "DP-2";
+        path = "$HOME/.face.icon";
+        size = 200;
+      }
+    ];
+  };
+
+  services.hypridle = {
+    enable = true;
+    settings = {
+      general = {
+        lock_cmd = "pidof hyprlock || hyprlock";
+        before_sleep_cmd = builtins.concatStringsSep "; " [
+          "loginctl lock-session"
+          "${pkgs.playerctl}/bin/playerctl pause"
+        ];
+      };
+    };
+  };
 }
