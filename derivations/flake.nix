@@ -28,6 +28,7 @@
         # xwaylandvideobridge = libsForQt5.callPackage ./xwaylandvideobridge.nix {inherit inputs;};
         vial-udev-rules = callPackage ./vial-udev-rules.nix {};
         gitbutler = callPackage ./gitbutler.nix {inherit inputs;};
+        alvr-latest = callPackage ./alvr {};
       };
     });
 }
