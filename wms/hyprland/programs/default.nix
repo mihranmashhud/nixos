@@ -14,7 +14,6 @@
   home.packages = with pkgs; [
     wl-clipboard
     cliphist
-    swaylock
     swww
     libnotify
     hyprkeys
