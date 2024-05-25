@@ -39,18 +39,23 @@
     gpuOverclock.enable = true;
   };
 
+  programs.alvr = {
+    enable = true;
+    package = pkgs.alvr-latest;
+  };
+
   networking.firewall = {
     allowedTCPPortRanges = [
       {
         from = 9943;
         to = 9944;
-      } # ALVR
+      }
     ];
     allowedUDPPortRanges = [
       {
         from = 9943;
         to = 9944;
-      } # ALVR
+      }
     ];
   };
 
@@ -62,9 +67,7 @@
   security.rtkit.enable = true;
 
   environment.systemPackages = with pkgs; [
-    nur.repos.materus.alvr
     wlxoverlay
-    pulseaudio # for alvr audio script
     sidequest
     r2modman
     gkraken
