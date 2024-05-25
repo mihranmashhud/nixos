@@ -51,6 +51,10 @@
       gparted
       inkscape
       gnome.gnome-calculator
+      prismlauncher
+      easyeffects
+      kdenlive
+      tenacity
 
       discord
       telegram-desktop
@@ -79,14 +83,18 @@
       entr
       btop
       comma
+      oversteer
+      usb-modeswitch
+      docker-compose
 
-      # dev tools
+      # development
       rustup
       gcc
       nodePackages.pnpm
-      androidStudioPackages.beta
+      android-studio
       alejandra
       go
+      python3
 
       # nix
       nix-index
