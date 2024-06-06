@@ -15,6 +15,7 @@
     in {
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [
+          # Add packages here as required.
         ];
       };
     });

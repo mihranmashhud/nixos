@@ -1,148 +1,75 @@
 {
-  description = "My NixOS flake";
-
-  nixConfig = {
-    experimental-features = ["nix-command" "flakes"];
-    auto-optimise-store = true;
-    substituters = [
-      "https://cache.nixos.org"
-      "https://nix-community.cachix.org"
-      "https://hyprland.cachix.org"
-    ];
-    trusted-public-keys = [
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-    ];
-  };
+  description = "Mihran's NixOS flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
-    nur.url = "github:nix-community/NUR";
+    snowfall-lib = {
+      url = "github:snowfallorg/lib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    snowfall-flake = {
+      url = "github:snowfallorg/flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    nixos-hardware.url = "github:nixos/nixos-hardware/master";
-
-    nix-gaming.url = "github:fufexan/nix-gaming";
-
-    # home-manager for user configuration
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-hardware.url = "github:nixos/nixos-hardware/master";
+
+    nix-gaming.url = "github:fufexan/nix-gaming";
+
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    hyprlock.url = "github:hyprwm/hyprlock";
 
     waybar.url = "github:Alexays/Waybar";
 
-    nix-colors.url = "github:misterio77/nix-colors";
-
-    ags.url = "github:Aylur/ags";
-
-    drvs = {
-      url = "path:derivations";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # Themes
+    stylix.url = "github:danth/stylix";
+    catppuccin.url = "github:catppuccin/nix";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    nur,
-    nixos-hardware,
-    nix-gaming,
-    home-manager,
-    hyprland,
-    waybar,
-    nix-colors,
-    drvs,
-    ...
-  } @ inputs: let
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-
-      overlays = [
-        (final: prev: drvs.packages.${system})
-        (final: prev: hyprland.packages.${system})
-        nur.overlay
-      ];
-      config = {
-        allowUnfree = true;
-        permittedInsecurePackages = [
-          "electron-24.8.6"
-          "electron-25.9.0"
-        ];
-      };
-    };
-    scripts = import ./modules/scripts.nix {inherit pkgs;};
-    nur-no-pkgs = import nur {
-      nurpkgs = import nixpkgs {inherit system;};
-    };
-    args = {
-      inherit self;
-      inherit pkgs;
+  outputs = inputs:
+    inputs.snowfall-lib.mkFlake {
       inherit inputs;
-      inherit scripts;
-      inherit nix-colors;
-      inherit nur-no-pkgs;
-    };
-  in {
-    templates = {
-      devshell = {
-        description = "Simple flake dev shell.";
-        path = ./templates/devshell;
+      src = ./.;
+
+      channels-config = {
+        allowUnfree = true;
+        permittedInsecurePackages = [];
+      };
+
+      overlays = with inputs; [
+        snowfall-flake.overlays.default
+        waybar.overlays.default
+      ];
+
+      homes.modules = with inputs; [
+        catppuccin.homeManagerModules.catppuccin
+      ];
+
+      systems.modules.nixos = with inputs; [
+        home-manager.nixosModules.home-manager
+        stylix.nixosModules.stylix
+        catppuccin.nixosModules.catppuccin
+      ];
+
+      systems.hosts.mihranDesktop.modules = with inputs; [
+        nixos-hardware.nixosModules.common-cpu-amd
+        nixos-hardware.nixosModules.common-cpu-amd-pstate
+        nixos-hardware.nixosModules.common-gpu-amd
+        nixos-hardware.nixosModules.common-pc-ssd
+        nix-gaming.nixosModules.pipewireLowLatency
+      ];
+
+      systems.hosts.mihranLaptop.modules = with inputs; [
+        nixos-hardware.nixosModules.lenovo-thinkpad-t480
+      ];
+
+      templates = {
+        devshell.description = "Simple dev shell via flake.";
       };
     };
-    nixosConfigurations = {
-      "mihranLaptop" = nixpkgs.lib.nixosSystem {
-        inherit system;
-
-        specialArgs = args;
-        modules = [
-          ./hosts/mihranLaptop/configuration.nix
-
-          nixos-hardware.nixosModules.lenovo-thinkpad-t480
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              extraSpecialArgs = args;
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.mihranmashhud = import ./hosts/mihranLaptop/home.nix;
-            };
-          }
-        ];
-      };
-      "mihranDesktop" = nixpkgs.lib.nixosSystem {
-        inherit system;
-
-        specialArgs = args;
-        modules = [
-          {nixpkgs.overlays = [nur.overlay];}
-
-          ./hosts/mihranDesktop/configuration.nix
-
-          nixos-hardware.nixosModules.common-cpu-amd
-          nixos-hardware.nixosModules.common-cpu-amd-pstate
-          nixos-hardware.nixosModules.common-gpu-amd
-          nixos-hardware.nixosModules.common-pc-ssd
-
-          nix-gaming.nixosModules.pipewireLowLatency
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              extraSpecialArgs = args;
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.mihranmashhud = import ./hosts/mihranDesktop/home.nix;
-            };
-          }
-        ];
-      };
-    };
-  };
 }

@@ -1,0 +1,24 @@
+{
+  "layer": "top",
+  "position": "top",
+  "gtk-layer-shell": true,
+
+  "modules-left": [
+    "hyprland/workspaces",
+    "hyprland/window"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "custom/dualsensebattery",
+    "tray",
+    "cpu",
+    "memory",
+    "network",
+    "custom/wlogout"
+  ],
+  "include": [
+    "~/.config/waybar/modules.json"
+  ]
+}
