@@ -17,11 +17,12 @@ with lib.${namespace}; let
 in {
   # Currently using catpuccin-mocha theme for the most part.
   options.${namespace}.themes.default = with types; {
-    enable = mkBoolOpt false "Whether to enable default theme";
+    enable = mkBoolOpt false "Whether to enable default system theme";
   };
 
   config = mkIf cfg.enable {
     stylix = {
+      autoEnable = false;
       polarity = "dark";
       base16Scheme = getScheme pkgs "catppuccin-mocha";
       opacity.terminal = 0.8;
@@ -42,11 +43,6 @@ in {
 
     ${namespace} = {
       themes.default.fonts = enabled;
-      home.extraOptions = {
-        catppuccin.enable = true;
-        gtk.catppuccin.cursor = disabled;
-        programs.rofi.catpuccin = disabled;
-      };
     };
   };
 }

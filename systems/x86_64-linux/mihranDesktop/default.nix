@@ -5,22 +5,63 @@
   system,
   config,
   ...
-}: with lib; with lib.internal; {
-  imports = [./hardware.nix];
+}:
+with lib;
+with lib.internal; {
+  imports = [
+    ./hardware.nix
+  ];
 
-  # internal = {
-  #   themes.default = enabled;
-  #   suites = {
-  #     system = enabled;
-  #     general = enabled;
-  #     gaming = enabled;
-  #     development = enabled;
-  #   };
-  #   desktop.hyprland = {
-  #     enable = true;
-  #     type = "desktop";
-  #   };
-  # };
+  # Kernel
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+
+  internal = {
+    system = enabled;
+
+    gaming = enabled;
+    development = enabled;
+
+    desktop.hyprland = enabled;
+
+    themes.default = enabled;
+  };
+
+  environment.systemPackages = with pkgs; [
+    wlx-overlay-s
+    sidequest
+    r2modman
+    gkraken
+  ];
+
+  networking.interfaces.enp4s0.wakeOnLan = {
+    enable = true;
+  };
+
+  programs.alvr = {
+    enable = true;
+    package = pkgs.internal.alvr;
+    openFirewall = true;
+  };
+
+  # Enable AMDVLK
+  hardware.amdgpu.amdvlk = true;
+
+  programs.corectrl = {
+    enable = true;
+    gpuOverclock.enable = true;
+  };
+
+  services.hardware.openrgb = {
+    enable = true;
+    motherboard = "amd";
+  };
+
+  services.pipewire.lowLatency = {
+    enable = true;
+    quantum = 32;
+    rate = 48000;
+  };
+  security.rtkit = enabled;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

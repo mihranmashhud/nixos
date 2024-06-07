@@ -22,5 +22,9 @@ in {
     environment.systemPackages = with pkgs; [
       nodePackages.pnpm
     ];
+    environment.shellAliases = {
+      npm = "pnpm";
+      npx = "pnpm dlx";
+    };
   };
 }

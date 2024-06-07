@@ -10,6 +10,10 @@
   systems, # An attribute map of your defined hosts.
   config,
   ...
-}: {
-  home.stateVersion = lib.mkDefault (config.system.stateVersion or "23.11");
+}:
+with lib;
+with lib.${namespace}; let
+in {
+  programs.home-manager = enabled;
+  home.stateVersion = config.system.stateVersion or "24.05";
 }

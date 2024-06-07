@@ -2,25 +2,29 @@
   lib,
   pkgs,
   inputs,
-  namespace, # The namespace used for your flake, defaulting to "internal" if not set.
-  system, # The system architecture for this host (eg. `x86_64-linux`).
-  target, # The Snowfall Lib target for this system (eg. `x86_64-iso`).
-  format, # A normalized name for the system target (eg. `iso`).
-  virtual, # A boolean to determine whether this system is a virtual target using nixos-generators.
-  systems, # An attribute map of your defined hosts.
+  system,
   config,
   ...
-}: {
-  imports = [./hardware.nix];
+}:
+with lib;
+with lib.internal; {
+  imports = [
+    ./hardware.nix
+  ];
 
-  ${namespace} = {
-    desktop.hyprland = {
-      enable = true;
-      type = "laptop";
-    };
+  internal = {
+    system = enabled;
+    gaming = enabled;
+    themes.default = enabled;
   };
 
+  environment.systemPackages = with pkgs; [
+    brightnessctl
+  ];
+
   services.upower.enable = true;
+  services.libinput.enable = true; # Enable touchpad support
+  services.tlp.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

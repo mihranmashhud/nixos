@@ -1,11 +1,22 @@
 {
   description = "Mihran's NixOS flake";
 
+  nixConfig = {
+    substituters = [
+      "https://cache.nixos.org"
+      "https://hyprland.cachix.org"
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+    ];
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
     snowfall-lib = {
-      url = "github:snowfallorg/lib";
+      url = "github:snowfallorg/lib?ref=dev";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     snowfall-flake = {
@@ -44,6 +55,7 @@
       overlays = with inputs; [
         snowfall-flake.overlays.default
         waybar.overlays.default
+        hyprland.overlays.default
       ];
 
       homes.modules = with inputs; [

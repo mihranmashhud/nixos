@@ -40,20 +40,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    assertions = [
-      (map
-        (value: {
-          assertion = value.url != null;
-          message = "${namespace}.nix.extra-substituters urls must be set";
-        })
-        cfg.extra-substituters)
-      (map
-        (value: {
-          assertion = value.key != null;
-          message = "${namespace}.nix.extra-substituters keys must be set";
-        })
-        cfg.extra-substituters)
-    ];
 
     nix = let
       users = ["root" config.${namespace}.user.name];

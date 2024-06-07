@@ -20,7 +20,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    fonts.packages = [
+    fonts.packages = with pkgs; [
         (nerdfonts.override {
           fonts = [
             "FiraCode"
@@ -42,7 +42,7 @@ in {
         name = "Inter";
       };
       serif = {
-        package = pkgs.robot-slab;
+        package = pkgs.roboto-slab;
         name = "Roboto Slab";
       };
       monospace = {

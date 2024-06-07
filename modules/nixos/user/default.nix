@@ -17,7 +17,7 @@ with lib.${namespace}; let
   defaultIconFileName = "profile.png";
   defaultIcon = pkgs.stdenvNoCC.mkDerivation {
     name = "default-icon";
-    src = ./. + "/${defaultIconFileName}";
+    src = ../../../assets + "/${defaultIconFileName}";
 
     dontUnpack = true;
 
@@ -40,7 +40,6 @@ in {
   options.${namespace}.user = with types; {
     name = mkOpt str "mihranmashhud" "The name to use for the user account.";
     fullName = mkOpt str "Mihran Mashhud" "The full name of the user.";
-    email = mkOpt str "mihranmashhud@gmail.com" "The email of the user.";
     initialPassword =
       mkOpt str "password"
       "The initial password to use when the user is first created.";
@@ -54,31 +53,16 @@ in {
   };
 
   config = {
-    environment.systemPackages = [
+    environment.systemPackages = with pkgs; [
       propagatedIcon
+
+      # Always have the ability to pull files
+      git
+      curl
+      wget
     ];
 
-    programs.zsh = {
-      enable = true;
-      autosuggestions.enable = true;
-      histFile = "$XDG_CACHE_HOME/zsh.history";
-    };
-
-    home-manager.users.${cfg.name} = {...}: {
-      home.file = {
-        "Desktop/.keep".text = "";
-        "Documents/.keep".text = "";
-        "Downloads/.keep".text = "";
-        "Music/.keep".text = "";
-        "Pictures/.keep".text = "";
-        "Videos/.keep".text = "";
-        ".face".source = cfg.icon;
-        "Pictures/${
-          cfg.icon.fileName or (builtins.baseNameOf cfg.icon)
-        }".source =
-          cfg.icon;
-      };
-    };
+    programs.zsh.enable = true;
 
     users.users.${cfg.name} =
       {

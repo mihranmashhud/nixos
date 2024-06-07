@@ -19,15 +19,9 @@ in {
     enable = mkBoolOpt false "Whether to enable direnv configuration.";
   };
   config = mkIf cfg.enable {
-    ${namespace}.home.extraOptions = {
-      home.sessionVariables = {
-        DIRENV_LOG_FORMAT = "";
-      };
-      programs.direnv = {
-        enable = true;
-        enableZshIntegration = config.${namespace}.cli.zsh.enable;
-        nix-direnv.enable = true;
-      };
+    programs.direnv = {
+      enable = true;
+      silent = true;
     };
   };
 }

@@ -16,7 +16,7 @@ with lib.${namespace}; let
   cfg = config.${namespace}.locale;
 in {
   options.${namespace}.locale = {
-    enable = mkBoolOpt false "Whether to enable locale configuration.";
+    enable = mkBoolOpt true "Whether to enable locale configuration.";
   };
 
   config = mkIf cfg.enable {
