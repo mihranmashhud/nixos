@@ -30,6 +30,9 @@ in {
 
     catppuccin.enable = true;
     catppuccin.accent = "blue";
+    gtk.enable = true;
+    qt.enable = true;
+    qt.style.name = "kvantum";
     gtk.catppuccin.cursor = disabled;
     programs.rofi.catppuccin = disabled;
   };

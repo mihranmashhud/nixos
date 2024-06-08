@@ -1,3 +1,5 @@
+@import "colors.css";
+
 * {
     border: none;
     border-radius: 0;
@@ -9,11 +11,11 @@
 
 window#waybar {
     background: rgba(0, 0, 0, 0);
-    color: @theme_text_color;
+    color: @base05;
 }
 
 tooltip {
-    background: @theme_bg_color;
+    background: @base00;
     border-radius: 10px;
     border-width: 2px;
     border-style: solid;
@@ -22,30 +24,30 @@ tooltip {
 
 #workspaces button {
     padding: 5px;
-    color: #313244;
+    color: @base02;
     margin-left: 5px;
     margin-right: 5px;
 }
 
 #workspaces button.active {
-    color: @theme_selected_fg_color;
+    color: @base04;
 }
 
 #workspaces button.focused {
-    color: #a6adc8;
-    background: #eba0ac;
+    color: @base04;
+    background: @base09;
     border-radius: 10px;
 }
 
 #workspaces button.urgent {
-    color: @warning_color;
-    background: #a6e3a1;
+    color: @base08;
+    background: @base0B;
     border-radius: 10px;
 }
 
 #workspaces button:hover {
-    background: @theme_bg_color;
-    color: @theme_unfocused_selected_fg_color;
+    background: @base00;
+    color: @base03;
     border-radius: 10px;
 }
 
@@ -66,7 +68,7 @@ tooltip {
 #cpu,
 #memory,
 #backlight {
-    background: @theme_base_color;
+    background: @base00;
     padding: 0px 10px;
     margin: 5px;
     border: 1px solid @borders;
@@ -74,20 +76,20 @@ tooltip {
 }
 
 #custom-caffeine {
-    color: #89DCEB;
+    color: @base0C;
 }
 
 #custom-language {
-    color: #F38BA8;
+    color: @base0F;
 }
 
 #custom-wlogout {
-    color: #89DCEB;
+    color: @base0C;
     padding-right: 12px;
 }
 
 #custom-dualsensebattery {
-    color: #89DCEB;
+    color: @base0C;
     padding-right: 12px;
 }
 
@@ -97,38 +99,38 @@ tooltip {
 }
 
 #clock {
-    color: #FAB387;
+    color: @base09;
 }
 
 #backlight {
-    color: #89B4FA;
+    color: @base0D;
 }
 
 #network {
-    color: #F9E2AF;
+    color: @base0A;
     border-left: 0px;
     border-right: 0px;
 }
 
 #pulseaudio {
-    color: #89B4FA;
+    color: @base0D;
 }
 
 #pulseaudio.microphone {
-    color: #CBA6F7;
+    color: @base0E;
     margin-right: 5px;
     border-radius: 0 10px 10px 0;
 }
 
 @keyframes charging {
     to {
-        background: #A6E3A1;
-        color: @theme_base_color;
+        background: @base0B;
+        color: @base00;
     }
 }
 
 #battery {
-    color: #A6E3A1;
+    color: @base0B;
     padding-right: 10px;
     border-right: 0;
     border-radius: 10px 0 0 10px;
@@ -147,8 +149,8 @@ tooltip {
     border-radius: 0 10px 10px 0;
 }
 #battery.warning:not(.charging) {
-    color: #FFCC6E;
+    color: @base09;
 }
 #battery.critical:not(.charging) {
-    color: #FE6D73;
+    color: @base08;
 }
