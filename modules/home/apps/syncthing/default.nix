@@ -20,6 +20,6 @@ in {
   };
   config = mkIf cfg.enable {
     services.syncthing.enable = true;
-    services.syncthing.tray.enable = snowfall.system.is-linux system;
+    # services.syncthing.tray.enable = snowfall.system.is-linux system;
   };
 }
