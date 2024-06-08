@@ -23,6 +23,7 @@ in {
       enable = true;
       settings = {
         background_opacity = "${toString config.stylix.opacity.terminal}";
+        font_size = "${toString config.stylix.fonts.sizes.terminal}.0";
         # Bell
         enable_audio_bell = "no";
         visual_bell_duration = "0.1";
