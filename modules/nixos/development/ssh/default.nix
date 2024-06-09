@@ -13,12 +13,13 @@
 }:
 with lib;
 with lib.${namespace}; let
-  cfg = config.${namespace}.cli.ssh-agent;
+  cfg = config.${namespace}.development.ssh;
 in {
-  options.${namespace}.cli.ssh-agent = {
-    enable = mkBoolOpt false "Whether to enable ssh-agent configuration.";
+  options.${namespace}.development.ssh = {
+    enable = mkBoolOpt false "Whether to enable ssh configuration.";
   };
   config = mkIf cfg.enable {
-    services.ssh-agent.enable = true;
+    programs.ssh.startAgent = true;
+    services.openssh.enable = true;
   };
 }
