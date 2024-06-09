@@ -14,7 +14,11 @@ with lib.internal; {
 
   internal = {
     system = enabled;
+
     gaming = enabled;
+    development = enabled;
+
+    desktop.hyprland = enabled;
   };
 
   environment.systemPackages = with pkgs; [

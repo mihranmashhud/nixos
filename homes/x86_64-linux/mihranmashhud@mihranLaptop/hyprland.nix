@@ -15,9 +15,6 @@ with lib.internal; {
       misc = {
         vfr = true;
       };
-      exec-once = [
-        "waybar -c ~/.config/waybar/laptop-config.json > /tmp/waybar.log &"
-      ];
       monitor = ",highrr,auto,1";
     };
   };
