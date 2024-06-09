@@ -13,11 +13,10 @@
 }:
 with lib;
 with lib.${namespace}; let
-  cfg = config.${namespace}.themes.default;
+  cfg = config.${namespace}.themes.catppuccin;
 in {
-  # Currently using catpuccin-mocha theme for the most part.
-  options.${namespace}.themes.default = with types; {
-    enable = mkBoolOpt false "Whether to enable default user theme";
+  options.${namespace}.themes.catppuccin = with types; {
+    enable = mkBoolOpt false "Whether to enable catppuccin system theme";
   };
 
   config = mkIf cfg.enable {
@@ -28,12 +27,18 @@ in {
       opacity.terminal = 0.8;
     };
 
-    catppuccin.enable = true;
-    catppuccin.accent = "blue";
-    gtk.enable = true;
-    qt.enable = true;
-    qt.style.name = "kvantum";
-    gtk.catppuccin.cursor = disabled;
-    programs.rofi.catppuccin = disabled;
+    stylix.cursor = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Classic";
+      size = 24;
+    };
+
+    catppuccin = {
+      enable = true;
+      flavor = "mocha";
+      accent = "blue";
+    };
+    boot.plymouth.enable = true;
+    services.displayManager.sddm.package = pkgs.kdePackages.sddm;
   };
 }

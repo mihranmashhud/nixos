@@ -55,7 +55,6 @@ in {
     programs.zsh = {
       enable = true;
       autosuggestion.enable = true;
-      history.path = "$XDG_CACHE_HOME/zsh.history";
     };
 
     home.username = cfg.name;

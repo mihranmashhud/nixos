@@ -19,13 +19,6 @@ in {
     enable = mkBoolOpt false "Whether to enable all development related configurations.";
   };
   config = mkIf cfg.enable {
-    ${namespace} = {
-      development = {
-        postgres = enabled;
-        adb = enabled;
-        pnpm = enabled;
-        docker = enabled;
-      };
-    };
+    ${namespace}.development = with builtins; mapAttrs (k: v: enabled) (attrsets.filterAttrs (k: v: v == "directory") (readDir ./.));
   };
 }

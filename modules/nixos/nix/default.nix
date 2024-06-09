@@ -14,7 +14,7 @@
 with lib;
 with lib.${namespace}; let
   cfg = config.${namespace}.nix;
-  substituters-submodule = types.submodule ({
+  substituters-submodule = types.submodule {
     options = with types; {
       url = mkOption {
         description = "URL of the substituter.";
@@ -25,7 +25,7 @@ with lib.${namespace}; let
         type = str;
       };
     };
-  });
+  };
 in {
   options.${namespace}.nix = with types; {
     enable = mkBoolOpt true "Whether or not to manage nix configuration.";
@@ -40,6 +40,13 @@ in {
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      alejandra
+      nix-index
+      snowfallorg.flake
+      snowfallorg.thaw
+      deploy-rs
+    ];
 
     nix = let
       users = ["root" config.${namespace}.user.name];

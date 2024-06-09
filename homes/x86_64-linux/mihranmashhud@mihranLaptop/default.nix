@@ -14,5 +14,4 @@
 with lib;
 with lib.internal; {
   imports = [./hyprland.nix];
-
 }

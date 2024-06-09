@@ -20,16 +20,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    ${namespace}.cli = {
-      bat = enabled;
-      eza = enabled;
-      git = enabled;
-      neovim = enabled;
-      ssh-agent = enabled;
-      starship = enabled;
-      trash-cli = enabled;
-      zoxide = enabled;
-      zsh = enabled;
-    };
+    ${namespace}.cli = with builtins; mapAttrs (k: v: enabled) (attrsets.filterAttrs (k: v: v == "directory") (readDir ./.));
   };
 }

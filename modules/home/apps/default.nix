@@ -20,19 +20,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    ${namespace}.apps = {
-      defaults = enabled;
-      development = enabled;
-      firefox = enabled;
-      general = enabled;
-      imv = enabled;
-      kitty = enabled;
-      mako = enabled;
-      rofi = enabled;
-      social = enabled;
-      syncthing = enabled;
-      waybar = enabled;
-      wlogout = enabled;
-    };
+    ${namespace}.apps = with builtins; mapAttrs (k: v: enabled) (attrsets.filterAttrs (k: v: v == "directory") (readDir ./.));
   };
 }

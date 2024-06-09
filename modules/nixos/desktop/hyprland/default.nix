@@ -17,13 +17,30 @@ with lib.${namespace}; let
 in {
   options.${namespace}.desktop.hyprland = with types; {
     enable = mkBoolOpt false "Whether to enable hyprland system configuration.";
+    makeDefaultSession = mkBoolOpt false "Make it the default session.";
   };
 
   config = mkIf cfg.enable {
     programs.hyprland.enable = true;
-    services.displayManager = {
-      sddm.wayland.enable = true;
-      sddm.enable = true;
+    services.displayManager =
+      {
+        sddm.wayland.enable = true;
+        sddm.enable = true;
+      }
+      // optionalAttrs cfg.makeDefaultSession {
+        sddm.defaultSession = "hyprland";
+      };
+
+    xdg.portal = {
+      enable = true;
+      config.hyprland = {
+        "org.freedesktop.portal.FileChooser" = [
+          "gtk"
+        ];
+      };
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+      ];
     };
 
     ${namespace} = {

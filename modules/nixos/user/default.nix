@@ -60,6 +60,8 @@ in {
       git
       curl
       wget
+
+      killall
     ];
 
     programs.zsh.enable = true;

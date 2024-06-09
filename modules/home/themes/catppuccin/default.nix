@@ -13,11 +13,11 @@
 }:
 with lib;
 with lib.${namespace}; let
-  cfg = config.${namespace}.themes.default;
+  cfg = config.${namespace}.themes.catppuccin;
 in {
   # Currently using catpuccin-mocha theme for the most part.
-  options.${namespace}.themes.default = with types; {
-    enable = mkBoolOpt false "Whether to enable default system theme";
+  options.${namespace}.themes.catppuccin = with types; {
+    enable = mkBoolOpt false "Whether to enable catppuccin user theme";
   };
 
   config = mkIf cfg.enable {
@@ -28,21 +28,15 @@ in {
       opacity.terminal = 0.8;
     };
 
-    stylix.cursor = {
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Classic";
-      size = 24;
-    };
-
-    catppuccin = {
-      enable = true;
-      flavor = "mocha";
-      accent = "blue";
-    };
-    boot.plymouth.enable = true;
-
-    ${namespace} = {
-      themes.default.fonts = enabled;
-    };
+    catppuccin.enable = true;
+    catppuccin.accent = "blue";
+    xdg.configFile."vesktop/themes/catppuccin-${config.catppuccin.flavor}.theme.css".text = ''
+      @import url("https://catppuccin.github.io/discord/dist/catppuccin-${config.catppuccin.flavor}-${config.catppuccin.accent}.theme.css");
+    '';
+    gtk.enable = true;
+    qt.enable = true;
+    qt.style.name = "kvantum";
+    gtk.catppuccin.cursor = disabled;
+    programs.rofi.catppuccin = disabled;
   };
 }

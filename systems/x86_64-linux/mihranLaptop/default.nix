@@ -15,7 +15,6 @@ with lib.internal; {
   internal = {
     system = enabled;
     gaming = enabled;
-    themes.default = enabled;
   };
 
   environment.systemPackages = with pkgs; [

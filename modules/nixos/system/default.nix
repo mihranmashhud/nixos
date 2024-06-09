@@ -18,18 +18,17 @@ in {
   options.${namespace}.system = {
     enable = mkBoolOpt false "Whether to enable all system configs.";
   };
-  config =
-    mkIf cfg.enable {
-      ${namespace} = {
-        boot = enabled;
-        hardware = {
-          bluetooth = enabled;
-          drawingtablet = enabled;
-          network = enabled;
-          printer = enabled;
-          sound = enabled;
-          udev = enabled;
-        };
+  config = mkIf cfg.enable {
+    ${namespace} = {
+      boot = enabled;
+      hardware = {
+        bluetooth = enabled;
+        drawingtablet = enabled;
+        network = enabled;
+        printer = enabled;
+        sound = enabled;
+        udev = enabled;
       };
     };
+  };
 }

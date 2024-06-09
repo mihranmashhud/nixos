@@ -19,14 +19,19 @@ in {
     enable = mkBoolOpt false "Whether to enable git configuration.";
   };
   config = mkIf cfg.enable {
+    programs.git-credential-oauth.enable = true;
     programs.git = {
       enable = true;
+      package = pkgs.gitFull;
 
       userName = config.${namespace}.user.name;
       userEmail = config.${namespace}.user.email;
 
       extraConfig = {
         color.ui = "auto";
+        push = {
+          autoSetupRemote = true;
+        };
       };
 
       delta = {

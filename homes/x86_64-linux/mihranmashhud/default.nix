@@ -12,11 +12,10 @@
   ...
 }:
 with lib;
-with lib.internal; let 
+with lib.internal; let
 in {
   internal = {
     apps = enabled;
     cli = enabled;
-    themes.default = enabled;
   };
 }

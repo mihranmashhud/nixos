@@ -19,6 +19,6 @@ in {
     enable = mkBoolOpt false "Whether to enable ssh-agent configuration.";
   };
   config = mkIf cfg.enable {
-      services.ssh-agent.enable = true;
+    services.ssh-agent.enable = true;
   };
 }

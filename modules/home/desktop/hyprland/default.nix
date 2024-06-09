@@ -65,10 +65,13 @@ in {
               "col.active_border" = active_color;
               "col.nogroup_border" = inactive_color;
               "col.nogroup_border_active" = active_color;
-              cursor_inactive_timeout = 15;
               resize_on_border = true;
-              no_cursor_warps = true;
               layout = "dwindle";
+            };
+
+            cursor = {
+              inactive_timeout = 15;
+              no_warps = true;
             };
 
             dwindle = {
@@ -114,6 +117,7 @@ in {
               {
                 windows = [
                   "class:^(discord)$"
+                  "class:^(vesktop)$"
                   "class:^(Slack)$"
                   "class:^(org.telegram.desktop)$"
                 ];
@@ -243,13 +247,13 @@ in {
       {
         enable = true;
         settings = {
-          backgrounds = [
+          background = [
             {
               monitor = "";
               path = "$HOME/.cache/background-img";
             }
           ];
-          images = [
+          image = [
             {
               monitor = "";
               path = "$HOME/.face.icon";

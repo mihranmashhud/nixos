@@ -13,22 +13,22 @@
 }:
 with lib;
 with lib.${namespace}; let
-  cfg = config.${namespace}.themes.default.fonts;
+  cfg = config.${namespace}.themes.catppuccin.fonts;
 in {
-  options.${namespace}.themes.default.fonts = with types; {
-    enable = mkBoolOpt false "Whether to enable default font theming";
+  options.${namespace}.themes.catppuccin.fonts = with types; {
+    enable = mkBoolOpt config.${namespace}.themes.catppuccin.enable "Whether to enable catppuccin font theming";
   };
 
   config = mkIf cfg.enable {
     fonts.packages = with pkgs; [
-        (nerdfonts.override {
-          fonts = [
-            "FiraCode"
-            "Hasklig"
-            "Iosevka"
-            "VictorMono"
-          ];
-        })
+      (nerdfonts.override {
+        fonts = [
+          "FiraCode"
+          "Hasklig"
+          "Iosevka"
+          "VictorMono"
+        ];
+      })
     ];
     stylix.fonts = {
       sizes = {

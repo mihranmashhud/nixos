@@ -22,8 +22,6 @@ with lib.internal; {
     development = enabled;
 
     desktop.hyprland = enabled;
-
-    themes.default = enabled;
   };
 
   environment.systemPackages = with pkgs; [

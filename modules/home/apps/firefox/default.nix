@@ -93,7 +93,7 @@ in {
                 params = [
                   {
                     name = "query";
-                    value = "searchTerms";
+                    value = "{searchTerms}";
                   }
                   {
                     name = "release";
