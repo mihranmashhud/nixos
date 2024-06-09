@@ -26,6 +26,8 @@ in {
       cinnamon.warpinator # Send files around
       obsidian # note taking
       mpv # video/Music player
+
+      btop
     ];
   };
 }
