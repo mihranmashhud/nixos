@@ -14,6 +14,7 @@ with lib.internal; {
     docker-desktop.enable = true;
     startMenuLaunchers = true;
   };
+  programs.dconf.enable = true; # Required to get theming working.
 
   internal = {
     development = enabled;
