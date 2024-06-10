@@ -8,10 +8,6 @@
 }:
 with lib;
 with lib.internal; {
-  imports = [
-    ./hardware.nix
-  ];
-
   wsl = {
     enable = true;
     defaultUser = config.internal.user.name;
