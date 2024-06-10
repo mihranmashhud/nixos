@@ -22,6 +22,15 @@ with lib.internal; {
     development = enabled;
 
     desktop.hyprland = enabled;
+
+    gpu-passthrough = {
+      enable = true;
+      platform = "amd";
+      vfioIDs = [
+        "1002:699f"
+        "1002:aae0"
+      ];
+    };
   };
 
   environment.systemPackages = with pkgs; [
