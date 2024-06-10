@@ -46,6 +46,7 @@ in {
     icon =
       mkOpt (nullOr package) defaultIcon
       "The profile picture to use for the user.";
+    uid = mkOpt int 1000 "The user ID.";
     extraGroups = mkOpt (listOf str) [] "Groups for the user to be assigned.";
     extraOptions =
       mkOpt attrs {}
@@ -71,6 +72,7 @@ in {
         isNormalUser = true;
         description = cfg.fullName;
         shell = pkgs.zsh;
+        uid = cfg.uid;
         inherit (cfg) name initialPassword extraGroups;
       }
       // cfg.extraOptions;
