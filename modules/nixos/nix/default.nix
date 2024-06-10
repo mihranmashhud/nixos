@@ -42,10 +42,11 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       alejandra
+      deploy-rs
       nix-index
+      nix-output-monitor
       snowfallorg.flake
       snowfallorg.thaw
-      deploy-rs
     ];
 
     nix = let
