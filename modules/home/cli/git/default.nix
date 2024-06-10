@@ -19,6 +19,10 @@ in {
     enable = mkBoolOpt false "Whether to enable git configuration.";
   };
   config = mkIf cfg.enable {
+    programs.gh = {
+      enable = true;
+      gitCredentialHelper.enable = true;
+    };
     programs.git-credential-oauth.enable = true;
     programs.git = {
       enable = true;
