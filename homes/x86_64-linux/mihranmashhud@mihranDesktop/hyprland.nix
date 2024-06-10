@@ -31,7 +31,7 @@ with lib.internal; {
         ++ hypr.workspaces "DP-1" (map toString (range 5 11));
       exec-once = with pkgs; [
         "[workspace 6 silent] vesktop &"
-        "obs --startreplaybuffer --minimize-to-tray &"
+        "[workspace 10 silent] obs --startreplaybuffer --minimize-to-tray &"
         "[workspace 10 silent] pavucontrol &"
         "${xwaylandvideobridge}/bin/.xwaylandvideobridge-wrapped &"
         "openrgb -p 'cool ice' &"
