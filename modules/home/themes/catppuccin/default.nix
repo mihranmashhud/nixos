@@ -36,7 +36,7 @@ in {
     gtk.enable = true;
     qt.enable = true;
     qt.style.name = "kvantum";
-    gtk.catppuccin.cursor = disabled;
-    programs.rofi.catppuccin = disabled;
+    gtk.catppuccin.cursor.enable = false;
+    programs.rofi.catppuccin.enable = false;
   };
 }
