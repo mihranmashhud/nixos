@@ -13,7 +13,7 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     snowfall-lib = {
       url = "github:snowfallorg/lib?ref=dev";
@@ -34,6 +34,8 @@
     };
 
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
+
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
 
     nix-gaming.url = "github:fufexan/nix-gaming";
 
@@ -91,6 +93,10 @@
 
       systems.hosts.mihranLaptop.modules = with inputs; [
         nixos-hardware.nixosModules.lenovo-thinkpad-t480
+      ];
+
+      systems.hosts.mihranWSL.modules = with inputs; [
+        nixos-wsl.nixosModules.default
       ];
 
       templates = {

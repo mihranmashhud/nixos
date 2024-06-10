@@ -735,6 +735,7 @@
         "snowfall-flake": "snowfall-flake",
         "snowfall-lib": "snowfall-lib_2",
         "snowfall-thaw": "snowfall-thaw",
+        "stableDeprecated": "stableDeprecated",
         "stylix": "stylix",
         "waybar": "waybar"
       }
@@ -850,6 +851,22 @@
       "original": {
         "owner": "snowfallorg",
         "repo": "thaw",
+        "type": "github"
+      }
+    },
+    "stableDeprecated": {
+      "locked": {
+        "lastModified": 1717880976,
+        "narHash": "sha256-BRvSCsKtDUr83NEtbGfHLUOdDK0Cgbezj2PtcHnz+sQ=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "4913a7c3d8b8d00cb9476a6bd730ff57777f740c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-23.11",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
