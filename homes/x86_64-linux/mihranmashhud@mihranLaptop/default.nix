@@ -14,4 +14,5 @@
 with lib;
 with lib.internal; {
   imports = [./hyprland.nix];
+  internal.apps = enabled;
 }

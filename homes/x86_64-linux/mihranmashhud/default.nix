@@ -15,7 +15,6 @@ with lib;
 with lib.internal; let
 in {
   internal = {
-    apps = enabled;
     cli = enabled;
   };
 }

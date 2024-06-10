@@ -14,6 +14,7 @@
 with lib;
 with lib.internal; {
   imports = [./hyprland.nix];
+  internal.apps = enabled;
   programs.obs-studio = {
     enable = true;
     plugins = with pkgs.obs-studio-plugins; [
