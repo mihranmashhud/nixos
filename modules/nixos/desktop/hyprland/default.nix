@@ -30,6 +30,11 @@ in {
       // optionalAttrs cfg.makeDefaultSession {
         sddm.defaultSession = "hyprland";
       };
+    programs.kdeconnect = {
+      enable = true;
+      package = pkgs.kdePackages.kdeconnect-kde;
+    };
+
 
     xdg.portal = {
       enable = true;
