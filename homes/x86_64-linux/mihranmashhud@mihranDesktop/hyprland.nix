@@ -11,10 +11,13 @@ with lib.internal; {
   internal.desktop.hyprland = {
     enable = true;
     type = "desktop";
-    settings = {
+    settings = let
+      m1 = "DP-1";
+      m2 = "DP-2";
+    in {
       monitor = [
-        "DP-2, highrr, 0x0, 1, vrr, 1"
-        "DP-1, highrr, 1920x0, 1, vrr, 0"
+        "${m1}, highrr, 0x0, 1, vrr, 1"
+        "${m2}, highrr, 1920x0, 1, vrr, 0"
       ];
       misc.vrr = 1;
       animations = {
@@ -27,8 +30,8 @@ with lib.internal; {
         ];
       };
       workspace =
-        hypr.workspaces "DP-2" (map toString (range 1 6))
-        ++ hypr.workspaces "DP-1" (map toString (range 5 11));
+        hypr.workspaces m1 (map toString (range 1 6))
+        ++ hypr.workspaces m2 (map toString (range 6 11));
       exec-once = with pkgs; [
         "[workspace 6 silent] vesktop &"
         "[workspace 10 silent] obs --startreplaybuffer --minimize-to-tray &"
