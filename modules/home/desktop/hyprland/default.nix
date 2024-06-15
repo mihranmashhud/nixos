@@ -237,7 +237,7 @@ in {
             bind = ,S, exec, ${grimblast}/bin/grimblast --notify copysave output
             bind = ,S, submap, reset
 
-            submap=reset
+            submap = reset
           ''
           cfg.extraConfig
         ];
