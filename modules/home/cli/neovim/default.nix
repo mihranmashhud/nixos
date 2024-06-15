@@ -27,11 +27,6 @@ in {
       vimdiffAlias = true;
       defaultEditor = true;
 
-      extraLuaConfig = ''
-        require"general"
-        require"plugins"
-      '';
-
       # Packages to make available to Neovim
       extraPackages = with pkgs; [
         nil

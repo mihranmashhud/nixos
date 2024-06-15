@@ -28,6 +28,11 @@ in {
       opacity.terminal = 0.8;
     };
 
+    # Enable Stylix for these targets
+    stylix.targets = {
+      vesktop.enable = true;
+    };
+
     catppuccin.enable = true;
     catppuccin.accent = "blue";
     xdg.configFile."vesktop/themes/catppuccin-${config.catppuccin.flavor}.theme.css".text = ''
@@ -36,7 +41,10 @@ in {
     gtk.enable = true;
     qt.enable = true;
     qt.style.name = "kvantum";
+
+    # Disable for these targets
     gtk.catppuccin.cursor.enable = false;
     programs.rofi.catppuccin.enable = false;
+    programs.neovim.catppuccin.enable = false;
   };
 }
