@@ -21,7 +21,6 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      discord
       vesktop
       slack
       teams-for-linux
