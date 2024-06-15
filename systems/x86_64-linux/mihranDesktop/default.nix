@@ -38,6 +38,7 @@ with lib.internal; {
     sidequest
     r2modman
     gkraken
+    lm_sensors
   ];
 
   networking.interfaces.enp4s0.wakeOnLan = {
