@@ -52,7 +52,10 @@ with lib.internal; {
   };
 
   # Enable AMDVLK
-  hardware.amdgpu.amdvlk = true;
+  hardware.amdgpu.amdvlk = {
+    enable = true;
+    support32Bit.enable = true;
+  };
 
   programs.corectrl = {
     enable = true;
