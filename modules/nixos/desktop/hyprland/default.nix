@@ -21,6 +21,7 @@ in {
   };
 
   config = mkIf cfg.enable {
+    services.udisks2.enable = true; # Required for udiskie
     programs.hyprland.enable = true;
     services.displayManager =
       {
