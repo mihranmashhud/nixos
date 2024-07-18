@@ -32,6 +32,11 @@ in {
       name = "Bibata-Modern-Classic";
       size = 24;
     };
+    # Required to get cursor working in Hyprland.
+    environment.sessionVariables = {
+      HYPRCURSOR_THEME = config.stylix.cursor.name;
+      HYPRCURSOR_SIZE = toString config.stylix.cursor.size;
+    };
 
     catppuccin = {
       enable = true;

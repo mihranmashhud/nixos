@@ -57,6 +57,7 @@ in {
         }
       ];
       polkit.enable = true;
+      theming.enable = true;
     };
   };
 }

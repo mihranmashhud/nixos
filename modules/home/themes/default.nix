@@ -13,16 +13,22 @@
 }:
 with lib;
 with lib.${namespace}; let
-  cfg = config.${namespace}.theme;
+  cfg = config.${namespace}.theming;
 in {
-  options.${namespace}.theme =
-    mkOpt
-    (types.enum (attrNames (attrsets.filterAttrs (k: v: v == "directory") (builtins.readDir ./.))))
-    "catppuccin"
-    "Set the theme.";
+  options.${namespace}.theming = {
+    enable = mkBoolOpt false "Whether to enable theming.";
+    theme =
+      mkOpt
+      (types.enum (attrNames (attrsets.filterAttrs (k: v: v == "directory") (builtins.readDir ./.))))
+      "catppuccin"
+      "Set the theme.";
+  };
 
-  config = {
-    ${namespace}.themes.${cfg} = enabled;
+  config = mkIfElse cfg.enable {
+    ${namespace}.themes.${cfg.theme}.enable = true;
+    stylix.enable = true;
+    stylix.image = ../../../assets/wallpaper.png; # Required to get stylix working.
+  } {
     stylix.image = ../../../assets/wallpaper.png; # Required to get stylix working.
   };
 }

@@ -39,11 +39,20 @@ in {
       @import url("https://catppuccin.github.io/discord/dist/catppuccin-${config.catppuccin.flavor}-${config.catppuccin.accent}.theme.css");
     '';
     gtk.enable = true;
+    gtk.theme = {
+      name = "Catppuccin-GTK-Dark";
+      package = pkgs.magnetic-catppuccin-gtk;
+    };
+    gtk.catppuccin.icon = {
+      enable = true;
+      accent = "blue";
+    };
     qt.enable = true;
     qt.style.name = "kvantum";
+    qt.platformTheme.name = "kvantum";
 
     # Disable for these targets
-    gtk.catppuccin.cursor.enable = false;
+    catppuccin.pointerCursor.enable = false;
     programs.rofi.catppuccin.enable = false;
     programs.neovim.catppuccin.enable = false;
   };

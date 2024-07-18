@@ -40,11 +40,14 @@ in {
       pavucontrol
     ];
 
-    ${namespace}.apps = {
-      waybar = enabled;
-      mako = enabled;
-      wlogout = enabled;
-      rofi = enabled;
+    ${namespace} = {
+      theming.enable = true;
+      apps = {
+        waybar = enabled;
+        mako = enabled;
+        wlogout = enabled;
+        rofi = enabled;
+      };
     };
 
     wayland.windowManager.hyprland = with config.lib.stylix.colors; {
