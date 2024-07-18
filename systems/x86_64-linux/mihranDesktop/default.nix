@@ -74,6 +74,20 @@ with lib.internal; {
   };
   security.rtkit = enabled;
 
+  security.pam.yubico = {
+    enable = true;
+    mode = "challenge-response";
+    id = ["27757091"];
+  };
+  services.udev.packages = with pkgs.internal; [
+    yklock-udev-rules
+  ];
+
+  nix.settings = {
+    cores = 8;
+    max-jobs = 8;
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
