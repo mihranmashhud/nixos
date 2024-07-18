@@ -14,8 +14,8 @@
       "on-click": "wlogout -p layer-shell"
     },
     "custom/dualsensebattery": {
-        "format": "test",
-        "exec": "dualsensectl battery",
+        "format": "󰊴 {}%",
+        "exec": "dualsensectl battery | grep -o '[0-9]*' || echo 0",
         "interval": 2,
         "on-click-right": "dualsensectl power-off"
     },
