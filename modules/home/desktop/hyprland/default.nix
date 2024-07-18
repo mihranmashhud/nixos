@@ -243,27 +243,41 @@ in {
         ];
     };
 
-    programs.hyprlock = mkMerge [
-      {
-        enable = true;
-        settings = {
-          background = [
-            {
-              monitor = "";
-              path = "$HOME/.cache/background-img";
-            }
-          ];
-          image = [
-            {
-              monitor = "";
-              path = "$HOME/.face.icon";
-              size = 200;
-            }
-          ];
-        };
-      }
-      cfg.hyprlock
-    ];
+    programs.hyprlock = with config.lib.stylix.colors;
+      mkMerge [
+        {
+          enable = true;
+          settings = {
+            background = [
+              {
+                monitor = "";
+                path = "$HOME/.cache/background-img";
+              }
+            ];
+            image = [
+              {
+                monitor = "";
+                path = "$HOME/.face.icon";
+                size = 150;
+                border_color = "rgb(${base00})";
+              }
+            ];
+            input-field = [
+              {
+                monitor = "";
+                dots_center = true;
+                check_color = "rgb(${base0B})";
+                fail_color = "rgb(${base08})";
+                outer_color = "rgb(${base00})";
+                inner_color = "rgb(${base03})";
+                font_color = "rgb(${base05})";
+                size = "300, 50";
+              }
+            ];
+          };
+        }
+        cfg.hyprlock
+      ];
 
     services.hypridle = mkMerge [
       {
