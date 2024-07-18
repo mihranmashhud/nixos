@@ -33,10 +33,19 @@ in {
     # Scanning
     hardware.sane = {
       enable = true;
-      extraBackends = [pkgs.sane-airscan];
+      extraBackends = with pkgs; [
+        sane-airscan
+      ];
+      openFirewall = true;
     };
     environment.systemPackages = with pkgs; [
       simple-scan
+    ];
+    services.ipp-usb.enable = true;
+    # Add to relevant groups
+    ${namespace}.user.extraGroups = [
+      "scanner"
+      "lp"
     ];
   };
 }
