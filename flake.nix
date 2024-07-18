@@ -39,8 +39,6 @@
 
     nix-gaming.url = "github:fufexan/nix-gaming";
 
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=refs/tags/v0.41.1";
-
     waybar.url = "github:Alexays/Waybar";
 
     # System deployment
@@ -70,7 +68,6 @@
         snowfall-flake.overlays.default
         snowfall-thaw.overlays.default
         waybar.overlays.default
-        hyprland.overlays.default
       ];
 
       homes.modules = with inputs; [
