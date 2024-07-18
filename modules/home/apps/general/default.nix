@@ -21,13 +21,15 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      gnome.nautilus # File manager
-      gnome.gnome-calculator # Calculator
-      cinnamon.warpinator # Send files around
+      nautilus # file manager
+      gnome-calculator # calculator
+      cinnamon.warpinator # send files around
       obsidian # note taking
-      mpv # video/Music player
+      mpv # video/music player
+      inkscape # vector editing
+      darktable # lighttable editor/darkroom
 
-      btop
+      btop # terminal process viewer/manager
     ];
   };
 }
