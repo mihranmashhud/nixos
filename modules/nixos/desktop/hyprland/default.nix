@@ -23,6 +23,7 @@ in {
   config = mkIf cfg.enable {
     services.udisks2.enable = true; # Required for udiskie
     programs.hyprland.enable = true;
+    programs.hyprlock.enable = true;
     services.displayManager =
       {
         sddm.wayland.enable = true;
@@ -35,7 +36,6 @@ in {
       enable = true;
       package = pkgs.kdePackages.kdeconnect-kde;
     };
-
 
     xdg.portal = {
       enable = true;
@@ -56,7 +56,7 @@ in {
           key = "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=";
         }
       ];
-      polkit = enabled;
+      polkit.enable = true;
     };
   };
 }
