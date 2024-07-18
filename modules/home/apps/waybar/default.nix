@@ -19,6 +19,9 @@ in {
     enable = mkBoolOpt false "Whether to enable waybar configuration.";
   };
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      dualsensectl
+    ];
     xdg.configFile."waybar/modules.json".source = ./config/modules.json;
     xdg.configFile."waybar/desktop-config.json".source = ./config/desktop-config.json;
     xdg.configFile."waybar/laptop-config.json".source = ./config/laptop-config.json;
