@@ -33,10 +33,13 @@ in {
         nixd
         nodejs
         lua-language-server
+        ltex-ls
         luajitPackages.luarocks
         stylua
         ripgrep
       ];
+
+      plugins = [pkgs.vimPlugins.nvim-treesitter.withAllGrammars];
     };
   };
 }
