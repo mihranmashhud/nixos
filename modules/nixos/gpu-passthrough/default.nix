@@ -23,7 +23,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    hardware.opengl.enable = true;
+    hardware.graphics.enable = true;
     boot = {
       initrd.kernelModules = mkBefore [
         "kvm-${cfg.platform}"

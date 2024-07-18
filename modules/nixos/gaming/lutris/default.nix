@@ -20,7 +20,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    hardware.opengl.driSupport32Bit = true;
+    hardware.graphics.enable32Bit = true;
     environment.systemPackages = with pkgs; [
       lutris
       wineWowPackages.stable
