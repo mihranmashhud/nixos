@@ -37,6 +37,7 @@ in {
         luajitPackages.luarocks
         stylua
         ripgrep
+        gcc
       ];
 
       plugins = [pkgs.vimPlugins.nvim-treesitter.withAllGrammars];
