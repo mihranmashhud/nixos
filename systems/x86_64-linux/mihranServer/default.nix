@@ -16,6 +16,10 @@ with lib.internal; {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.blacklistedKernelModules = ["rtw88_8821ce"]; # keeps spamming errors.
+
+  services.getty.autologinUser = "mihranmashhud";
+
   internal = {
     locale = enabled;
     development = {

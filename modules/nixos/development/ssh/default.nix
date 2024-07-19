@@ -20,6 +20,9 @@ in {
   };
   config = mkIf cfg.enable {
     programs.ssh.startAgent = true;
-    services.openssh.enable = true;
+    services.openssh = {
+      enable = true;
+      openFirewall = true;
+    };
   };
 }
