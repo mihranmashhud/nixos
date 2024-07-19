@@ -11,6 +11,11 @@ with lib.internal; {
   imports = [
     ./hardware.nix # Make sure to add the generated hardware config.
   ];
+
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   internal = {
     locale = enabled;
     development = {
