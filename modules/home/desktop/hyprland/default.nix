@@ -277,6 +277,7 @@ in {
         settings = {
           general = {
             lock_cmd = "pidof hyprlock || hyprlock";
+            unlock_cmd = "pkill -USR1 hyprlock";
             before_sleep_cmd = builtins.concatStringsSep "; " [
               "loginctl lock-session"
               "${pkgs.playerctl}/bin/playerctl pause"
