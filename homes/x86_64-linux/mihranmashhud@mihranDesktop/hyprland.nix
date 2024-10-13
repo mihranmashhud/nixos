@@ -44,7 +44,7 @@ with lib.internal; {
         ++ hypr.workspaces m2 (map toString (range 6 11));
       exec-once = with pkgs; [
         "[workspace 6 silent] vesktop &"
-        "[workspace 10 silent] pavucontrol &"
+        "[workspace 10 silent] pwvucontrol &"
         "${xwaylandvideobridge}/bin/.xwaylandvideobridge-wrapped &"
         "openrgb -p 'cool ice' &"
       ];

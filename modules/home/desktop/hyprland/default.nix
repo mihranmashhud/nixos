@@ -37,7 +37,7 @@ in {
       choose-wallpaper
       random-wallpaper
       grimblast
-      pavucontrol
+      pwvucontrol
     ];
 
     ${namespace} = {
@@ -127,7 +127,7 @@ in {
                 rules = ["workspace 6"];
               }
               {
-                windows = ["class:^(pavucontrol)$"];
+                windows = ["class:^(com.saivert.pwvucontrol)$"];
                 rules = ["workspace 10"];
               }
               {
