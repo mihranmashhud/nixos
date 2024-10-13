@@ -13,7 +13,7 @@ with lib.internal; {
   ];
 
   # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
   internal = {
     system = enabled;
