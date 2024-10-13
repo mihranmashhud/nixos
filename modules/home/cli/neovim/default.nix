@@ -27,20 +27,43 @@ in {
       vimdiffAlias = true;
       defaultEditor = true;
 
+      extraLuaConfig =
+        # lua
+        ''
+        vim.g.nix = true
+        require"general"
+        require"plugins"
+        '';
+
       # Packages to make available to Neovim
       extraPackages = with pkgs; [
-        nil
-        nixd
+        tree-sitter
         nodejs
-        lua-language-server
-        ltex-ls
         luajitPackages.luarocks
-        stylua
         ripgrep
         gcc
+        unzip
+        typescript
+
+        # Formatters
+        stylua
+
+        # Language servers
+        tailwindcss-language-server
+        svelte-language-server
+        ccls
+        nil
+        ltex-ls
+        lua-language-server
+        pyright
+        gopls
+        go
       ];
 
-      plugins = [pkgs.vimPlugins.nvim-treesitter.withAllGrammars];
+      plugins = with pkgs.vimPlugins; [
+        nvim-treesitter.withAllGrammars
+        lazy-nvim
+      ];
     };
   };
 }
