@@ -146,6 +146,12 @@ in {
                   "minsize 1 1"
                 ];
               }
+              {
+                windows = ["initialTitle:^(Steam Big Picture Mode)$, class:^(steam)$"];
+                rules = [
+                  "fullscreen"
+                ];
+              }
             ];
 
             # TODO: use binaries directly from store for each binding.
