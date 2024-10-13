@@ -13,4 +13,5 @@
 }:
 with lib;
 with lib.internal; {
+  xdg.userDirs.createDirectories = lib.mkForce false;
 }
