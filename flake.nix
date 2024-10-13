@@ -42,6 +42,9 @@
     # Themes
     stylix.url = "github:danth/stylix";
     catppuccin.url = "github:catppuccin/nix";
+
+    # TODO: update when v2 is released
+    ags.url = "github:Aylur/ags/v2";
   };
 
   outputs = {self, ...} @ inputs: let
@@ -62,6 +65,7 @@
 
       homes.modules = with inputs; [
         catppuccin.homeManagerModules.catppuccin
+        ags.homeManagerModules.default
       ];
 
       systems.modules.nixos = with inputs; [
@@ -86,7 +90,6 @@
       systems.hosts.mihranWSL.modules = with inputs; [
         nixos-wsl.nixosModules.default
       ];
-
       templates = {
         devshell.description = "Simple flake dev shell.";
       };
