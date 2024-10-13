@@ -131,23 +131,6 @@ in {
                 rules = ["workspace 10"];
               }
               {
-                # TODO: delete once Vanguard is implemented in league.
-                windows = ["class:^(leagueclientux.exe)$"];
-                rules = [
-                  "workspace 4"
-                  "float"
-                  "center"
-                  "size 1600 900"
-                  "nomaxsize"
-                ];
-              }
-              {
-                windows = ["class:^(league of legends.exe)$"];
-                rules = [
-                  "fullscreen"
-                ];
-              }
-              {
                 windows = ["class:^(xwaylandvideobridge)$"];
                 rules = [
                   "opacity 0.0 override 0.0 override"
