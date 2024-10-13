@@ -45,6 +45,8 @@ with lib.internal; {
     lm_sensors
   ];
 
+  zramSwap.enable = true;
+
   networking.interfaces.enp4s0.wakeOnLan = {
     enable = true;
   };
