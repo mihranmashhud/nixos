@@ -68,6 +68,7 @@
         home-manager.nixosModules.home-manager
         stylix.nixosModules.stylix
         catppuccin.nixosModules.catppuccin
+        nix-gaming.nixosModules.platformOptimizations
       ];
 
       systems.hosts.mihranDesktop.modules = with inputs; [

@@ -19,16 +19,22 @@ in {
     enable = mkBoolOpt false "Whether to enable steam configuration.";
   };
   config = mkIf cfg.enable {
+      
     environment.systemPackages = with pkgs; [
-      protontricks
+      internal.sgdboop
     ];
+    programs.gamemode.enable = true;
+    programs.gamescope.enable = true;
+    ${namespace}.user.extraGroups = ["gamemode"];
     programs.steam = {
       enable = true;
-      gamescopeSession.enable = true;
       extraCompatPackages = with pkgs; [
         proton-ge-bin
       ];
       localNetworkGameTransfers.openFirewall = true;
+      extest.enable = true;
+      protontricks.enable = true;
+      platformOptimizations.enable = true;
     };
   };
 }
