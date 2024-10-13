@@ -29,6 +29,21 @@ with lib.internal; {
   services.libinput.enable = true; # Enable touchpad support
   services.tlp.enable = true;
 
+  # Distributed Nix builds
+  nix.buildMachines = [{
+    hostName = "builder";
+    system = "x86_64-linux";
+    protocol = "ssh-ng";
+    maxJobs = 3;
+    speedFactor = 2;
+    supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+    mandatoryFeatures = [ ];
+  }];
+  nix.distributedBuilds = true;
+  nix.settings = {
+    builders-use-substitutes = true;
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
