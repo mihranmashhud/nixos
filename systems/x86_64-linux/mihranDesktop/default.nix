@@ -18,7 +18,8 @@ with lib.internal; {
   internal = {
     system = enabled;
 
-    gaming = enabled;
+    apps.steam.enable = true;
+
     development = enabled;
 
     desktop.hyprland = enabled;
