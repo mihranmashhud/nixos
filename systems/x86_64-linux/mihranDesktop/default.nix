@@ -35,7 +35,10 @@ with lib.internal; {
   };
 
   environment.systemPackages = with pkgs; [
-    wlx-overlay-s
+    oversteer
+    dolphin-emu # Wii/Gamecube emulation
+    steam-rom-manager
+    heroic
     sidequest
     r2modman
     gkraken
@@ -57,6 +60,7 @@ with lib.internal; {
     gpuOverclock.enable = true;
   };
 
+      amd_performance_level = "high";
   services.hardware.openrgb = {
     enable = true;
     motherboard = "amd";
@@ -74,8 +78,9 @@ with lib.internal; {
     mode = "challenge-response";
     id = ["27757091"];
   };
-  services.udev.packages = with pkgs.internal; [
+  services.udev.packages = with pkgs; with pkgs.internal; [
     yklock-udev-rules
+    dolphin-emu
   ];
 
   nix.settings = {
