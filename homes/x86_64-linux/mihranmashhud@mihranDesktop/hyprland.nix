@@ -29,6 +29,16 @@ with lib.internal; {
           "borderangle, 1, 50, linear, loop"
         ];
       };
+      windowrulev2 = hypr.windowrules [
+        # Deadlock
+        {
+          windows = ["class:^(steam_app_1422450)$"];
+          rules = [
+            "fullscreen"
+            "allowsinput 1"
+          ];
+        }
+      ];
       workspace =
         hypr.workspaces m1 (map toString (range 1 6))
         ++ hypr.workspaces m2 (map toString (range 6 11));
