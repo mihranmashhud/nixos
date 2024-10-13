@@ -19,11 +19,14 @@ in {
     enable = mkBoolOpt false "Whether to enable git configuration.";
   };
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      git-credential-manager
+    ];
     programs.gh = {
       enable = true;
       gitCredentialHelper.enable = true;
     };
-    programs.git-credential-oauth.enable = true;
+    # programs.git-credential-oauth.enable = true;
     programs.git = {
       enable = true;
       package = pkgs.gitFull;
@@ -36,6 +39,7 @@ in {
         push = {
           autoSetupRemote = true;
         };
+        credential.credentialStore = "secretservice";
       };
 
       delta = {
