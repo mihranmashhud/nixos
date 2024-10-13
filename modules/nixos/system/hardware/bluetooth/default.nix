@@ -21,7 +21,7 @@ in {
 
   config = mkIf cfg.enable {
     hardware.bluetooth = {
-      package = pkgs.bluez;
+      powerOnBoot = true;
       enable = true;
       settings = {
         General = {
