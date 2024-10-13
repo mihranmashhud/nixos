@@ -23,11 +23,19 @@ in {
     home.packages = with pkgs; [
       nautilus # file manager
       gnome-calculator # calculator
-      cinnamon.warpinator # send files around
+      warpinator # send files around
       obsidian # note taking
       mpv # video/music player
       inkscape # vector editing
       darktable # lighttable editor/darkroom
+      transmission_4-gtk # torrenting
+      transmission-remote-gtk # remote Transmission control
+      teams-for-linux
+
+      libreoffice-qt # Office Apps
+      hunspell
+      hunspellDicts.en_US
+      hunspellDicts.en_CA
 
       btop # terminal process viewer/manager
     ];
