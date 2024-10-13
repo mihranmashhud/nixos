@@ -19,14 +19,6 @@
       url = "github:snowfallorg/lib?ref=dev";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    snowfall-flake = {
-      url = "github:snowfallorg/flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    snowfall-thaw = {
-      url = "github:snowfallorg/thaw";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -65,8 +57,6 @@
       };
 
       overlays = with inputs; [
-        snowfall-flake.overlays.default
-        snowfall-thaw.overlays.default
         waybar.overlays.default
       ];
 

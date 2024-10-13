@@ -45,8 +45,6 @@ in {
       deploy-rs
       nix-index
       nix-output-monitor
-      snowfallorg.flake
-      snowfallorg.thaw
     ];
 
     nix = let
