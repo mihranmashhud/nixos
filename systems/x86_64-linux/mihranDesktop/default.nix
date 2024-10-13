@@ -60,7 +60,18 @@ with lib.internal; {
     gpuOverclock.enable = true;
   };
 
+  programs.gamemode.settings = {
+    general = {
+      renice = 10;
+    };
+
+    gpu = {
+      apply_gpu_optimisations = "accept-responsibility";
+      gpu_device = 1;
       amd_performance_level = "high";
+    };
+  };
+
   services.hardware.openrgb = {
     enable = true;
     motherboard = "amd";
