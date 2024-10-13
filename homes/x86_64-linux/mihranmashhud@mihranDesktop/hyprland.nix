@@ -12,8 +12,8 @@ with lib.internal; {
     enable = true;
     type = "desktop";
     settings = let
-      m1 = "DP-1";
-      m2 = "DP-2";
+      m1 = "desc:Acer Technologies XB253Q TH5AA0038521";
+      m2 = "desc:Sceptre Tech Inc Sceptre M24 0x00000001";
     in {
       monitor = [
         "${m1}, highrr, 0x0, 1, vrr, 1"
