@@ -46,6 +46,7 @@ in {
         typescript
 
         # Formatters
+        alejandra
         stylua
 
         # Language servers
@@ -53,6 +54,7 @@ in {
         svelte-language-server
         ccls
         nil
+        nixd
         ltex-ls
         lua-language-server
         pyright
