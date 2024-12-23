@@ -98,9 +98,16 @@ with lib.internal; {
     dolphin-emu
   ];
 
+  services.nix-serve = {
+    enable = true;
+    package = pkgs.nix-serve-ng;
+    openFirewall = true;
+  };
+
   nix.settings = {
     cores = 8;
     max-jobs = 8;
+    trusted-users = ["nixremote"]; # For using this machine as a remote builder
   };
 
   # This value determines the NixOS release from which the default
