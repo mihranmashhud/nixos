@@ -79,7 +79,6 @@ in {
 
             dwindle = {
               force_split = 0;
-              no_gaps_when_only = true;
             };
 
             decoration = {
@@ -230,6 +229,13 @@ in {
             bind = ,S, submap, reset
 
             submap = reset
+
+            workspace = w[tv1], gapsout:0, gapsin:0
+            workspace = f[1], gapsout:0, gapsin:0
+            windowrulev2 = bordersize 0, floating:0, onworkspace:w[tv1]
+            windowrulev2 = rounding 0, floating:0, onworkspace:w[tv1]
+            windowrulev2 = bordersize 0, floating:0, onworkspace:f[1]
+            windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
           ''
           cfg.extraConfig
         ];
