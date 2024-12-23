@@ -43,6 +43,7 @@ with lib.internal; {
     r2modman
     gkraken
     lm_sensors
+    owmods-cli
   ];
 
   zramSwap.enable = true;
