@@ -66,6 +66,10 @@ in {
         trusted-public-keys = [cfg.default-substituter.key] ++ (map (x: x.key) cfg.extra-substituters);
       };
 
+      nixPath = [
+        "nixpkgs=${inputs.nixpkgs}"
+      ];
+
       gc = {
         automatic = true;
         dates = "weekly";
