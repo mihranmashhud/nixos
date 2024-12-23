@@ -83,6 +83,7 @@ with lib.internal; {
     quantum = 32;
     rate = 48000;
   };
+
   security.rtkit = enabled;
 
   security.pam.yubico = {
@@ -90,6 +91,7 @@ with lib.internal; {
     mode = "challenge-response";
     id = ["27757091"];
   };
+
   services.udev.packages = with pkgs; with pkgs.internal; [
     yklock-udev-rules
     dolphin-emu
