@@ -53,7 +53,6 @@ with lib.internal; {
 
   programs.alvr = {
     enable = true;
-    package = pkgs.internal.alvr;
     openFirewall = true;
   };
 
