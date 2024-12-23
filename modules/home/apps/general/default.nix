@@ -31,6 +31,7 @@ in {
       transmission_4-gtk # torrenting
       transmission-remote-gtk # remote Transmission control
       teams-for-linux
+      cheese
 
       libreoffice-qt # Office Apps
       hunspell
