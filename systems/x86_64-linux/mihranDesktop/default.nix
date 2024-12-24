@@ -41,7 +41,7 @@ with lib.internal; {
     heroic
     sidequest
     r2modman
-    gkraken
+    coolercontrol.coolercontrol-gui
     lm_sensors
     owmods-cli
   ];

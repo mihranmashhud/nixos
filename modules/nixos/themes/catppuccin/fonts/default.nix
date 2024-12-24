@@ -20,15 +20,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-    fonts.packages = with pkgs; [
-      (nerdfonts.override {
-        fonts = [
-          "FiraCode"
-          "Hasklig"
-          "Iosevka"
-          "VictorMono"
-        ];
-      })
+    fonts.packages = with pkgs.nerd-fonts; [
+      fira-code
+      hasklug
+      iosevka
+      victor-mono
     ];
     stylix.fonts = {
       sizes = {
@@ -46,11 +42,7 @@ in {
         name = "Roboto Slab";
       };
       monospace = {
-        package = pkgs.nerdfonts.override {
-          fonts = [
-            "CascadiaCode"
-          ];
-        };
+        package = pkgs.nerd-fonts.caskaydia-cove;
         name = "CaskaydiaCove Nerd Font";
       };
     };
