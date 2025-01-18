@@ -43,7 +43,7 @@ in {
       name = "Catppuccin-GTK-Dark";
       package = pkgs.magnetic-catppuccin-gtk;
     };
-    gtk.catppuccin.icon = {
+    catppuccin.gtk.icon = {
       enable = true;
       accent = "blue";
     };
@@ -52,8 +52,10 @@ in {
     qt.platformTheme.name = "kvantum";
 
     # Disable for these targets
-    catppuccin.pointerCursor.enable = false;
-    programs.rofi.catppuccin.enable = false;
-    programs.neovim.catppuccin.enable = false;
+    catppuccin = {
+      cursors.enable = false;
+      rofi.enable = false;
+      nvim.enable = false;
+    };
   };
 }
