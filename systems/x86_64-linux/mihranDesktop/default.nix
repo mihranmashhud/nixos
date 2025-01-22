@@ -79,6 +79,13 @@ with lib.internal; {
     motherboard = "amd";
   };
 
+  services.pipewire.wireplumber.extraConfig = {
+    wireplumber.settings = {
+      device.routes.default-sink-volume = 1;
+      device.routes.default-source-volume = 1;
+    };
+  };
+
   services.pipewire.lowLatency = {
     enable = true;
     quantum = 32;
