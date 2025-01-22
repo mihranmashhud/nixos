@@ -20,7 +20,7 @@ with lib.${namespace}; {
       background = "dark";
       clipboard = {
         providers.wl-copy.enable = true;
-        register = "unamedplus";
+        register = "unnamedplus";
       };
       completeopt = ["menu" "menuone" "noselect"];
       conceallevel = 0;
