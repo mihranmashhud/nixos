@@ -8,10 +8,10 @@ nvim_lsp.nixd.setup({
          },
          options = {
             nixos = {
-               expr = '(builtins.getFlake ("git+file://" + toString ./.)).nixosConfigurations.mihranDesktop.options',
+               expr = '(builtins.getFlake "/home/mihranmashhud/nixos").nixosConfigurations.mihranDesktop.options',
             },
             home_manager = {
-               expr = '(builtins.getFlake ("git+file://" + toString ./.)).homeConfigurations."mihranmashhud@mihranDesktop".options',
+               expr = '(builtins.getFlake "/home/mihranmashhud/nixos").homeConfigurations."mihranmashhud@mihranDesktop".options',
             },
          },
       },
