@@ -45,6 +45,11 @@
 
     # TODO: update when v2 is released
     ags.url = "github:Aylur/ags/v2";
+
+    nixvim = {
+        url = "github:nix-community/nixvim";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {self, ...} @ inputs: let
@@ -66,6 +71,7 @@
       homes.modules = with inputs; [
         catppuccin.homeManagerModules.catppuccin
         ags.homeManagerModules.default
+        nixvim.homeManagerModules.nixvim
       ];
 
       systems.modules.nixos = with inputs; [

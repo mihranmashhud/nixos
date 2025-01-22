@@ -43,10 +43,10 @@ with lib; rec {
   mkBoolOpt' = mkOpt' types.bool;
 
   enabled = {
-    enable = true;
+    enable = mkDefault true;
   };
 
   disabled = {
-    enable = false;
+    enable = mkDefault false;
   };
 }
