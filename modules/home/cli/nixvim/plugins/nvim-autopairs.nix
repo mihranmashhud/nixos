@@ -15,20 +15,12 @@ with lib;
 with lib.${namespace}; {
   config.programs.nixvim = {
     plugins.nvim-autopairs = {
-      enable = false;
+      enable = true;
       settings = {
         map_cr = true;
         map_complete = true;
         auto_select = false;
       };
-      luaConfig =
-        # lua
-        ''
-          local npairs = require"nvim-autopairs"
-          npairs.add_rules(require("nvim-autopairs.rules.endwise-elixir"))
-          npairs.add_rules(require("nvim-autopairs.rules.endwise-lua"))
-          npairs.add_rules(require("nvim-autopairs.rules.endwise-ruby"))
-        '';
     };
   };
 }
