@@ -59,13 +59,13 @@ with lib.${namespace}; {
         {
           mode = "n";
           key = "<C-j>";
-          action = ":cnext<cr>";
+          action = "<cmd>cnext<cr>";
           options.expr = true;
         }
         {
           mode = "n";
           key = "<C-k>";
-          action = ":cprev<cr>";
+          action = "<cmd>cprev<cr>";
           options.expr = true;
         }
 
@@ -152,14 +152,6 @@ with lib.${namespace}; {
           options = {
             silent = true;
             desc = "quit buffer";
-          };
-        }
-        {
-          mode = ["n" "v"];
-          key = "<leader>/";
-          action = "gcc";
-          options = {
-            desc = "Comment line(s)";
           };
         }
       ]
