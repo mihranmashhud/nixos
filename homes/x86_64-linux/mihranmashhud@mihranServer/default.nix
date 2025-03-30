@@ -13,5 +13,6 @@
 }:
 with lib;
 with lib.internal; {
+  internal.cli = enabled;
   xdg.userDirs.createDirectories = lib.mkForce false;
 }

@@ -14,22 +14,11 @@
 with lib;
 with lib.internal; {
   imports = [./hyprland.nix];
-  internal.apps = enabled;
-  programs.ags = {
-    enable = true;
-    extraPackages = with inputs.ags.packages.${target}; [
-      apps
-      battery
-      bluetooth
-      hyprland
-      mpris
-      network
-      notifd
-      tray
-      wireplumber
-    ];
+  internal = {
+    cli = enabled;
+    apps = enabled;
   };
-  home.packages = [
-    inputs.ags.packages.${target}.astal
+  home.packages = with inputs.ags.packages.${target}; [
+    agsFull
   ];
 }

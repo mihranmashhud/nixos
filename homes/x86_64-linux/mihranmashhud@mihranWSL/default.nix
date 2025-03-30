@@ -13,4 +13,5 @@
 }:
 with lib;
 with lib.internal; {
+  internal.cli = enabled;
 }

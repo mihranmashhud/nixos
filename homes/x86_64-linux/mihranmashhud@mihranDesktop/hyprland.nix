@@ -20,6 +20,10 @@ with lib.internal; {
         "${m2}, highrr, 1920x0, 1, vrr, 0"
       ];
       misc.vrr = 1;
+      experimental = {
+        wide_color_gamut = false;
+        xx_color_management_v4 = true;
+      };
       animations = {
         enabled = "yes";
         bezier = [
@@ -45,7 +49,7 @@ with lib.internal; {
       exec-once = with pkgs; [
         "[workspace 6 silent] vesktop &"
         "[workspace 10 silent] pwvucontrol &"
-        "${xwaylandvideobridge}/bin/.xwaylandvideobridge-wrapped &"
+        "${kdePackages.xwaylandvideobridge}/bin/.xwaylandvideobridge-wrapped &"
         "openrgb -p 'cool ice' &"
       ];
     };
