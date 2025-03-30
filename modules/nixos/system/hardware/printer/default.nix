@@ -22,10 +22,11 @@ in {
   config = mkIf cfg.enable {
     # Printing
     services.printing.enable = true;
-    services.avahi.enable = true;
-    services.avahi.nssmdns4 = true;
-    # for WiFi printer
-    services.avahi.openFirewall = true;
+    services.avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
     # Load epson driver
     services.printing.drivers = with pkgs; [
       epson-escpr
