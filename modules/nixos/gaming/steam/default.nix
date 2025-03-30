@@ -32,6 +32,7 @@ in {
         proton-ge-bin
       ];
       localNetworkGameTransfers.openFirewall = true;
+      remotePlay.openFirewall = true;
       extest.enable = true;
       protontricks.enable = true;
       platformOptimizations.enable = true;
