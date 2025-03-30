@@ -32,7 +32,7 @@ in {
       swww
       libnotify
       hyprkeys
-      xwaylandvideobridge
+      kdePackages.xwaylandvideobridge
       wdisplays
       choose-wallpaper
       random-wallpaper
