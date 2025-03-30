@@ -14,14 +14,14 @@
 with lib;
 with lib.${namespace}; {
   config.programs.nixvim = {
+    clipboard = {
+      providers.wl-copy.enable = true;
+      register = "unnamedplus";
+    };
     opts = {
       autoindent = true;
       autoread = true;
       background = "dark";
-      clipboard = {
-        providers.wl-copy.enable = true;
-        register = "unnamedplus";
-      };
       completeopt = ["menu" "menuone" "noselect"];
       conceallevel = 0;
       cursorline = true;

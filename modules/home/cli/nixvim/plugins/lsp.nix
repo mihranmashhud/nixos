@@ -16,10 +16,12 @@ with lib.${namespace}; {
   config.programs.nixvim = {
     # Include LSP related plugins here as well
     diagnostics = {
+      severity_sort = true;
+      virtual_text = false;
       signs.text.__raw = ''{
         [vim.diagnostic.severity.ERROR] = " ",
         [vim.diagnostic.severity.WARN] = " ",
-        [vim.diagnostic.severity.INFO] = "ERROR",
+        [vim.diagnostic.severity.INFO] = " ",
         [vim.diagnostic.severity.HINT] = " ",
       }'';
     };
@@ -39,9 +41,7 @@ with lib.${namespace}; {
       onAttach = 
       # lua
       ''
-        function on_attach(client, bufnr)
-          set_group_name("<leader>l", "LSP")
-        end
+        set_group_name("<leader>l", "LSP")
       '';
       keymaps = {
         extra = [

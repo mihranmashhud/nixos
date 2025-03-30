@@ -17,6 +17,14 @@ with lib.${namespace}; {
     plugins.snacks = {
       enable = true;
       settings = {
+        indent.enabled = true;
+        chunk = {
+          enabled = true;
+          char = {
+            corner_top = "╭";
+            corner_bottom = "╰";
+          };
+        };
         dashboard = {
           preset = {
             header = ''

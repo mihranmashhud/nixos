@@ -32,6 +32,7 @@ in {
       transmission-remote-gtk # remote Transmission control
       teams-for-linux
       cheese
+      kdePackages.partitionmanager # Drive management
 
       libreoffice-qt # Office Apps
       hunspell

@@ -14,7 +14,23 @@
 with lib;
 with lib.${namespace}; {
   config.programs.nixvim = {
-    plugins.neo-tree.enable = true;
+    plugins.neo-tree = {
+      enable = true;
+      eventHandlers = let
+        on_rename_handler =
+          # lua
+          ''
+            function (data)
+              if Snacks then
+                Snacks.rename.on_rename_file(data.source, data.destination)
+              end
+            end
+          '';
+      in {
+        file_moved = on_rename_handler;
+        file_renamed = on_rename_handler;
+      };
+    };
     keymaps = [
       {
         mode = "n";

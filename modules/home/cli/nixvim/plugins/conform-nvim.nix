@@ -55,7 +55,7 @@ with lib.${namespace}; {
     };
     globals.formatonsave = false;
     extraConfigLuaPre = ''
-      function mutateFormatonsave(g, b)
+      function mutate_formatonsave(g, b)
         return function(args)
           if args.bang then
             vim.g.formatonsave = g
@@ -90,17 +90,17 @@ with lib.${namespace}; {
         range = true;
       };
       FormatOnSaveToggle = {
-        command.__raw = "mutateFormatonsave(not vim.g.formatonsave, not vim.b.formatonsave)";
+        command.__raw = "mutate_formatonsave(not vim.g.formatonsave, not vim.b.formatonsave)";
         desc = "Toggle format on save";
         bang = true;
       };
       FormatOnSaveEnable = {
-        command.__raw = "mutateFormatonsave(true, true)";
+        command.__raw = "mutate_formatonsave(true, true)";
         desc = "Enable format on save";
         bang = true;
       };
       FormatOnSaveDisable = {
-        command.__raw = "mutateFormatonsave(false, false)";
+        command.__raw = "mutate_formatonsave(false, false)";
         desc = "Disable format on save";
         bang = true;
       };

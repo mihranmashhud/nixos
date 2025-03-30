@@ -14,21 +14,17 @@
 with lib;
 with lib.${namespace}; {
   config.programs.nixvim = {
-    extraConfigLuaPre =
-      # lua
-      ''
-        _G.set_group_name = function (lhs, name)
-          local ok, wk = pcall(require, "which-key")
-          if ok then
-            wk.add{ {lhs, group = name } }
-          end
+    extraConfigLuaPre = ''
+      _G.set_group_name = function (lhs, name)
+        local ok, wk = pcall(require, "which-key")
+        if ok then
+          wk.add{ {lhs, group = name } }
         end
-      '';
-    extraConfigLua =
-      # lua
-      ''
-        set_group_name("<leader>a", "Actions")
-      '';
+      end
+    '';
+    extraConfigLua = ''
+      set_group_name("<leader>a", "Actions")
+    '';
     keymaps =
       [
         # Change indentation without losing selection

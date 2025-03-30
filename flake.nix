@@ -41,15 +41,19 @@
 
     # Themes
     stylix.url = "github:danth/stylix";
-    catppuccin.url = "github:catppuccin/nix";
+    catppuccin = {
+      url = "github:catppuccin/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    # TODO: update when v2 is released
-    ags.url = "github:Aylur/ags/v2";
+    ags.url = "github:Aylur/ags";
 
     nixvim = {
         url = "github:nix-community/nixvim";
         inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixneovimplugins.url = "github:jooooscha/nixpkgs-vim-extra-plugins";
   };
 
   outputs = {self, ...} @ inputs: let
@@ -66,6 +70,7 @@
 
       overlays = with inputs; [
         waybar.overlays.default
+        nixneovimplugins.overlays.default
       ];
 
       homes.modules = with inputs; [

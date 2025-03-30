@@ -31,9 +31,9 @@ with lib.${namespace}; {
           };
           globalstatus = true;
           refresh = {
-            statusline = 1000;
-            tabline = 1000;
-            winbar = 1000;
+            statusline = 100;
+            tabline = 100;
+            winbar = 100;
           };
         };
         sections = {
@@ -90,7 +90,14 @@ with lib.${namespace}; {
           lualine_y = [];
           lualine_z = [];
         };
-        extensions = [] ++ (if config.programs.nixvim.plugins.neo-tree.enable then ["neo-tree"] else []); };
+        extensions =
+          []
+          ++ (
+            if config.programs.nixvim.plugins.neo-tree.enable
+            then ["neo-tree"]
+            else []
+          );
+      };
     };
   };
 }

@@ -14,16 +14,6 @@
 with lib;
 with lib.${namespace}; {
   config.programs.nixvim = {
-    # Enables treesitter related plugins as well
-    plugins.treesitter = {
-      enable = true;
-      settings = {
-        highlight.enable = true;
-        indent.enable = true;
-        playground.enable = true;
-      };
-    };
-    plugins.ts-comments.enable = true;
-    plugins.ts-autotag.enable = true;
+    plugins.todo-comments.enable = true;
   };
 }
