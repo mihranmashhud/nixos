@@ -21,7 +21,6 @@ with lib.internal; {
       ];
       misc.vrr = 1;
       experimental = {
-        wide_color_gamut = false;
         xx_color_management_v4 = true;
       };
       animations = {
