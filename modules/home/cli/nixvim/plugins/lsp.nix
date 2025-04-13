@@ -17,7 +17,6 @@ with lib.${namespace}; {
     # Include LSP related plugins here as well
     diagnostics = {
       severity_sort = true;
-      virtual_text = false;
       signs.text.__raw = ''{
         [vim.diagnostic.severity.ERROR] = " ",
         [vim.diagnostic.severity.WARN] = " ",
