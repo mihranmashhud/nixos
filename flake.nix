@@ -33,6 +33,9 @@
 
     waybar.url = "github:Alexays/Waybar";
 
+    zen-browser.url = "github:youwen5/zen-browser-flake";
+    zenix.url = "github:anders130/zenix";
+
     # System deployment
     deploy-rs = {
       url = "github:serokell/deploy-rs";
@@ -71,12 +74,14 @@
       overlays = with inputs; [
         waybar.overlays.default
         nixneovimplugins.overlays.default
+        zenix.overlays.default
       ];
 
       homes.modules = with inputs; [
         catppuccin.homeManagerModules.catppuccin
         ags.homeManagerModules.default
         nixvim.homeManagerModules.nixvim
+        zenix.homeModules.default
       ];
 
       systems.modules.nixos = with inputs; [

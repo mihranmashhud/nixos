@@ -13,30 +13,22 @@
 }:
 with lib;
 with lib.${namespace}; let
-  cfg = config.${namespace}.apps.firefox;
+  cfg = config.${namespace}.apps.zen-browser;
 in {
-  options.${namespace}.apps.firefox = {
-    enable = mkBoolOpt false "Whether to enable firefox configuration.";
+  options.${namespace}.apps.zen-browser = {
+    enable = mkBoolOpt false "Whether to enable zen-browser configuration.";
   };
   config = mkIf cfg.enable {
-    programs.firefox = {
+    programs.zenix = {
       enable = true;
-      package = pkgs.firefox-bin;
-      profiles.mihranmashhud = {
+      package = inputs.zen-browser.packages.${system}.default;
+      profiles.default = {
+        id = 0;
+        isDefault = true;
         settings = {
-          "toolkit.legacyUserProfileCustomizations.stylesheets" = true; # Enable userChrome.css
           "privacy.webrtc.hideGlobalIndicator" = true;
           "media.ffmpeg.vaapi.enabled" = true;
         };
-        userChrome =
-          /*
-          css
-          */
-          ''
-            #TabsToolbar {
-              visibility: collapse !important;
-            }
-          '';
         search.engines = {
           "Nix Packages" = {
             urls = [

@@ -33,8 +33,8 @@ in {
     # };
 
     home.sessionVariables = {
-      BROWSER = "firefox";
-      DEFAULT_BROWSER = "${config.programs.firefox.package}/bin/firefox";
+      BROWSER = "zen";
+      DEFAULT_BROWSER = "${inputs.zen-browser.packages.${system}.default}/bin/zen";
     };
   };
 }
