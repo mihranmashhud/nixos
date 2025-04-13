@@ -60,6 +60,7 @@ with lib.${namespace}; {
       updatetime = 100;
       virtualedit = "onemore";
       whichwrap = "<,>,h,l,[,]";
+      winborder = "rounded";
       wrap = true;
     };
 
