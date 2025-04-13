@@ -53,8 +53,13 @@ in {
       package = cfg.package;
 
       settings = {
-        experimental-features = "nix-command flakes";
+        experimental-features = [
+          "nix-command"
+          "flakes"
+          "pipe-operators"
+        ];
 
+        download-buffer-size = 524288000;
         http-connections = 50;
         log-lines = 50;
         warn-dirty = false;
