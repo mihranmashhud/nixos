@@ -24,11 +24,8 @@ in {
       "Set the theme.";
   };
 
-  config = mkIfElse cfg.enable {
+  config = mkIf cfg.enable {
     ${namespace}.themes.${cfg.theme}.enable = true;
     stylix.enable = true;
-    stylix.image = ../../../assets/wallpaper.png; # Required to get stylix working.
-  } {
-    stylix.image = ../../../assets/wallpaper.png; # Required to get stylix working.
   };
 }
