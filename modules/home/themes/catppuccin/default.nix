@@ -56,6 +56,7 @@ in {
       cursors.enable = false;
       rofi.enable = false;
       nvim.enable = false;
+      firefox.profiles.mihranmashhud.enable = false;
     };
   };
 }

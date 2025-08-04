@@ -24,7 +24,7 @@ in {
       "Set the theme.";
   };
 
-  config = mkIfElse cfg.enable {
+  config = mkIf cfg.enable {
     ${namespace}.themes.${cfg.theme}.enable = true;
     stylix.enable = true;
     xdg.configFile."colors.css".text = with config.lib.stylix.colors; ''
@@ -45,8 +45,5 @@ in {
       @define-color base0E #${base0E}; /* mauve */
       @define-color base0F #${base0F}; /* flamingo */
     '';
-    stylix.image = ../../../assets/wallpaper.png; # Required to get stylix working.
-  } {
-    stylix.image = ../../../assets/wallpaper.png; # Required to get stylix working.
   };
 }
