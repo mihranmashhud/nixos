@@ -10,10 +10,10 @@
   inputs,
   ...
 }: (final: prev: {
-  vdf-patch = prev.python312Packages.vdf.overrideAttrs (oldAttrs: rec {
+  vdf-patch = prev.python312Packages.vdf.overrideAttrs (oldAttrs: {
     src = inputs.vdf-patch;
   });
-  protontricks-beta = prev.protontricks.overrideAttrs (oldAttrs: rec {
+  protontricks-beta = prev.protontricks.overrideAttrs (oldAttrs: {
     src = inputs.protontricks;
     propagatedBuildInputs = [
       prev.python312Packages.setuptools # implicit dependency, used to find data/icon_placeholder.png
