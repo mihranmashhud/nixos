@@ -20,6 +20,7 @@ with lib.${namespace}; {
       black
       alejandra
       stylua
+      rustywind
     ];
     plugins.conform-nvim = {
       enable = true;
@@ -37,7 +38,7 @@ with lib.${namespace}; {
           typescript = ["prettierd"];
           javascriptreact = ["prettierd"];
           typescriptreact = ["prettierd"];
-          svelte = ["svelte_fmt"];
+          svelte = ["rustywind" "svelte_fmt"];
           nix = ["alejandra"];
         };
         format_on_save =
