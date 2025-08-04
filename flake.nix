@@ -49,14 +49,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ags.url = "github:Aylur/ags";
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell?ref=refs/tags/v0.1.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixvim = {
-        url = "github:nix-community/nixvim";
-        inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nixvim";
     };
 
     nixneovimplugins.url = "github:jooooscha/nixpkgs-vim-extra-plugins";
+
+    agenix.url = "github:ryantm/agenix";
   };
 
   outputs = {self, ...} @ inputs: let
@@ -68,7 +72,10 @@
     lib.mkFlake {
       channels-config = {
         allowUnfree = true;
-        permittedInsecurePackages = [];
+        permittedInsecurePackages = [
+          "libsoup-2.74.3" # TODO: Remove after https://github.com/NixOS/nixpkgs/pull/429473 is merged.
+          "beekeeper-studio-5.2.12"
+        ];
       };
 
       overlays = with inputs; [
@@ -78,8 +85,7 @@
       ];
 
       homes.modules = with inputs; [
-        catppuccin.homeManagerModules.catppuccin
-        ags.homeManagerModules.default
+        catppuccin.homeModules.catppuccin
         nixvim.homeManagerModules.nixvim
         zenix.homeModules.default
       ];
@@ -89,6 +95,7 @@
         stylix.nixosModules.stylix
         catppuccin.nixosModules.catppuccin
         nix-gaming.nixosModules.platformOptimizations
+        agenix.nixosModules.default
       ];
 
       systems.hosts.mihranDesktop.modules = with inputs; [
