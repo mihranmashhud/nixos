@@ -25,7 +25,9 @@ in {
       slack
       teams-for-linux
       telegram-desktop
-      zoom-us
+      (zoom-us.override (prev: {
+        hyprlandXdgDesktopPortalSupport = true;
+      }))
     ];
   };
 }
