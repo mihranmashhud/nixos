@@ -22,14 +22,14 @@ in {
   config = mkIf cfg.enable {
     services.mako = {
       enable = true;
-      defaultTimeout = 2000;
-      borderRadius = 5;
-      borderSize = 2;
-      layer = "overlay";
-      extraConfig = ''
-        on-button-left=exec makoctl menu -n "$id" rofi -dmenu -p 'Select action: '
-        on-notify=exec mpv ${system-sounds}/message-attention.oga
-      '';
+      settings = {
+        default-timeout = 2000;
+        border-radius = 5;
+        border-size = 2;
+        layer = "overlay";
+        on-button-left = "exec makoctl menu -n \"$id\" rofi -dmenu -p 'Select action: '";
+        on-notify = "exec mpv ${system-sounds}/message-attention.oga";
+      };
     };
   };
 }
