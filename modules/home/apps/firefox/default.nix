@@ -28,15 +28,6 @@ in {
           "privacy.webrtc.hideGlobalIndicator" = true;
           "media.ffmpeg.vaapi.enabled" = true;
         };
-        userChrome =
-          /*
-          css
-          */
-          ''
-            #TabsToolbar {
-              visibility: collapse !important;
-            }
-          '';
         search.engines = {
           "Nix Packages" = {
             urls = [
