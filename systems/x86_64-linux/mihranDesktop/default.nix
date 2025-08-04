@@ -34,6 +34,14 @@ with lib.internal; {
     };
   };
 
+  # Security
+  services.openssh.settings = {
+    PasswordAuthentication = false;
+    TCPKeepAlive = "yes";
+    ClientAliveInterval = 300;
+    ClientAliveCountMax = 2;
+  };
+
   environment.systemPackages = with pkgs; [
     oversteer
     dolphin-emu # Wii/Gamecube emulation
