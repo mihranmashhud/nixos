@@ -19,10 +19,6 @@ with lib.internal; {
         "${m1}, highrr, 0x0, 1, vrr, 1"
         "${m2}, highrr, 1920x0, 1, vrr, 0"
       ];
-      misc.vrr = 1;
-      experimental = {
-        xx_color_management_v4 = true;
-      };
       animations = {
         enabled = "yes";
         bezier = [
