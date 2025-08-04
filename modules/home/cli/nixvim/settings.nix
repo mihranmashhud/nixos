@@ -29,6 +29,7 @@ with lib.${namespace}; {
       expandtab = true;
       exrc = true;
       fileencoding = "utf-8";
+      foldlevel = 99;
       hlsearch = true;
       inccommand = "split";
       incsearch = true;

@@ -17,6 +17,7 @@ with lib.${namespace}; {
     # Enables treesitter related plugins as well
     plugins.treesitter = {
       enable = true;
+      folding = true;
       settings = {
         highlight.enable = true;
         indent.enable = true;
