@@ -38,6 +38,7 @@ in {
 
         # Cursor
         cursor_shape = "beam";
+        cursor_trail = 3;
 
         # Remote control
         allow_remote_control = "socket-only";
