@@ -100,7 +100,8 @@ with lib.internal; {
     id = ["27757091"];
   };
 
-  services.udev.packages = with pkgs; with pkgs.internal; [
+  services.udev.packages = with pkgs;
+  with pkgs.internal; [
     yklock-udev-rules
     dolphin-emu
   ];
