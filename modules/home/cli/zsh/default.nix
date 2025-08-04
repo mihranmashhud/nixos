@@ -24,7 +24,7 @@ in {
       enable = true;
 
       autocd = true;
-      dotDir = ".config/zsh";
+      dotDir = "${config.xdg.configHome}/zsh";
       shellAliases =
         optionalAttrs config.${namespace}.cli.eza.enable {
           ls = "eza";
@@ -41,7 +41,8 @@ in {
         };
 
       # Load completion before loading plugins with antidote.
-      initExtraFirst =
+      initContent =
+        lib.mkBefore
         /*
         bash
         */
