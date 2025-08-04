@@ -29,10 +29,14 @@ in {
   };
 
   config = mkIf cfg.enable {
+    home.sessionVariables = {
+      MANPAGER = "nvim +Man!";
+    };
     programs.nixvim = {
       enable = true;
       viAlias = true;
       vimAlias = true;
+      vimdiffAlias = true;
       defaultEditor = true;
     };
   };
