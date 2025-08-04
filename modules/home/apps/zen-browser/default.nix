@@ -28,6 +28,7 @@ in {
         settings = {
           "privacy.webrtc.hideGlobalIndicator" = true;
           "media.ffmpeg.vaapi.enabled" = true;
+          "browser.tabs.hoverPreview.enabled" = true;
         };
         search.engines = {
           "Nix Packages" = {
