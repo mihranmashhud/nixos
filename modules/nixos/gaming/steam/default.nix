@@ -23,6 +23,7 @@ in {
     environment.systemPackages = with pkgs; [
       internal.sgdboop
     ];
+    hardware.graphics.enable32Bit = true;
     programs.gamemode.enable = true;
     programs.gamescope.enable = true;
     ${namespace}.user.extraGroups = ["gamemode"];
@@ -36,6 +37,7 @@ in {
       extest.enable = true;
       protontricks.enable = true;
       platformOptimizations.enable = true;
+      gamescopeSession.enable = true;
     };
   };
 }
