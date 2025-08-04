@@ -24,6 +24,7 @@ in {
 
   config = mkIf cfg.enable {
     hardware.graphics.enable = true;
+    hardware.amdgpu.initrd.enable = false;
     boot = {
       initrd.kernelModules = mkBefore [
         "kvm-${cfg.platform}"
@@ -74,6 +75,9 @@ in {
       };
     };
     ${namespace}.user.extraGroups = [
+      "kvm"
+      "libvirt"
+      "input"
       "qemu-libvirtd"
       "libvirtd"
       "disk"
