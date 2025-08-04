@@ -15,88 +15,123 @@ with lib;
 with lib.${namespace}; {
   config.programs.nixvim = {
     # Include LSP related plugins here as well
-    diagnostics = {
+    extraPackages = with pkgs; [
+      typescript
+      ty
+    ];
+    diagnostic.settings = {
       severity_sort = true;
-      signs.text.__raw = ''{
-        [vim.diagnostic.severity.ERROR] = " ",
-        [vim.diagnostic.severity.WARN] = " ",
-        [vim.diagnostic.severity.INFO] = " ",
-        [vim.diagnostic.severity.HINT] = " ",
-      }'';
+      signs.text.__raw = ''        {
+                [vim.diagnostic.severity.ERROR] = " ",
+                [vim.diagnostic.severity.WARN] = " ",
+                [vim.diagnostic.severity.INFO] = " ",
+                [vim.diagnostic.severity.HINT] = " ",
+              }'';
     };
-    plugins.lsp = {
-      enable = true;
-      inlayHints = true;
+    lsp = {
+      inlayHints.enable = true;
       servers = {
-        pyright.enable = true;
+        ty.enable = true;
         ccls.enable = true;
         svelte.enable = true;
         tailwindcss.enable = true;
+        cssls.enable = true;
+        css_variables.enable = true;
+        cssmodules_ls.enable = true;
         ltex.enable = true;
         gopls.enable = true;
         lua_ls.enable = true;
         nixd.enable = true;
+        qmlls.enable = true;
+        qmlls.settings.command = ["qmlls" "-E"];
       };
-      onAttach = 
-      # lua
-      ''
-        set_group_name("<leader>l", "LSP")
-      '';
-      keymaps = {
-        extra = [
-          {
-            mode = "n";
-            key = "<leader>lr";
-            action = "<cmd>Lspsaga rename<cr>";
-            options = {
-              desc = "Rename";
-            };
-          }
-          {
-            mode = "n";
-            key = "K";
-            action = "<cmd>Lspsaga hover_doc<cr>";
-            options = {
-              desc = "Hover doc";
-            };
-          }
-          {
-            mode = "n";
-            key = "<leader>le";
-            action = "<cmd>Lspsaga show_line_diagnostics<cr>";
-            options = {
-              desc = "View line diagnostics";
-            };
-          }
-          {
-            mode = "n";
-            key = "<leader>ld";
-            action = "<cmd>Lspsaga show_cursor_diagnostics<cr>";
-            options = {
-              desc = "View cursor diagnostics";
-            };
-          }
-          {
-            mode = "n";
-            key = "<leader>la";
-            action = "<cmd>Lspsaga code_action<cr>";
-            options = {
-              desc = "View code actions";
-            };
-          }
-        ];
-        lspBuf = {
-          gd = "definition";
-          gD = "declaration";
-          gi = "implementation";
-          gr = "references";
-          gs = "signature_help";
-        };
-        diagnostic = {
-          "[d" = "goto_prev";
-          "]d" = "goto_next";
-        };
-      };
+      onAttach =
+        # lua
+        ''
+          set_group_name("<leader>l", "LSP")
+        '';
+      keymaps = [
+        {
+          mode = "n";
+          key = "<leader>lr";
+          action = "<cmd>Lspsaga rename<cr>";
+          options = {
+            desc = "Rename";
+          };
+        }
+        {
+          mode = "n";
+          key = "K";
+          action = "<cmd>Lspsaga hover_doc<cr>";
+          options = {
+            desc = "Hover doc";
+          };
+        }
+        {
+          mode = "n";
+          key = "<leader>le";
+          action = "<cmd>Lspsaga show_line_diagnostics<cr>";
+          options = {
+            desc = "View line diagnostics";
+          };
+        }
+        {
+          mode = "n";
+          key = "<leader>ld";
+          action = "<cmd>Lspsaga show_cursor_diagnostics<cr>";
+          options = {
+            desc = "View cursor diagnostics";
+          };
+        }
+        {
+          mode = "n";
+          key = "<leader>la";
+          action = "<cmd>Lspsaga code_action<cr>";
+          options = {
+            desc = "View code actions";
+          };
+        }
+        {
+          mode = "n";
+          key = "gd";
+          lspBufAction = "definition";
+          options = {
+            desc = "View definition";
+          };
+        }
+        {
+          mode = "n";
+          key = "gd";
+          lspBufAction = "declaration";
+          options = {
+            desc = "View declaration";
+          };
+        }
+        {
+          mode = "n";
+          key = "gd";
+          lspBufAction = "implementation";
+          options = {
+            desc = "View implementation";
+          };
+        }
+        {
+          mode = "n";
+          key = "gd";
+          lspBufAction = "references";
+          options = {
+            desc = "View definition";
+          };
+        }
+        {
+          mode = "n";
+          key = "gd";
+          lspBufAction = "signature_help";
+          options = {
+            desc = "View definition";
+          };
+        }
+      ];
     };
     plugins.lspsaga = {
       enable = true;
@@ -105,8 +140,7 @@ with lib.${namespace}; {
         showServerName = true;
       };
       ui = {
-        border = "rounded";
-        lines = [ "╰" "├" "│" "─" "╭" ];
+        lines = ["╰" "├" "│" "─" "╭"];
       };
       symbolInWinbar.enable = false;
       lightbulb.enable = false;
