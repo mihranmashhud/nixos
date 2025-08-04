@@ -46,8 +46,6 @@ with lib.internal; {
     owmods-cli
   ];
 
-  zramSwap.enable = true;
-
   networking.interfaces.enp4s0.wakeOnLan = {
     enable = true;
   };
