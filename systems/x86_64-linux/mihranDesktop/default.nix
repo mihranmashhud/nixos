@@ -23,6 +23,7 @@ with lib.internal; {
     development = enabled;
 
     desktop.hyprland = enabled;
+    desktop.quickshell = enabled;
 
     gpu-passthrough = {
       enable = true;
