@@ -17,9 +17,15 @@ in {
   config = {
     programs.nixvim.colorschemes = {
       catppuccin = {
-        enable = true;
+        enable = false;
         settings = {
           flavour = "mocha";
+        };
+      };
+      kanagawa-paper = {
+        enable = true;
+        settings = {
+          theme = "ink";
         };
       };
     };
