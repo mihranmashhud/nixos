@@ -18,7 +18,4 @@ with lib.internal; {
     cli = enabled;
     apps = enabled;
   };
-  home.packages = with inputs.ags.packages.${target}; [
-    agsFull
-  ];
 }
