@@ -29,7 +29,6 @@ in {
     with pkgs.${namespace}; [
       wl-clipboard
       cliphist
-      swww
       libnotify
       hyprkeys
       kdePackages.xwaylandvideobridge
@@ -87,8 +86,6 @@ in {
 
             input = {
               follow_mouse = 2;
-              kb_layout = "us,ara";
-              kb_options = "grp:ctrls_toggle";
             };
 
             gestures = {
@@ -101,6 +98,7 @@ in {
               mouse_move_focuses_monitor = false;
               mouse_move_enables_dpms = true;
               new_window_takes_over_fullscreen = 1;
+              anr_missed_pings = 5;
             };
 
             binds = {
@@ -109,8 +107,6 @@ in {
 
             # Startup
             exec-once = [
-              # Wallpaper
-              "swww init"
               # Top bar
               "waybar -c ~/.config/waybar/${cfg.type}-config.json > /tmp/waybar.log &"
             ];
@@ -221,11 +217,11 @@ in {
 
             submap = capture
 
-            bind = ,G, exec, ${grimblast}/bin/grimblast --notify copysave area
+            bind = ,G, exec, ${grimblast}/bin/grimblast --freeze --notify copysave area
             bind = ,G, submap, reset
-            bind = ,Print, exec, ${grimblast}/bin/grimblast --notify copysave active
+            bind = ,Print, exec, ${grimblast}/bin/grimblast --freeze --notify copysave active
             bind = ,Print, submap, reset
-            bind = ,S, exec, ${grimblast}/bin/grimblast --notify copysave output
+            bind = ,S, exec, ${grimblast}/bin/grimblast --freeze --notify copysave output
             bind = ,S, submap, reset
 
             submap = reset
@@ -280,5 +276,6 @@ in {
     };
     services.cliphist.enable = true; # Clipboard history for wayland
     services.udiskie.enable = true; # USB automount
+    services.swww.enable = true; # Wallpaper daemon
   };
 }
