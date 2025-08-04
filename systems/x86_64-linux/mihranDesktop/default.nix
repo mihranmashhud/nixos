@@ -41,9 +41,9 @@ with lib.internal; {
     heroic
     sidequest
     r2modman
-    coolercontrol.coolercontrol-gui
     lm_sensors
     owmods-cli
+    linux-wallpaperengine
   ];
 
   networking.interfaces.enp4s0.wakeOnLan = {
