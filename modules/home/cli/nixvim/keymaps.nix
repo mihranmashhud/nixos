@@ -150,6 +150,15 @@ with lib.${namespace}; {
             desc = "quit buffer";
           };
         }
+        {
+          mode = ["n" "v"];
+          key = "<leader>/";
+          action = "<cmd>normal gcc<cr>";
+          options = {
+            silent = true;
+            desc = "toggle comment";
+          };
+        }
       ]
       ++ (map (key: {
         mode = "i";
