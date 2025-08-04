@@ -12,9 +12,6 @@ with lib.internal; {
     enable = true;
     type = "laptop";
     settings = {
-      misc = {
-        vfr = true;
-      };
       monitor = ",highrr,auto,1";
     };
   };
