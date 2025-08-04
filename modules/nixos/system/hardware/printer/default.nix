@@ -29,7 +29,7 @@ in {
     };
     # Load epson driver
     services.printing.drivers = with pkgs; [
-      epson-escpr
+      epson-escpr2
     ];
     # Scanning
     hardware.sane = {
