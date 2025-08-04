@@ -17,9 +17,6 @@ with lib.${namespace}; {
     plugins.ccc = {
         enable = true;
         settings = {
-          win_opts = {
-            border = "rounded";
-          };
           inputs = [
             "ccc.input.hsl"
             "ccc.input.rgb"

@@ -16,11 +16,6 @@ with lib.${namespace}; {
   config.programs.nixvim = {
     plugins.gitsigns = {
       enable = true;
-      settings = {
-        preview_config = {
-          border = "rounded";
-        };
-      };
     };
   };
 }

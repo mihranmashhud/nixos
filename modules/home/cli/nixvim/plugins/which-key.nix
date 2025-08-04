@@ -17,9 +17,6 @@ with lib.${namespace}; {
     plugins.which-key = {
       enable = true;
       settings = {
-        win = {
-          border = "rounded";
-        };
         plugins.spelling = {
           enabled = true;
           suggestions = 20;
