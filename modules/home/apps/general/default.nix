@@ -31,15 +31,17 @@ in {
       transmission_4-gtk # torrenting
       transmission-remote-gtk # remote Transmission control
       teams-for-linux
-      cheese
-      kdePackages.partitionmanager # Drive management
+      cheese # webcam viewer
+      kdePackages.partitionmanager # drive management
+      bitwarden-desktop # password Management
 
-      libreoffice-qt # Office Apps
+      libreoffice-qt # office Apps
       hunspell
       hunspellDicts.en_US
       hunspellDicts.en_CA
 
       btop # terminal process viewer/manager
+      unzip
     ];
   };
 }
