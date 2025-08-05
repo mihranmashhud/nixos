@@ -20,7 +20,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
+    home.packages = with pkgs; with pkgs.${namespace}; [
       nautilus # file manager
       gnome-calculator # calculator
       warpinator # send files around
@@ -42,6 +42,7 @@ in {
 
       btop # terminal process viewer/manager
       unzip
+      swap
     ];
   };
 }
