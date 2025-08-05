@@ -28,7 +28,6 @@ in {
     xdg.configFile."waybar/style.css".source = mkForce ./config/style.css;
     programs.waybar = {
       enable = true;
-      package = inputs.waybar.packages.${system}.waybar;
     };
   };
 }

@@ -31,8 +31,6 @@
 
     nix-gaming.url = "github:fufexan/nix-gaming";
 
-    waybar.url = "github:Alexays/Waybar";
-
     zen-browser.url = "github:youwen5/zen-browser-flake";
     zenix.url = "github:anders130/zenix";
 
@@ -79,7 +77,6 @@
       };
 
       overlays = with inputs; [
-        waybar.overlays.default
         nixneovimplugins.overlays.default
         zenix.overlays.default
       ];
