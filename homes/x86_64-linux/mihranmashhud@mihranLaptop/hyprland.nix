@@ -12,7 +12,10 @@ with lib.internal; {
     enable = true;
     type = "laptop";
     settings = {
-      monitor = ",highrr,auto,1";
+      monitor = [
+        "eDP-1,highrr,auto,1"
+        ", preferred, auto, 1, mirror, eDP-1"
+      ];
     };
   };
 }
