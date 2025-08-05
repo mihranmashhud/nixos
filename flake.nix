@@ -31,8 +31,10 @@
 
     nix-gaming.url = "github:fufexan/nix-gaming";
 
-    zen-browser.url = "github:youwen5/zen-browser-flake";
-    zenix.url = "github:anders130/zenix";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # System deployment
     deploy-rs = {
@@ -78,13 +80,12 @@
 
       overlays = with inputs; [
         nixneovimplugins.overlays.default
-        zenix.overlays.default
       ];
 
       homes.modules = with inputs; [
         catppuccin.homeModules.catppuccin
         nixvim.homeManagerModules.nixvim
-        zenix.homeModules.default
+        zen-browser.homeModules.default
       ];
 
       systems.modules.nixos = with inputs; [

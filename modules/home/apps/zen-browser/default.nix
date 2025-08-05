@@ -19,9 +19,8 @@ in {
     enable = mkBoolOpt false "Whether to enable zen-browser configuration.";
   };
   config = mkIf cfg.enable {
-    programs.zenix = {
+    programs.zen-browser = {
       enable = true;
-      package = inputs.zen-browser.packages.${system}.default;
       profiles.default = {
         id = 0;
         isDefault = true;
