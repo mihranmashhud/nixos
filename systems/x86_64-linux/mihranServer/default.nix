@@ -31,6 +31,8 @@ with lib.internal; {
     ClientAliveCountMax = 2;
   };
 
+  services.cloudflared.enable = true;
+
   # Multimedia
   systemd.tmpfiles.rules = [
     "d /data/media 0770 - multimedia - -"
