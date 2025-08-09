@@ -31,7 +31,7 @@ in {
         event = "TextYankPost";
         group = "highlight_yank";
         callback.__raw = ''
-          function() vim.highlight.on_yank({ hlgroup = "IncSearch", timeout = 200 }) end
+          function() vim.hl.on_yank({ hlgroup = "IncSearch", timeout = 200 }) end
         '';
       }
       {
