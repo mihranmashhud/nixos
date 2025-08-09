@@ -86,5 +86,13 @@ in {
       generateNixPathFromInputs = true;
       linkInputs = true;
     };
+    services.nixos-cli = {
+      enable = true;
+      prebuildOptionCache = false;
+      config = {
+        config_location = "/home/${config.${namespace}.user.name}/nixos";
+        apply.use_nom = true;
+      };
+    };
   };
 }
