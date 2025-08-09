@@ -12,7 +12,13 @@
   ...
 }:
 with lib;
-with lib.${namespace}; {
+with lib.${namespace}; let
+  undo_breakpoints = map (key: {
+    mode = "i";
+    inherit key;
+    action = "${key}<c-g>u";
+  }) ["," "." "!" "?"];
+in {
   config.programs.nixvim = {
     extraConfigLuaPre = ''
       _G.set_group_name = function (lhs, name)
@@ -160,10 +166,6 @@ with lib.${namespace}; {
           };
         }
       ]
-      ++ (map (key: {
-        mode = "i";
-        inherit key;
-        action = "${key}<c-g>u";
-      }) ["," "." "!" "?"]);
+      ++ undo_breakpoints;
   };
 }
