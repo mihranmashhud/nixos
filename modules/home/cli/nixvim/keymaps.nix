@@ -165,6 +165,10 @@ in {
             desc = "toggle comment";
           };
         }
+        {
+          key = "<MiddleMouse>";
+          action = "<nop>";
+        }
       ]
       ++ undo_breakpoints;
   };
