@@ -25,12 +25,6 @@ with lib.${namespace}; {
     plugins.conform-nvim = {
       enable = true;
       settings = {
-        formatters = {
-          svelte_fmt = {
-            command = "npx";
-            args = ["prettier" "--plugin" "prettier-plugin-svelte" "$FILENAME"];
-          };
-        };
         formatters_by_ft = {
           lua = ["stylua"];
           python = ["isort" "black"];
@@ -38,7 +32,7 @@ with lib.${namespace}; {
           typescript = ["prettierd"];
           javascriptreact = ["prettierd"];
           typescriptreact = ["prettierd"];
-          svelte = ["rustywind" "svelte_fmt"];
+          svelte = ["prettierd"];
           nix = ["alejandra"];
         };
         format_on_save =
