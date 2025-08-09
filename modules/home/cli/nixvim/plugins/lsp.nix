@@ -16,7 +16,6 @@ with lib.${namespace}; {
   config.programs.nixvim = {
     # Include LSP related plugins here as well
     extraPackages = with pkgs; [
-      typescript
       ty
     ];
     diagnostic.settings = {
@@ -33,11 +32,10 @@ with lib.${namespace}; {
       servers = {
         ty.enable = true;
         ccls.enable = true;
+        ts_ls.enable = true;
         svelte.enable = true;
         tailwindcss.enable = true;
         cssls.enable = true;
-        css_variables.enable = true;
-        cssmodules_ls.enable = true;
         ltex.enable = true;
         gopls.enable = true;
         lua_ls.enable = true;
@@ -54,6 +52,14 @@ with lib.${namespace}; {
         {
           mode = "n";
           key = "<leader>lr";
+          action = "<cmd>Lspsaga rename<cr>";
+          options = {
+            desc = "Rename";
+          };
+        }
+        {
+          mode = "n";
+          key = "grn";
           action = "<cmd>Lspsaga rename<cr>";
           options = {
             desc = "Rename";
@@ -101,7 +107,7 @@ with lib.${namespace}; {
         }
         {
           mode = "n";
-          key = "gd";
+          key = "gD";
           lspBufAction = "declaration";
           options = {
             desc = "View declaration";
@@ -109,7 +115,7 @@ with lib.${namespace}; {
         }
         {
           mode = "n";
-          key = "gd";
+          key = "gI";
           lspBufAction = "implementation";
           options = {
             desc = "View implementation";
@@ -117,22 +123,15 @@ with lib.${namespace}; {
         }
         {
           mode = "n";
-          key = "gd";
+          key = "gR";
           lspBufAction = "references";
-          options = {
-            desc = "View definition";
-          };
-        }
-        {
-          mode = "n";
-          key = "gd";
-          lspBufAction = "signature_help";
           options = {
             desc = "View definition";
           };
         }
       ];
     };
+    plugins.lspconfig.enable = true;
     plugins.lspsaga = {
       enable = true;
       codeAction = {
