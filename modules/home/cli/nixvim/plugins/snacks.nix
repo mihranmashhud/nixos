@@ -14,9 +14,15 @@
 with lib;
 with lib.${namespace}; {
   config.programs.nixvim = {
+    extraPackages = with pkgs; [
+      ghostscript # Required to render PDF files
+      tectonic # Required to render LaTeX math expressions
+      mermaid-cli # Required to render Mermaid diagrams
+    ];
     plugins.snacks = {
       enable = true;
       settings = {
+        image.enabled = true;
         indent.enabled = true;
         chunk = {
           enabled = true;
