@@ -147,6 +147,13 @@ in {
                   "fullscreen"
                 ];
               }
+              {
+                windows = ["title:^(Picture-in-Picture)$"];
+                rules = [
+                  "size 448 252"
+                  "float"
+                ];
+              }
             ];
 
             # TODO: use binaries directly from store for each binding.
