@@ -16,17 +16,20 @@ with lib.${namespace}; let
   cfg = config.${namespace}.theming;
 in {
   options.${namespace}.theming = {
-    enable = mkBoolOpt false "Whether to enable theming.";
     theme =
       mkOpt
       (types.enum (attrNames (attrsets.filterAttrs (k: v: v == "directory") (builtins.readDir ./.))))
       "catppuccin"
       "Set the theme.";
+    graphical =
+      mkBoolOpt
+      false
+      "Enable theming of graphical targets.";
   };
 
-  config = mkIf cfg.enable {
-    ${namespace}.themes.${cfg.theme}.enable = true;
+  config = {
     stylix.enable = true;
+    ${namespace}.themes.${cfg.theme}.enable = true;
     xdg.configFile."colors.css".text = with config.lib.stylix.colors; ''
       @define-color base00 #${base00}; /* base */
       @define-color base01 #${base01}; /* mantle */

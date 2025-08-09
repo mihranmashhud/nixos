@@ -14,6 +14,7 @@
 with lib;
 with lib.${namespace}; let
   cfg = config.${namespace}.themes.catppuccin;
+  theming = config.${namespace}.theming;
 in {
   options.${namespace}.themes.catppuccin = with types; {
     enable = mkBoolOpt false "Whether to enable catppuccin system theme";
@@ -22,7 +23,6 @@ in {
   config = mkIf cfg.enable {
     stylix = {
       autoEnable = false;
-      polarity = "dark";
       base16Scheme = getScheme pkgs "catppuccin-mocha";
       opacity.terminal = 0.8;
     };

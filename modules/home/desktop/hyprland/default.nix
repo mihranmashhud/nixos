@@ -40,7 +40,7 @@ in {
     ];
 
     ${namespace} = {
-      theming.enable = true;
+      theming.graphical = true;
       apps = {
         waybar = enabled;
         mako = enabled;
@@ -237,21 +237,20 @@ in {
         ];
     };
 
-    programs.hyprlock = with config.lib.stylix.colors;
-      mkMerge [
-        {
-          enable = true;
-          settings = {
-            background = [
-              {
-                monitor = "";
-                path = "$HOME/.cache/background-img";
-              }
-            ];
-          };
-        }
-        cfg.hyprlock
-      ];
+    programs.hyprlock = mkMerge [
+      {
+        enable = true;
+        settings = {
+          background = [
+            {
+              monitor = "";
+              path = "$HOME/.cache/background-img";
+            }
+          ];
+        };
+      }
+      cfg.hyprlock
+    ];
 
     services.hypridle = mkMerge [
       {

@@ -16,16 +16,20 @@ with lib.${namespace}; let
   cfg = config.${namespace}.theming;
 in {
   options.${namespace}.theming = {
-    enable = mkBoolOpt false "Whether to enable theming.";
     theme =
       mkOpt
       (types.enum (attrNames (attrsets.filterAttrs (k: v: v == "directory") (builtins.readDir ./.))))
       "catppuccin"
       "Set the theme.";
+    graphical =
+      mkBoolOpt
+      false
+      "Enable theming of graphical targets.";
   };
 
-  config = mkIf cfg.enable {
-    ${namespace}.themes.${cfg.theme}.enable = true;
+  config = {
     stylix.enable = true;
+    stylix.autoEnable = false;
+    ${namespace}.themes.${cfg.theme}.enable = true;
   };
 }

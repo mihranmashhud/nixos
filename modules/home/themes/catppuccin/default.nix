@@ -14,6 +14,7 @@
 with lib;
 with lib.${namespace}; let
   cfg = config.${namespace}.themes.catppuccin;
+  theming = config.${namespace}.theming;
 in {
   # Currently using catpuccin-mocha theme for the most part.
   options.${namespace}.themes.catppuccin = with types; {
@@ -23,28 +24,18 @@ in {
   config = mkIf cfg.enable {
     stylix = {
       autoEnable = false;
-      polarity = "dark";
-      base16Scheme = getScheme pkgs "catppuccin-mocha";
+      # base16Scheme = getScheme pkgs "catppuccin-mocha";
       opacity.terminal = 0.8;
-    };
-
-    # Enable Stylix for these targets
-    stylix.targets = {
-      vesktop.enable = true;
     };
 
     catppuccin.enable = true;
     catppuccin.accent = "blue";
-    xdg.configFile."vesktop/themes/catppuccin-${config.catppuccin.flavor}.theme.css".text = ''
-      @import url("https://catppuccin.github.io/discord/dist/catppuccin-${config.catppuccin.flavor}-${config.catppuccin.accent}.theme.css");
-    '';
-    gtk.enable = true;
-    gtk.theme = {
+    gtk.enable = mkIf theming.graphical true;
+    gtk.theme = mkIf theming.graphical {
       name = "Catppuccin-GTK-Dark";
       package = pkgs.magnetic-catppuccin-gtk;
     };
     catppuccin.gtk.icon = {
-      enable = true;
       accent = "blue";
     };
     qt.enable = true;
