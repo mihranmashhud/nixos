@@ -31,11 +31,10 @@ with lib.internal; {
     ClientAliveCountMax = 2;
   };
 
+  # Multimedia
   systemd.tmpfiles.rules = [
     "d /data/media 0770 - multimedia - -"
   ];
-
-  # Multimedia
   users.groups.multimedia = {};
   users.users.mihranmashhud.extraGroups = [
     "multimedia"
@@ -74,6 +73,17 @@ with lib.internal; {
       rcp-whitelist = "127.0.0.1:10.0.0.*";
     };
   };
+  environment.etc."nextcloud-admin-pass".text = "Scale-Sandy-Thickness9-Moody";
+  services.nextcloud = {
+    enable = true;
+    package = pkgs.nextcloud31;
+    hostName = "localhost";
+    config = {
+      adminpassFile = "/etc/nextcloud-admin-pass";
+      dbtype = "sqlite";
+    };
+  };
+
   systemd.services.glances-web-server = {
     wantedBy = ["multi-user.target"];
     after = ["network.target"];
