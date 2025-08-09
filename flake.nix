@@ -4,11 +4,11 @@
   nixConfig = {
     substituters = [
       "https://cache.nixos.org"
-      "https://hyprland.cachix.org"
+      "https://watersucks.cachix.org"
     ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      "watersucks.cachix.org-1:6gadPC5R8iLWQ3EUtfu3GFrVY7X6I4Fwz/ihW25Jbv8="
     ];
   };
 
@@ -24,6 +24,8 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixos-cli.url = "github:nix-community/nixos-cli";
 
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
@@ -59,8 +61,6 @@
     };
 
     nixneovimplugins.url = "github:jooooscha/nixpkgs-vim-extra-plugins";
-
-    agenix.url = "github:ryantm/agenix";
   };
 
   outputs = {self, ...} @ inputs: let
@@ -84,16 +84,16 @@
 
       homes.modules = with inputs; [
         catppuccin.homeModules.catppuccin
-        nixvim.homeManagerModules.nixvim
+        nixvim.homeModules.nixvim
         zen-browser.homeModules.default
       ];
 
       systems.modules.nixos = with inputs; [
         home-manager.nixosModules.home-manager
+        nixos-cli.nixosModules.nixos-cli
         stylix.nixosModules.stylix
         catppuccin.nixosModules.catppuccin
         nix-gaming.nixosModules.platformOptimizations
-        agenix.nixosModules.default
       ];
 
       systems.hosts.mihranDesktop.modules = with inputs; [
