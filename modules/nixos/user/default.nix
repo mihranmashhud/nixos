@@ -50,7 +50,7 @@ in {
     extraGroups = mkOpt (listOf str) [] "Groups for the user to be assigned.";
     extraOptions =
       mkOpt attrs {}
-      (mdDoc "Extra options passed to `users.users.<name>`. (options already declared will be overidden)");
+      "Extra options passed to `users.users.<name>`. (options already declared will be overidden)";
   };
 
   config = {
