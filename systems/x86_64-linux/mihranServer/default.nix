@@ -31,7 +31,20 @@ with lib.internal; {
     ClientAliveCountMax = 2;
   };
 
-  services.cloudflared.enable = true;
+  # Secrets
+  age.secrets.cloudflare-tunnel = {
+    file = ../../../secrets/cloudflare-tunnel.age;
+  };
+
+  services.cloudflared = {
+    enable = true;
+    tunnels = {
+      "948fd76c-4a17-45f7-b2ba-6a25d3645163" = {
+        credentialsFile = "${config.age.secrets.cloudflare-tunnel.path}";
+        default = "http_status:404";
+      };
+    };
+  };
 
   # Multimedia
   systemd.tmpfiles.rules = [
@@ -73,16 +86,6 @@ with lib.internal; {
     settings = {
       rpc-bind-address = "0.0.0.0";
       rcp-whitelist = "127.0.0.1:10.0.0.*";
-    };
-  };
-  environment.etc."nextcloud-admin-pass".text = "Scale-Sandy-Thickness9-Moody";
-  services.nextcloud = {
-    enable = true;
-    package = pkgs.nextcloud31;
-    hostName = "localhost";
-    config = {
-      adminpassFile = "/etc/nextcloud-admin-pass";
-      dbtype = "sqlite";
     };
   };
 
@@ -197,6 +200,12 @@ with lib.internal; {
       }
     ];
   };
+  # services.seafile = {
+  #   enable = true;
+  #   ccnetSettings.General.SERVICE_URL = "https://seafile.mihran.dev";
+  #   adminEmail = "mihranmashhud@gmail.com";
+  #   initialAdminPassword = "somepassword";
+  # };
 
   # Hardware acceleration
   nixpkgs.config.packageOverrides = pkgs: {
@@ -223,6 +232,7 @@ with lib.internal; {
       ssh = enabled;
     };
   };
+
 
   environment.systemPackages = with pkgs; [
     glances

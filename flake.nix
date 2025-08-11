@@ -33,6 +33,8 @@
 
     nix-gaming.url = "github:fufexan/nix-gaming";
 
+    agenix.url = "github:ryantm/agenix";
+
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -86,6 +88,7 @@
         catppuccin.homeModules.catppuccin
         nixvim.homeModules.nixvim
         zen-browser.homeModules.default
+        agenix.homeManagerModules.default
       ];
 
       systems.modules.nixos = with inputs; [
@@ -94,6 +97,7 @@
         stylix.nixosModules.stylix
         catppuccin.nixosModules.catppuccin
         nix-gaming.nixosModules.platformOptimizations
+        agenix.nixosModules.default
       ];
 
       systems.hosts.mihranDesktop.modules = with inputs; [
