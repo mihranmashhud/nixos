@@ -34,6 +34,7 @@ in {
       cheese # webcam viewer
       kdePackages.partitionmanager # drive management
       bitwarden-desktop # password Management
+      impression
 
       libreoffice-qt # office Apps
       hunspell
