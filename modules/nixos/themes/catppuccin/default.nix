@@ -20,30 +20,33 @@ in {
     enable = mkBoolOpt false "Whether to enable catppuccin system theme";
   };
 
-  config = mkIf cfg.enable {
-    stylix = {
-      autoEnable = false;
-      base16Scheme = getScheme pkgs "catppuccin-mocha";
-      opacity.terminal = 0.8;
-    };
+  config = mkIf cfg.enable (mkMerge [
+    {
+      stylix = {
+        autoEnable = false;
+        base16Scheme = getScheme pkgs "catppuccin-mocha";
+        opacity.terminal = 0.8;
+      };
 
-    stylix.cursor = {
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Classic";
-      size = 24;
-    };
-    # Required to get cursor working in Hyprland.
-    environment.sessionVariables = {
-      HYPRCURSOR_THEME = config.stylix.cursor.name;
-      HYPRCURSOR_SIZE = toString config.stylix.cursor.size;
-    };
-
-    catppuccin = {
-      enable = true;
-      flavor = "mocha";
-      accent = "blue";
-    };
-    boot.plymouth.enable = true;
-    services.displayManager.sddm.package = pkgs.kdePackages.sddm;
-  };
+      catppuccin = {
+        enable = true;
+        flavor = "mocha";
+        accent = "blue";
+      };
+      services.displayManager.sddm.package = pkgs.kdePackages.sddm;
+    }
+    (mkIf theming.graphical {
+      boot.plymouth.enable = true;
+      stylix.cursor = {
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Modern-Classic";
+        size = 24;
+      };
+      # Required to get cursor working in Hyprland.
+      environment.sessionVariables = {
+        HYPRCURSOR_THEME = config.stylix.cursor.name;
+        HYPRCURSOR_SIZE = toString config.stylix.cursor.size;
+      };
+    })
+  ]);
 }

@@ -21,33 +21,39 @@ in {
     enable = mkBoolOpt false "Whether to enable catppuccin user theme";
   };
 
-  config = mkIf cfg.enable {
-    stylix = {
-      autoEnable = false;
-      # base16Scheme = getScheme pkgs "catppuccin-mocha";
-      opacity.terminal = 0.8;
-    };
+  config = mkIf cfg.enable (mkMerge [
+    {
+      stylix = {
+        autoEnable = false;
+        # base16Scheme = getScheme pkgs "catppuccin-mocha";
+        opacity.terminal = 0.8;
+      };
 
-    catppuccin.enable = true;
-    catppuccin.accent = "blue";
-    gtk.enable = mkIf theming.graphical true;
-    gtk.theme = mkIf theming.graphical {
-      name = "Catppuccin-GTK-Dark";
-      package = pkgs.magnetic-catppuccin-gtk;
-    };
-    catppuccin.gtk.icon = {
-      accent = "blue";
-    };
-    qt.enable = true;
-    qt.style.name = "kvantum";
-    qt.platformTheme.name = "kvantum";
+      catppuccin.enable = true;
+      catppuccin.accent = "blue";
+      catppuccin.gtk.icon = {
+        accent = "blue";
+      };
+      qt.enable = true;
+      qt.style.name = "kvantum";
+      qt.platformTheme.name = "kvantum";
 
-    # Disable for these targets
-    catppuccin = {
-      cursors.enable = false;
-      rofi.enable = false;
-      nvim.enable = false;
-      firefox.profiles.mihranmashhud.enable = false;
-    };
-  };
+      # Disable for these targets
+      catppuccin = {
+        cursors.enable = false;
+        rofi.enable = false;
+        nvim.enable = false;
+        firefox.profiles.mihranmashhud.enable = false;
+      };
+    }
+    (mkIf theming.graphical {
+      gtk = {
+        enable = true;
+        theme = {
+          name = "Catppuccin-GTK-Dark";
+          package = pkgs.magnetic-catppuccin-gtk;
+        };
+      };
+    })
+  ]);
 }
