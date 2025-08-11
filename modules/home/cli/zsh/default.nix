@@ -19,6 +19,9 @@ in {
     enable = mkBoolOpt false "Whether to enable zsh configuration.";
   };
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      rmtrash
+    ];
     programs.command-not-found = enabled;
     programs.zsh = {
       enable = true;
@@ -35,7 +38,7 @@ in {
         // optionalAttrs config.${namespace}.cli.zoxide.enable {
           cd = "z";
         }
-        // optionalAttrs config.${namespace}.cli.trash-cli.enable {
+        // {
           rm = "rmtrash";
           rmdir = "rmdirtrash";
         };

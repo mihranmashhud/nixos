@@ -13,14 +13,17 @@
 }:
 with lib;
 with lib.${namespace}; let
-  cfg = config.${namespace}.cli.trash-cli;
+  cfg = config.${namespace}.cli.general;
 in {
-  options.${namespace}.cli.trash-cli = {
-    enable = mkBoolOpt false "Whether to enable trash-cli.";
+  options.${namespace}.cli.general = {
+    enable = mkBoolOpt false "Whether to enable general cli tools.";
   };
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      rmtrash
+    home.packages = with pkgs; with pkgs.${namespace}; [
+      inputs.agenix.packages.${system}.default
+      btop # terminal process viewer/manager
+      unzip
+      swap
     ];
   };
 }
