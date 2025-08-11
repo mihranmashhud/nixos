@@ -122,8 +122,6 @@ with lib.internal; {
     rate = 48000;
   };
 
-  security.rtkit = enabled;
-
   security.pam.yubico = {
     enable = true;
     mode = "challenge-response";
