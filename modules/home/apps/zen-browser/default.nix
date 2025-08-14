@@ -21,9 +21,8 @@ in {
   config = mkIf cfg.enable {
     programs.zen-browser = {
       enable = true;
+      package = mkForce pkgs.zen-browser;
       profiles.default = {
-        id = 0;
-        isDefault = true;
         settings = {
           "privacy.webrtc.hideGlobalIndicator" = true;
           "media.ffmpeg.vaapi.enabled" = true;
