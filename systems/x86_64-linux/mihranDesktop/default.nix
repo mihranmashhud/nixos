@@ -114,12 +114,11 @@ with lib.internal; {
       device.routes.default-sink-volume = 1;
       device.routes.default-source-volume = 1;
     };
-  };
-
-  services.pipewire.lowLatency = {
-    enable = true;
-    quantum = 32;
-    rate = 48000;
+    lowLatency = {
+      enable = true;
+      quantum = 32;
+      rate = 48000;
+    };
   };
 
   security.pam.yubico = {
