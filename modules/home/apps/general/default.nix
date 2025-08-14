@@ -34,7 +34,8 @@ in {
       cheese # webcam viewer
       kdePackages.partitionmanager # drive management
       bitwarden-desktop # password Management
-      impression
+      impression # live usb creation tool
+      seafile-client # file sharing via home server
 
       libreoffice-qt # office Apps
       hunspell
