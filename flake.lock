@@ -168,6 +168,19 @@
         "type": "github"
       }
     },
+    "firefox-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1752780957,
+        "narHash": "sha256-UVHHHhoYoPspZAOjpGhgI9RVxSPlRS8JTlUCxh3YM1E=",
+        "type": "tarball",
+        "url": "https://archive.mozilla.org/pub/firefox/releases/141.0/source/firefox-141.0.source.tar.xz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://archive.mozilla.org/pub/firefox/releases/141.0/source/firefox-141.0.source.tar.xz"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -758,11 +771,11 @@
     },
     "nixpkgs_7": {
       "locked": {
-        "lastModified": 1754214453,
-        "narHash": "sha256-Q/I2xJn/j1wpkGhWkQnm20nShYnG7TI99foDBpXm1SY=",
+        "lastModified": 1754725699,
+        "narHash": "sha256-iAcj9T/Y+3DBy2J0N+yF9XQQQ8IEb5swLFzs23CdP88=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "5b09dc45f24cf32316283e62aec81ffee3c3e376",
+        "rev": "85dbfc7aaf52ecb755f87e577ddbe6dbbdbc1054",
         "type": "github"
       },
       "original": {
@@ -936,7 +949,8 @@
         "quickshell": "quickshell",
         "snowfall-lib": "snowfall-lib",
         "stylix": "stylix",
-        "zen-browser": "zen-browser"
+        "zen-browser": "zen-browser",
+        "zen-browser-nix-build": "zen-browser-nix-build"
       }
     },
     "rust-overlay": {
@@ -1136,6 +1150,21 @@
         "type": "github"
       }
     },
+    "systems_9": {
+      "locked": {
+        "lastModified": 1689347949,
+        "narHash": "sha256-12tWmuL2zgBgZkdoB6qXZsgJEH9LR3oUgpaQq2RbI80=",
+        "owner": "nix-systems",
+        "repo": "default-linux",
+        "rev": "31732fcf5e8fea42e59c2488ad31a0e651500f68",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default-linux",
+        "type": "github"
+      }
+    },
     "tinted-foot": {
       "flake": false,
       "locked": {
@@ -1253,6 +1282,62 @@
       "original": {
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
+        "type": "github"
+      }
+    },
+    "zen-browser-nix-build": {
+      "inputs": {
+        "firefox-src": "firefox-src",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": "systems_9",
+        "zen-browser-src": "zen-browser-src",
+        "zen-l10n": "zen-l10n"
+      },
+      "locked": {
+        "lastModified": 1754127121,
+        "narHash": "sha256-12ne3R78hF5oevVUR6semCBedqLwfO2h+7XE6YE1lbI=",
+        "owner": "PaideiaDilemma",
+        "repo": "zen-browser-nix-build",
+        "rev": "5ab4d22dfeec837abec4f4c708bb27af64e41a64",
+        "type": "github"
+      },
+      "original": {
+        "owner": "PaideiaDilemma",
+        "repo": "zen-browser-nix-build",
+        "type": "github"
+      }
+    },
+    "zen-browser-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1754017047,
+        "narHash": "sha256-Dh7Bq5FkkuG9m3ZJp0wp9Ekt6LF9OrMmSkcRwy1igQ8=",
+        "owner": "zen-browser",
+        "repo": "desktop",
+        "rev": "1dce853e2ab63d5b5f6657412d1609c81fb9b02c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zen-browser",
+        "repo": "desktop",
+        "type": "github"
+      }
+    },
+    "zen-l10n": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1753702761,
+        "narHash": "sha256-7cTE0dRLssogo0J4TS2wtpXnCYsk7HxUI8Gf9OZj6eE=",
+        "owner": "zen-browser",
+        "repo": "l10n-packs",
+        "rev": "57effd74fed5aadd40ae1c08a182f96f5ee66045",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zen-browser",
+        "repo": "l10n-packs",
         "type": "github"
       }
     }

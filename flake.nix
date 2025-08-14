@@ -35,6 +35,10 @@
 
     agenix.url = "github:ryantm/agenix";
 
+    zen-browser-nix-build = {
+      url = "github:PaideiaDilemma/zen-browser-nix-build";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -75,19 +79,20 @@
       channels-config = {
         allowUnfree = true;
         permittedInsecurePackages = [
-          "libsoup-2.74.3" # TODO: Remove after https://github.com/NixOS/nixpkgs/pull/429473 is merged.
+          "libsoup-2.74.3" # TODO: Remove after https://github.com/NixOS/nixpkgs/pull/429473 is merged and has been built on Cachix.
           "beekeeper-studio-5.2.12"
         ];
       };
 
       overlays = with inputs; [
         nixneovimplugins.overlays.default
+        zen-browser-nix-build.overlays.default
       ];
 
       homes.modules = with inputs; [
         catppuccin.homeModules.catppuccin
         nixvim.homeModules.nixvim
-        zen-browser.homeModules.default
+        zen-browser.homeModules.beta
         agenix.homeManagerModules.default
       ];
 
