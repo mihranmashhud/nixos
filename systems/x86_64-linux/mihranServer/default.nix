@@ -32,18 +32,50 @@ with lib.internal; {
   };
 
   # Secrets
-  age.secrets.cloudflare-tunnel = {
-    file = ../../../secrets/cloudflare-tunnel.age;
+  age.secrets = {
+    cloudflared-cert.file = ../../../secrets/cloudflared-cert.age;
+    cloudflared-tunnel.file = ../../../secrets/cloudflared-tunnel.age;
   };
 
-  services.cloudflared = {
+  internal.services.cloudflared = {
     enable = true;
+    certificateFile = "${config.age.secrets.cloudflared-cert.path}";
     tunnels = {
-      "948fd76c-4a17-45f7-b2ba-6a25d3645163" = {
-        credentialsFile = "${config.age.secrets.cloudflare-tunnel.path}";
+      "f2e9d477-063c-4eae-8f3d-6eeed5499825" = {
+        credentialsFile = "${config.age.secrets.cloudflared-tunnel.path}";
         default = "http_status:404";
+        ingress = [
+          {
+            hostname = "seafile.mihran.dev";
+            service = config.services.seafile.seahubAddress;
+          }
+          {
+            hostname = "seafile.mihran.dev";
+            service = config.services.seafile.seafileSettings.fileserver.host;
+            path = "seafhttp";
+          }
+        ];
       };
     };
+  };
+
+  # environment.etc."nextcloud-admin-pass".text = "Canine-Joyous-Obligate-Mushroom-Laxative5";
+  # services.nextcloud = {
+  #   enable = true;
+  #   occ.enable = true;
+  #   package = pkgs.nextcloud31;
+  #   hostName = "localhost:8000";
+  #   config.adminpassFile = "/etc/nextcloud-admin-pass";
+  #   config.dbtype = "sqlite";
+  #   settings.trusted_domains = ["nextcloud.mihran.dev" "10.0.0.20:8000"];
+  # };
+  services.seafile = {
+    enable = true;
+    seahubAddress = "unix:/run/seahub/gunicorn.sock";
+    ccnetSettings.General.SERVICE_URL = "https://seahub.mihran.dev";
+    adminEmail = "mihranmashhud@gmail.com";
+    initialAdminPassword = "Canine-Joyous-Obligate-Mushroom-Laxative5";
+    seafileSettings.fileserver.host = "unix:/run/seafile/server.sock";
   };
 
   # Multimedia
@@ -200,12 +232,6 @@ with lib.internal; {
       }
     ];
   };
-  # services.seafile = {
-  #   enable = true;
-  #   ccnetSettings.General.SERVICE_URL = "https://seafile.mihran.dev";
-  #   adminEmail = "mihranmashhud@gmail.com";
-  #   initialAdminPassword = "somepassword";
-  # };
 
   # Hardware acceleration
   nixpkgs.config.packageOverrides = pkgs: {
@@ -232,7 +258,6 @@ with lib.internal; {
       ssh = enabled;
     };
   };
-
 
   environment.systemPackages = with pkgs; [
     glances
