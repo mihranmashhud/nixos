@@ -22,6 +22,7 @@ in {
     home.packages = with pkgs; with pkgs.${namespace}; [
       inputs.agenix.packages.${system}.default
       btop # terminal process viewer/manager
+      zip
       unzip
       swap
     ];
