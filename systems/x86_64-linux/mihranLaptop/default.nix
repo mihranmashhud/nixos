@@ -29,6 +29,12 @@ with lib.internal; {
   services.libinput.enable = true; # Enable touchpad support
   services.tlp.enable = true;
 
+  security.pam.yubico = {
+    enable = true;
+    mode = "challenge-response";
+    id = ["27757091"];
+  };
+
   # Distributed Nix builds
   nix.buildMachines = [{
     hostName = "builder";
