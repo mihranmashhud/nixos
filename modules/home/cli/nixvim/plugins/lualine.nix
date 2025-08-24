@@ -19,7 +19,7 @@ with lib.${namespace}; {
       enable = true;
       settings = {
         options = {
-          theme = "auto";
+          theme = mkDefault "auto";
           icons_enabled = true;
           component_separators = {
             left = "";

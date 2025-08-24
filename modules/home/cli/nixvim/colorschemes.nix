@@ -15,19 +15,23 @@ with lib;
 with lib.${namespace}; let
 in {
   config = {
-    programs.nixvim.colorschemes = {
-      catppuccin = {
-        enable = false;
-        settings = {
-          flavour = "mocha";
+    programs.nixvim = {
+      opts.background = "dark";
+      colorschemes = {
+        catppuccin = {
+          enable = false;
+          settings = {
+            flavour = "mocha";
+          };
+        };
+        kanagawa-paper = {
+          enable = true;
         };
       };
-      kanagawa-paper = {
-        enable = true;
-        settings = {
-          theme = "ink";
-        };
-      };
+      plugins.lualine.settings.options.theme.__raw =
+        if config.programs.nixvim.opts.background == "light"
+        then ''require("lualine.themes.kanagawa-paper-canvas")''
+        else ''require("lualine.themes.kanagawa-paper-ink")'';
     };
   };
 }

@@ -21,7 +21,6 @@ with lib.${namespace}; {
     opts = {
       autoindent = true;
       autoread = true;
-      background = "dark";
       completeopt = ["menu" "menuone" "noselect"];
       conceallevel = 0;
       cursorline = true;
