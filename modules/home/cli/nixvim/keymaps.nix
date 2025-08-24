@@ -30,6 +30,7 @@ in {
     '';
     extraConfigLua = ''
       set_group_name("<leader>a", "Actions")
+      set_group_name("<leader>c", "Quickfix List")
     '';
     keymaps =
       [
@@ -165,6 +166,55 @@ in {
             desc = "toggle comment";
           };
         }
+
+        # Quickfix list
+        {
+          mode = ["n" "v"];
+          key = "<leader>co";
+          action = "<cmd>copen<cr>";
+          options = {
+            silent = true;
+            desc = "open quickfix list";
+          };
+        }
+        {
+          mode = ["n" "v"];
+          key = "<leader>cq";
+          action = "<cmd>cclose<cr>";
+          options = {
+            silent = true;
+            desc = "close quickfix list";
+          };
+        }
+        {
+          mode = ["n" "v"];
+          key = "<leader>cj";
+          action = "<cmd>cnext<cr>";
+          options = {
+            silent = true;
+            desc = "next entry in quickfix list";
+          };
+        }
+        {
+          mode = ["n" "v"];
+          key = "<leader>ck";
+          action = "<cmd>cprevious<cr>";
+          options = {
+            silent = true;
+            desc = "previous entry in quickfix list";
+          };
+        }
+
+        {
+          mode = ["t"];
+          key = "<Esc>";
+          action = "<C-\\><C-n>";
+          options = {
+            noremap = true;
+          };
+        }
+
+        # Disable middle mouse paste
         {
           key = "<MiddleMouse>";
           action = "<nop>";
