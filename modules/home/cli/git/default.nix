@@ -30,24 +30,24 @@ in {
     programs.git = {
       enable = true;
       package = pkgs.gitFull;
-
-      userName = config.${namespace}.user.name;
-      userEmail = config.${namespace}.user.email;
-
-      extraConfig = {
+      settings = {
+        user = {
+          name = config.${namespace}.user.name;
+          email = config.${namespace}.user.email;
+        };
         color.ui = "auto";
         push = {
           autoSetupRemote = true;
         };
         credential.credentialStore = "secretservice";
       };
-
-      delta = {
-        enable = true;
-        options = {
-          side-by-side = true;
-        };
+    };
+    programs.delta = {
+      enable = true;
+      options = {
+        side-by-side = true;
       };
+      enableGitIntegration = true;
     };
   };
 }
