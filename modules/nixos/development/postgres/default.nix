@@ -20,6 +20,12 @@ in {
   };
 
   config = mkIf cfg.enable {
+    services.pgadmin = {
+      enable = true;
+      initialEmail = "mihranmashhud@gmail.com";
+      initialPasswordFile = "/home/mihranmashhud/.pgadmin/initial_password";
+      openFirewall = true;
+    };
     services.postgresql = {
       enable = true;
       ensureDatabases = [
