@@ -5,10 +5,12 @@
     substituters = [
       "https://cache.nixos.org"
       "https://watersucks.cachix.org"
+      "https://vicinae.cachix.org"
     ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "watersucks.cachix.org-1:6gadPC5R8iLWQ3EUtfu3GFrVY7X6I4Fwz/ihW25Jbv8="
+      "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
     ];
   };
 
@@ -25,6 +27,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-cli.url = "github:nix-community/nixos-cli";
 
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
@@ -35,19 +42,45 @@
 
     agenix.url = "github:ryantm/agenix";
 
-    zen-browser-nix-build = {
-      url = "github:PaideiaDilemma/zen-browser-nix-build";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # System deployment
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Apps
+    nixvim = {
+      url = "github:nix-community/nixvim";
+    };
+
+    nixneovimplugins.url = "github:jooooscha/nixpkgs-vim-extra-plugins";
+
+    vicinae.url = "github:vicinaehq/vicinae";
+
+    zen-browser-nix = {
+      url = "github:LunaCOLON3/zen-browser-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake/beta";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Shell
+    dgop = {
+      url = "github:AvengeMedia/dgop";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dms-cli = {
+      url = "github:AvengeMedia/danklinux";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dankMaterialShell = {
+      url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.dgop.follows = "dgop";
+      inputs.dms-cli.follows = "dms-cli";
     };
 
     # Themes
@@ -56,17 +89,6 @@
       url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell?ref=refs/tags/v0.1.0";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixvim = {
-      url = "github:nix-community/nixvim";
-    };
-
-    nixneovimplugins.url = "github:jooooscha/nixpkgs-vim-extra-plugins";
   };
 
   outputs = {self, ...} @ inputs: let
@@ -78,22 +100,20 @@
     lib.mkFlake {
       channels-config = {
         allowUnfree = true;
-        permittedInsecurePackages = [
-          "libsoup-2.74.3" # TODO: Remove after https://github.com/NixOS/nixpkgs/pull/429473 is merged and has been built on Cachix.
-          "beekeeper-studio-5.2.12"
-        ];
       };
 
       overlays = with inputs; [
         nixneovimplugins.overlays.default
-        zen-browser-nix-build.overlays.default
+        zen-browser-nix.overlay
       ];
 
       homes.modules = with inputs; [
+        agenix.homeManagerModules.default
         catppuccin.homeModules.catppuccin
+        dankMaterialShell.homeModules.dankMaterialShell.default
         nixvim.homeModules.nixvim
         zen-browser.homeModules.beta
-        agenix.homeManagerModules.default
+        vicinae.homeManagerModules.default
       ];
 
       systems.modules.nixos = with inputs; [
@@ -103,6 +123,7 @@
         catppuccin.nixosModules.catppuccin
         nix-gaming.nixosModules.platformOptimizations
         agenix.nixosModules.default
+        nix-index-database.nixosModules.nix-index
       ];
 
       systems.hosts.mihranDesktop.modules = with inputs; [
