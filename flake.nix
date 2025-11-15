@@ -50,10 +50,8 @@
 
     # Apps
     nixvim = {
-      url = "github:nix-community/nixvim";
+      url = "github:mihranmashhud/nixvim";
     };
-
-    nixneovimplugins.url = "github:jooooscha/nixpkgs-vim-extra-plugins";
 
     vicinae.url = "github:vicinaehq/vicinae";
 
@@ -103,7 +101,6 @@
       };
 
       overlays = with inputs; [
-        nixneovimplugins.overlays.default
         zen-browser-nix.overlay
       ];
 

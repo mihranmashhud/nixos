@@ -20,4 +20,5 @@ in
     ./colorschemes.nix
   ]
   ++ plugins;
+  enableMan = false;
 }

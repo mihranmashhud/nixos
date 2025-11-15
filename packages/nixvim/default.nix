@@ -10,7 +10,7 @@
   nixvimModule = {
     module = import ./config;
     extraSpecialArgs = {
-      inherit inputs namespace;
+      inherit inputs namespace system;
     };
   };
 in
