@@ -15,29 +15,22 @@ with lib;
 with lib.${namespace}; let
   cfg = config.${namespace}.cli.nixvim;
 in {
-  imports =
-    [
-      ./keymaps.nix
-      ./settings.nix
-      ./commands.nix
-      ./colorschemes.nix
-    ]
-    ++ (umport {path = ./plugins;});
-
   options.${namespace}.cli.nixvim = {
     enable = mkBoolOpt false "Whether to enable nixvim configuration.";
   };
 
   config = mkIf cfg.enable {
+    home.packages = [
+      pkgs.${namespace}.nixvim
+    ];
     home.sessionVariables = {
+      EDITOR = "nvim";
       MANPAGER = "nvim +Man!";
     };
-    programs.nixvim = {
-      enable = true;
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-      defaultEditor = true;
+    home.shellAliases = {
+      vi = "nvim";
+      vim = "nvim";
+      vimdiff = "nvim -d";
     };
   };
 }
