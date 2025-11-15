@@ -25,6 +25,8 @@ in {
       zip
       unzip
       swap
+
+      python3
     ];
   };
 }
