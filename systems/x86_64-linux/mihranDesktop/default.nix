@@ -68,6 +68,8 @@ with lib.internal; {
 
   hardware.amdgpu.overdrive.enable = true;
 
+  services.syncthing.enable = true;
+
   services.wivrn = {
     enable = true;
     openFirewall = true;
