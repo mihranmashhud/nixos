@@ -24,7 +24,7 @@ in {
       github-desktop
       chromium # For web development
       bruno # HTTP client
-      beekeeper-studio # Database data management
+      antares # DB management
     ];
   };
 }
