@@ -44,11 +44,10 @@ in rec {
                     (overrides.${name}.profiles.system or {})
                     // {
                       path = deploy-rs.lib.${system}.activate.nixos host;
-                    }
-                    // lib.optionalAttrs (user != null) {
                       user = "root";
-                      sshUser = user;
-                      interactiveSudo = true;
+                      sshUser = "deploy";
+                      sshOpts = ["-i" "~/.ssh/id_deploy"];
+                      remoteBuild = true;
                     }
                     // lib.optionalAttrs
                     (host.config.${namespace}.security.doas.enable or false)

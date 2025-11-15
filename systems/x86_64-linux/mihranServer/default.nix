@@ -7,10 +7,25 @@
   ...
 }:
 with lib;
-with lib.internal; {
+with lib.internal; let
+in {
   imports = [
     ./hardware.nix # Make sure to add the generated hardware config.
   ];
+
+  internal = {
+    locale = enabled;
+    development = {
+      direnv = enabled;
+      docker = enabled;
+      pnpm = enabled;
+      ssh = enabled;
+    };
+    server.deploy = {
+      enable = true;
+      keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDFKRlKNZ6jdiQoT92DBEvHrhnFHd2PhOFapxHX4Wz2B mihranmashhud@mihranDesktop"];
+    };
+  };
 
   time.timeZone = "America/Toronto";
 
@@ -30,53 +45,78 @@ with lib.internal; {
     ClientAliveInterval = 300;
     ClientAliveCountMax = 2;
   };
-
-  # Secrets
-  age.secrets = {
-    cloudflared-cert.file = ../../../secrets/cloudflared-cert.age;
-    cloudflared-tunnel.file = ../../../secrets/cloudflared-tunnel.age;
-  };
-
-  internal.services.cloudflared = {
+  services.tailscale = {
     enable = true;
-    certificateFile = "${config.age.secrets.cloudflared-cert.path}";
-    tunnels = {
-      "f2e9d477-063c-4eae-8f3d-6eeed5499825" = {
-        credentialsFile = "${config.age.secrets.cloudflared-tunnel.path}";
-        default = "http_status:404";
-        ingress = [
-          {
-            hostname = "seafile.mihran.dev";
-            service = config.services.seafile.seahubAddress;
-          }
-          {
-            hostname = "seafile.mihran.dev";
-            service = config.services.seafile.seafileSettings.fileserver.host;
-            path = "seafhttp";
-          }
-        ];
-      };
+    useRoutingFeatures = "server";
+    extraSetFlags = ["--advertise-exit-node"];
+    extraUpFlags = ["--ssh"];
+  };
+  system.activationScripts."tailscale-udp-gro-forwarding".text = ''
+    ${getExe pkgs.ethtool} -K enp2s0 rx-udp-gro-forwarding on rx-gro-list off
+  '';
+
+  # Reverse Proxy
+  age.secrets.caddy = {
+    file = ../../../secrets/caddy.env.age;
+    owner = "caddy";
+    group = "caddy";
+  };
+  services.caddy = {
+    enable = true;
+    package = pkgs.caddy.withPlugins {
+      plugins = ["github.com/caddy-dns/cloudflare@v0.2.2"];
+      hash = "sha256-6b1AWcE0P498h6p3b0y/9P0CdGytrwXSyvPkEQq2CVw=";
     };
+    extraConfig = ''
+      (cloudflare) {
+        tls {
+          dns cloudflare {$CF_API_TOKEN}
+        }
+      }
+    '';
+    environmentFile = config.age.secrets.caddy.path;
+    virtualHosts = mkMerge [
+      (mkIf config.services.jellyfin.enable {
+        "jellyfin.server.mihran.dev".extraConfig = ''
+          reverse_proxy http://localhost:8096
+          import cloudflare
+        '';
+      })
+      (mkIf config.services.calibre-web.enable {
+        "calibre.server.mihran.dev".extraConfig = let
+          inherit (config.services.calibre-web.listen) ip port;
+        in ''
+          reverse_proxy http://${ip}:${toString port}
+          import cloudflare
+        '';
+      })
+      (mkIf config.services.n8n.enable {
+        "n8n.server.mihran.dev".extraConfig = ''
+          reverse_proxy http://localhost:${toString config.services.n8n.settings.port}
+          import cloudflare
+        '';
+      })
+      (mkIf config.services.couchdb.enable {
+        "couchdb.server.mihran.dev".extraConfig = ''
+          reverse_proxy http://localhost:${toString config.services.couchdb.port}
+          import cloudflare
+        '';
+      })
+      (mkIf config.services.immich.enable {
+        "immich.server.mihran.dev".extraConfig = ''
+          reverse_proxy http://localhost:${toString config.services.immich.port}
+          import cloudflare
+        '';
+      })
+      (mkIf config.services.syncthing.enable {
+        "syncthing.server.mihran.dev".extraConfig = ''
+          reverse_proxy http://${config.services.syncthing.guiAddress}
+          import cloudflare
+        '';
+      })
+    ];
   };
-
-  # environment.etc."nextcloud-admin-pass".text = "Canine-Joyous-Obligate-Mushroom-Laxative5";
-  # services.nextcloud = {
-  #   enable = true;
-  #   occ.enable = true;
-  #   package = pkgs.nextcloud31;
-  #   hostName = "localhost:8000";
-  #   config.adminpassFile = "/etc/nextcloud-admin-pass";
-  #   config.dbtype = "sqlite";
-  #   settings.trusted_domains = ["nextcloud.mihran.dev" "10.0.0.20:8000"];
-  # };
-  services.seafile = {
-    enable = true;
-    seahubAddress = "unix:/run/seahub/gunicorn.sock";
-    ccnetSettings.General.SERVICE_URL = "https://seahub.mihran.dev";
-    adminEmail = "mihranmashhud@gmail.com";
-    initialAdminPassword = "Canine-Joyous-Obligate-Mushroom-Laxative5";
-    seafileSettings.fileserver.host = "unix:/run/seafile/server.sock";
-  };
+  networking.firewall.allowedTCPPorts = [80 443];
 
   # Multimedia
   systemd.tmpfiles.rules = [
@@ -105,11 +145,20 @@ with lib.internal; {
     enable = true;
     openFirewall = true;
   };
-  services.readarr = {
+  services.calibre-web = {
     enable = true;
+
+    # This is so that the server is accessible via local home network. The e-reader basically requires this if tailscale is to not be installed on it.
     openFirewall = true;
+    listen.ip = "10.0.0.20"; # Fixed IP on home network
+
     group = "multimedia";
+    dataDir = "/data/media/calibre-web";
+    options = {
+      enableBookUploading = true;
+    };
   };
+
   services.transmission = {
     enable = true;
     openFirewall = true;
@@ -121,31 +170,44 @@ with lib.internal; {
     };
   };
 
-  systemd.services.glances-web-server = {
-    wantedBy = ["multi-user.target"];
-    after = ["network.target"];
-    description = "Start glances web server";
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "${pkgs.glances}/bin/glances -w";
-    };
+  # General file sync
+  services.syncthing = {
+    enable = true;
+    guiAddress = "10.0.0.20:8384";
   };
-  networking.firewall = {
-    allowedTCPPorts = [61208];
+
+  # Automation
+  services.n8n = {
+    enable = true;
+  };
+
+  # For syncing obsidian
+  services.couchdb = {
+    enable = true;
+    adminPass = "somerandompassword";
+  };
+
+  # Photos sync
+  services.immich = {
+    enable = true;
+    accelerationDevices = [
+      "/dev/dri/renderD128"
+    ];
+  };
+
+  # View system load
+  services.glances = {
+    enable = true;
+    extraArgs = [
+      "--webserver"
+      "--disable-webui"
+    ];
   };
 
   services.homepage-dashboard = {
     enable = true;
     openFirewall = true;
-    settings = {
-      title = "Mihran's Homelab";
-      layout = {
-        "Media" = {
-          style = "row";
-          columns = 5;
-        };
-      };
-    };
+    allowedHosts = "10.0.0.20:8082,localhost,homepage.server.mihran.dev";
     services = [
       {
         "Media" = [
@@ -159,40 +221,42 @@ with lib.internal; {
           {
             "Radarr" = {
               icon = "radarr.png";
-              href = "http://10.0.0.20:7878";
+              href = "http://10.0.0.20:${toString config.services.radarr.settings.server.port}";
               description = "Movies management";
             };
           }
           {
             "Sonarr" = {
               icon = "sonarr.png";
-              href = "http://10.0.0.20:8989";
+              href = "http://10.0.0.20:${toString config.services.sonarr.settings.server.port}";
               description = "TV shows management";
-            };
-          }
-          {
-            "Readarr" = {
-              icon = "readarr.png";
-              href = "http://10.0.0.20:8787";
-              description = "EBooks management";
             };
           }
           {
             "Prowlarr" = {
               icon = "prowlarr.png";
-              href = "http://10.0.0.20:9696";
+              href = "http://10.0.0.20:${toString config.services.prowlarr.settings.server.port}";
               description = "Torrent indexes";
+            };
+          }
+          {
+            "Calibre Web" = {
+              icon = "calibre-web.png";
+              href = "http://10.0.0.20:${toString config.services.calibre-web.listen.port}";
+              description = "Ebooks Management";
             };
           }
         ];
       }
       {
-        "Info" = [
+        "Info" = let
+          url = "http://10.0.0.20:${toString config.services.glances.port}";
+        in [
           {
             "CPU Usage" = {
               widget = {
                 type = "glances";
-                url = "http://10.0.0.20:61208";
+                inherit url;
                 version = 4;
                 metric = "cpu";
               };
@@ -202,7 +266,7 @@ with lib.internal; {
             "Memory Usage" = {
               widget = {
                 type = "glances";
-                url = "http://10.0.0.20:61208";
+                inherit url;
                 version = 4;
                 metric = "memory";
               };
@@ -212,7 +276,7 @@ with lib.internal; {
             "Storage Usage" = {
               widget = {
                 type = "glances";
-                url = "http://10.0.0.20:61208";
+                inherit url;
                 version = 4;
                 metric = "disk:nvme0n1";
               };
@@ -222,7 +286,7 @@ with lib.internal; {
             "Top Processes (by CPU usage)" = {
               widget = {
                 type = "glances";
-                url = "http://10.0.0.20:61208";
+                inherit url;
                 version = 4;
                 metric = "process";
               };
@@ -248,20 +312,6 @@ with lib.internal; {
       vpl-gpu-rt # QSV on 11th gen or newer
     ];
   };
-
-  internal = {
-    locale = enabled;
-    development = {
-      direnv = enabled;
-      docker = enabled;
-      pnpm = enabled;
-      ssh = enabled;
-    };
-  };
-
-  environment.systemPackages = with pkgs; [
-    glances
-  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

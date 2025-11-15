@@ -44,6 +44,11 @@ with lib.internal; {
     ClientAliveInterval = 300;
     ClientAliveCountMax = 2;
   };
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "client";
+    extraUpFlags = ["--ssh"];
+  };
 
   environment.systemPackages = with pkgs; [
     oversteer

@@ -14,6 +14,5 @@ let
     mihranServer
   ];
 in {
-  "cloudflared-tunnel.age".publicKeys = users ++ [mihranServer];
-  "cloudflared-cert.age".publicKeys = users ++ [mihranServer];
+  "caddy.env.age".publicKeys = users ++ [mihranServer];
 }
