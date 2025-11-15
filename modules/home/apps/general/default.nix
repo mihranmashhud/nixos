@@ -35,6 +35,7 @@ in {
       kdePackages.partitionmanager # drive management
       bitwarden-desktop # password Management
       impression # live usb creation tool
+      papers # PDF viewer
       seafile-client # file sharing via home server
 
       libreoffice-qt # office Apps
