@@ -94,10 +94,14 @@ with lib.internal; {
     };
   };
 
-  programs.alvr = {
     enable = true;
     openFirewall = true;
   };
+
+  # programs.alvr = {
+  #   enable = true;
+  #   openFirewall = true;
+  # };
 
   programs.gamemode.settings = {
     general = {
