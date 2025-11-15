@@ -20,7 +20,7 @@ in {
   };
   config = mkIf cfg.enable {
     ${namespace} = {
-      apps = {
+      gaming = {
         steam = enabled;
         lutris = enabled;
       };

@@ -13,9 +13,9 @@
 }:
 with lib;
 with lib.${namespace}; let
-  cfg = config.${namespace}.apps.lutris;
+  cfg = config.${namespace}.gaming.lutris;
 in {
-  options.${namespace}.apps.lutris = {
+  options.${namespace}.gaming.lutris = {
     enable = mkBoolOpt false "Whether to install lutris.";
   };
 

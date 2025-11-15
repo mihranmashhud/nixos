@@ -18,7 +18,7 @@ with lib.internal; {
   internal = {
     system = enabled;
 
-    apps.steam.enable = true;
+    gaming.steam.enable = true;
 
     development = enabled;
 

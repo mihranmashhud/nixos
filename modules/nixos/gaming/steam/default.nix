@@ -13,9 +13,9 @@
 }:
 with lib;
 with lib.${namespace}; let
-  cfg = config.${namespace}.apps.steam;
+  cfg = config.${namespace}.gaming.steam;
 in {
-  options.${namespace}.apps.steam = {
+  options.${namespace}.gaming.steam = {
     enable = mkBoolOpt false "Whether to enable steam configuration.";
   };
   config = mkIf cfg.enable {
