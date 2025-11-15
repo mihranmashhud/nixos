@@ -19,7 +19,11 @@ with lib.internal; {
       monitor = [
         "${m1}, highrr, 0x0, 1, vrr, 1"
         "${m2}, highrr, 1920x0, 1, vrr, 0"
+        "HEADLESS-2, disable" # for sunshine
       ];
+      general = {
+        allow_tearing = true;
+      };
       animations = {
         enabled = "yes";
         bezier = [
@@ -29,6 +33,9 @@ with lib.internal; {
           "borderangle, 1, 50, linear, loop"
         ];
       };
+      render = {
+        direct_scanout = 2;
+      };
       windowrulev2 = hypr.windowrules [
         # Deadlock
         {
@@ -36,6 +43,13 @@ with lib.internal; {
           rules = [
             "fullscreen"
             "allowsinput 1"
+            "immediate"
+          ];
+        }
+        {
+          windows = ["title:^(Picture-in-Picture)$"];
+          rules = [
+            "move 100%-w-10 100%-w-10"
           ];
         }
       ];
@@ -45,6 +59,8 @@ with lib.internal; {
       exec-once = with pkgs; [
         "[workspace 6 silent] vesktop &"
         "openrgb -p 'cool ice' &"
+
+        "hyprctl output create headless" # for sunshine
       ];
     };
   };
