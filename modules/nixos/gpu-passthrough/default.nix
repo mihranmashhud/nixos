@@ -66,7 +66,6 @@ in {
 
         qemu = {
           package = pkgs.qemu_kvm;
-          ovmf = enabled;
           verbatimConfig = ''
             namespaces = []
             user = "+${builtins.toString user.uid}"
