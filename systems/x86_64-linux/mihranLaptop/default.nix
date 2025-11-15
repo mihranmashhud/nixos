@@ -18,7 +18,10 @@ with lib.internal; {
     gaming = enabled;
     development = enabled;
 
-    desktop.hyprland = enabled;
+    desktop.hyprland = {
+      enable = true;
+      makeDefaultSession = true;
+    };
   };
 
   environment.systemPackages = with pkgs; [
