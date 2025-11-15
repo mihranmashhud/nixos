@@ -22,7 +22,6 @@ in {
     home.packages = with pkgs; [
       rmtrash
     ];
-    programs.command-not-found = enabled;
     programs.zsh = {
       enable = true;
 
@@ -60,7 +59,6 @@ in {
           "ohmyzsh/ohmyzsh path:lib/completion.zsh"
           "ohmyzsh/ohmyzsh path:plugins/gitfast"
           "ohmyzsh/ohmyzsh path:plugins/wd"
-          "ohmyzsh/ohmyzsh path:plugins/command-not-found"
           "ohmyzsh/ohmyzsh path:plugins/compleat"
           "ohmyzsh/ohmyzsh path:plugins/pip"
           "ohmyzsh/ohmyzsh path:plugins/npm"

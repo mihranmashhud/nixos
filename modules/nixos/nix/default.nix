@@ -43,9 +43,9 @@ in {
     environment.systemPackages = with pkgs; [
       alejandra
       deploy-rs
-      nix-index
       nix-output-monitor
     ];
+    programs.nix-index.enable = true;
 
     nix = let
       users = ["root" config.${namespace}.user.name];
@@ -66,6 +66,7 @@ in {
         auto-optimise-store = true;
         trusted-users = users;
         allowed-users = users;
+        accept-flake-config = true;
 
         substituters = [cfg.default-substituter.url] ++ (map (x: x.url) cfg.extra-substituters);
         trusted-public-keys = [cfg.default-substituter.key] ++ (map (x: x.key) cfg.extra-substituters);
