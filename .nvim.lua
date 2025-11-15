@@ -1,5 +1,4 @@
-local nvim_lsp = require("lspconfig")
-nvim_lsp.nixd.setup({
+vim.lsp.config("nixd", {
    cmd = { "nixd" },
    settings = {
       nixd = {
@@ -8,10 +7,10 @@ nvim_lsp.nixd.setup({
          },
          options = {
             nixos = {
-               expr = '(builtins.getFlake "/home/mihranmashhud/nixos").nixosConfigurations.mihranDesktop.options',
+               expr = '(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.mihranDesktop.options',
             },
             home_manager = {
-               expr = '(builtins.getFlake "/home/mihranmashhud/nixos").homeConfigurations."mihranmashhud@mihranDesktop".options',
+               expr = '(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.mihranDesktop.options.home-manager.users.type.getSubOptions []',
             },
          },
       },
