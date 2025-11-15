@@ -22,15 +22,15 @@ in {
 
   config = mkIf cfg.enable {
     services.udisks2.enable = true; # Required for udiskie
+    services.accounts-daemon.enable = true; # For user account information
     programs.hyprland.enable = true;
-    programs.hyprlock.enable = true;
     services.displayManager =
       {
         sddm.wayland.enable = true;
         sddm.enable = true;
       }
       // optionalAttrs cfg.makeDefaultSession {
-        sddm.defaultSession = "hyprland";
+        defaultSession = "hyprland";
       };
     programs.kdeconnect = {
       enable = true;

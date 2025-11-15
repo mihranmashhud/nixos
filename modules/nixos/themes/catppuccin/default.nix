@@ -15,6 +15,7 @@ with lib;
 with lib.${namespace}; let
   cfg = config.${namespace}.themes.catppuccin;
   theming = config.${namespace}.theming;
+  accent = "mauve";
 in {
   options.${namespace}.themes.catppuccin = with types; {
     enable = mkBoolOpt false "Whether to enable catppuccin system theme";
@@ -31,7 +32,7 @@ in {
       catppuccin = {
         enable = true;
         flavor = "mocha";
-        accent = "blue";
+        inherit accent;
       };
       services.displayManager.sddm.package = pkgs.kdePackages.sddm;
     }

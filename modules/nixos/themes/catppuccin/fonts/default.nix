@@ -25,6 +25,7 @@ in {
       hasklug
       iosevka
       victor-mono
+      symbols-only
     ];
     stylix.fonts = {
       sizes = {

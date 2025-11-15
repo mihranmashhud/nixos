@@ -22,8 +22,10 @@ with lib.internal; {
 
     development = enabled;
 
-    desktop.hyprland = enabled;
-    desktop.quickshell = enabled;
+    desktop.hyprland = {
+      enable = true;
+      makeDefaultSession = true;
+    };
 
     gpu-passthrough = {
       enable = true;

@@ -13,17 +13,28 @@
 }:
 with lib;
 with lib.${namespace}; let
-  cfg = config.${namespace}.desktop.quickshell;
+  cfg = config.${namespace}.apps.vicinae;
 in {
-  options.${namespace}.desktop.quickshell = with types; {
-    enable = mkBoolOpt false "Whether to enable quickshell configuration.";
+  options.${namespace}.apps.vicinae = {
+    enable = mkBoolOpt false "Whether to enable vicinae configuration.";
   };
-
   config = mkIf cfg.enable {
-    environment.systemPackages = [
-      inputs.quickshell.packages.${system}.default
-      pkgs.qtcreator
-    ];
-    qt.enable = lib.mkForce true;
+    services.vicinae = {
+      enable = true;
+      autoStart = true;
+      settings = {
+        closeOnFocusLoss = true;
+        popToRootOnClose = true;
+        keybinding = "default";
+        faviconService = "twenty";
+        rootSearch.searchFiles = true;
+        font.size = 11;
+        window = {
+          csd = true;
+          opacity = 0.95;
+          rounding = 8;
+        };
+      };
+    };
   };
 }

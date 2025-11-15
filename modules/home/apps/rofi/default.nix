@@ -21,7 +21,6 @@ in {
   config = mkIf cfg.enable {
     programs.rofi = {
       enable = true;
-      package = pkgs.rofi-wayland;
       font = "monospace 12";
       extraConfig = {
         modi = "drun,filebrowser";

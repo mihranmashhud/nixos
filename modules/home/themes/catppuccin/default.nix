@@ -15,6 +15,7 @@ with lib;
 with lib.${namespace}; let
   cfg = config.${namespace}.themes.catppuccin;
   theming = config.${namespace}.theming;
+  accent = "mauve";
 in {
   # Currently using catpuccin-mocha theme for the most part.
   options.${namespace}.themes.catppuccin = with types; {
@@ -30,13 +31,12 @@ in {
       };
 
       catppuccin.enable = true;
-      catppuccin.accent = "blue";
-      catppuccin.gtk.icon = {
-        accent = "blue";
+      catppuccin = {
+        inherit accent;
       };
-      qt.enable = true;
-      qt.style.name = "kvantum";
-      qt.platformTheme.name = "kvantum";
+      catppuccin.gtk.icon = {
+        inherit accent;
+      };
 
       # Disable for these targets
       catppuccin = {
@@ -53,6 +53,22 @@ in {
           name = "Catppuccin-GTK-Dark";
           package = pkgs.magnetic-catppuccin-gtk;
         };
+        iconTheme = mkForce {
+          name = "Papirus";
+          package = pkgs.papirus-icon-theme;
+        };
+      };
+    })
+    (mkIf config.programs.dankMaterialShell.enable {
+      programs.dankMaterialShell.default.settings = {
+        currentThemeName = "cat-${config.catppuccin.accent}";
+        iconTheme = config.gtk.iconTheme.name;
+      };
+    })
+    (mkIf config.services.vicinae.enable {
+      services.vicinae.settings.theme = {
+        iconTheme = "Papirus";
+        name = "catppuccin-${config.catppuccin.flavor}";
       };
     })
   ]);

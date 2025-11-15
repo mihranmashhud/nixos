@@ -8,6 +8,7 @@
 }:
 with lib;
 with lib.internal; {
+  internal.desktop.dms = enabled;
   internal.desktop.hyprland = {
     enable = true;
     type = "desktop";
