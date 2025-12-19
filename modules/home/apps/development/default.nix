@@ -22,7 +22,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       github-desktop
-      chromium # For web development
+      ungoogled-chromium # For web development
       bruno # HTTP client
       antares # DB management
     ];
