@@ -60,6 +60,11 @@ with lib.internal; {
     lm_sensors
     owmods-cli
     linux-wallpaperengine
+    ringracers
+  ];
+
+  networking.firewall.allowedUDPPorts = [
+    5029 # Ring racers
   ];
 
   networking.interfaces.enp4s0.wakeOnLan = {
