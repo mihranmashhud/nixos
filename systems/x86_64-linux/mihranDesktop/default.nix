@@ -94,11 +94,6 @@ with lib.internal; {
     };
   };
 
-  services.sunshine = {
-    enable = true;
-    capSysAdmin = true;
-    openFirewall = true;
-  };
 
   # programs.alvr = {
   #   enable = true;
