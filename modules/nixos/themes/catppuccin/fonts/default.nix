@@ -43,8 +43,8 @@ in {
         name = "Roboto Slab";
       };
       monospace = {
-        package = pkgs.nerd-fonts.caskaydia-cove;
-        name = "CaskaydiaCove Nerd Font";
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrains Mono";
       };
     };
   };
