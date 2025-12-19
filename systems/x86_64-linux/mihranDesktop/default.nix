@@ -68,9 +68,11 @@ with lib.internal; {
 
   hardware.amdgpu.overdrive.enable = true;
 
-  services.syncthing.enable = true;
 
   services.wivrn = {
+  services.syncthing = let 
+    username = config.internal.user.name;
+  in {
     enable = true;
     openFirewall = true;
     autoStart = true;
@@ -92,6 +94,9 @@ with lib.internal; {
         application = [pkgs.wlx-overlay-s];
       };
     };
+    group = "users";
+    user = username;
+    dataDir = "/home/${username}/Documents";
   };
 
 
