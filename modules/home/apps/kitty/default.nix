@@ -24,6 +24,10 @@ in {
       settings = {
         background_opacity = "${toString config.stylix.opacity.terminal}";
         font_size = "${toString config.stylix.fonts.sizes.terminal}.0";
+        font_family = "family=\"${config.stylix.fonts.monospace.name}\"";
+        bold_font = "auto";
+        italic_font = "auto";
+        bold_italic_font = "auto";
         # Bell
         enable_audio_bell = "no";
         visual_bell_duration = "0.1";
