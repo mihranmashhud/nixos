@@ -121,7 +121,7 @@ in {
               # Startup
               exec-once =
                 if dmsEnabled
-                then (mkAfter ["${getExe inputs.dms-cli.packages.${system}.dms-cli} run"])
+                then (mkAfter ["dms run"])
                 else [
                   # Top bar
                   "waybar -c ~/.config/waybar/${cfg.type}-config.json > /tmp/waybar.log &"
