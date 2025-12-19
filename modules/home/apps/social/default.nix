@@ -21,7 +21,6 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      vesktop
       slack
       teams-for-linux
       telegram-desktop
@@ -29,5 +28,12 @@ in {
         hyprlandXdgDesktopPortalSupport = true;
       }))
     ];
+    programs.vesktop.enable = true;
+    programs.discord = {
+      enable = true;
+      settings = {
+        SKIP_HOST_UPDATE = true;
+      };
+    };
   };
 }
