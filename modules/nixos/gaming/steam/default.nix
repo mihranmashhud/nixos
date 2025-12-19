@@ -21,7 +21,7 @@ in {
   config = mkIf cfg.enable {
       
     environment.systemPackages = with pkgs; [
-      internal.sgdboop
+      sgdboop
     ];
     hardware.graphics.enable32Bit = true;
     programs.gamemode.enable = true;
