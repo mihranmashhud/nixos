@@ -9,14 +9,66 @@
     ghostscript # Required to render PDF files
     tectonic # Required to render LaTeX math expressions
   ];
+  extraConfigLua = ''
+    set_group_name("<leader>s", "Search")
+  '';
+  keymaps = [
+    {
+      mode = "n";
+      key = "<leader>at";
+      action.__raw = ''
+        function()
+          if Snacks.dim.enabled then
+            Snacks.dim.disable()
+          else
+            Snacks.dim.enable()
+          end
+        end
+      '';
+      options = {
+        silent = true;
+        desc = "toggle dimming";
+      };
+    }
+
+    # Search/Pickers
+    {
+      mode = "n";
+      key = "<leader>f";
+      action.__raw = "Snacks.picker.files";
+      options = {
+        desc = "files";
+      };
+    }
+    {
+      mode = "n";
+      key = "<leader>sw";
+      action.__raw = "Snacks.picker.grep";
+      options = {
+        desc = "live grep";
+      };
+    }
+    {
+      mode = "n";
+      key = "<leader>sb";
+      action.__raw = "Snacks.picker.git_branches";
+      options = {
+        desc = "git branches";
+      };
+    }
+  ];
   plugins.snacks = {
     enable = true;
     settings = {
-      image = {
-        enabled = true;
-        inline = false;
-        float = true;
+      picker = {
+        layout.preset = "telescope";
       };
+      notifier.enabled = true;
+      # image = {
+      #   enabled = true;
+      #   inline = false;
+      #   float = true;
+      # };
       indent.enabled = true;
       chunk = {
         enabled = true;

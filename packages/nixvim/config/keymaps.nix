@@ -83,18 +83,6 @@ in {
         action = ";";
       }
 
-      # Esc alias
-      {
-        mode = ["i" "t"];
-        key = "jk";
-        action = "<esc>";
-      }
-      {
-        mode = ["i" "t"];
-        key = "kj";
-        action = "<esc>";
-      }
-
       # Move lines around
       {
         mode = "v";

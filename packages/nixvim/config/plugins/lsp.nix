@@ -22,6 +22,9 @@
       ty.enable = true;
       ccls.enable = true;
       ts_ls.enable = true;
+      ts_ls.packageFallback = true;
+      eslint.enable = true;
+      eslint.packageFallback = true;
       svelte.enable = true;
       svelte.packageFallback = true;
       tailwindcss.enable = true;

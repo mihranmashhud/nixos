@@ -17,10 +17,16 @@
             end
           end
         '';
-    in {
-      file_moved = on_rename_handler;
-      file_renamed = on_rename_handler;
-    };
+    in [
+      {
+        event = "file_moved";
+        handler.__raw = on_rename_handler;
+      }
+      {
+        event = "file_renamed";
+        handler.__raw = on_rename_handler;
+      }
+    ];
   };
   keymaps = [
     {

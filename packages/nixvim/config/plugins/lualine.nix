@@ -84,11 +84,7 @@
       };
       extensions =
         []
-        ++ (
-          if config.plugins.neo-tree.enable
-          then ["neo-tree"]
-          else []
-        );
+        ++ (lib.optional config.plugins.neo-tree.enable "neo-tree");
     };
   };
 }

@@ -13,10 +13,6 @@
         enabled = true;
         suggestions = 20;
       };
-      disable = {
-        bt = [];
-        ft = ["TelescopePrompt"];
-      };
     };
   };
 }
