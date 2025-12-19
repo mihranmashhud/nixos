@@ -30,10 +30,10 @@ in {
     };
     programs.dankMaterialShell = {
       enable = true;
+      quickshell.package = inputs.quickshell.packages.${system}.quickshell;
       enableDynamicTheming = false;
       default.settings = let
         isDesktop = config.${namespace}.desktop.hyprland.type == "desktop";
-        themes = config.${namespace}.themes;
       in {
         matugenScheme = "scheme-tonal-spot";
         runUserMatugenTemplates = false;
