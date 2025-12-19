@@ -68,37 +68,45 @@ with lib.internal; {
 
   hardware.amdgpu.overdrive.enable = true;
 
-
-  services.wivrn = {
   services.syncthing = let 
     username = config.internal.user.name;
   in {
     enable = true;
-    openFirewall = true;
-    autoStart = true;
-    config = {
-      enable = true;
-      json = {
-        scale = 0.5;
-        bitrate = 50000000;
-        encoders = [
-          {
-            encoder = "vaapi";
-            codec = "h265";
-            width = 1.0;
-            height = 1.0;
-            offset_x = 0.0;
-            offset_y = 0.0;
-          }
-        ];
-        application = [pkgs.wlx-overlay-s];
-      };
-    };
     group = "users";
     user = username;
     dataDir = "/home/${username}/Documents";
   };
 
+  # See if we can use steam link vr instead
+  # services.wivrn = {
+  #   enable = true;
+  #   openFirewall = true;
+  #   autoStart = true;
+  #   config = {
+  #     enable = true;
+  #     json = {
+  #       scale = 0.5;
+  #       bitrate = 50000000;
+  #       encoders = [
+  #         {
+  #           encoder = "vaapi";
+  #           codec = "h265";
+  #           width = 1.0;
+  #           height = 1.0;
+  #           offset_x = 0.0;
+  #           offset_y = 0.0;
+  #         }
+  #       ];
+  #       application = [pkgs.wlx-overlay-s];
+  #     };
+  #   };
+  # };
+
+  # services.sunshine = {
+  #   enable = true;
+  #   capSysAdmin = true;
+  #   openFirewall = true;
+  # };
 
   # programs.alvr = {
   #   enable = true;
