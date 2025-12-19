@@ -20,6 +20,39 @@ with lib.${namespace}; {
       settings = {
         binds.allow_workspace_cycles = true;
 
+        bindd =
+          (
+            if dmsEnabled
+            then [
+              # General
+              "ALT SHIFT, X, Lock screen, exec, dms ipc call lock lock"
+              "CTRL, Grave, Toggle notifications panel, exec, dms ipc call notifications toggle"
+            ]
+            else [
+              # General
+              "ALT, W, Choose wallpaper, exec, choose-wallpaper"
+              "ALT, R, Random wallpaper, exec, random-wallpaper"
+              "ALT SHIFT, X, Lock screen, exec, hyprlock"
+              "CTRL, Grave, Restore notification, exec, makoctl restore"
+              "CTRL, Space, Dismiss notification, exec, makoctl dismiss"
+              "CTRL SHIFT, Space, Dismiss all notifications, exec, makoctl dismiss --all"
+            ]
+          )
+          ++ [
+            # General
+            "SUPER, B, Open browser, exec, $BROWSER"
+            "SUPER, Space, Open launcher, exec, vicinae toggle"
+            "SUPER, Return, Open terminal, exec, kitty -1"
+
+            # Hyprland
+            "SUPER, W, Close current window, killactive"
+            "SUPER SHIFT, C, Cycle to previous window, cyclenext, prev"
+            "SUPER, C, Cycle to next window, cyclenext"
+            "SUPER, F, Toggle floating, togglefloating"
+            "SUPER SHIFT, F, Toggle fullscreen, fullscreen"
+            "SUPER, M, Toggle monocle, fullscreen, 1" # Monocle mode
+            "SUPER, Tab, Swap to last used workspace, workspace, previous"
+          ];
         bind = let
           workspaces = range 1 11;
           directions = [
@@ -33,40 +66,8 @@ with lib.${namespace}; {
             ["Right" "r"]
           ];
         in
-          (
-            if dmsEnabled
-            then [
-              # General
-              "ALT SHIFT, X, exec, dms ipc call lock lock"
-              "CTRL, Grave, exec, dms ipc call notifications toggle"
-            ]
-            else [
-              # General
-              "ALT, W, exec, choose-wallpaper"
-              "ALT, R, exec, random-wallpaper"
-              "ALT SHIFT, X, exec, hyprlock"
-              "CTRL, Grave, exec, makoctl restore"
-              "CTRL, Space, exec, makoctl dismiss"
-              "CTRL SHIFT, Space, exec, makoctl dismiss --all"
-            ]
-          )
-          ++ [
-            # General
-            "SUPER, B, exec, $BROWSER"
-            "SUPER, Space, exec, vicinae toggle"
-            "SUPER, Return, exec, kitty -1"
-
-            # Hyprland
-            "SUPER, W, killactive"
-            "SUPER SHIFT, C, cyclenext, prev"
-            "SUPER, C, cyclenext"
-            "SUPER, F, togglefloating"
-            "SUPER SHIFT, F, fullscreen"
-            "SUPER, M, fullscreen, 1" # Monocle mode
-            "SUPER, Tab, workspace, previous"
-          ]
           # - Move focus
-          ++ (map (x: "SUPER, ${elemAt x 0}, movefocus, ${elemAt x 1}") directions)
+          (map (x: "SUPER, ${elemAt x 0}, movefocus, ${elemAt x 1}") directions)
           # - Move window
           ++ (map (x: "SUPER SHIFT, ${elemAt x 0}, movewindow, ${elemAt x 1}") directions)
           # - Workspaces
@@ -76,39 +77,39 @@ with lib.${namespace}; {
         bindm = [
           "SUPER, mouse:272, movewindow"
         ];
-        bindl = [
-          "ALT SHIFT, S, exec, systemctl suspend"
-          "ALT SHIFT, H, exec, systemctl hibernate"
+        binddl = [
+          "ALT SHIFT, S, Suspend, exec, systemctl suspend"
+          "ALT SHIFT, H, Hibernate, exec, systemctl hibernate"
         ];
-        binde =
+        bindde =
           if dmsEnabled
           then [
             # Audio
-            ",XF86AudioLowerVolume, exec, dms ipc call audio decrement 3"
-            ",XF86AudioRaiseVolume, exec, dms ipc call audio increment 3"
-            ",XF86AudioMute, exec, dms ipc call audio mute"
-            ",XF86AudioMicMute, exec, dms ipc call audio micmute"
+            ",XF86AudioLowerVolume, Decrease volume, exec, dms ipc call audio decrement 3"
+            ",XF86AudioRaiseVolume, Increase volume, exec, dms ipc call audio increment 3"
+            ",XF86AudioMute, Mute volume, exec, dms ipc call audio mute"
+            ",XF86AudioMicMute, Mute microphone, exec, dms ipc call audio micmute"
             # Brightness
-            ",XF86MonBrightnessDown, exec, dms ipc call brightness decrement 5 ''"
-            ",XF86MonBrightnessUp, exec, dms ipc call brightness increment 5 ''"
+            ",XF86MonBrightnessDown, Increase brightness, exec, dms ipc call brightness decrement 5 ''"
+            ",XF86MonBrightnessUp, Decrease brightness, exec, dms ipc call brightness increment 5 ''"
           ]
           else [
-            ",XF86AudioLowerVolume, exec, pamixer -d 5"
-            ",XF86AudioRaiseVolume, exec, pamixer -i 5"
-            ",XF86MonBrightnessDown, exec, brightnessctl set 5%-"
-            ",XF86MonBrightnessUp, exec, brightnessctl set 5%+"
+            ",XF86AudioLowerVolume, Decrease volume, exec, pamixer -d 5"
+            ",XF86AudioRaiseVolume, Increase volume, exec, pamixer -i 5"
+            ",XF86MonBrightnessDown, Decrese brightness, exec, brightnessctl set 5%-"
+            ",XF86MonBrightnessUp, Increase brightness, exec, brightnessctl set 5%+"
           ];
       };
       extraConfig = with pkgs; ''
-        bind = ,Print,submap,capture
+        bindd = ,Print, Screenshot, submap,capture
 
         submap = capture
 
-        bind = ,G, exec, ${grimblast}/bin/grimblast --freeze --notify copysave area
+        bindd = ,G, Screenshot area, exec, ${grimblast}/bin/grimblast --freeze --notify copysave area
         bind = ,G, submap, reset
-        bind = ,Print, exec, ${grimblast}/bin/grimblast --freeze --notify copysave active
+        bindd = ,Print, Screenshot active window, exec, ${grimblast}/bin/grimblast --freeze --notify copysave active
         bind = ,Print, submap, reset
-        bind = ,S, exec, ${grimblast}/bin/grimblast --freeze --notify copysave output
+        bindd = ,S, Screenshot screen, exec, ${grimblast}/bin/grimblast --freeze --notify copysave output
         bind = ,S, submap, reset
 
         submap = reset
