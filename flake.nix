@@ -70,14 +70,9 @@
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    dgop = {
-      url = "github:AvengeMedia/dgop";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    dankMaterialShell = {
+    dms = {
       url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.dgop.follows = "dgop";
     };
 
     # Themes
@@ -106,13 +101,14 @@
       homes.modules = with inputs; [
         agenix.homeManagerModules.default
         catppuccin.homeModules.catppuccin
-        dankMaterialShell.homeModules.dankMaterialShell.default
+        dms.homeModules.dank-material-shell
         nixvim.homeModules.nixvim
         zen-browser.homeModules.beta
         vicinae.homeManagerModules.default
       ];
 
       systems.modules.nixos = with inputs; [
+        dms.nixosModules.greeter
         home-manager.nixosModules.home-manager
         nixos-cli.nixosModules.nixos-cli
         stylix.nixosModules.stylix

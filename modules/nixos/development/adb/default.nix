@@ -20,9 +20,8 @@ in {
   };
 
   config = mkIf cfg.enable {
-    ${namespace}.user.extraGroups = [
-      "adbusers"
+    environment.systemPackages = with pkgs; [
+      android-tools
     ];
-    programs.adb.enable = true;
   };
 }

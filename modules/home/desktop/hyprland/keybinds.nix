@@ -14,7 +14,7 @@
 with lib;
 with lib.${namespace}; {
   config = let
-    dmsEnabled = config.programs.dankMaterialShell.enable;
+    dmsEnabled = config.programs.dank-material-shell.enable;
   in {
     wayland.windowManager.hyprland = {
       settings = {

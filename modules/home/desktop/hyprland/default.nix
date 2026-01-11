@@ -29,7 +29,7 @@ in {
   };
 
   config = let
-    dmsEnabled = config.programs.dankMaterialShell.enable;
+    dmsEnabled = config.programs.dank-material-shell.enable;
   in
     mkIf cfg.enable {
       home.packages = with pkgs;
@@ -114,7 +114,7 @@ in {
                 disable_hyprland_logo = true;
                 mouse_move_focuses_monitor = false;
                 mouse_move_enables_dpms = true;
-                new_window_takes_over_fullscreen = 1;
+                on_focus_under_fullscreen = 1;
                 anr_missed_pings = 5;
               };
 
@@ -170,9 +170,14 @@ in {
               ];
 
               layerrule = [
-                "blur, vicinae"
-                "ignorealpha 0, vicinae"
-                "noanim, vicinae"
+                {
+                  name = "vicinae";
+                  "match:namespace" = "vicinae";
+
+                  blur = "on";
+                  ignore_alpha = 0;
+                  no_anim = "on";
+                }
               ];
             }
             cfg.settings

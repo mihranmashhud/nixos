@@ -28,13 +28,14 @@ in {
       style.name = "kvantum";
       platformTheme.name = "qt6ct";
     };
-    programs.dankMaterialShell = {
+    programs.dank-material-shell = {
       enable = true;
       quickshell.package = inputs.quickshell.packages.${system}.quickshell;
       enableDynamicTheming = false;
-      default.settings = let
+      settings = let
         isDesktop = config.${namespace}.desktop.hyprland.type == "desktop";
       in {
+        currentThemeName
         matugenScheme = "scheme-tonal-spot";
         runUserMatugenTemplates = false;
         matugenTargetMonitor = "";

@@ -18,6 +18,7 @@ in {
   options.${namespace}.desktop.hyprland = with types; {
     enable = mkBoolOpt false "Whether to enable hyprland system configuration.";
     makeDefaultSession = mkBoolOpt false "Make it the default session.";
+    dmsGreeter = mkBoolOpt false "Use DMS greeter.";
   };
 
   config = mkIf cfg.enable {
@@ -26,10 +27,24 @@ in {
     services.accounts-daemon.enable = true; # For user account information
     programs.hyprland.enable = true;
     services.displayManager =
-      {
-        sddm.wayland.enable = true;
-        sddm.enable = true;
-      }
+      (
+        if cfg.dmsGreeter
+        then {
+          dms-greeter = {
+            enable = true;
+            configHome = "/home/${config.${namespace}.user.name}";
+            compositor.name = "hyprland";
+            logs = {
+              save = true;
+              path = "/tmp/dms-greeter.log";
+            };
+          };
+        }
+        else {
+          sddm.wayland.enable = true;
+          sddm.enable = true;
+        }
+      )
       // optionalAttrs cfg.makeDefaultSession {
         defaultSession = "hyprland";
       };

@@ -21,7 +21,8 @@ in {
   config = mkIf cfg.enable {
       
     environment.systemPackages = with pkgs; [
-      sgdboop
+      # Currently broken: waiting for PR: https://github.com/NixOS/nixpkgs/pull/475718 to fix it.
+      # sgdboop
     ];
     hardware.graphics.enable32Bit = true;
     programs.gamemode.enable = true;

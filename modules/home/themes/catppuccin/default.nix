@@ -59,11 +59,12 @@ in {
         };
       };
     })
-    (mkIf config.programs.dankMaterialShell.enable {
-      programs.dankMaterialShell.default.settings = {
+    (mkIf config.programs.dank-material-shell.enable {
+      programs.dank-material-shell.settings = {
         currentThemeName = "cat-${config.catppuccin.accent}";
         iconTheme = config.gtk.iconTheme.name;
       };
+      xdg.configFile."DankMaterialShell/themes/catppuccin/theme.json".source = ./dms.json;
     })
     (mkIf config.services.vicinae.enable {
       services.vicinae.settings.theme = {
