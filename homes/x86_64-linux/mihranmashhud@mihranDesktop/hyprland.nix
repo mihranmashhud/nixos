@@ -16,10 +16,27 @@ with lib.internal; {
       m1 = "desc:Acer Technologies XB253Q TH5AA0038521";
       m2 = "desc:Sceptre Tech Inc Sceptre M24 0x00000001";
     in {
-      monitor = [
-        "${m1}, highrr, 0x0, 1, vrr, 1"
-        "${m2}, highrr, 1920x0, 1, vrr, 0"
-        # "HEADLESS-2, disable" # for sunshine
+      monitorv2 = [
+        {
+          output = m1;
+          mode = "highrr";
+          vrr = 1;
+          cm = "auto";
+          supports_wide_color = -1;
+          supports_hdr = 1;
+          sdrbrightness = 1.0;
+          sdrsaturation = 1.0;
+          sdr_min_luminance = 0.005;
+          sdr_max_luminance = 200;
+          min_luminance = 0;
+          max_luminance = 400;
+        }
+        {
+          output = m2;
+          mode = "highrr";
+          position = "auto-right";
+          vrr = 0;
+        }
       ];
       general = {
         allow_tearing = true;
@@ -36,28 +53,21 @@ with lib.internal; {
       render = {
         direct_scanout = 2;
       };
-      windowrulev2 = hypr.windowrules [
-        # Deadlock
+      windowrule = [
         {
-          windows = ["class:^(steam_app_1422450)$"];
-          rules = [
-            "fullscreen"
-            "allowsinput 1"
-            "immediate"
-          ];
-        }
-        {
-          windows = ["title:^(Picture-in-Picture)$"];
-          rules = [
-            "move 100%-w-10 100%-w-10"
-          ];
+          name = "Deadlock";
+          "match:class" = "^(steam_app_1422450)$";
+          fullscreen = "on";
+          allows_input = "on";
+          immediate = "on";
         }
       ];
       workspace =
         hypr.workspaces m1 (map toString (range 1 6))
         ++ hypr.workspaces m2 (map toString (range 6 11));
-      exec-once = with pkgs; [
+      exec-once = [
         "[workspace 6 silent] vesktop &"
+        "[workspace 6 silent] Telegram &"
         "openrgb -p 'cool ice' &"
 
         # "hyprctl output create headless" # for sunshine

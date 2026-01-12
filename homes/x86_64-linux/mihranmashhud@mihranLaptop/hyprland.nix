@@ -16,6 +16,10 @@ with lib.internal; {
         "eDP-1,highrr,auto,1"
         ", preferred, auto, 1, mirror, eDP-1"
       ];
+      exec-once = [
+        "[workspace 6 silent] vesktop &"
+        "[workspace 6 silent] Telegram &"
+      ];
     };
   };
 }

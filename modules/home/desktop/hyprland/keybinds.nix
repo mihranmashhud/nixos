@@ -40,7 +40,7 @@ with lib.${namespace}; {
           )
           ++ [
             # General
-            "SUPER, B, Open browser, exec, $BROWSER"
+            "SUPER, B, Open browser, exec, ${config.home.sessionVariables.BROWSER}"
             "SUPER, Space, Open launcher, exec, vicinae toggle"
             "SUPER, Return, Open terminal, exec, kitty -1"
 

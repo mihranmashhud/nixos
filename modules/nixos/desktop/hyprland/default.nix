@@ -22,7 +22,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.sessionVariables.NIXOS_OZONE_WL = "1";
     services.udisks2.enable = true; # Required for udiskie
     services.accounts-daemon.enable = true; # For user account information
     programs.hyprland.enable = true;
@@ -55,6 +54,7 @@ in {
 
     xdg.portal = {
       enable = true;
+      xdgOpenUsePortal = true;
       config.hyprland = {
         "org.freedesktop.portal.FileChooser" = [
           "gtk"
@@ -66,12 +66,6 @@ in {
     };
 
     ${namespace} = {
-      nix.extra-substituters = [
-        {
-          url = "https://hyprland.cachix.org";
-          key = "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=";
-        }
-      ];
       polkit.enable = true;
       theming.graphical = true;
     };

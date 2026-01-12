@@ -73,6 +73,15 @@ in {
           mkMerge
           [
             {
+              env = [
+                "NIXOS_OZONE_WL,1"
+                "XDG_CURRENT_DESKTOP,Hyprland"
+                "XDG_SESSION_TYPE,wayland"
+                "XDG_SESSION_DESKTOP,Hyprland"
+                "QT_AUTO_SCALE_FACTOR,1"
+                "QT_QPA_PLATFORM,wayland;xcb"
+                "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+              ];
               general = {
                 border_size = 2;
                 gaps_in = 4;
@@ -112,6 +121,7 @@ in {
 
               misc = {
                 disable_hyprland_logo = true;
+                disable_splash_rendering = true;
                 mouse_move_focuses_monitor = false;
                 mouse_move_enables_dpms = true;
                 on_focus_under_fullscreen = 1;
@@ -127,46 +137,67 @@ in {
                   "waybar -c ~/.config/waybar/${cfg.type}-config.json > /tmp/waybar.log &"
                 ];
 
-              windowrulev2 = hypr.windowrules [
+              monitor = mkAfter [
+                ", preferred, auto, 1"
+              ];
+
+              windowrule = [
                 {
-                  windows = [
-                    "class:^(discord)$"
-                    "class:^(vesktop)$"
-                    "class:^(Slack)$"
-                    "class:^(org.telegram.desktop)$"
-                  ];
-                  rules = ["workspace 6"];
+                  name = "messaging";
+                  "match:class" = "^(discord|vesktop|Slack|org\\.telegram\\.desktop)$";
+
+                  workspace = 6;
                 }
                 {
-                  windows = ["class:^(com.saivert.pwvucontrol)$"];
-                  rules = ["workspace 10"];
+                  name = "misbehaved-dropdowns-steam";
+                  "match:title" = "^()$";
+                  "match:class" = "class:^(steam)$";
+
+                  stay_focused = "on";
+                  min_size = "1 1";
                 }
                 {
-                  windows = ["title:^()$,class:^(steam)$"];
-                  rules = [
-                    "stayfocused"
-                    "minsize 1 1"
-                  ];
+                  name = "misbehaved-dropdowns-zoom";
+                  "match:initial_title" = "(menu window)";
+                  "match:class" = "class:^(zoom)$";
+
+                  stay_focused = "on";
+                  min_size = "1 1";
                 }
                 {
-                  windows = ["initialTitle:^(Steam Big Picture Mode)$, class:^(steam)$"];
-                  rules = [
-                    "fullscreen"
-                  ];
+                  name = "fullscreen-bigpicture-mode";
+                  "match:initial_title" = "^(Steam Big Picture Mode)$";
+                  "match:class" = "^(steam)$";
+
+                  fullscreen = "on";
                 }
                 {
-                  windows = ["title:^(Picture-in-Picture)$"];
-                  rules = [
-                    "size 448 252"
-                    "float"
-                  ];
+                  name = "picture-in-picture";
+                  "match:title" = "^(Picture-in-Picture)$";
+
+                  size = "448 252";
+                  move = "(monitor_w-window_w-10) (monitor_h-window_h-10)";
+                  float = "on";
                 }
                 {
-                  windows = ["class:(zoom),initialTitle:(menu window)"];
-                  rules = [
-                    "stayfocused"
-                  ];
+                  name = "monocle-mode-1";
+                  "match:workspace" = "w[tv1]";
+                  "match:float" = 0;
+                  border_size = 0;
+                  rounding = 0;
                 }
+                {
+                  name = "monocle-mode-2";
+                  "match:workspace" = "f[1]";
+                  "match:float" = 0;
+                  border_size = 0;
+                  rounding = 0;
+                }
+              ];
+
+              workspace = mkAfter [
+                "w[tv1], gapsout:0, gapsin:0"
+                "f[1], gapsout:0, gapsin:0"
               ];
 
               layerrule = [
@@ -182,20 +213,7 @@ in {
             }
             cfg.settings
           ];
-
-        extraConfig = with pkgs;
-          mkMerge [
-            # For Monocle Mode
-            ''
-              workspace = w[tv1], gapsout:0, gapsin:0
-              workspace = f[1], gapsout:0, gapsin:0
-              windowrulev2 = bordersize 0, floating:0, onworkspace:w[tv1]
-              windowrulev2 = rounding 0, floating:0, onworkspace:w[tv1]
-              windowrulev2 = bordersize 0, floating:0, onworkspace:f[1]
-              windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
-            ''
-            cfg.extraConfig
-          ];
+        extraConfig = cfg.extraConfig;
       };
 
       programs.hyprlock = mkMerge [
