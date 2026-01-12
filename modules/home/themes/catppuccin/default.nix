@@ -15,6 +15,7 @@ with lib;
 with lib.${namespace}; let
   cfg = config.${namespace}.themes.catppuccin;
   theming = config.${namespace}.theming;
+  flavor = "mocha";
   accent = "mauve";
 in {
   # Currently using catpuccin-mocha theme for the most part.
@@ -26,16 +27,16 @@ in {
     {
       stylix = {
         autoEnable = false;
-        # base16Scheme = getScheme pkgs "catppuccin-mocha";
+        base16Scheme = getScheme pkgs "catppuccin-${flavor}";
         opacity.terminal = 0.8;
       };
 
       catppuccin.enable = true;
       catppuccin = {
-        inherit accent;
+        inherit accent flavor;
       };
       catppuccin.gtk.icon = {
-        inherit accent;
+        inherit accent flavor;
       };
 
       # Disable for these targets
@@ -61,7 +62,14 @@ in {
     })
     (mkIf config.programs.dank-material-shell.enable {
       programs.dank-material-shell.settings = {
-        currentThemeName = "cat-${config.catppuccin.accent}";
+        currentThemeName = "custom";
+        currentThemeCategory = "registry";
+        customThemeFile = "${config.xdg.configHome}/DankMaterialShell/themes/catppuccin/theme.json";
+        registryThemeVariants = {
+          catppuccin = {
+            inherit accent flavor;
+          };
+        };
         iconTheme = config.gtk.iconTheme.name;
       };
       xdg.configFile."DankMaterialShell/themes/catppuccin/theme.json".source = ./dms.json;
@@ -69,7 +77,7 @@ in {
     (mkIf config.services.vicinae.enable {
       services.vicinae.settings.theme = {
         iconTheme = "Papirus";
-        name = "catppuccin-${config.catppuccin.flavor}";
+        name = "catppuccin-${flavor}";
       };
     })
   ]);

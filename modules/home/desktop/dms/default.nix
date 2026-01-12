@@ -35,7 +35,6 @@ in {
       settings = let
         isDesktop = config.${namespace}.desktop.hyprland.type == "desktop";
       in {
-        currentThemeName
         matugenScheme = "scheme-tonal-spot";
         runUserMatugenTemplates = false;
         matugenTargetMonitor = "";
@@ -163,6 +162,10 @@ in {
         ];
         dankBarRightWidgets =
           [
+            {
+              id = "cpuUsage";
+              enabled = true;
+            }
             {
               id = "systemTray";
               enabled = true;

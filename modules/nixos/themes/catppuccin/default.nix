@@ -15,6 +15,7 @@ with lib;
 with lib.${namespace}; let
   cfg = config.${namespace}.themes.catppuccin;
   theming = config.${namespace}.theming;
+  flavor = "mocha";
   accent = "mauve";
 in {
   options.${namespace}.themes.catppuccin = with types; {
@@ -25,18 +26,17 @@ in {
     {
       stylix = {
         autoEnable = false;
-        base16Scheme = getScheme pkgs "catppuccin-mocha";
+        base16Scheme = getScheme pkgs "catppuccin-${flavor}";
         opacity.terminal = 0.8;
       };
 
       catppuccin = {
         enable = true;
-        flavor = "mocha";
-        inherit accent;
+        inherit accent flavor;
       };
       services.displayManager.sddm.package = pkgs.kdePackages.sddm;
     }
-    (mkIf theming.graphical {
+    (mkIf theming.graphical rec {
       boot.plymouth.enable = true;
       stylix.cursor = {
         package = pkgs.bibata-cursors;
@@ -45,8 +45,8 @@ in {
       };
       # Required to get cursor working in Hyprland.
       environment.sessionVariables = {
-        HYPRCURSOR_THEME = config.stylix.cursor.name;
-        HYPRCURSOR_SIZE = toString config.stylix.cursor.size;
+        HYPRCURSOR_THEME = stylix.cursor.name;
+        HYPRCURSOR_SIZE = toString stylix.cursor.size;
       };
     })
   ]);
