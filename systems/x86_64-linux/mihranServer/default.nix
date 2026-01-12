@@ -92,7 +92,7 @@ in {
       })
       (mkIf config.services.n8n.enable {
         "n8n.server.mihran.dev".extraConfig = ''
-          reverse_proxy http://localhost:${toString config.services.n8n.settings.port}
+          reverse_proxy http://localhost:${toString config.services.n8n.environment.N8N_PORT}
           import cloudflare
         '';
       })
@@ -111,6 +111,14 @@ in {
       (mkIf config.services.syncthing.enable {
         "syncthing.server.mihran.dev".extraConfig = ''
           reverse_proxy http://${config.services.syncthing.guiAddress}
+          import cloudflare
+        '';
+      })
+      (mkIf config.services.adguardhome.enable {
+        "adguard.server.mihran.dev".extraConfig = let
+            inherit (config.services.adguardhome) host port;
+          in ''
+          reverse_proxy http://${host}:${toString port}
           import cloudflare
         '';
       })
@@ -160,6 +168,7 @@ in {
   };
 
   services.transmission = {
+    package = pkgs.transmission_4;
     enable = true;
     openFirewall = true;
     openRPCPort = true;
@@ -202,6 +211,13 @@ in {
       "--webserver"
       "--disable-webui"
     ];
+  };
+
+  services.adguardhome = {
+    enable = true;
+    port = 3003;
+    openFirewall = true;
+    allowDHCP = true;
   };
 
   services.homepage-dashboard = {
@@ -307,7 +323,7 @@ in {
     extraPackages = with pkgs; [
       intel-media-driver
       intel-vaapi-driver
-      vaapiVdpau
+      libva-vdpau-driver
       intel-compute-runtime # OpenCL filter support (hardware tonemapping and subtitle burn-in)
       vpl-gpu-rt # QSV on 11th gen or newer
     ];
