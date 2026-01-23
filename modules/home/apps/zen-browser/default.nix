@@ -75,6 +75,11 @@ in {
             color = "purple";
             icon = "fruit";
           };
+          Work = {
+            id = 4;
+            color = "orange";
+            icon = "briefcase";
+          };
         };
         spacesForce = true;
         spaces = let
@@ -93,6 +98,11 @@ in {
             id = "e929eab6-cba8-49bb-8c3c-b675ec55093f";
             position = 3000;
             container = containers."Academia".id;
+          };
+          "Work" = {
+            id = "0cc9d658-6523-4d5e-b0f9-f86965325942";
+            position = 4000;
+            container = containers."Work".id;
           };
         };
         search = {
