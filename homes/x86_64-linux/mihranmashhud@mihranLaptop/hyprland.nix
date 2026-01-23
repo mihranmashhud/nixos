@@ -8,6 +8,7 @@
 }:
 with lib;
 with lib.internal; {
+  internal.desktop.dms = enabled;
   internal.desktop.hyprland = {
     enable = true;
     type = "laptop";
@@ -20,6 +21,7 @@ with lib.internal; {
         "[workspace 6 silent] vesktop &"
         "[workspace 6 silent] Telegram &"
       ];
+      input.kb_options = "caps:swapescape";
     };
   };
 }
