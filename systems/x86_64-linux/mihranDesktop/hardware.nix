@@ -11,10 +11,11 @@
 
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
   boot.initrd.kernelModules = [];
+  boot.initrd.systemd.enable = true;
   boot.kernelModules = [];
   boot.extraModulePackages = [];
-  boot.resumeDevice = "/dev/disk/by-uuid/6e41e996-1c8c-4a01-bf15-d90fd53528b5";
-  boot.kernelParams = ["resume_offset=272384"];
+  # boot.resumeDevice = "/dev/disk/by-uuid/6e41e996-1c8c-4a01-bf15-d90fd53528b5";
+  # boot.kernelParams = ["resume_offset=272384"];
   swapDevices = [
     {
       device = "/var/lib/swapfile";
