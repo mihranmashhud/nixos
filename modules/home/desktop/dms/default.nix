@@ -275,6 +275,14 @@ in {
         batteryHibernateTimeout = 0;
         lockBeforeSuspend = true;
         loginctlLockIntegration = true;
+        powerMenuActions = [
+          "suspend"
+          "reboot"
+          "hibernate"
+          "poweroff"
+          "logout"
+          "lock"
+        ];
       };
     };
     services.mako.enable = mkForce false;
