@@ -63,6 +63,7 @@ in {
 
       wayland.windowManager.hyprland = with config.lib.stylix.colors; {
         enable = true;
+        configType = "hyprlang";
 
         settings = let
           inactive_color = "rgb(${base02})";
@@ -241,6 +242,6 @@ in {
       };
       services.cliphist.enable = true; # Clipboard history for wayland
       services.udiskie.enable = true; # USB automount
-      services.swww.enable = !dmsEnabled; # Wallpaper daemon
+      services.awww.enable = !dmsEnabled; # Wallpaper daemon
     };
 }

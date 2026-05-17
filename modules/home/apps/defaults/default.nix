@@ -31,10 +31,5 @@ in {
     #     "x-scheme-handler/unknown" = "firefox.desktop";
     #   };
     # };
-
-    home.sessionVariables = {
-      BROWSER = "zen";
-      DEFAULT_BROWSER = "${inputs.zen-browser.packages.${system}.default}/bin/zen";
-    };
   };
 }

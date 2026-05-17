@@ -15,5 +15,5 @@ with lib;
 with lib.${namespace}; let
 in {
   programs.home-manager = enabled;
-  home.stateVersion = config.system.stateVersion or "24.05";
+  home.stateVersion = config.system.stateVersion or "26.05";
 }

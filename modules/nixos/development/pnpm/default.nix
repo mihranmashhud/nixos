@@ -20,7 +20,7 @@ in {
   };
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      nodePackages.pnpm
+      pnpm
     ];
     environment.shellAliases = {
       npm = "pnpm";
