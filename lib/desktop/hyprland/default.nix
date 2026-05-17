@@ -6,14 +6,48 @@
 }:
 with lib; rec {
   hypr = {
-    windowrules = list:
-      concatMap (
-        set:
-          concatMap (rule: map (window: concatStringsSep "," [rule window]) set.windows) set.rules
-      )
-      list;
-    workspaces = m: ws:
-      ["${builtins.head ws}, monitor:${m}, default:true"]
-      ++ map (w: "${w}, monitor:${m}") (builtins.tail ws);
+    monitor_workspaces = m: ws:
+      [
+        {
+          workspace = "${builtins.head ws}";
+          monitor = m;
+          default = true;
+        }
+      ]
+      ++ (map (w: {
+        workspace = "${w}";
+        monitor = m;
+      }) (builtins.tail ws));
+    args = list: {
+      _args = list;
+    };
+    bind = {
+      keys,
+      dispatcher,
+      flags,
+    }:
+      args [
+        keys
+        (lib.generators.mkLuaInline dispatcher)
+        flags
+      ];
+    bind_exec = {
+      keys,
+      command,
+      flags,
+    }: (bind {
+      inherit keys flags;
+      dispatcher = "hl.dsp.exec_cmd(\"${command}\")";
+    });
+    autostart = commands: (args [
+      "hyprland.start"
+      (lib.generators.mkLuaInline
+        # lua
+        ''
+          function ()
+            ${lib.strings.join "\n" (map (cmd: "hl.dsp.exec_cmd(\"${cmd}\")"))}
+          end
+        '')
+    ]);
   };
 }

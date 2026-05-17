@@ -16,7 +16,7 @@ with lib.internal; {
       m1 = "desc:Acer Technologies XB253Q TH5AA0038521";
       m2 = "desc:Sceptre Tech Inc Sceptre M24 0x00000001";
     in {
-      monitorv2 = [
+      monitor = [
         {
           output = m1;
           mode = "highrr";
@@ -38,37 +38,39 @@ with lib.internal; {
           vrr = 0;
         }
       ];
-      general = {
-        allow_tearing = true;
+      config = {
+        general = {
+          allow_tearing = true;
+        };
+        animations = {
+          enabled = "yes";
+          bezier = [
+            "linear,0,0,1,1"
+          ];
+          animation = [
+            "borderangle, 1, 50, linear, loop"
+          ];
+        };
+        render = {
+          direct_scanout = 2;
+        };
       };
-      animations = {
-        enabled = "yes";
-        bezier = [
-          "linear,0,0,1,1"
-        ];
-        animation = [
-          "borderangle, 1, 50, linear, loop"
-        ];
-      };
-      render = {
-        direct_scanout = 2;
-      };
-      windowrule = [
+      window_rule = [
         {
           name = "Deadlock";
-          "match:class" = "^(steam_app_1422450)$";
-          fullscreen = "on";
-          allows_input = "on";
-          immediate = "on";
+          match.class = "^(steam_app_1422450)$";
+          fullscreen = "2 2";
+          allows_input = true;
+          immediate = true;
         }
       ];
-      workspace =
-        hypr.workspaces m1 (map toString (range 1 6))
-        ++ hypr.workspaces m2 (map toString (range 6 11));
-      exec-once = [
-        "[workspace 6 silent] vesktop &"
-        "[workspace 6 silent] Telegram &"
-        "openrgb -p 'cool ice' &"
+      workspace_rule =
+        workspaces m1 (map toString (range 1 6))
+        ++ workspaces m2 (map toString (range 6 11));
+      on = autostart [
+        "vesktop"
+        "Telegram"
+        "openrgb -p 'cool ice'"
 
         # "hyprctl output create headless" # for sunshine
       ];
