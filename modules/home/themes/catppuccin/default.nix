@@ -74,11 +74,5 @@ in {
       };
       xdg.configFile."DankMaterialShell/themes/catppuccin/theme.json".source = ./dms.json;
     })
-    (mkIf config.services.vicinae.enable {
-      services.vicinae.settings.theme = {
-        iconTheme = "Papirus";
-        name = "catppuccin-${flavor}";
-      };
-    })
   ]);
 }

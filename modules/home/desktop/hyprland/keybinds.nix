@@ -41,7 +41,7 @@ with lib.${namespace}; {
           ++ [
             # General
             "SUPER, B, Open browser, exec, ${config.home.sessionVariables.BROWSER}"
-            "SUPER, Space, Open launcher, exec, vicinae toggle"
+            "SUPER, Space, Open launcher, exec, dms ipc call spotlight toggle"
             "SUPER, Return, Open terminal, exec, kitty -1"
 
             # Hyprland

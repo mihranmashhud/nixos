@@ -5,12 +5,10 @@
     substituters = [
       "https://cache.nixos.org"
       "https://watersucks.cachix.org"
-      "https://vicinae.cachix.org"
     ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "watersucks.cachix.org-1:6gadPC5R8iLWQ3EUtfu3GFrVY7X6I4Fwz/ihW25Jbv8="
-      "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
     ];
   };
 
@@ -51,13 +49,6 @@
     # Apps
     nixvim = {
       url = "github:mihranmashhud/nixvim";
-    };
-
-    vicinae.url = "github:vicinaehq/vicinae";
-
-    zen-browser-nix = {
-      url = "github:LunaCOLON3/zen-browser-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     zen-browser = {
@@ -104,7 +95,6 @@
         dms.homeModules.dank-material-shell
         nixvim.homeModules.nixvim
         zen-browser.homeModules.beta
-        vicinae.homeManagerModules.default
       ];
 
       systems.modules.nixos = with inputs; [

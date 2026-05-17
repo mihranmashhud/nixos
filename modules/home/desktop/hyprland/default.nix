@@ -56,10 +56,8 @@ in {
             waybar = enabled;
             mako = enabled;
             wlogout = enabled;
-            vicinae = enabled;
           }
           else {
-            vicinae = enabled;
           };
       };
 
@@ -198,17 +196,6 @@ in {
               workspace = mkAfter [
                 "w[tv1], gapsout:0, gapsin:0"
                 "f[1], gapsout:0, gapsin:0"
-              ];
-
-              layerrule = [
-                {
-                  name = "vicinae";
-                  "match:namespace" = "vicinae";
-
-                  blur = "on";
-                  ignore_alpha = 0;
-                  no_anim = "on";
-                }
               ];
             }
             cfg.settings
