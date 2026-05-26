@@ -28,10 +28,12 @@ with lib.internal.hypr; {
           mirror = "eDP-1";
         }
       ];
-      on = autostart [
+    };
+    extraConfig =
+      autostart
+      [
         "vesktop"
         "Telegram"
       ];
-    };
   };
 }

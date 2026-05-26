@@ -122,7 +122,8 @@ with lib.${namespace}.hypr; {
                 description = "Open terminal";
               };
             }
-
+          ])
+          ++ (map bind [
             # Hyprland
             {
               keys = "SUPER + W";
@@ -132,7 +133,7 @@ with lib.${namespace}.hypr; {
               };
             }
             {
-              keys = "SUPER SHIFT + C";
+              keys = "SUPER + SHIFT + C";
               dispatcher = "hl.dsp.window.cycle_next({ next = false })";
               flags = {
                 description = "Cycle to previous window";
@@ -185,25 +186,25 @@ with lib.${namespace}.hypr; {
           # - Move focus
           ++ (map (x: (bind {
               keys = "SUPER + ${elemAt x 0}";
-              dispatcher = "hl.dsp.focus({ direction = ${elemAt x 1} })";
+              dispatcher = "hl.dsp.focus({ direction = \"${elemAt x 1}\" })";
             }))
             directions)
           # - Move window
           ++ (map (x: (bind {
               keys = "SUPER + SHIFT + ${elemAt x 0}";
-              dispatcher = "hl.dsp.window.move({ direction = ${elemAt x 1} })";
+              dispatcher = "hl.dsp.window.move({ direction = \"${elemAt x 1}\" })";
             }))
             directions)
           # - Workspaces
           ++ (map (x: (bind {
               keys = "SUPER + ${toString (modulo x 10)}";
-              dispatcher = "hl.dsp.focus({ workspace = ${toString x} })";
+              dispatcher = "hl.dsp.focus({ workspace = \"${toString x}\" })";
             }))
             workspaces)
           # - Move window to workspace
           ++ (map (x: (bind {
               keys = "SUPER + SHIFT + ${toString (modulo x 10)}";
-              dispatcher = "hl.dsp.window.move({ workspace = ${toString x} })";
+              dispatcher = "hl.dsp.window.move({ workspace = \"${toString x}\" })";
             }))
             workspaces)
           ++ [
@@ -330,21 +331,7 @@ with lib.${namespace}.hypr; {
               # lua
               ''
                 function()
-                  hl.dsp.exec("${grimblast}/bin/grimblast --freeze --notify copysave area")
-                  hl.dsp.submap("reset")
-                end
-              '';
-            flags = {
-              description = "Screenshot area";
-            };
-          })
-          (bind {
-            keys = "G";
-            dispatcher =
-              # lua
-              ''
-                function()
-                  hl.dsp.exec("${grimblast}/bin/grimblast --freeze --notify copysave area")
+                  hl.dsp.exec_cmd("${pkgs.grimblast}/bin/grimblast --freeze --notify copysave area")
                   hl.dsp.submap("reset")
                 end
               '';
@@ -358,7 +345,7 @@ with lib.${namespace}.hypr; {
               # lua
               ''
                 function()
-                  hl.dsp.exec("${grimblast}/bin/grimblast --freeze --notify copysave active")
+                  hl.dsp.exec_cmd("${pkgs.grimblast}/bin/grimblast --freeze --notify copysave active")
                   hl.dsp.submap("reset")
                 end
               '';
@@ -367,12 +354,12 @@ with lib.${namespace}.hypr; {
             };
           })
           (bind {
-            keys = "Print";
+            keys = "S";
             dispatcher =
               # lua
               ''
                 function()
-                  hl.dsp.exec("${grimblast}/bin/grimblast --freeze --notify copysave output")
+                  hl.dsp.exec_cmd("${pkgs.grimblast}/bin/grimblast --freeze --notify copysave output")
                   hl.dsp.submap("reset")
                 end
               '';

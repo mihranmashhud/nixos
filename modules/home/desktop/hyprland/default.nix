@@ -67,7 +67,7 @@ in {
 
         settings = let
           inactive_color = "rgb(${base02})";
-          active_color = "rgb(${base0D}) rgb(${base0E}) 45deg";
+          active_color = lib.generators.mkLuaInline ''{ colors = {"rgb(${base0D})", "rgb(${base0E})"}, angle = 45 }'';
         in
           mkMerge
           [
@@ -131,28 +131,16 @@ in {
                   action = "workspace";
                 }
               ];
-
-              # Startup
-              on =
-                autostart
-                (
-                  if dmsEnabled
-                  then (mkAfter ["dms run"])
-                  else [
-                    # Top bar
-                    "waybar -c ~/.config/waybar/${cfg.type}-config.json > /tmp/waybar.log"
-                  ]
-                );
-
               monitor = mkAfter [
                 {
+                  output = "";
                   mode = "preferred";
                   position = "auto";
                   scale = 1;
                 }
               ];
 
-              windowrule = [
+              window_rule = [
                 {
                   name = "messaging";
                   match.class = "^(discord|vesktop|Slack|org\\.telegram\\.desktop)$";
@@ -190,38 +178,25 @@ in {
                   move = lib.generators.mkLuaInline "{\"(monitor_w-window_w-10)\", \"(monitor_h-window_h-10)\"}";
                   float = true;
                 }
-                {
-                  name = "monocle-mode-1";
-                  match.workspace = "w[tv1]";
-                  match.float = 0;
-                  border_size = 0;
-                  rounding = 0;
-                }
-                {
-                  name = "monocle-mode-2";
-                  match.workspace = "f[1]";
-                  match.float = 0;
-                  border_size = 0;
-                  rounding = 0;
-                }
-              ];
-
-              workspace_rule = mkAfter [
-                {
-                  workspace = "w[tv1]";
-                  gapsout = 0;
-                  gapsin = 0;
-                }
-                {
-                  workspace = "f[1]";
-                  gapsout = 0;
-                  gapsin = 0;
-                }
               ];
             }
             cfg.settings
           ];
-        extraConfig = cfg.extraConfig;
+        # Startup
+        extraConfig =
+          mkMerge
+          [
+            (autostart
+              (
+                if dmsEnabled
+                then ["${inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/dms run"]
+                else [
+                  # Top bar
+                  "${lib.getBin pkgs.waybar} -c ~/.config/waybar/${cfg.type}-config.json > /tmp/waybar.log"
+                ]
+              ))
+            cfg.extraConfig
+          ];
       };
 
       programs.hyprlock = mkMerge [

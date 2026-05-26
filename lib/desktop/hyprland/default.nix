@@ -4,8 +4,8 @@
   namespace,
   snowfall-inputs,
 }:
-with lib; rec {
-  hypr = {
+with lib; {
+  hypr = rec {
     monitor_workspaces = m: ws:
       [
         {
@@ -24,7 +24,7 @@ with lib; rec {
     bind = {
       keys,
       dispatcher,
-      flags,
+      flags ? {},
     }:
       args [
         keys
@@ -34,20 +34,16 @@ with lib; rec {
     bind_exec = {
       keys,
       command,
-      flags,
+      flags ? {},
     }: (bind {
       inherit keys flags;
       dispatcher = "hl.dsp.exec_cmd(\"${command}\")";
     });
-    autostart = commands: (args [
-      "hyprland.start"
-      (lib.generators.mkLuaInline
-        # lua
-        ''
-          function ()
-            ${lib.strings.join "\n" (map (cmd: "hl.dsp.exec_cmd(\"${cmd}\")"))}
-          end
-        '')
-    ]);
+    autostart = commands:
+    # lua
+    ''
+      hl.on("hyprland.start", function ()
+        ${lib.strings.join "\n  " (map (cmd: "hl.exec_cmd(\"${cmd}\")") commands)}
+      end)'';
   };
 }

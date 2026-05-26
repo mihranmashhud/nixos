@@ -7,7 +7,8 @@
   ...
 }:
 with lib;
-with lib.internal; {
+with lib.internal;
+with lib.internal.hypr; {
   internal.desktop.dms = enabled;
   internal.desktop.hyprland = {
     enable = true;
@@ -43,7 +44,7 @@ with lib.internal; {
           allow_tearing = true;
         };
         animations = {
-          enabled = "yes";
+          enabled = true;
           bezier = [
             "linear,0,0,1,1"
           ];
@@ -59,21 +60,23 @@ with lib.internal; {
         {
           name = "Deadlock";
           match.class = "^(steam_app_1422450)$";
-          fullscreen = "2 2";
+          fullscreen_state = "2 2";
           allows_input = true;
           immediate = true;
         }
       ];
       workspace_rule =
-        workspaces m1 (map toString (range 1 6))
-        ++ workspaces m2 (map toString (range 6 11));
-      on = autostart [
-        "vesktop"
-        "Telegram"
-        "openrgb -p 'cool ice'"
+        monitor_workspaces m1 (map toString (range 1 6))
+        ++ monitor_workspaces m2 (map toString (range 6 11));
+    };
+    extraConfig =
+      autostart
+      [
+        "${pkgs.vesktop}/bin/vesktop"
+        "${pkgs.telegram-desktop}/bin/Telegram"
+        "${pkgs.openrgb}/bin/openrgb -p 'cool ice'"
 
         # "hyprctl output create headless" # for sunshine
       ];
-    };
   };
 }

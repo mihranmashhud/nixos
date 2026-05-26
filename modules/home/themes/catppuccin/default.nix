@@ -45,6 +45,7 @@ in {
         rofi.enable = false;
         nvim.enable = false;
         firefox.profiles.mihranmashhud.enable = false;
+        hyprland.enable = false;
       };
     }
     (mkIf theming.graphical {

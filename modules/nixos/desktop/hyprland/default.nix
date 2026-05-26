@@ -22,6 +22,9 @@ in {
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      xdg-utils
+    ];
     services.udisks2.enable = true; # Required for udiskie
     services.accounts-daemon.enable = true; # For user account information
     programs.hyprland.enable = true;
@@ -72,7 +75,11 @@ in {
       enable = true;
       xdgOpenUsePortal = true;
       config.hyprland = {
-        "org.freedesktop.portal.FileChooser" = [
+        default = [
+          "hyprland"
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.FileChooser" = [
           "gtk"
         ];
       };
