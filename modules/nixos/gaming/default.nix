@@ -22,7 +22,6 @@ in {
     ${namespace} = {
       gaming = {
         steam = enabled;
-        lutris = enabled;
       };
     };
   };
