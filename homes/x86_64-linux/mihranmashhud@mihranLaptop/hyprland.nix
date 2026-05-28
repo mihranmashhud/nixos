@@ -21,7 +21,9 @@ with lib.internal; {
         "[workspace 6 silent] vesktop &"
         "[workspace 6 silent] Telegram &"
       ];
-      input.kb_options = "caps:swapescape";
+      input.touchpad = {
+        natural_scroll = true;
+      };
     };
   };
 }
