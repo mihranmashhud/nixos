@@ -12,7 +12,8 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+with lib.${namespace}.hypr; let
   cfg = config.${namespace}.desktop.hyprland;
 in {
   imports = [
@@ -56,10 +57,8 @@ in {
             waybar = enabled;
             mako = enabled;
             wlogout = enabled;
-            vicinae = enabled;
           }
           else {
-            vicinae = enabled;
           };
       };
 
@@ -68,152 +67,181 @@ in {
 
         settings = let
           inactive_color = "rgb(${base02})";
-          active_color = "rgb(${base0D}) rgb(${base0E}) 45deg";
+          active_color = lib.generators.mkLuaInline ''{ colors = {"rgb(${base0D})", "rgb(${base0E})"}, angle = 45 }'';
         in
           mkMerge
           [
             {
-              env = [
-                "NIXOS_OZONE_WL,1"
-                "XDG_CURRENT_DESKTOP,Hyprland"
-                "XDG_SESSION_TYPE,wayland"
-                "XDG_SESSION_DESKTOP,Hyprland"
-                "QT_AUTO_SCALE_FACTOR,1"
-                "QT_QPA_PLATFORM,wayland;xcb"
-                "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+              env = map args [
+                ["NIXOS_OZONE_WL" "1"]
+                ["XDG_CURRENT_DESKTOP" "Hyprland"]
+                ["XDG_SESSION_TYPE" "wayland"]
+                ["XDG_SESSION_DESKTOP" "Hyprland"]
+                ["QT_AUTO_SCALE_FACTOR" "1"]
+                ["QT_QPA_PLATFORM" "wayland;xcb"]
+                ["QT_WAYLAND_DISABLE_WINDOWDECORATION" "1"]
               ];
-              general = {
-                border_size = 2;
-                gaps_in = 4;
-                gaps_out = 8;
-                "col.inactive_border" = inactive_color;
-                "col.active_border" = active_color;
-                "col.nogroup_border" = inactive_color;
-                "col.nogroup_border_active" = active_color;
-                resize_on_border = true;
-                layout = "dwindle";
-              };
+              config = {
+                general = {
+                  border_size = 2;
+                  gaps_in = 4;
+                  gaps_out = 8;
+                  "col.inactive_border" = inactive_color;
+                  "col.active_border" = active_color;
+                  "col.nogroup_border" = inactive_color;
+                  "col.nogroup_border_active" = active_color;
+                  resize_on_border = true;
+                  layout = "dwindle";
+                };
 
-              cursor = {
-                inactive_timeout = 15;
-                no_warps = true;
-              };
+                cursor = {
+                  inactive_timeout = 15;
+                  no_warps = true;
+                };
 
-              dwindle = {
-                force_split = 0;
-              };
+                dwindle = {
+                  force_split = 0;
+                };
 
-              decoration = {
-                rounding = 2;
-              };
+                decoration = {
+                  rounding = 2;
+                };
 
-              input = {
-                follow_mouse = 2;
-              };
+                input = {
+                  follow_mouse = 2;
+                };
 
-              gestures = {
-                workspace_swipe_invert = false;
-              };
+                gestures = {
+                  workspace_swipe_invert = false;
+                };
 
+                misc = {
+                  disable_hyprland_logo = true;
+                  disable_splash_rendering = true;
+                  mouse_move_focuses_monitor = false;
+                  mouse_move_enables_dpms = true;
+                  on_focus_under_fullscreen = 1;
+                  anr_missed_pings = 5;
+                };
+              };
               gesture = [
-                "3, horizontal, workspace"
+                {
+                  fingers = 3;
+                  direction = "horizontal";
+                  action = "workspace";
+                }
               ];
-
-              misc = {
-                disable_hyprland_logo = true;
-                disable_splash_rendering = true;
-                mouse_move_focuses_monitor = false;
-                mouse_move_enables_dpms = true;
-                on_focus_under_fullscreen = 1;
-                anr_missed_pings = 5;
-              };
-
-              # Startup
-              exec-once =
-                if dmsEnabled
-                then (mkAfter ["dms run"])
-                else [
-                  # Top bar
-                  "waybar -c ~/.config/waybar/${cfg.type}-config.json > /tmp/waybar.log &"
-                ];
-
               monitor = mkAfter [
-                ", preferred, auto, 1"
+                {
+                  output = "";
+                  mode = "preferred";
+                  position = "auto";
+                  scale = 1;
+                }
               ];
-
-              windowrule = [
+              window_rule = [
                 {
                   name = "messaging";
-                  "match:class" = "^(discord|vesktop|Slack|org\\.telegram\\.desktop)$";
+                  match.class = "^(discord|vesktop|Slack|org\\.telegram\\.desktop)$";
 
                   workspace = 6;
                 }
                 {
                   name = "misbehaved-dropdowns-steam";
-                  "match:title" = "^()$";
-                  "match:class" = "class:^(steam)$";
+                  match.title = "^()$";
+                  match.class = "class:^(steam)$";
 
-                  stay_focused = "on";
+                  stay_focused = true;
                   min_size = "1 1";
                 }
                 {
                   name = "misbehaved-dropdowns-zoom";
-                  "match:initial_title" = "(menu window)";
-                  "match:class" = "class:^(zoom)$";
+                  match.initial_title = "(menu window)";
+                  match.class = "class:^(zoom)$";
 
-                  stay_focused = "on";
+                  stay_focused = true;
                   min_size = "1 1";
                 }
                 {
                   name = "fullscreen-bigpicture-mode";
-                  "match:initial_title" = "^(Steam Big Picture Mode)$";
-                  "match:class" = "^(steam)$";
+                  match.initial_title = "^(Steam Big Picture Mode)$";
+                  match.class = "^(steam)$";
 
-                  fullscreen = "on";
+                  fullscreen_state = "2 2";
                 }
                 {
                   name = "picture-in-picture";
-                  "match:title" = "^(Picture-in-Picture)$";
+                  match.title = "^(Picture-in-Picture)$";
 
                   size = "448 252";
-                  move = "(monitor_w-window_w-10) (monitor_h-window_h-10)";
-                  float = "on";
+                  move = lib.generators.mkLuaInline "{\"(monitor_w-window_w-10)\", \"(monitor_h-window_h-10)\"}";
+                  float = true;
+                }
+                # Smart Gaps
+                {
+                  match = {
+                    float = false;
+                    workspace = "w[tv1]";
+                  };
+                  border_size = 0;
                 }
                 {
-                  name = "monocle-mode-1";
-                  "match:workspace" = "w[tv1]";
-                  "match:float" = 0;
-                  border_size = 0;
+                  match = {
+                    float = false;
+                    workspace = "w[tv1]";
+                  };
                   rounding = 0;
                 }
                 {
-                  name = "monocle-mode-2";
-                  "match:workspace" = "f[1]";
-                  "match:float" = 0;
+                  match = {
+                    float = false;
+                    workspace = "f[1]";
+                  };
                   border_size = 0;
+                }
+                {
+                  match = {
+                    float = false;
+                    workspace = "f[1]";
+                  };
                   rounding = 0;
                 }
               ];
-
-              workspace = mkAfter [
-                "w[tv1], gapsout:0, gapsin:0"
-                "f[1], gapsout:0, gapsin:0"
-              ];
-
-              layerrule = [
+              workspace_rule = [
+                # Smart Gaps
                 {
-                  name = "vicinae";
-                  "match:namespace" = "vicinae";
-
-                  blur = "on";
-                  ignore_alpha = 0;
-                  no_anim = "on";
+                  workspace = "w[tv1]";
+                  gaps_out = 0;
+                  gaps_in = 0;
+                }
+                {
+                  workspace = "f[1]";
+                  gaps_out = 0;
+                  gaps_in = 0;
                 }
               ];
             }
             cfg.settings
           ];
-        extraConfig = cfg.extraConfig;
+        # Startup
+        extraConfig =
+          mkMerge
+          [
+            # lua
+            ''
+              hl.animation({ leaf = "windows", enabled = true, speed = 8, bezier = "default", style = "popin 80%" })
+            ''
+            (autostart
+              (
+                if dmsEnabled
+                then ["${inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/dms run"]
+                else [
+                  # Top bar
+                  "${lib.getBin pkgs.waybar} -c ~/.config/waybar/${cfg.type}-config.json > /tmp/waybar.log"
+                ]
+              ))
+            cfg.extraConfig
+          ];
       };
 
       programs.hyprlock = mkMerge [
@@ -254,6 +282,6 @@ in {
       };
       services.cliphist.enable = true; # Clipboard history for wayland
       services.udiskie.enable = true; # USB automount
-      services.swww.enable = !dmsEnabled; # Wallpaper daemon
+      services.awww.enable = !dmsEnabled; # Wallpaper daemon
     };
 }

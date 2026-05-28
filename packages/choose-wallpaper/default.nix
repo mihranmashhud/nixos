@@ -1,6 +1,6 @@
 {
   writeShellApplication,
-  swww,
+  awww,
   imv,
   feh,
 }: let
@@ -9,7 +9,7 @@
 in
   writeShellApplication {
     name = "choose-wallpaper";
-    runtimeInputs = [swww imv feh];
+    runtimeInputs = [awww imv feh];
     text =
       /*
       bash
@@ -24,7 +24,7 @@ in
         ln -sf "$pic" "$CHOICE"
 
         if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
-          swww img "$pic" --transition-type center
+          awww img "$pic" --transition-type center
         else
           feh --no-fehbg --bg-fill "$pic"
         fi

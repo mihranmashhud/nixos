@@ -45,6 +45,7 @@ in {
         rofi.enable = false;
         nvim.enable = false;
         firefox.profiles.mihranmashhud.enable = false;
+        hyprland.enable = false;
       };
     }
     (mkIf theming.graphical {
@@ -73,12 +74,6 @@ in {
         iconTheme = config.gtk.iconTheme.name;
       };
       xdg.configFile."DankMaterialShell/themes/catppuccin/theme.json".source = ./dms.json;
-    })
-    (mkIf config.services.vicinae.enable {
-      services.vicinae.settings.theme = {
-        iconTheme = "Papirus";
-        name = "catppuccin-${flavor}";
-      };
     })
   ]);
 }

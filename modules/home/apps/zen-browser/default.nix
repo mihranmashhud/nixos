@@ -25,7 +25,7 @@ in {
   config = mkIf cfg.enable {
     programs.zen-browser = {
       enable = true;
-      package = pkgs.zen-browser;
+      setAsDefaultBrowser = true;
       nativeMessagingHosts = [pkgs.firefoxpwa];
       policies = {
         Preferences = mkLockedAttrs {
@@ -65,7 +65,7 @@ in {
             color = "blue";
             icon = "fingerprint";
           };
-          i3 = {
+          Dawah = {
             id = 2;
             color = "red";
             icon = "circle";
@@ -84,25 +84,23 @@ in {
         spacesForce = true;
         spaces = let
           containers = config.programs.zen-browser.profiles."default".containers;
-        in {
+          mapContainerIds = mapAttrs (name: value: value // {container = containers.${name}.id;});
+        in mapContainerIds {
           "Personal" = {
             id = "0b1ba42c-884c-4d87-9203-c65500464be5";
             position = 1000;
           };
-          "i3" = {
+          "Dawah" = {
             id = "703bc0ed-139a-4ff2-8ccf-6e90a720bf39";
             position = 2000;
-            container = containers."i3".id;
           };
           "Academia" = {
             id = "e929eab6-cba8-49bb-8c3c-b675ec55093f";
             position = 3000;
-            container = containers."Academia".id;
           };
           "Work" = {
             id = "0cc9d658-6523-4d5e-b0f9-f86965325942";
             position = 4000;
-            container = containers."Work".id;
           };
         };
         search = {

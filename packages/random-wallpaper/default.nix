@@ -1,6 +1,6 @@
 {
   writeShellApplication,
-  swww,
+  awww,
   feh,
 }: let
   bg-choice-file = "$HOME/.cache/background-img";
@@ -8,7 +8,7 @@
 in
   writeShellApplication {
     name = "random-wallpaper";
-    runtimeInputs = [swww feh];
+    runtimeInputs = [awww feh];
     text =
       /*
       bash
@@ -27,7 +27,7 @@ in
         ln -sf "$pic" "$CHOICE"
 
         if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
-          swww img "$pic" --transition-type center
+          awww img "$pic" --transition-type center
         else
           feh --no-fehbg --bg-fill "$pic"
         fi

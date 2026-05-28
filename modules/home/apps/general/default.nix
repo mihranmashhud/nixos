@@ -33,7 +33,8 @@ in {
       teams-for-linux
       cheese # webcam viewer
       kdePackages.partitionmanager # drive management
-      bitwarden-desktop # password Management
+      bitwarden-desktop # password management
+      _1password-gui # password management
       impression # live usb creation tool
       papers # PDF viewer
       seafile-client # file sharing via home server

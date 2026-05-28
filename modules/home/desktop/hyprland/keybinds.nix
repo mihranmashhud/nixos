@@ -12,47 +12,15 @@
   ...
 }:
 with lib;
-with lib.${namespace}; {
+with lib.${namespace};
+with lib.${namespace}.hypr; {
   config = let
     dmsEnabled = config.programs.dank-material-shell.enable;
   in {
     wayland.windowManager.hyprland = {
       settings = {
-        binds.allow_workspace_cycles = true;
+        config.binds.allow_workspace_cycles = true;
 
-        bindd =
-          (
-            if dmsEnabled
-            then [
-              # General
-              "ALT SHIFT, X, Lock screen, exec, dms ipc call lock lock"
-              "CTRL, Grave, Toggle notifications panel, exec, dms ipc call notifications toggle"
-            ]
-            else [
-              # General
-              "ALT, W, Choose wallpaper, exec, choose-wallpaper"
-              "ALT, R, Random wallpaper, exec, random-wallpaper"
-              "ALT SHIFT, X, Lock screen, exec, hyprlock"
-              "CTRL, Grave, Restore notification, exec, makoctl restore"
-              "CTRL, Space, Dismiss notification, exec, makoctl dismiss"
-              "CTRL SHIFT, Space, Dismiss all notifications, exec, makoctl dismiss --all"
-            ]
-          )
-          ++ [
-            # General
-            "SUPER, B, Open browser, exec, ${config.home.sessionVariables.BROWSER}"
-            "SUPER, Space, Open launcher, exec, vicinae toggle"
-            "SUPER, Return, Open terminal, exec, kitty -1"
-
-            # Hyprland
-            "SUPER, W, Close current window, killactive"
-            "SUPER SHIFT, C, Cycle to previous window, cyclenext, prev"
-            "SUPER, C, Cycle to next window, cyclenext"
-            "SUPER, F, Toggle floating, togglefloating"
-            "SUPER SHIFT, F, Toggle fullscreen, fullscreen"
-            "SUPER, M, Toggle monocle, fullscreen, 1" # Monocle mode
-            "SUPER, Tab, Swap to last used workspace, workspace, previous"
-          ];
         bind = let
           workspaces = range 1 11;
           directions = [
@@ -66,54 +34,376 @@ with lib.${namespace}; {
             ["Right" "r"]
           ];
         in
+          (map bind_exec (
+            if dmsEnabled
+            then [
+              # General
+              {
+                keys = "ALT + SHIFT + X";
+                command = "dms ipc call lock lock";
+                flags = {
+                  description = "Lock screen";
+                };
+              }
+              {
+                keys = "CTRL + Grave";
+                command = "dms ipc call notifications toggle";
+                flags = {
+                  description = "Toggle notifications panel";
+                };
+              }
+            ]
+            else [
+              # General
+              {
+                keys = "ALT + W";
+                command = "choose-wallpaper";
+                flags = {
+                  description = "Choose wallpaper";
+                };
+              }
+              {
+                keys = "ALT + R";
+                command = "random-wallpaper";
+                flags = {
+                  description = "Random wallpaper";
+                };
+              }
+              {
+                keys = "ALT + SHIFT + X";
+                command = "hyprlock";
+                flags = {
+                  description = "Lock screen";
+                };
+              }
+              {
+                keys = "CTRL + Grave";
+                command = "makoctl restore";
+                flags = {
+                  description = "Restore notification";
+                };
+              }
+              {
+                keys = "CTRL + Space";
+                command = "makoctl dismiss";
+                flags = {
+                  description = "Dismiss notification";
+                };
+              }
+              {
+                keys = "CTRL SHIFT + Space";
+                command = "makoctl dismiss --all";
+                flags = {
+                  description = "Dismiss all notifications";
+                };
+              }
+            ]
+          ))
+          ++ (map bind_exec [
+            # General
+            {
+              keys = "SUPER + B";
+              command = "${config.home.sessionVariables.BROWSER}";
+              flags = {
+                description = "Open browser";
+              };
+            }
+            {
+              keys = "SUPER + Space";
+              command = "dms ipc call spotlight toggle";
+              flags = {
+                description = "Open launcher";
+              };
+            }
+            {
+              keys = "SUPER + Return";
+              command = "kitty -1";
+              flags = {
+                description = "Open terminal";
+              };
+            }
+          ])
+          ++ (map bind [
+            # Hyprland
+            {
+              keys = "SUPER + W";
+              dispatcher = "hl.dsp.window.close()";
+              flags = {
+                description = "Close current window";
+              };
+            }
+            {
+              keys = "SUPER + SHIFT + C";
+              dispatcher = "hl.dsp.window.cycle_next({ next = false })";
+              flags = {
+                description = "Cycle to previous window";
+              };
+            }
+            {
+              keys = "SUPER + F";
+              dispatcher = "hl.dsp.window.float({ action = \"toggle\" })";
+              flags = {
+                description = "Toggle floating";
+              };
+            }
+            {
+              keys = "SUPER + SHIFT + F";
+              dispatcher = "hl.dsp.window.fullscreen({ action = \"toggle\" })";
+              flags = {
+                description = "Toggle fullscreen";
+              };
+            }
+            # TODO: Figure out how to swap between monocle layout. Requires special cycle function.
+            # {
+            #   keys = "SUPER + M";
+            #   command = "1";
+            #   flags = {
+            #     description = "Toggle monocle";
+            #   };
+            # }
+            {
+              keys = "SUPER + Tab";
+              dispatcher = "hl.dsp.focus({ workspace = \"previous\" })";
+              flags = {
+                description = "Swap to last used workspace";
+              };
+            }
+            {
+              keys = "Print";
+              dispatcher = "hl.dsp.submap(\"screenshot\")";
+              flags = {
+                description = "Screenshot";
+              };
+            }
+          ])
           # - Move focus
-          (map (x: "SUPER, ${elemAt x 0}, movefocus, ${elemAt x 1}") directions)
+          ++ (map (x: (bind {
+              keys = "SUPER + ${elemAt x 0}";
+              dispatcher = "hl.dsp.focus({ direction = \"${elemAt x 1}\" })";
+            }))
+            directions)
           # - Move window
-          ++ (map (x: "SUPER SHIFT, ${elemAt x 0}, movewindow, ${elemAt x 1}") directions)
+          ++ (map (x: (bind {
+              keys = "SUPER + SHIFT + ${elemAt x 0}";
+              dispatcher = "hl.dsp.window.move({ direction = \"${elemAt x 1}\" })";
+            }))
+            directions)
           # - Workspaces
-          ++ (map (x: "SUPER, ${toString (modulo x 10)}, workspace, ${toString x}") workspaces)
+          ++ (map (x: (bind {
+              keys = "SUPER + ${toString (modulo x 10)}";
+              dispatcher = "hl.dsp.focus({ workspace = \"${toString x}\" })";
+            }))
+            workspaces)
           # - Move window to workspace
-          ++ (map (x: "SUPER SHIFT, ${toString (modulo x 10)}, movetoworkspace, ${toString x}") workspaces);
-        bindm = [
-          "SUPER, mouse:272, movewindow"
-        ];
-        binddl = [
-          "ALT SHIFT, S, Suspend, exec, systemctl suspend"
-          "ALT SHIFT, H, Hibernate, exec, systemctl hibernate"
-        ];
-        bindde =
-          if dmsEnabled
-          then [
-            # Audio
-            ",XF86AudioLowerVolume, Decrease volume, exec, dms ipc call audio decrement 3"
-            ",XF86AudioRaiseVolume, Increase volume, exec, dms ipc call audio increment 3"
-            ",XF86AudioMute, Mute volume, exec, dms ipc call audio mute"
-            ",XF86AudioMicMute, Mute microphone, exec, dms ipc call audio micmute"
-            # Brightness
-            ",XF86MonBrightnessDown, Increase brightness, exec, dms ipc call brightness decrement 5 ''"
-            ",XF86MonBrightnessUp, Decrease brightness, exec, dms ipc call brightness increment 5 ''"
+          ++ (map (x: (bind {
+              keys = "SUPER + SHIFT + ${toString (modulo x 10)}";
+              dispatcher = "hl.dsp.window.move({ workspace = \"${toString x}\" })";
+            }))
+            workspaces)
+          ++ [
+            # Drag window
+            (bind {
+              keys = "SUPER + mouse:272";
+              dispatcher = "hl.dsp.window.drag()";
+              flags = {
+                mouse = true;
+              };
+            })
+            (bind_exec {
+              keys = "ALT + SHIFT + S";
+              command = "systemctl suspend";
+              flags = {
+                description = "Suspend";
+                locked = true;
+              };
+            })
+            (bind_exec {
+              keys = "ALT + SHIFT + H";
+              command = "systemctl hibernate";
+              flags = {
+                description = "Hibernate";
+                locked = true;
+              };
+            })
           ]
-          else [
-            ",XF86AudioLowerVolume, Decrease volume, exec, pamixer -d 5"
-            ",XF86AudioRaiseVolume, Increase volume, exec, pamixer -i 5"
-            ",XF86MonBrightnessDown, Decrese brightness, exec, brightnessctl set 5%-"
-            ",XF86MonBrightnessUp, Increase brightness, exec, brightnessctl set 5%+"
-          ];
+          ++ (map bind_exec (
+            if dmsEnabled
+            then [
+              # Audio
+              {
+                keys = "XF86AudioLowerVolume";
+                command = "dms ipc call audio decrement 3";
+                flags = {
+                  description = "Decrease volume";
+                  repeating = true;
+                };
+              }
+              {
+                keys = "XF86AudioRaiseVolume";
+                command = "dms ipc call audio increment 3";
+                flags = {
+                  description = "Increase volume";
+                  repeating = true;
+                };
+              }
+              {
+                keys = "XF86AudioMute";
+                command = "dms ipc call audio mute";
+                flags = {
+                  description = "Mute volume";
+                  repeating = true;
+                };
+              }
+              {
+                keys = "XF86AudioMicMute";
+                command = "dms ipc call audio micmute";
+                flags = {
+                  description = "Mute microphone";
+                  repeating = true;
+                };
+              }
+              # Brightness
+              {
+                keys = "XF86MonBrightnessDown";
+                command = "dms ipc call brightness decrement 5";
+                flags = {
+                  description = "Increase brightness";
+                  repeating = true;
+                };
+              }
+              {
+                keys = "XF86MonBrightnessUp";
+                command = "dms ipc call brightness increment 5 ";
+                flags = {
+                  description = "Decrease brightness";
+                  repeating = true;
+                };
+              }
+            ]
+            else [
+              {
+                keys = "XF86AudioLowerVolume";
+                command = "pamixer -d 5";
+                flags = {
+                  description = "Decrease volume";
+                  repeating = true;
+                };
+              }
+              {
+                keys = "XF86AudioRaiseVolume";
+                command = "pamixer -i 5";
+                flags = {
+                  description = "Increase volume";
+                  repeating = true;
+                };
+              }
+              {
+                keys = "XF86MonBrightnessDown";
+                command = "brightnessctl set 5%-";
+                flags = {
+                  description = "Decrese brightness";
+                  repeating = true;
+                };
+              }
+              {
+                keys = "XF86MonBrightnessUp";
+                command = "Increase brightness";
+                flags = {
+                  description = "brightnessctl set 5%+";
+                  repeating = true;
+                };
+              }
+            ]
+          ));
       };
-      extraConfig = with pkgs; ''
-        bindd = ,Print, Screenshot, submap,capture
+      submaps = {
+        screenshot.settings.bind = [
+          (bind {
+            keys = "G";
+            dispatcher =
+              # lua
+              ''
+                function()
+                  hl.dsp.exec_cmd("${pkgs.grimblast}/bin/grimblast --freeze --notify copysave area")
+                  hl.dsp.submap("reset")
+                end
+              '';
+            flags = {
+              description = "Screenshot area";
+            };
+          })
+          (bind {
+            keys = "Print";
+            dispatcher =
+              # lua
+              ''
+                function()
+                  hl.dsp.exec_cmd("${pkgs.grimblast}/bin/grimblast --freeze --notify copysave active")
+                  hl.dsp.submap("reset")
+                end
+              '';
+            flags = {
+              description = "Screenshot window";
+            };
+          })
+          (bind {
+            keys = "S";
+            dispatcher =
+              # lua
+              ''
+                function()
+                  hl.dsp.exec_cmd("${pkgs.grimblast}/bin/grimblast --freeze --notify copysave output")
+                  hl.dsp.submap("reset")
+                end
+              '';
+            flags = {
+              description = "Screenshot screen";
+            };
+          })
+        ];
+      };
+      extraConfig =
+        # lua
+        ''
+                local function layout_bind(bind_table)
+                  return function ()
+                    local workspace = hl.get_active_special_workspace() or
+                    hl.get_active_workspace()
 
-        submap = capture
+                    if not workspace then
+                      return
+                    end
 
-        bindd = ,G, Screenshot area, exec, ${grimblast}/bin/grimblast --freeze --notify copysave area
-        bind = ,G, submap, reset
-        bindd = ,Print, Screenshot active window, exec, ${grimblast}/bin/grimblast --freeze --notify copysave active
-        bind = ,Print, submap, reset
-        bindd = ,S, Screenshot screen, exec, ${grimblast}/bin/grimblast --freeze --notify copysave output
-        bind = ,S, submap, reset
+                    local layout = workspace.tiled_layout
 
-        submap = reset
-      '';
+                    if bind_table[layout] then
+                      hl.dispatch(bind_table[layout])
+                    end
+                  end
+                end
+                -- Cycle windows
+                hl.bind("SUPER + C", layout_bind({
+                  dwindle = hl.dsp.window.cycle_next(),
+                  monocle = hl.dsp.layout("cyclenext")
+                }))
+                hl.bind("SUPER + SHIFT + C", layout_bind({
+                  dwindle = hl.dsp.window.cycle_next({ next = false }),
+                  monocle = hl.dsp.layout("cycleprev"),
+                }))
+
+                -- Toggle Monocle layout
+                hl.bind("SUPER + M", function()
+                  local workspace = hl.get_active_workspace()
+
+                  if not workspace then return end
+
+                  if workspace.tiled_layout == "dwindle" then
+                    hl.workspace_rule({ workspace = workspace.name, layout = "monocle" })
+                  else
+                    hl.workspace_rule({ workspace = workspace.name, layout = "dwindle" })
+                  end
+                end)
+        '';
     };
   };
 }
