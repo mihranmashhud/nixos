@@ -43,15 +43,6 @@ with lib.internal.hypr; {
         general = {
           allow_tearing = true;
         };
-        animations = {
-          enabled = true;
-          bezier = [
-            "linear,0,0,1,1"
-          ];
-          animation = [
-            "borderangle, 1, 50, linear, loop"
-          ];
-        };
         render = {
           direct_scanout = 2;
         };
@@ -69,14 +60,17 @@ with lib.internal.hypr; {
         monitor_workspaces m1 (map toString (range 1 6))
         ++ monitor_workspaces m2 (map toString (range 6 11));
     };
-    extraConfig =
-      autostart
-      [
+    extraConfig = mkMerge [
+      # lua
+      ''
+        hl.curve("linear", { type = "bezier", points = {{0.0,0.0},{1.0,1.0}}})
+        hl.animation({ leaf = "borderangle", enabled = true, speed = 0.1, bezier = "linear", style = "loop"})
+      ''
+      (autostart [
         "${pkgs.vesktop}/bin/vesktop"
         "${pkgs.telegram-desktop}/bin/Telegram"
         "${pkgs.openrgb}/bin/openrgb -p 'cool ice'"
-
-        # "hyprctl output create headless" # for sunshine
-      ];
+      ])
+    ];
   };
 }

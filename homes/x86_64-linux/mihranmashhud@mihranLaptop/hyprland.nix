@@ -22,12 +22,18 @@ with lib.internal.hypr; {
           scale = 1;
         }
         {
+          output = "";
           mode = "preferred";
-          postion = "auto";
+          position = "auto";
           scale = 1;
           mirror = "eDP-1";
         }
       ];
+      config = {
+        input.touchpad = {
+          natural_scroll = true;
+        };
+      };
     };
     extraConfig =
       autostart

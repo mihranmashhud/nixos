@@ -139,7 +139,6 @@ in {
                   scale = 1;
                 }
               ];
-
               window_rule = [
                 {
                   name = "messaging";
@@ -178,6 +177,48 @@ in {
                   move = lib.generators.mkLuaInline "{\"(monitor_w-window_w-10)\", \"(monitor_h-window_h-10)\"}";
                   float = true;
                 }
+                # Smart Gaps
+                {
+                  match = {
+                    float = false;
+                    workspace = "w[tv1]";
+                  };
+                  border_size = 0;
+                }
+                {
+                  match = {
+                    float = false;
+                    workspace = "w[tv1]";
+                  };
+                  rounding = 0;
+                }
+                {
+                  match = {
+                    float = false;
+                    workspace = "f[1]";
+                  };
+                  border_size = 0;
+                }
+                {
+                  match = {
+                    float = false;
+                    workspace = "f[1]";
+                  };
+                  rounding = 0;
+                }
+              ];
+              workspace_rule = [
+                # Smart Gaps
+                {
+                  workspace = "w[tv1]";
+                  gaps_out = 0;
+                  gaps_in = 0;
+                }
+                {
+                  workspace = "f[1]";
+                  gaps_out = 0;
+                  gaps_in = 0;
+                }
               ];
             }
             cfg.settings
@@ -186,6 +227,10 @@ in {
         extraConfig =
           mkMerge
           [
+            # lua
+            ''
+              hl.animation({ leaf = "windows", enabled = true, speed = 8, bezier = "default", style = "popin 80%" })
+            ''
             (autostart
               (
                 if dmsEnabled

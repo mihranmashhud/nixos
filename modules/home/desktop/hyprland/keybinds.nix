@@ -140,13 +140,6 @@ with lib.${namespace}.hypr; {
               };
             }
             {
-              keys = "SUPER + C";
-              dispatcher = "hl.dsp.window.cycle_next()";
-              flags = {
-                description = "Cycle to next window";
-              };
-            }
-            {
               keys = "SUPER + F";
               dispatcher = "hl.dsp.window.float({ action = \"toggle\" })";
               flags = {
@@ -369,6 +362,48 @@ with lib.${namespace}.hypr; {
           })
         ];
       };
+      extraConfig =
+        # lua
+        ''
+                local function layout_bind(bind_table)
+                  return function ()
+                    local workspace = hl.get_active_special_workspace() or
+                    hl.get_active_workspace()
+
+                    if not workspace then
+                      return
+                    end
+
+                    local layout = workspace.tiled_layout
+
+                    if bind_table[layout] then
+                      hl.dispatch(bind_table[layout])
+                    end
+                  end
+                end
+                -- Cycle windows
+                hl.bind("SUPER + C", layout_bind({
+                  dwindle = hl.dsp.window.cycle_next(),
+                  monocle = hl.dsp.layout("cyclenext")
+                }))
+                hl.bind("SUPER + SHIFT + C", layout_bind({
+                  dwindle = hl.dsp.window.cycle_next({ next = false }),
+                  monocle = hl.dsp.layout("cycleprev"),
+                }))
+
+                -- Toggle Monocle layout
+                hl.bind("SUPER + M", function()
+                  local workspace = hl.get_active_workspace()
+
+                  if not workspace then return end
+
+                  if workspace.tiled_layout == "dwindle" then
+                    hl.workspace_rule({ workspace = workspace.name, layout = "monocle" })
+                  else
+                    hl.workspace_rule({ workspace = workspace.name, layout = "dwindle" })
+                  end
+                end)
+        '';
     };
   };
 }
