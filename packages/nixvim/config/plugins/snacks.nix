@@ -56,6 +56,16 @@
         desc = "git branches";
       };
     }
+
+    # Toggle terminal
+    {
+      mode = "n";
+      key = "<leader>t";
+      action.__raw = "Snacks.terminal.toggle";
+      options = {
+        desc = "toggle terminal";
+      };
+    }
   ];
   plugins.snacks = {
     enable = true;
@@ -64,11 +74,12 @@
         layout.preset = "telescope";
       };
       notifier.enabled = true;
-      # image = {
-      #   enabled = true;
-      #   inline = false;
-      #   float = true;
-      # };
+      image = {
+        enabled = true;
+        inline = false;
+        float = true;
+      };
+      scroll.enabled = true;
       indent.enabled = true;
       chunk = {
         enabled = true;

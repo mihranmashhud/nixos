@@ -9,7 +9,7 @@ let
   plugins = let 
     filenames = builtins.attrNames (builtins.readDir ./plugins);
     filtered = builtins.filter (f: lib.strings.hasSuffix ".nix" f) filenames;
-    paths = builtins.map (f: ./plugins/${f}) filtered;
+    paths = map (f: ./plugins/${f}) filtered;
   in paths;
 in
 {

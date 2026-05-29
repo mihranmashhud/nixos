@@ -177,35 +177,6 @@ in {
                   move = lib.generators.mkLuaInline "{\"(monitor_w-window_w-10)\", \"(monitor_h-window_h-10)\"}";
                   float = true;
                 }
-                # Smart Gaps
-                {
-                  match = {
-                    float = false;
-                    workspace = "w[tv1]";
-                  };
-                  border_size = 0;
-                }
-                {
-                  match = {
-                    float = false;
-                    workspace = "w[tv1]";
-                  };
-                  rounding = 0;
-                }
-                {
-                  match = {
-                    float = false;
-                    workspace = "f[1]";
-                  };
-                  border_size = 0;
-                }
-                {
-                  match = {
-                    float = false;
-                    workspace = "f[1]";
-                  };
-                  rounding = 0;
-                }
               ];
               workspace_rule = [
                 # Smart Gaps
