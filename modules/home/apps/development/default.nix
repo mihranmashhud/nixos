@@ -27,5 +27,9 @@ in {
       bruno # HTTP client
       antares # DB management
     ];
+
+    programs.opencode = {
+      enable = true;
+    };
   };
 }
