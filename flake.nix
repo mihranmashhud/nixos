@@ -1,5 +1,9 @@
+# DO-NOT-EDIT. This file was auto-generated using github:vic/flake-file.
+# Use `nix run .#write-flake` to regenerate it.
 {
-  description = "Mihran's NixOS flake";
+  description = "Mihran's Nix flake";
+
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   nixConfig = {
     substituters = [
@@ -13,124 +17,41 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    snowfall-lib = {
-      url = "github:snowfallorg/lib?ref=dev";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    home-manager = {
-      url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixos-cli.url = "github:nix-community/nixos-cli";
-
-    nixos-hardware.url = "github:nixos/nixos-hardware/master";
-
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-
-    nix-gaming.url = "github:fufexan/nix-gaming";
-
-    agenix.url = "github:ryantm/agenix";
-
-    # System deployment
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Apps
-    nixvim = {
-      url = "github:mihranmashhud/nixvim";
-    };
-
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
-
-    # Shell
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    dms = {
-      url = "github:AvengeMedia/DankMaterialShell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Themes
-    stylix.url = "github:danth/stylix";
     catppuccin = {
       url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    den.url = "github:denful/den";
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    flake-file.url = "github:denful/flake-file";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    import-tree.url = "github:vic/import-tree";
+    nix-gaming.url = "github:fufexan/nix-gaming";
+    nixos-hardware.url = "github:nixos/nixos-hardware/master";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
+    nixvim.url = "github:mihranmashhud/nixvim";
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    stylix.url = "github:danth/stylix";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs = {
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
   };
-
-  outputs = {self, ...} @ inputs: let
-    lib = inputs.snowfall-lib.mkLib {
-      inherit inputs;
-      src = ./.;
-    };
-  in
-    lib.mkFlake {
-      channels-config = {
-        allowUnfree = true;
-      };
-
-      overlays = with inputs; [
-      ];
-
-      homes.modules = with inputs; [
-        agenix.homeManagerModules.default
-        catppuccin.homeModules.catppuccin
-        dms.homeModules.dank-material-shell
-        nixvim.homeModules.nixvim
-        zen-browser.homeModules.beta
-      ];
-
-      systems.modules.nixos = with inputs; [
-        dms.nixosModules.greeter
-        home-manager.nixosModules.home-manager
-        nixos-cli.nixosModules.nixos-cli
-        stylix.nixosModules.stylix
-        catppuccin.nixosModules.catppuccin
-        nix-gaming.nixosModules.platformOptimizations
-        agenix.nixosModules.default
-        nix-index-database.nixosModules.nix-index
-      ];
-
-      systems.hosts.mihranDesktop.modules = with inputs; [
-        nixos-hardware.nixosModules.common-cpu-amd
-        nixos-hardware.nixosModules.common-cpu-amd-pstate
-        nixos-hardware.nixosModules.common-gpu-amd
-        nixos-hardware.nixosModules.common-pc-ssd
-        nix-gaming.nixosModules.pipewireLowLatency
-      ];
-
-      systems.hosts.mihranLaptop.modules = with inputs; [
-        nixos-hardware.nixosModules.lenovo-thinkpad-t480
-      ];
-
-      systems.hosts.mihranWSL.modules = with inputs; [
-        nixos-wsl.nixosModules.default
-      ];
-      templates = {
-        devshell.description = "Simple flake dev shell.";
-      };
-
-      deploy = lib.mkDeploy {
-        inherit (inputs) self;
-      };
-
-      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
-    };
 }
