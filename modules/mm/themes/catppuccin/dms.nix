@@ -3,10 +3,7 @@
     flavor = "mocha";
     accent = "mauve";
   in {
-    homeManager = {
-      config,
-      ...
-    }: (lib.mkIf (builtins.hasAttr "dank-material-shell" config.programs) {
+    homeManager = {config, ...}: (lib.mkIf (builtins.hasAttr "dank-material-shell" config.programs) {
       programs.dank-material-shell.settings = {
         currentThemeName = "custom";
         currentThemeCategory = "registry";

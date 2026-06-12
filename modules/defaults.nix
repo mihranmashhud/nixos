@@ -4,6 +4,10 @@
   mm,
   ...
 }: {
+  den.default.includes = [
+    den.batteries.self'
+    den.batteries.inputs'
+  ];
   den.default.nixos = {
     nixpkgs.config = {
       allowUnfree = true;

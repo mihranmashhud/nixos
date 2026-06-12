@@ -239,21 +239,21 @@ in {
           settings.bind = [
             (bind_exec {
               keys = "G";
-              command ="${pkgs.grimblast}/bin/grimblast --freeze --notify copysave area";
+              command = "${pkgs.grimblast}/bin/grimblast --freeze --notify copysave area";
               flags = {
                 description = "Screenshot area";
               };
             })
             (bind_exec {
               keys = "W";
-              command ="${pkgs.grimblast}/bin/grimblast --freeze --notify copysave active";
+              command = "${pkgs.grimblast}/bin/grimblast --freeze --notify copysave active";
               flags = {
                 description = "Screenshot window";
               };
             })
             (bind_exec {
               keys = "S";
-              command ="${pkgs.grimblast}/bin/grimblast --freeze --notify copysave output";
+              command = "${pkgs.grimblast}/bin/grimblast --freeze --notify copysave output";
               flags = {
                 description = "Screenshot screen";
               };

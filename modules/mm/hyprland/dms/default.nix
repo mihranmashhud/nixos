@@ -27,15 +27,22 @@
           path = "/tmp/dms-greeter.log";
         };
       };
+      programs.kdeconnect.enable = true;
     };
+    provides.to-users = {user, ...}:
+      lib.mkIf (user.name == "mihranmashhud") {
+        nixos.services.displayManager.dms-greeter.configHome = "/home/mihranmashhud";
+      };
 
     homeManager = {
       pkgs,
       host,
+      inputs',
       ...
     }: {
       imports = [
         inputs.dms.homeModules.dank-material-shell
+        inputs.dms-plugin-registry.nixosModules.default
       ];
 
       home.packages = with pkgs; [
@@ -48,10 +55,14 @@
       };
       programs.dank-material-shell = {
         enable = true;
-        quickshell.package = inputs.quickshell.packages.${pkgs.system}.quickshell;
+        quickshell.package = inputs'.quickshell.packages.quickshell;
         enableDynamicTheming = false;
         settings = builtins.fromJSON (builtins.readFile ./settings-${host.device-type}.json);
+        plugins = {
+          dankKDEConnect.enable = true;
+        };
       };
+      services.kdeconnect.enable = true;
     };
   };
   flake-file.inputs = {
@@ -61,6 +72,10 @@
     };
     dms = {
       url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dms-plugin-registry = {
+      url = "github:AvengeMedia/dms-plugin-registry";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

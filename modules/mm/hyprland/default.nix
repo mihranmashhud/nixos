@@ -1,7 +1,6 @@
 {
   mm,
   lib,
-  inputs,
   ...
 }: let
   monitor_workspaces = m: ws:
@@ -43,11 +42,6 @@ in {
       ];
       services.udisks2.enable = true; # Required for udiskie
       services.accounts-daemon.enable = true; # For user account information
-      programs.kdeconnect = {
-        enable = true;
-        package = pkgs.kdePackages.kdeconnect-kde;
-      };
-
       xdg.portal = {
         enable = true;
         xdgOpenUsePortal = true;
@@ -66,8 +60,8 @@ in {
       };
     };
     homeManager = {
-      pkgs,
       config,
+      inputs',
       ...
     }: {
       wayland.windowManager.hyprland = with config.lib.stylix.colors; {
@@ -208,15 +202,11 @@ in {
           ''
           (
             autostart
-            ["${inputs.dms.packages.${pkgs.system}.default}/bin/dms run"]
+            ["${inputs'.dms.packages.default}/bin/dms run"]
           )
         ];
       };
 
-      services.kdeconnect = {
-        enable = true;
-        indicator = true; # Phone integration
-      };
       services.cliphist.enable = true; # Clipboard history for wayland
       services.udiskie.enable = true; # USB automount
       services.hyprpolkitagent.enable = true; # Polkit agent

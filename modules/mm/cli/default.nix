@@ -1,8 +1,4 @@
-{
-  mm,
-  self,
-  ...
-}: {
+{mm, ...}: {
   mm.cli = {
     includes = [
       mm.cli._
@@ -10,10 +6,11 @@
     homeManager = {
       pkgs,
       user,
+      self',
       ...
     }: {
       home.packages = with pkgs;
-      with self.packages.${pkgs.system}; [
+      with self'.packages; [
         zip
         unzip
         swap

@@ -1,7 +1,6 @@
 {
   mm,
   lib,
-  self,
   ...
 }: {
   mm.system = {
@@ -137,9 +136,13 @@
       ];
     };
 
-    udev.nixos = {pkgs, ...}: {
+    udev.nixos = {
+      pkgs,
+      self',
+      ...
+    }: {
       services.udev.packages = with pkgs;
-      with self.packages.${pkgs.system}; [
+      with self'.packages; [
         qmk-udev-rules
         vial-udev-rules
         g920-wheel-udev-rules

@@ -1,8 +1,4 @@
-{
-  self,
-  inputs,
-  ...
-}: {
+{inputs, ...}: {
   perSystem = {pkgs, ...}: let
     system = pkgs.system;
     nixvim = inputs.nixvim.legacyPackages.${system};
@@ -16,8 +12,8 @@
     packages.nixvim = nixvim.makeNixvimWithModule nixvimModule;
   };
 
-  mm.dev.nixvim.homeManager = {pkgs, ...}: {
-    home.packages = with self.packages.${pkgs.system}; [
+  mm.dev.nixvim.homeManager = {self', ...}: {
+    home.packages = with self'.packages; [
       nixvim
     ];
     home.sessionVariables = {

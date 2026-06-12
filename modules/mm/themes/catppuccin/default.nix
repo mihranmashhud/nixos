@@ -38,6 +38,7 @@
 
       catppuccin = {
         enable = true;
+        cache.enable = true;
         autoEnable = true;
         inherit accent flavor;
       };
@@ -49,11 +50,7 @@
       };
     };
 
-    homeManager = {
-      pkgs,
-      host,
-      ...
-    }: {
+    homeManager = {pkgs, ...}: {
       imports = with inputs; [
         catppuccin.homeModules.catppuccin
       ];
@@ -77,12 +74,19 @@
         nvim.enable = false;
         hyprland.enable = false;
       };
+    };
 
-      gtk = {
-        enable = host.graphical;
-        theme = {
-          name = "Catppuccin-GTK-Dark";
-          package = pkgs.magnetic-catppuccin-gtk;
+    provides.to-hosts = {host, ...}: {
+      homeManager = {pkgs, ...}: {
+        gtk = rec {
+          enable = host.graphical;
+          theme = {
+            name = "Catppuccin-GTK-Dark";
+            package = pkgs.magnetic-catppuccin-gtk;
+          };
+          gtk4 = {
+            inherit theme;
+          };
         };
       };
     };
@@ -90,9 +94,6 @@
 
   flake-file.inputs = {
     stylix.url = "github:danth/stylix";
-    catppuccin = {
-      url = "github:catppuccin/nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    catppuccin.url = "github:catppuccin/nix";
   };
 }
