@@ -14,19 +14,20 @@
     graphical = true;
   };
 
+  # Host aspect
   den.aspects.mihranDesktop = {
     inludes = [
       mm.themes.catppuccin
       mm.hyprland
       mm.apps
       mm.gaming
-      (mm.gpu-passthrough {
-        platform = "amd";
-        vfioIDs = [
-          "1002:699f"
-          "1002:aae0"
-        ];
-      })
+      # (mm.gpu-passthrough {
+      #   platform = "amd";
+      #   vfioIDs = [
+      #     "1002:699f"
+      #     "1002:aae0"
+      #   ];
+      # })
     ];
 
     nixos = {pkgs, ...}: {
@@ -63,7 +64,6 @@
         r2modman
         lm_sensors
         owmods-cli
-        linux-wallpaperengine
         ringracers
       ];
 
