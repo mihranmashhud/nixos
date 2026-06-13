@@ -1,6 +1,7 @@
 {
   mm,
   inputs,
+  lib,
   ...
 }: {
   den.hosts.x86_64-linux.mihranDesktop = {
@@ -11,7 +12,6 @@
     };
 
     device-type = "desktop";
-    graphical = true;
   };
 
   # Host aspect
@@ -21,13 +21,13 @@
       mm.hyprland
       mm.apps
       mm.gaming
-      # (mm.gpu-passthrough {
-      #   platform = "amd";
-      #   vfioIDs = [
-      #     "1002:699f"
-      #     "1002:aae0"
-      #   ];
-      # })
+      (mm.gpu-passthrough {
+        platform = "amd";
+        vfioIDs = [
+          "1002:699f"
+          "1002:aae0"
+        ];
+      })
     ];
 
     nixos = {pkgs, ...}: {
@@ -128,6 +128,59 @@
         cores = 8;
         max-jobs = 8;
         trusted-users = ["nixremote"]; # For using this machine as a remote builder
+      };
+    };
+
+    homeManager = {pkgs, ...}: {
+      wayland.windowManager.hyprland = with mm.hyprland.meta.helpers; {
+        settings = let
+          m1 = "desc:Acer Technologies XB253Q TH5AA0038521";
+          m2 = "desc:Sceptre Tech Inc Sceptre M24 0x00000001";
+        in {
+          monitor = [
+            {
+              output = m1;
+              mode = "highrr";
+              vrr = 1;
+              cm = "auto";
+              supports_wide_color = -1;
+              supports_hdr = 1;
+              sdrbrightness = 1.0;
+              sdrsaturation = 1.0;
+              sdr_min_luminance = 0.005;
+              sdr_max_luminance = 200;
+              min_luminance = 0;
+              max_luminance = 400;
+            }
+            {
+              output = m2;
+              mode = "highrr";
+              position = "auto-right";
+              vrr = 0;
+            }
+          ];
+          config = {
+            general = {
+              allow_tearing = true;
+            };
+            render = {
+              direct_scanout = 2;
+            };
+          };
+          workspace_rule =
+            monitor_workspaces m1 (map toString (lib.lists.range 1 5))
+            ++ monitor_workspaces m2 (map toString (lib.lists.range 6 10));
+        };
+        extraConfig = lib.mkMerge [
+          # lua
+          ''
+            hl.curve("linear", { type = "bezier", points = {{0.0,0.0},{1.0,1.0}}})
+            hl.animation({ leaf = "borderangle", enabled = true, speed = 0.1, bezier = "linear", style = "loop"})
+          ''
+          (autostart [
+            "${pkgs.openrgb}/bin/openrgb -p 'cool ice'"
+          ])
+        ];
       };
     };
 

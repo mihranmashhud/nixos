@@ -23,6 +23,15 @@
       mm.system
       mm.nix
     ];
+
+    options = with lib;
+    with lib.types; {
+      device-type = mkOption {type = enum ["desktop" "laptop" "server"];};
+      graphical = mkOption {
+        type = bool;
+        default = true;
+      };
+    };
   };
 
   den.schema.user = {
@@ -30,7 +39,18 @@
       den.batteries.host-aspects
       den.batteries.define-user
     ];
+
+    options = with lib;
+    with lib.types; {
+      fullName = mkOption {type = str;};
+      email = mkOption {type = str;};
+      uid = mkOption {
+        default = 1000;
+        type = uniq int;
+      };
+    };
+
     # enable hm by default
-    classes = lib.mkDefault ["homeManager"];
+    config.classes = lib.mkDefault ["homeManager"];
   };
 }
