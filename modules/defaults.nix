@@ -20,7 +20,6 @@
   den.schema.host = {
     includes = [
       den.batteries.hostname
-      mm.system
       mm.nix
     ];
 

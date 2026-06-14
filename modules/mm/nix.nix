@@ -32,11 +32,6 @@
           auto-optimise-store = true;
           accept-flake-config = true;
         };
-        gc = {
-          automatic = true;
-          dates = "weekly";
-          options = "--delete-older-than 30d";
-        };
       };
     };
     provides.to-users = {user, ...}: let

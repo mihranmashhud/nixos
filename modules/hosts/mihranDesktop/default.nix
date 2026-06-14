@@ -17,6 +17,7 @@
   # Host aspect
   den.aspects.mihranDesktop = {
     includes = [
+      mm.system
       mm.themes.catppuccin
       mm.hyprland
       mm.apps
