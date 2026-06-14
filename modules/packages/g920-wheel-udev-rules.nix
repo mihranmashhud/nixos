@@ -1,6 +1,5 @@
 {
-  perSystem = {pkgs, ...}: let
-  in {
+  perSystem = {pkgs, ...}: {
     packages.g920-wheel-udev-rules = pkgs.callPackage (
       {
         writeTextFile,

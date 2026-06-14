@@ -1,11 +1,4 @@
-{
-  lib,
-  namespace,
-  inputs,
-  pkgs,
-  config,
-  ...
-}: {
+_: {
   # Enables treesitter related plugins as well
   plugins.treesitter = {
     enable = true;

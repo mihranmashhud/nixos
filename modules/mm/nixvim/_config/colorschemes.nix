@@ -1,13 +1,10 @@
 {
   lib,
   namespace,
-  inputs,
-  pkgs,
   ...
 }:
 with lib;
-with lib.${namespace}; let
-in rec {
+with lib.${namespace}; rec {
   opts.background = "dark";
   colorschemes = {
     kanagawa-paper.enable = true;

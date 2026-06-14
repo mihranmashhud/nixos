@@ -4,7 +4,7 @@
       slack
       teams-for-linux
       telegram-desktop
-      (zoom-us.override (prev: {
+      (zoom-us.override (_prev: {
         hyprlandXdgDesktopPortalSupport = true;
       }))
     ];

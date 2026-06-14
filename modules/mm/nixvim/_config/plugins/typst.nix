@@ -1,11 +1,4 @@
-{
-  lib,
-  namespace,
-  inputs,
-  pkgs,
-  config,
-  ...
-}: {
+_: {
   dependencies.typst.enable = true;
   lsp.servers.tinymist.enable = true;
   plugins.typst-preview.enable = true;

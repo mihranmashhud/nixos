@@ -1,13 +1,10 @@
 {
   lib,
   namespace,
-  inputs,
-  pkgs,
   ...
 }:
 with lib;
-with lib.${namespace}; let
-in {
+with lib.${namespace}; {
   extraConfigLuaPre = ''
     local set_kitty_bg = function(bg)
       vim.fn.system("kitty @ set-colors background='"..bg.."'")

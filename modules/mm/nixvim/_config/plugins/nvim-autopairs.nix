@@ -1,10 +1,4 @@
-{
-  lib,
-  namespace,
-  inputs,
-  pkgs,
-  ...
-}: {
+_: {
   plugins.nvim-autopairs = {
     enable = true;
     settings = {

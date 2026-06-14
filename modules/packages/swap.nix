@@ -1,6 +1,5 @@
 {
-  perSystem = {pkgs, ...}: let
-  in {
+  perSystem = {pkgs, ...}: {
     packages.swap = pkgs.callPackage (
       {writeShellApplication}:
         writeShellApplication {

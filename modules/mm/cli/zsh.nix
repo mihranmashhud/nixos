@@ -30,9 +30,7 @@
       # Load completion before loading plugins with antidote.
       initContent =
         lib.mkBefore
-        /*
-        bash
-        */
+        # bash
         ''
           autoload -U compinit && compinit
         '';

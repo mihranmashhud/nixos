@@ -1,10 +1,4 @@
-{
-  lib,
-  namespace,
-  inputs,
-  pkgs,
-  ...
-}: let
+{lib, ...}: let
   plugins = let
     filenames = builtins.attrNames (builtins.readDir ./plugins);
     filtered = builtins.filter (f: lib.strings.hasSuffix ".nix" f) filenames;

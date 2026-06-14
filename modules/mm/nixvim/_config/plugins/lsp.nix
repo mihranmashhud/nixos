@@ -1,11 +1,4 @@
-{
-  lib,
-  namespace,
-  inputs,
-  pkgs,
-  config,
-  ...
-}: {
+{config, ...}: {
   # Include LSP related plugins here as well
   diagnostic.settings = {
     severity_sort = true;

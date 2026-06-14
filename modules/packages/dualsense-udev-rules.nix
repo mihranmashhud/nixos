@@ -1,6 +1,5 @@
 {
-  perSystem = {pkgs, ...}: let
-  in {
+  perSystem = {pkgs, ...}: {
     packages.dualsense-udev-rules = pkgs.callPackage (
       {writeTextFile}:
         writeTextFile {

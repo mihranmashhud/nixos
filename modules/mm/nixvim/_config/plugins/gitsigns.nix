@@ -1,10 +1,4 @@
-{
-  lib,
-  namespace,
-  inputs,
-  pkgs,
-  ...
-}: {
+_: {
   plugins.gitsigns = {
     enable = true;
     settings = {

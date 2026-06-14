@@ -1,10 +1,4 @@
-{
-  lib,
-  namespace,
-  inputs,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   extraPackages = with pkgs; [
     prettierd
     isort

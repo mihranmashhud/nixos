@@ -1,10 +1,4 @@
-{
-  lib,
-  namespace,
-  inputs,
-  pkgs,
-  ...
-}: {
+_: {
   plugins = {
     snacks.settings.input.enabled = true;
     snacks.settings.terminal.enabled = true;

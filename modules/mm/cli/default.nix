@@ -32,8 +32,8 @@
         package = pkgs.gitFull;
         settings = {
           user = {
-            name = user.name;
-            email = user.email;
+            inherit (user) name;
+            inherit (user) email;
           };
           color.ui = "auto";
           push = {

@@ -1,10 +1,4 @@
-{
-  lib,
-  namespace,
-  inputs,
-  pkgs,
-  ...
-}: {
+_: {
   plugins.blink-cmp = {
     enable = true;
     settings = {

@@ -1,6 +1,6 @@
 {inputs, ...}: {
   perSystem = {pkgs, ...}: let
-    system = pkgs.system;
+    inherit (pkgs) system;
     nixvim = inputs.nixvim.legacyPackages.${system};
     nixvimModule = {
       module = import ./_config;

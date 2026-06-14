@@ -1,10 +1,4 @@
-{
-  lib,
-  namespace,
-  inputs,
-  pkgs,
-  ...
-}: {
+_: {
   plugins.neo-tree = {
     enable = true;
     settings.event_handlers = let

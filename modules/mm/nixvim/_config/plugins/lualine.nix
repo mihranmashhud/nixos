@@ -1,8 +1,5 @@
 {
   lib,
-  namespace,
-  inputs,
-  pkgs,
   config,
   ...
 }: {
@@ -83,8 +80,7 @@
         lualine_z = [];
       };
       extensions =
-        []
-        ++ (lib.optional config.plugins.neo-tree.enable "neo-tree");
+        lib.optional config.plugins.neo-tree.enable "neo-tree";
     };
   };
 }

@@ -3,9 +3,19 @@
     nixos = {pkgs, ...}: {
       environment.systemPackages = with pkgs; [
         alejandra
+        deadnix
+        statix
       ];
       programs.nix-index.enable = true;
       programs.nix-ld.enable = true;
+      programs.nh = {
+        enable = true;
+        clean = {
+          enable = true;
+          dates = "weekly";
+          extraArgs = "--keep 5";
+        };
+      };
 
       nix = {
         settings = {

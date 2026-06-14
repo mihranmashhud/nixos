@@ -1,7 +1,6 @@
 {
   lib,
   namespace,
-  inputs,
   ...
 }:
 with lib;

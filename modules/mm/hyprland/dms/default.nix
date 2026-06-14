@@ -57,7 +57,7 @@
         enable = true;
         quickshell.package = inputs'.quickshell.packages.quickshell;
         enableDynamicTheming = false;
-        settings = lib.mkDefault (builtins.fromJSON (builtins.readFile ./settings-${host.device-type}.json));
+        settings = builtins.fromJSON (builtins.readFile ./settings-${host.device-type}.json);
         plugins = {
           dankKDEConnect.enable = true;
         };

@@ -1,11 +1,4 @@
-{
-  lib,
-  namespace,
-  inputs,
-  pkgs,
-  config,
-  ...
-}: {
+_: {
   plugins.transparent = {
     enable = true;
     settings.extra_groups = [

@@ -1,11 +1,4 @@
-{
-  lib,
-  namespace,
-  inputs,
-  pkgs,
-  config,
-  ...
-}: {
+_: {
   plugins.undotree.enable = true;
   keymaps = [
     {

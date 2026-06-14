@@ -1,10 +1,3 @@
-{
-  lib,
-  namespace,
-  inputs,
-  pkgs,
-  config,
-  ...
-}: {
+_: {
   plugins.web-devicons.enable = true;
 }

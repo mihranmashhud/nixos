@@ -16,7 +16,7 @@
   "dockTransparency": 1,
   "widgetBackgroundColor": "s",
   "widgetColorMode": "default",
-  "controlCenterTileColorMode": "surfaceVariant",
+  "controlCenterTileColorMode": "primary",
   "buttonColorMode": "primary",
   "cornerRadius": 8,
   "niriLayoutGapsOverride": -1,
@@ -109,12 +109,7 @@
     {
       "id": "volumeSlider",
       "enabled": true,
-      "width": 50
-    },
-    {
-      "id": "brightnessSlider",
-      "enabled": true,
-      "width": 50
+      "width": 100
     },
     {
       "id": "wifi",
@@ -142,7 +137,7 @@
       "width": 50
     },
     {
-      "id": "darkMode",
+      "id": "doNotDisturb",
       "enabled": true,
       "width": 50
     }
@@ -223,7 +218,7 @@
   ],
   "centeringMode": "index",
   "clockDateFormat": "ddd MMM d",
-  "lockDateFormat": "ddd MMM d",
+  "lockDateFormat": "",
   "greeterRememberLastSession": true,
   "greeterRememberLastUser": true,
   "greeterAutoLogin": false,
@@ -259,7 +254,7 @@
   "dankLauncherV2UnloadOnClose": false,
   "dankLauncherV2IncludeFilesInAll": false,
   "dankLauncherV2IncludeFoldersInAll": false,
-  "launcherUseOverlayLayer": false,
+  "launcherUseOverlayLayer": true,
   "launcherStyle": "full",
   "spotlightBarShowModeChips": false,
   "useAutoLocation": true,
@@ -448,7 +443,7 @@
   "notificationHistorySaveNormal": true,
   "notificationHistorySaveCritical": true,
   "notificationRules": [],
-  "notificationFocusedMonitor": true,
+  "notificationFocusedMonitor": false,
   "osdAlwaysShowValue": true,
   "osdPosition": 5,
   "osdVolumeEnabled": true,
@@ -463,11 +458,11 @@
   "powerActionConfirm": true,
   "powerActionHoldDuration": 0.5,
   "powerMenuActions": [
-    "reboot",
-    "logout",
-    "poweroff",
-    "lock",
     "suspend",
+    "reboot",
+    "poweroff",
+    "logout",
+    "lock",
     "restart"
   ],
   "powerMenuDefaultAction": "suspend",
@@ -486,7 +481,7 @@
   "updaterIntervalSeconds": 86400,
   "updaterIncludeFlatpak": true,
   "updaterAllowAUR": true,
-  "displayNameMode": "model",
+  "displayNameMode": "system",
   "screenPreferences": {},
   "showOnLastDisplay": {},
   "niriOutputSettings": {},
@@ -535,9 +530,7 @@
         },
         {
           "id": "memUsage",
-          "enabled": true,
-          "showSwap": false,
-          "showInGb": false
+          "enabled": true
         },
         {
           "id": "notificationButton",
@@ -568,10 +561,7 @@
       "openOnOverview": false,
       "visible": true,
       "popupGapsAuto": true,
-      "popupGapsManual": 4,
-      "widgetOutlineEnabled": false,
-      "useOverlayLayer": false,
-      "shadowIntensity": 0
+      "popupGapsManual": 4
     }
   ],
   "desktopClockEnabled": false,

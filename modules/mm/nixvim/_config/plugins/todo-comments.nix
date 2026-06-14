@@ -1,9 +1,3 @@
-{
-  lib,
-  namespace,
-  inputs,
-  pkgs,
-  ...
-}: {
+_: {
   plugins.todo-comments.enable = true;
 }

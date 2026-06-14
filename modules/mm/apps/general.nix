@@ -8,6 +8,7 @@
     homeManager = {pkgs, ...}: {
       home.packages = with pkgs; [
         kdePackages.dolphin # file manager
+        nautilus
         gnome-calculator # calculator
         warpinator # send files around
         obsidian # note taking

@@ -1,10 +1,4 @@
-{
-  lib,
-  namespace,
-  inputs,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   extraPackages = with pkgs; [
     ghostscript # Required to render PDF files
     tectonic # Required to render LaTeX math expressions

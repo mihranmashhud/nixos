@@ -34,18 +34,27 @@
       ];
     };
 
-    devenv.nixos = {pkgs, ...}: {
-      environment.systemPackages = with pkgs; [
-        devenv
-      ];
-    };
-
-    direnv.nixos = {
-      programs.direnv = {
-        enable = true;
-        silent = true;
+    devenv = {
+      nixos = {pkgs, ...}: {
+        environment.systemPackages = with pkgs; [
+          devenv
+        ];
+      };
+      homeManager = {
+        programs.zsh.initContent =
+          # bash
+          ''
+            eval "$(devenv hook zsh)"
+          '';
       };
     };
+
+    # direnv.nixos = {
+    #   programs.direnv = {
+    #     enable = true;
+    #     silent = true;
+    #   };
+    # };
 
     postgres.nixos = {pkgs, ...}: {
       services.pgadmin = {

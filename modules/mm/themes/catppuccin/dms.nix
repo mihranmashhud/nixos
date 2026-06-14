@@ -4,7 +4,7 @@
     accent = "mauve";
   in {
     homeManager = {config, ...}: (lib.mkIf (builtins.hasAttr "dank-material-shell" config.programs) {
-      programs.dank-material-shell.settings = lib.mkForce {
+      programs.dank-material-shell.settings = lib.mkAfter {
         currentThemeName = "custom";
         currentThemeCategory = "registry";
         customThemeFile = "${config.xdg.configHome}/DankMaterialShell/themes/catppuccin/theme.json";
