@@ -70,8 +70,11 @@
       notifier.enabled = true;
       image = {
         enabled = true;
-        inline = false;
-        float = true;
+        doc = {
+          enabled = true;
+          inline = false;
+          float = true;
+        };
       };
       scroll.enabled = true;
       indent.enabled = true;
