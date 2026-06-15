@@ -56,32 +56,7 @@ _: {
         "path"
         "snippets"
         "buffer"
-        "copilot"
       ];
-      sources.providers = {
-        copilot = {
-          async = true;
-          module = "blink-copilot";
-          name = "copilot";
-        };
-      };
-    };
-  };
-  plugins.blink-copilot.enable = true;
-  plugins.copilot-lua = {
-    enable = true;
-    settings = {
-      suggestion.enabled = false;
-      panel.enabled = false;
-      filetypes = {
-        markdown = true;
-        help = true;
-      };
-      server_opts_overrides = {
-        settings = {
-          telemetry.telemetryLevel = "off";
-        };
-      };
     };
   };
 }
