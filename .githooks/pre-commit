@@ -2,7 +2,7 @@
 set -e
 
 echo "Formatting files..."
-alejandra .
+alejandra . --quiet
 
 echo "Running statix fix..."
 statix fix .
