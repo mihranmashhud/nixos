@@ -43,7 +43,18 @@
         inherit accent flavor;
       };
       services.displayManager.sddm.package = pkgs.kdePackages.sddm;
-      boot.plymouth.enable = host.graphical;
+      boot = {
+        plymouth.enable = host.graphical;
+        kernelParams = lib.mkIf host.graphical [
+          # Silent Boot Params
+          "quiet"
+          "splash" # See splash screen
+          "rd.systemd.show_status=false"
+          "rd.udev.log_level=3"
+          "udev.log_priority=3"
+          "boot.shell_on_fail"
+        ];
+      };
       environment.sessionVariables = lib.mkIf (host.graphical && config.programs.hyprland.enable) {
         HYPRCURSOR_THEME = config.stylix.cursor.name;
         HYPRCURSOR_SIZE = toString config.stylix.cursor.size;

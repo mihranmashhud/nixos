@@ -186,11 +186,15 @@ in {
               workspace = "w[tv1]";
               gaps_out = 0;
               gaps_in = 0;
+              no_border = true;
+              no_rounding = true;
             }
             {
               workspace = "f[1]";
               gaps_out = 0;
               gaps_in = 0;
+              no_border = true;
+              no_rounding = true;
             }
           ];
         };
