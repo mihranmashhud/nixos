@@ -41,6 +41,9 @@
         cache.enable = true;
         autoEnable = true;
         inherit accent flavor;
+        sources = inputs.catppuccin.packages.${pkgs.stdenv.hostPlatform.system}.overrideScope (final: prev: {
+          whiskers = pkgs.catppuccin-whiskers;
+        });
       };
       services.displayManager.sddm.package = pkgs.kdePackages.sddm;
       boot = {
@@ -84,20 +87,18 @@
         rofi.enable = false;
         nvim.enable = false;
         hyprland.enable = false;
+        sources = inputs.catppuccin.packages.${pkgs.stdenv.hostPlatform.system}.overrideScope (final: prev: {
+          whiskers = pkgs.catppuccin-whiskers;
+        });
       };
-    };
-
-    provides.to-hosts = {host, ...}: {
-      homeManager = {pkgs, ...}: {
-        gtk = rec {
-          enable = host.graphical;
-          theme = {
-            name = "Catppuccin-GTK-Dark";
-            package = pkgs.magnetic-catppuccin-gtk;
-          };
-          gtk4 = {
-            inherit theme;
-          };
+      gtk = rec {
+        enable = true;
+        theme = {
+          name = "Catppuccin-GTK-Dark";
+          package = pkgs.magnetic-catppuccin-gtk;
+        };
+        gtk4 = {
+          inherit theme;
         };
       };
     };
