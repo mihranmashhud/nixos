@@ -22,6 +22,7 @@
       mm.hyprland
       mm.apps
       mm.gaming
+      mm.gaming.stream-client
     ];
 
     nixos = {
@@ -38,6 +39,11 @@
         enable = true;
         mode = "challenge-response";
         id = ["27757091"];
+      };
+
+      services.tailscale = {
+        enable = true;
+        useRoutingFeatures = "client";
       };
 
       # Distributed Nix builds
@@ -58,7 +64,7 @@
       };
     };
 
-    homeManager = {
+    homeManager = {pkgs, ...}: {
       wayland.windowManager.hyprland.settings.monitor = [
         {
           output = "eDP-1";

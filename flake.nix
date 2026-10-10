@@ -3,7 +3,7 @@
 {
   description = "Mihran's Nix flake";
 
-  outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./modules);
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   nixConfig = {
     substituters = [
@@ -37,6 +37,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     import-tree.url = "github:vic/import-tree";
+    moonshine.url = "github:hgaiser/moonshine";
     nix-gaming.url = "github:fufexan/nix-gaming";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";

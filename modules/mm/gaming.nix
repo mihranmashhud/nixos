@@ -5,7 +5,7 @@
 }: {
   mm.gaming = {
     includes = [
-      mm.gaming._
+      mm.gaming.steam
     ];
     nixos = {
       imports = with inputs; [
@@ -35,11 +35,40 @@
         programs.gamemode.enable = true;
       };
       provides.to-users = {user, ...}: {
-        users.users.${user.name}.extraGroups = ["gamemode"];
+        nixos.users.users.${user.name}.extraGroups = ["gamemode"];
+      };
+    };
+    stream-server = {
+      nixos = {
+        services.moonshine = {
+          enable = true;
+          user = "mihranmashhud";
+          settings = {
+            application = [
+              {
+                title = "Steam";
+                command = [
+                  "/run/current-system/sw/bin/steam"
+                  "steam://open/bigpicture"
+                ];
+              }
+            ];
+          };
+        };
+        users.users.mihranmashhud.extraGroups = ["input"];
+      };
+    };
+    stream-client = {
+      nixos = {
+        programs.moonlight-qt = {
+          enable = true;
+          capSysNice = true;
+        };
       };
     };
   };
   flake-file.inputs = {
     nix-gaming.url = "github:fufexan/nix-gaming";
+    moonshine.url = "github:hgaiser/moonshine";
   };
 }

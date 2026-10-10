@@ -22,6 +22,7 @@
       mm.hyprland
       mm.apps
       mm.gaming
+      mm.gaming.stream-server
       (mm.gpu-passthrough {
         platform = "amd";
         vfioIDs = [
