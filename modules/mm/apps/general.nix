@@ -25,6 +25,7 @@
         impression # live usb creation tool
         papers # PDF viewer
         seafile-client # file sharing via home server
+        deluge
 
         libreoffice-qt # office Apps
         hunspell
