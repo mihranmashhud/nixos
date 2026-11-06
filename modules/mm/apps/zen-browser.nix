@@ -4,7 +4,8 @@
     Status = "locked";
   });
 in {
-  mm.apps.zen-browser.homeManager = {pkgs, ...}: {
+  mm.apps.zen-browser.
+    homeManager = {pkgs, ...}: {
     imports = with inputs; [
       zen-browser.homeModules.beta
     ];
@@ -54,11 +55,6 @@ in {
             color = "purple";
             icon = "fruit";
           };
-          Work = {
-            id = 4;
-            color = "orange";
-            icon = "briefcase";
-          };
         };
         spacesForce = true;
         spaces = let
@@ -76,10 +72,6 @@ in {
             "Academia" = {
               id = "e929eab6-cba8-49bb-8c3c-b675ec55093f";
               position = 3000;
-            };
-            "Work" = {
-              id = "0cc9d658-6523-4d5e-b0f9-f86965325942";
-              position = 4000;
             };
           };
         search = {

@@ -10,7 +10,6 @@
         kdePackages.dolphin # file manager
         nautilus
         gnome-calculator # calculator
-        warpinator # send files around
         obsidian # note taking
         mpv # video/music player
         inkscape # vector editing
@@ -21,7 +20,6 @@
         cheese # webcam viewer
         kdePackages.partitionmanager # drive management
         bitwarden-desktop # password management
-        _1password-gui # password management
         impression # live usb creation tool
         papers # PDF viewer
         seafile-client # file sharing via home server
