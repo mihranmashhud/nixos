@@ -9,17 +9,21 @@
         enable = true;
         compositor = {
           name = "hyprland";
-          customConfig = ''
-            env = DMS_RUN_GREETER,1
-            env = HYPRCURSOR_THEME,${config.stylix.cursor.name}
-            env = HYPRCURSOR_SIZE,${toString config.stylix.cursor.size}
+          customConfig =
+            # lua
+            ''
+              hl.env("DMS_RUN_GREETER","1")
+              hl.env("HYPRCURSOR_THEME","${config.stylix.cursor.name}")
+              hl.env("HYPRCURSOR_SIZE","${toString config.stylix.cursor.size}")
 
-            misc {
-              disable_hyprland_logo = true
-              disable_splash_rendering = true
-              disable_watchdog_warning = true
-            }
-          '';
+              hl.config({
+                misc {
+                  disable_hyprland_logo = true
+                  disable_splash_rendering = true
+                  disable_watchdog_warning = true
+                }
+              })
+            '';
         };
 
         logs = {
@@ -37,12 +41,12 @@
     homeManager = {
       pkgs,
       host,
-      inputs',
       ...
     }: {
       imports = [
         inputs.dms.homeModules.dank-material-shell
         inputs.dms-plugin-registry.nixosModules.default
+        inputs.dcal.homeModules.default
       ];
 
       home.packages = with pkgs; [
@@ -55,27 +59,31 @@
       };
       programs.dank-material-shell = {
         enable = true;
-        quickshell.package = inputs'.quickshell.packages.quickshell;
         enableDynamicTheming = false;
         settings = builtins.fromJSON (builtins.readFile ./settings-${host.device-type}.json);
         plugins = {
           dankKDEConnect.enable = true;
         };
       };
+      programs.dank-calendar = {
+        enable = true;
+        settings = builtins.fromJSON (builtins.readFile ./dcal-settings.json);
+        systemd.enable = true;
+      };
       services.kdeconnect.enable = true;
     };
   };
   flake-file.inputs = {
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     dms = {
-      url = "github:AvengeMedia/DankMaterialShell";
+      url = "github:duxlabs-dev/dux-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dms-plugin-registry = {
-      url = "github:AvengeMedia/dms-plugin-registry";
+      url = "github:duxlabs-dev/dux-plugin-registry";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dcal = {
+      url = "github:duxlabs-dev/dux-calendar";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

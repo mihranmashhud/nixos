@@ -2,27 +2,23 @@
   mm.apps.general = {
     nixos = {
       nixpkgs.config.permittedInsecurePackages = [
-        "electron-39.8.10" # for bitwarden-desktop
       ];
+      programs.localsend = {
+        enable = true;
+        openFirewall = true;
+      };
     };
     homeManager = {pkgs, ...}: {
       home.packages = with pkgs; [
         kdePackages.dolphin # file manager
         nautilus
-        gnome-calculator # calculator
         obsidian # note taking
         mpv # video/music player
         inkscape # vector editing
-        darktable # lighttable editor/darkroom
-        transmission_4-gtk # torrenting
-        transmission-remote-gtk # remote Transmission control
-        teams-for-linux
         cheese # webcam viewer
         kdePackages.partitionmanager # drive management
-        bitwarden-desktop # password management
         impression # live usb creation tool
         papers # PDF viewer
-        seafile-client # file sharing via home server
         deluge
 
         libreoffice-qt # office Apps

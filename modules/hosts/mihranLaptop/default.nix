@@ -22,7 +22,6 @@
       mm.hyprland
       mm.apps
       mm.gaming
-      mm.gaming.stream-client
     ];
 
     nixos = {
@@ -64,7 +63,7 @@
       };
     };
 
-    homeManager = {pkgs, ...}: {
+    homeManager = {...}: {
       wayland.windowManager.hyprland.settings.monitor = [
         {
           output = "eDP-1";
