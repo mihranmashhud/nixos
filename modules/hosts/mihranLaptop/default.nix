@@ -30,31 +30,31 @@
       ...
     }: {
       imports = with inputs; [
-        nixos-hardware.nixosModules.microsoft-surface-common
+        # nixos-hardware.nixosModules.microsoft-surface-common
         ./_hardware.nix
       ];
 
       # Surface Book 3
 
-      boot.kernelParams = [
-        "reboot=pci"
-      ];
-      boot.initrd.kernelModules = [
-        "surface_aggregator"
-        "surface_aggregator_registry"
-        "surface_aggregator_hub "
-        "surface_hid_core"
-        "surface_hid"
-        "intel_lpss"
-        "intel_lpss_pci"
-        "8250_dw"
-      ];
-      boot.extraModprobeConfig = ''
-        # Required for auto D3Cold
-        options nvidia_drm modeset=0
-        options nvidia NVreg_DynamicPowerManagement=0x02
-      '';
-      hardware.microsoft-surface.kernelVersion = "longterm";
+      # boot.kernelParams = [
+      #   "reboot=pci"
+      # ];
+      # boot.initrd.kernelModules = [
+      #   "surface_aggregator"
+      #   "surface_aggregator_registry"
+      #   "surface_aggregator_hub "
+      #   "surface_hid_core"
+      #   "surface_hid"
+      #   "intel_lpss"
+      #   "intel_lpss_pci"
+      #   "8250_dw"
+      # ];
+      # boot.extraModprobeConfig = ''
+      #   # Required for auto D3Cold
+      #   options nvidia_drm modeset=0
+      #   options nvidia NVreg_DynamicPowerManagement=0x02
+      # '';
+      # hardware.microsoft-surface.kernelVersion = "longterm";
       hardware.graphics.enable = true;
       services.xserver.videoDrivers = ["nvidia"];
       hardware.nvidia = {
