@@ -17,10 +17,10 @@
               hl.env("HYPRCURSOR_SIZE","${toString config.stylix.cursor.size}")
 
               hl.config({
-                misc {
-                  disable_hyprland_logo = true
-                  disable_splash_rendering = true
-                  disable_watchdog_warning = true
+                misc = {
+                  disable_hyprland_logo = true,
+                  disable_splash_rendering = true,
+                  disable_watchdog_warning = true,
                 }
               })
             '';
