@@ -2,8 +2,10 @@
   mm,
   inputs,
   ...
-}: {
-  den.hosts.x86_64-linux.mihranLaptop = {
+}: let
+  hostname = "mihranSurface";
+in {
+  den.hosts.x86_64-linux.${hostname} = {
     # Set users
     users.mihranmashhud = {
       fullName = "Mihran Mashhud";
@@ -15,7 +17,7 @@
   };
 
   # Host aspect
-  den.aspects.mihranLaptop = {
+  den.aspects.${hostname} = {
     includes = [
       mm.system
       mm.themes.catppuccin
