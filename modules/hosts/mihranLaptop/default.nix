@@ -54,7 +54,7 @@
         options nvidia_drm modeset=0
         options nvidia NVreg_DynamicPowerManagement=0x02
       '';
-      hardware.microsoft-surface.kernelVersion = "stable";
+      hardware.microsoft-surface.kernelVersion = "longterm";
       hardware.graphics.enable = true;
       services.xserver.videoDrivers = ["nvidia"];
       hardware.nvidia = {
