@@ -1,0 +1,24 @@
+{
+  perSystem = {pkgs, ...}: {
+    packages.sb3-nvidia-pm-udev-rules = pkgs.callPackage (
+      {writeTextFile}:
+        writeTextFile {
+          name = "sb3-nvidia-pm-udev-rules";
+          text = ''
+            # Enable runtime PM for NVIDIA VGA/3D controller devices on driver bind
+            ACTION=="bind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="auto"
+            ACTION=="bind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030200", TEST=="power/control", ATTR{power/control}="auto"
+
+            # Disable runtime PM for NVIDIA VGA/3D controller devices on driver unbind
+            ACTION=="unbind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="on"
+            ACTION=="unbind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030200", TEST=="power/control", ATTR{power/control}="on"
+
+            # Enable runtime PM for NVIDIA VGA/3D controller devices on adding device
+            ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="auto"
+            ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030200", TEST=="power/control", ATTR{power/control}="auto"
+          '';
+          destination = "/etc/udev/rules.d/80-sb3-nvidia-pm.rules";
+        }
+    ) {};
+  };
+}
