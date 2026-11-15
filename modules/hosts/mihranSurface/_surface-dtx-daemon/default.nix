@@ -29,23 +29,27 @@ in {
       enable = mkEnableOption "Surface DTX Daemon";
       attach = mkOption {
         type = types.str;
-        default = ''
-          #! /usr/bin/env bash
-        '';
+        default =
+          # bash
+          ''
+            #! /usr/bin/env bash
+          '';
         description = ''
           Runs on clipboard attach
         '';
       };
       detach = mkOption {
         type = types.str;
-        default = ''
-          #! /usr/bin/env bash
-          for usb_dev in /dev/disk/by-id/usb-*
-            do
-              dev=$(readlink -f $usb_dev)
-              mount -l | grep -q "^$dev\s" && umount "$dev"
-            done
-        '';
+        default =
+          # bash
+          ''
+            #! /usr/bin/env bash
+            for usb_dev in /dev/disk/by-id/usb-*
+              do
+                dev=$(readlink -f $usb_dev)
+                mount -l | grep -q "^$dev\s" && umount "$dev"
+              done
+          '';
         description = ''
           Runs on clipboard detach
         '';
