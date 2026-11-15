@@ -5,7 +5,7 @@
 }: {
   mm.hyprland.dms = {
     nixos = {config, ...}: {
-      services.displayManager.dms-greeter = {
+      services.displayManager.dux-greeter = {
         enable = true;
         compositor = {
           name = "hyprland";
@@ -20,7 +20,7 @@
                 misc = {
                   disable_hyprland_logo = true,
                   disable_splash_rendering = true,
-                  disable_watchdog_warning = true
+                  disable_watchdog_warning = true,
                 }
               })
             '';
@@ -28,14 +28,14 @@
 
         logs = {
           save = true;
-          path = "/tmp/dms-greeter.log";
+          path = "/tmp/dux-greeter.log";
         };
       };
       programs.kdeconnect.enable = true;
     };
     provides.to-users = {user, ...}:
       lib.mkIf (user.name == "mihranmashhud") {
-        nixos.services.displayManager.dms-greeter.configHome = "/home/mihranmashhud";
+        nixos.services.displayManager.dux-greeter.configHome = "/home/mihranmashhud";
       };
 
     homeManager = {

@@ -1,7 +1,7 @@
 {
   mm.apps.social.homeManager = {pkgs, ...}: {
     home.packages = with pkgs; [
-      telegram-desktop
+      # telegram-desktop
       (zoom-us.override (_prev: {
         hyprlandXdgDesktopPortalSupport = true;
       }))

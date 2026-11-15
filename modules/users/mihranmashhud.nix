@@ -46,7 +46,7 @@
         initialPassword = "password";
       };
 
-      services.displayManager.dms-greeter.configHome = "/home/mihranmashhud";
+      services.displayManager.dux-greeter.configHome = "/home/mihranmashhud";
     };
   };
 }

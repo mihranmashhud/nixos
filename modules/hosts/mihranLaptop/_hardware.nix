@@ -27,7 +27,7 @@
     fsType = "vfat";
   };
 
-  fileSystems."/home" = {
+ fileSystems."/home" = {
     device = "/dev/disk/by-uuid/26e5bf93-525d-41f8-97d1-9b9265a85e56";
     fsType = "ext4";
   };
