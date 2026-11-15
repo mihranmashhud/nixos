@@ -58,7 +58,7 @@
 
     postgres.nixos = {pkgs, ...}: {
       services.pgadmin = {
-        enable = true;
+        # enable = true;
         initialEmail = "mihranmashhud@gmail.com";
         initialPasswordFile = "/home/mihranmashhud/.pgadmin/initial_password";
         openFirewall = true;

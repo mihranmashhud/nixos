@@ -15,7 +15,10 @@
     home-manager.useGlobalPkgs = true;
     system.stateVersion = "26.05";
   };
-  den.default.homeManager.home.stateVersion = "26.05";
+  den.default.homeManager = {
+    home.stateVersion = "26.05";
+    home.backupFileExtension = "bak";
+  };
 
   den.schema.host = {
     includes = [

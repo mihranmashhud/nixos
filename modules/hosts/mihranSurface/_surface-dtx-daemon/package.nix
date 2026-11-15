@@ -1,6 +1,6 @@
 {
   rustPlatform,
-  pkgconfig,
+  pkg-config,
   dbus,
 }:
 rustPlatform.buildRustPackage rec {
@@ -8,14 +8,13 @@ rustPlatform.buildRustPackage rec {
   version = "0.3.12-1";
   src = builtins.fetchurl {
     url = "https://github.com/linux-surface/surface-dtx-daemon/archive/v${version}.tar.gz";
-    # sha256 = "1qn85ywk069chw0w8ygvxfl8b0i94qybhhf1k144hdb4ykhp33mw";
+    sha256 = "0jyjb9bmz8rqk9b65ami24hdi8jlk6qxlwvvprympaifzb9p80z5";
   };
 
-  patches = [./service.patch];
+  nativeBuildInputs = [pkg-config];
+  buildInputs = [dbus];
 
-  buildInputs = [pkgconfig dbus];
-
-  # cargoSha256 = "1jr5l3rbfpgii1y4z29rx1vwqbsf4spqyddjpiyh4w9q7y82s7pp";
+  cargoHash = "sha256-QuA2D6FGg8y1wBRRmIFS9urp96gHa+vVYssLXMaTya0=";
 
   postInstall = ''
     mkdir -p $out/etc/udev/rules.d

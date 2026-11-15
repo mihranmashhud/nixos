@@ -1,11 +1,10 @@
 {
   mm,
   inputs,
+  lib,
   ...
-}: let
-  hostname = "mihranSurface";
-in {
-  den.hosts.x86_64-linux.${hostname} = {
+}: {
+  den.hosts.x86_64-linux.mihranSurface = {
     # Set users
     users.mihranmashhud = {
       fullName = "Mihran Mashhud";
@@ -17,7 +16,7 @@ in {
   };
 
   # Host aspect
-  den.aspects.${hostname} = {
+  den.aspects.mihranSurface = {
     includes = [
       mm.system
       mm.themes.catppuccin
@@ -26,54 +25,39 @@ in {
       mm.gaming
     ];
 
-    nixos = {
-      pkgs,
-      self',
-      ...
-    }: {
+    provides.to-users = {user, ...}: {
+      nixos.users.users.${user.name}.extraGroups = ["surface-control"];
+    };
+
+    nixos = {self', ...}: {
       imports = with inputs; [
-        # nixos-hardware.nixosModules.microsoft-surface-common
+        nixos-hardware.nixosModules.microsoft-surface-pro-intel
+        ./_surface-dtx-daemon
         ./_hardware.nix
       ];
 
       # Surface Book 3
 
-      # boot.kernelParams = [
-      #   "reboot=pci"
-      # ];
-      # boot.initrd.kernelModules = [
-      #   "surface_aggregator"
-      #   "surface_aggregator_registry"
-      #   "surface_aggregator_hub "
-      #   "surface_hid_core"
-      #   "surface_hid"
-      #   "intel_lpss"
-      #   "intel_lpss_pci"
-      #   "8250_dw"
-      # ];
-      # boot.extraModprobeConfig = ''
-      #   # Required for auto D3Cold
-      #   options nvidia_drm modeset=0
-      #   options nvidia NVreg_DynamicPowerManagement=0x02
-      # '';
-      # hardware.microsoft-surface.kernelVersion = "longterm";
-      hardware.graphics.enable = true;
-      services.xserver.videoDrivers = ["nvidia"];
+      # Required for auto D3Cold
+      boot.extraModprobeConfig = ''
+        options nvidia_drm modeset=0
+        options nvidia NVreg_DynamicPowerManagement=0x02
+      '';
+      hardware.microsoft-surface.kernelVersion = "stable";
+      services.surface-dtx-daemon.enable = true;
+      services.xserver.videoDrivers = ["modesetting" "nvidia"];
+
+      services.upower.enable = true;
       hardware.nvidia = {
         modesetting.enable = true;
         open = true;
         prime = {
-          # TODO: Change the bus IDs to the ones on the device.
-
-          # offload.enable = true;
-          # offload.enableOffloadCmd = true;
-          # intelBusId = "PCI:0@0:2:0";
-          # nvidiaBusId = "PCI:1@0:0:0";
+          offload.enable = true;
+          offload.enableOffloadCmd = true;
+          intelBusId = "PCI:0:2:0";
+          nvidiaBusId = "PCI:2:0:0";
         };
       };
-      environment.systemPackages = with pkgs; [
-        surface-control
-      ];
       services.udev.packages = [
         self'.packages.sb3-nvidia-pm-udev-rules
       ];
@@ -101,20 +85,19 @@ in {
 
     homeManager = {...}: {
       wayland.windowManager.hyprland.settings.monitor = [
-        # TODO: Change these to match the laptop (output and mirror)
-        # {
-        #   output = "eDP-1";
-        #   mode = "highrr";
-        #   position = "auto";
-        #   scale = 1;
-        # }
-        # {
-        #   output = "";
-        #   mode = "preferred";
-        #   position = "auto";
-        #   scale = 1;
-        #   mirror = "eDP-1";
-        # }
+        {
+          output = "eDP-1";
+          mode = "highrr";
+          position = "auto";
+          scale = 2;
+        }
+        {
+          output = "";
+          mode = "preferred";
+          position = "auto";
+          scale = 1;
+          mirror = "eDP-1";
+        }
       ];
     };
   };
